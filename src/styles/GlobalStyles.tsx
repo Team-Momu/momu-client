@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
     --Sub-color2 : #4F8BAD;
     --Sub-color3 : #CEE4F1;
     
-    // GreyScale
+    // greyScale
     --grey-color1:#191919; // stroke, icon
     --grey-color2:#5f5f5f; // button general
     --grey-color3:#767676; // stroke
@@ -33,7 +33,7 @@ const GlobalStyle = createGlobalStyle`
    body {
        margin: 0px;
        background-color: var(--grey-color8);
-     
+      
    }
 
   
