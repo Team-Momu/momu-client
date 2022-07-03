@@ -6,6 +6,7 @@ import React from 'react';
 type Props = {
   children: React.ReactNode;
 };
+console.log('test');
 const AppLayout: FC<Props> = ({ children }) => {
   return (
     <>
