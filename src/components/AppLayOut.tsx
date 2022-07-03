@@ -7,6 +7,7 @@ type Props = {
   children: React.ReactNode;
 };
 console.log('test');
+console.log('test2');
 const AppLayout: FC<Props> = ({ children }) => {
   return (
     <>
