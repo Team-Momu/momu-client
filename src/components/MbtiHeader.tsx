@@ -16,6 +16,7 @@ const MbtiHeader = () => {
   // 해당 값에 맞게 빈 배열 만들어서 랜더링 해주기
   const loopArray = Array.from({ length: loopNumber });
 
+
   return (
     <>
       <ProgressBar>
