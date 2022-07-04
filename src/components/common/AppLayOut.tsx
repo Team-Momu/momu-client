@@ -24,6 +24,7 @@ const Wrapper = styled.div`
   overflow: scroll;
   margin: auto;
   background: #ffffff;
+  border: 1px solid black;
 `;
 const Container = styled.div`
   position: relative;
