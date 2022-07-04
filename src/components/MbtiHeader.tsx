@@ -16,7 +16,6 @@ const MbtiHeader = () => {
   // 해당 값에 맞게 빈 배열 만들어서 랜더링 해주기
   const loopArray = Array.from({ length: loopNumber });
 
-
   return (
     <>
       <ProgressBar>
@@ -104,7 +103,9 @@ const Question = styled.div`
   font-weight: 700;
   font-size: 28px;
   line-height: 33px;
-  text-decoration: underline;
+  text-decoration-line: underline;
+
+  color: #191919;
 
   color: var(--grey-color1);
 `;
