@@ -27,19 +27,27 @@ const GlobalStyle = createGlobalStyle`
     
     
   }
- *{
+   html,body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--grey-color8);
+      
+   }
+   *{
    box-sizing: border-box;
    font-family: 'Pretendard';
  }
-   body {
-       margin: 0px;
-       background-color: var(--grey-color8);
-      
-   }
    button{
     border : none;
     cursor : pointer;
    }
+
+   a {
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
 
   
     
