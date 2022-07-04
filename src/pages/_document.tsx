@@ -39,11 +39,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link
-            href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
-            rel="stylesheet"
-            type="text/css"
-          />
+          <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.4/dist/web/static/pretendard.css" />
         </Head>
         <body>
           <Main />

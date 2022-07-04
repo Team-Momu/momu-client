@@ -26,6 +26,7 @@ const Wrapper = styled.div`
   background: #ffffff;
 `;
 const Container = styled.div`
+  position: relative;
   border: 1px solid red;
   padding: 0 16px;
   height: 100%;

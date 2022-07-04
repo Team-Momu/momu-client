@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import AppLayOut from '../components/AppLayOut';
 
+
 const Home: NextPage = () => {
   return (
     <>
