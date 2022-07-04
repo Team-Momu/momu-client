@@ -36,6 +36,10 @@ const GlobalStyle = createGlobalStyle`
        background-color: var(--grey-color8);
       
    }
+   button{
+    border : none;
+    cursor : pointer;
+   }
 
   
     
