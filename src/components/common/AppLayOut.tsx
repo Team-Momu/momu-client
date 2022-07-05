@@ -20,9 +20,6 @@ const AppLayout: FC<Props> = ({ children }) => {
 const Wrapper = styled.div`
   width: 375px;
   height: 812px;
-  position: relative;
-  overflow: scroll;
-  scrollbar-width: none;
   margin: auto;
   background: #ffffff;
   border: 1px solid black;
