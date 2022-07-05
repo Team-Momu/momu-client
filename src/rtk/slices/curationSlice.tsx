@@ -25,10 +25,10 @@ const curationSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchCuration.pending.type]: (state, action) => {
+    [fetchCuration?.pending.type]: (state, action) => {
       state.loading = true;
     },
-    [fetchCuration.fulfilled.type]: (state, action) => {
+    [fetchCuration?.fulfilled.type]: (state, action) => {
       state.loading = true;
       state.area = action.payload.area;
       state.when = action.payload.when;
@@ -37,7 +37,7 @@ const curationSlice = createSlice({
       state.additionalText = action.payload.additionalTest;
     },
 
-    [fetchCuration.rejected.type]: (state, action) => {
+    [fetchCuration?.rejected.type]: (state, action) => {
       state.loading = true;
     },
   },
