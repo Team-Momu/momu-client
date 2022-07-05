@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   height: 812px;
   position: relative;
   overflow: scroll;
+  scrollbar-width: none;
   margin: auto;
   background: #ffffff;
   border: 1px solid black;
