@@ -31,11 +31,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     background-color: var(--grey-color8);
+    -ms-overflow-style: none;
    }
    ::-webkit-scrollbar {
   display: none;
-}
-
+  }
    *{
    box-sizing: border-box;
    font-family: 'Pretendard';

@@ -20,16 +20,17 @@ const AppLayout: FC<Props> = ({ children }) => {
 const Wrapper = styled.div`
   width: 375px;
   height: 812px;
+  position: relative;
+  overflow: scroll;
   margin: auto;
   background: #ffffff;
-  border: 1px solid black;
 `;
 const Container = styled.div`
   position: relative;
-  border: 1px solid red;
   padding: 0 16px;
   height: 100%;
   margin: auto;
+  border: 1px solid red;
 `;
 
 export default AppLayout;

@@ -1,4 +1,3 @@
-import AppLayout from '@common/AppLayOut';
 import MbtiFooter from '@mbti/MbtiFooter';
 import MbtiHeader from '@mbti/MbtiHeader';
 
