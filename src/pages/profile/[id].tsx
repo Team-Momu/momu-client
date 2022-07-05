@@ -4,10 +4,10 @@ import MbtiHeader from '@mbti/MbtiHeader';
 
 const Profile = () => {
   return (
-    <AppLayout>
+    <>
       <MbtiHeader />
       <MbtiFooter />
-    </AppLayout>
+    </>
   );
 };
 

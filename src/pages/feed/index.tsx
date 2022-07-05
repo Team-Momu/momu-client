@@ -1,12 +1,12 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import AppLayOut from '../../components/common/AppLayOut';
+import AppLayOut from '@common/AppLayOut';
 
 const Feed: NextPage = () => {
   return (
-    <AppLayOut>
+    <>
       <h1>feed</h1>
-    </AppLayOut>
+    </>
   );
 };
 
