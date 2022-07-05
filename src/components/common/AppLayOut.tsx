@@ -31,6 +31,7 @@ const Container = styled.div`
   border: 1px solid red;
   padding: 0 16px;
   height: 100%;
+  margin: auto;
 `;
 
 export default AppLayout;
