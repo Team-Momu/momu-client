@@ -9,6 +9,7 @@
     "lint": "node_modules/.bin/next lint"
   },
   "dependencies": {
+    "@react-spring/parallax": "^9.4.5",
     "babel-plugin-styled-components": "^2.0.7",
     "next": "12.2.0",
     "react": "18.2.0",
