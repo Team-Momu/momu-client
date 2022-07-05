@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import filterIcon from '';
 
 const FeedHeader = () => {
   return (
@@ -44,7 +43,7 @@ const FilterButton = styled.button`
 `;
 
 const FilterText = styled.div`
-  margin-left: 6px;
+  margin-left: 7px;
 `;
 
 const FilterIcon = styled.img`
