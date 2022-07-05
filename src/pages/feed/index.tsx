@@ -1,12 +1,17 @@
 import { NextPage } from 'next';
+import { Parallax, ParallaxLayer } from '@react-spring/parallax';
 import styled from 'styled-components';
-import AppLayOut from '@common/AppLayOut';
+
+import AppLayOut from '../../components/common/AppLayOut';
+import FeedList from '../../components/feed/FeedList';
 
 const Feed: NextPage = () => {
   return (
-    <>
-      <h1>feed</h1>
-    </>
+    <AppLayOut>
+      <Parallax pages={2}>
+        <FeedList />
+      </Parallax>
+    </AppLayOut>
   );
 };
 
