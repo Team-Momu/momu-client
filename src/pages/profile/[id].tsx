@@ -1,6 +1,6 @@
-import AppLayout from '../../components/common/AppLayOut';
-import MbtiFooter from '../../components/mbti/MbtiFooter';
-import MbtiHeader from '../../components/mbti/MbtiHeader';
+import AppLayout from '@common/AppLayOut';
+import MbtiFooter from '@mbti/MbtiFooter';
+import MbtiHeader from '@mbti/MbtiHeader';
 
 const Profile = () => {
   return (
