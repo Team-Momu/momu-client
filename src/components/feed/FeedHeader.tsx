@@ -1,22 +1,55 @@
 import styled from 'styled-components';
+import filterIcon from '';
 
 const FeedHeader = () => {
   return (
     <HeaderContainer>
-      <TitleContainer>
-        <TextContainer>Request</TextContainer>
-        <LineContainer></LineContainer>
-      </TitleContainer>
-      <FilterButton>필터</FilterButton>
+      <TextContainer>Request</TextContainer>
+      <FilterButton>
+        <FilterText>필터</FilterText>
+        <FilterIcon src={'img/filtericon.png'} />
+      </FilterButton>
     </HeaderContainer>
   );
 };
 export default FeedHeader;
 
-const HeaderContainer = styled.div``;
-const TitleContainer = styled.div``;
-const TextContainer = styled.div`
-  border-bottom: 1px solid black;
+const HeaderContainer = styled.div`
+  width: calc(100% + 16 * 2);
+  margin: 0%;
+  padding: 0;
+  width: 100%;
+  height: 68px;
+  line-height: 68px;
+  border-bottom: 2px solid #000000;
+  display: flex;
+  align-items: center;
 `;
-const LineContainer = styled.div``;
-const FilterButton = styled.button``;
+const TextContainer = styled.div`
+  font-family: 'Pretendard';
+  font-size: 28px;
+
+  line-height: 68px;
+`;
+const FilterButton = styled.button`
+  font-family: 'Pretendard';
+  background-color: transparent;
+  width: 78px;
+  height: 36px;
+  border: 1.5px solid #000000;
+  align-items: center;
+  display: flex;
+  line-height: 36px;
+  margin-left: auto;
+`;
+
+const FilterText = styled.div`
+  margin-left: 6px;
+`;
+
+const FilterIcon = styled.img`
+  width: 16x;
+  height: 16px;
+  padding-left: 4px;
+  vertical-align: auto;
+`;
