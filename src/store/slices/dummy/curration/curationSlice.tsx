@@ -1,7 +1,7 @@
 //GetCurationCard, AddCurationCard..등에 사용되는 내용.
 
 import { createSlice } from '@reduxjs/toolkit';
-const { fetchCuration } = require('../actions/curation');
+const { fetchCuration } = require('../../../actions/curation');
 
 type stateType = {
   loading: boolean;

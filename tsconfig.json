@@ -17,7 +17,9 @@
     "baseUrl": "./src",
     "paths": {
       "@common/*": ["components/common/*"],
-      "@mbti/*": ["components/mbti/*"]
+      "@mbti/*": ["components/mbti/*"],
+      "@actions/*": ["store/actions/*"],
+      "@slices/*": ["store/slices/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/test.js"],
