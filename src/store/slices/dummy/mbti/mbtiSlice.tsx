@@ -1,6 +1,6 @@
 //GetCurationCard, AddCurationCard..등에 사용되는 내용.
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface IState {
   mbti: {
@@ -17,7 +17,7 @@ const mbtiSlice = createSlice({
   initialState,
   reducers: {
     changeState: (state, action) => {
-      state = action.payload;
+      state.test = true;
     },
   },
 });

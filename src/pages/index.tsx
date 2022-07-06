@@ -1,17 +1,24 @@
 import type { NextPage } from 'next';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeState } from '@slices/dummy/mbti/mbtiSlice';
 import { RootState } from 'store/store';
+import { useCallback } from 'react';
+const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
+
 const Home: NextPage = () => {
   const {
     mbti: { test },
   } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
-  console.log(changeState);
+
+  const onClick = useCallback(() => {
+    dispatch(mbtiSlice.actions.changeState());
+  }, [dispatch]);
+
+  console.log(onClick);
   return (
     <>
       <span>hi</span>
-      <button onClick={() => alert('hi')}>버튼</button>
+      <button onClick={onClick}>버튼</button>
       {test && 'hi'}
     </>
   );
