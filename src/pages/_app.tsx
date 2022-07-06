@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app';
-import AppLayout from '@common/AppLayout';
+import AppLayout from '@common/AppLayOut';
 import GlobalStyle from 'styles/GlobalStyles';
 import { Provider } from 'react-redux';
 import React from 'react';
