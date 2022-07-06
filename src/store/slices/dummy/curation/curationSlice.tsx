@@ -51,4 +51,5 @@ const curationSlice = createSlice({
 });
 
 export const { fetchCurationInfo } = curationSlice.actions;
+
 module.exports = curationSlice;

@@ -8,17 +8,13 @@ const curationSlice = require('@slices/dummy/curation/curationSlice');
 const GetCurationCard = () => {
   //addFeed에서 받아와야하는 데이터: 지역, 시간대, 음주여부, 몇 명, 추가요청사항
 
-  const area = useSelector((state: RootState) => state.curationSlice?.area);
-  // const when = useSelector((state: RootState) => state.curationSlice.when);
-  // const isDrink = useSelector(
-  //   (state: RootState) => state.curationSlice.isDrink
-  // );
-  // const personnel = useSelector(
-  //   (state: RootState) => state.curationSlice.personnel
-  // );
-  // const additionalText = useSelector(
-  //   (state: RootState) => state.additionalText
-  // );
+  const area = useSelector((state: RootState) => state.curation.area);
+  const when = useSelector((state: RootState) => state.curation.when);
+  const isDrink = useSelector((state: RootState) => state.curation.isDrink);
+  const personnel = useSelector((state: RootState) => state.curation.personnel);
+  const additionalText = useSelector(
+    (state: RootState) => state.curation.additionalText
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,7 +22,13 @@ const GetCurationCard = () => {
   }, [dispatch]);
   console.log(area);
 
-  return <>{area}</>;
+  return (
+    <>
+      <div>
+        {area} {when} {isDrink} {personnel} {additionalText}
+      </div>
+    </>
+  );
 };
 
 export default GetCurationCard;
