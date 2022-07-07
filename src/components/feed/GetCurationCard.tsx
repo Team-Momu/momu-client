@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 
 const curationSlice = require('@slices/dummy/curation/curationSlice');
+const userSlice = require('@slices/dummy/user/userSlice');
 
 const GetCurationCard = () => {
   //addFeed에서 받아와야하는 데이터: 지역, 시간대, 음주여부, 몇 명, 추가요청사항, 작성일, 답변 개수.
@@ -16,7 +17,13 @@ const GetCurationCard = () => {
   const additionalText = useSelector(
     (state: RootState) => state.curation.additionalText
   );
-  var isScrapped = useSelector((state: RootState) => state.curation.isScrapped);
+  const isScrapped = useSelector(
+    (state: RootState) => state.curation.isScrapped
+  );
+
+  const userId = useSelector((state: RootState) => state.user.id);
+  const mukbti = useSelector((state: RootState) => state.user.mbti);
+  const profileImg = useSelector((state: RootState) => state.user.img);
 
   console.log(isScrapped);
   const [scrapState, setScrapState] = useState(isScrapped);
@@ -24,7 +31,9 @@ const GetCurationCard = () => {
 
   useEffect(() => {
     dispatch(curationSlice.actions.fetchCurationInfo());
+    dispatch(userSlice.actions.fetchUserInfo());
   }, [dispatch]);
+
   console.log(area);
 
   const onClick = () => {
@@ -55,6 +64,18 @@ const GetCurationCard = () => {
         <AdditionalText>{additionalText}</AdditionalText>
         <Line />
       </InfoContainer>
+      <BottomContainer>
+        <BottomInfo>
+          <ProfileImg src={'img/ProfileTest.png'} />
+          <USerId>{userId}</USerId>
+          <LineImg src={'img/Line.png'} />
+          <Mukbti>{mukbti}</Mukbti>
+        </BottomInfo>
+        <BottomInfo>
+          <CardInfo>2022.07.07</CardInfo>
+          <CardInfo>큐레이션 3</CardInfo>
+        </BottomInfo>
+      </BottomContainer>
     </CurationContainer>
   );
 };
@@ -68,6 +89,7 @@ const CurationContainer = styled.div`
   margin: 16px 0;
   padding: 20px 16px 20px 10px;
   display: flex;
+  flex-direction: column;
 `;
 const InfoContainer = styled.div`
   display: flex;
@@ -119,4 +141,61 @@ const AdditionalText = styled.div`
 const Line = styled.div`
   border-bottom: 1px solid #191919;
   margin: 0 4px 0 10px;
+`;
+
+const BottomContainer = styled.div`
+  margin: 0;
+  padding: 0 4px 0 6px;
+
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ProfileImg = styled.img`
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-top: 14px;
+`;
+const USerId = styled.div`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  padding-left: 10px;
+  padding-top: 20px;
+`;
+
+const LineImg = styled.img`
+  padding: 2px 8px 0 8px;
+  height: 15px;
+  margin-top: 20px;
+`;
+
+const Mukbti = styled.div`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+
+  padding-top: 20px;
+
+  //얘도 없는 색상이 추가 된건지 확인 필요
+  color: #2260d8;
+`;
+
+const CardInfo = styled.div`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 17px;
+  padding-left: 4px;
+  padding-top: 20px;
+  //얘도 없는 색상이 추가 된건지 확인 필요
+  color: #a09a9a;
+`;
+
+const BottomInfo = styled.div`
+  display: flex;
 `;
