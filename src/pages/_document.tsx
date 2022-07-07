@@ -42,10 +42,8 @@ class MyDocument extends Document {
           <link
             rel="stylesheet"
             as="style"
-            crossorigin
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.4/dist/web/static/pretendard.css"
           />
-
         </Head>
         <body>
           <Main />
