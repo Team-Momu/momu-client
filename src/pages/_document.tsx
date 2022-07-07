@@ -46,10 +46,6 @@ class MyDocument extends Document {
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.4/dist/web/static/pretendard.css"
           />
 
-          <link
-            href="https://fonts.googleapis.com/css2?family=Prompt:wght@100;400;700&display=swap"
-            rel="stylesheet"
-          />
         </Head>
         <body>
           <Main />

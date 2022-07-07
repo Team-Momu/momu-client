@@ -18,15 +18,15 @@ const MbtiFooter = () => {
     <>
       {stageNumber === 1 ? (
         <NextButton onClick={pushNextPage}>
-          <NextButtonText>다음으로</NextButtonText>
+          <NextButtonText>다음</NextButtonText>
         </NextButton>
       ) : (
         <>
           <PrevisouButton onClick={pushPreviousPage}>
-            <PreviousButtonText>이전으로</PreviousButtonText>
+            <PreviousButtonText>이전</PreviousButtonText>
           </PrevisouButton>
           <SmallNextButton onClick={pushNextPage}>
-            <SmallNextButtonText>다음으로</SmallNextButtonText>
+            <SmallNextButtonText>다음</SmallNextButtonText>
           </SmallNextButton>
         </>
       )}
@@ -37,9 +37,9 @@ const MbtiFooter = () => {
 const NextButton = styled.button`
   position: absolute;
   width: 343px;
-  height: 44px;
+  height: 56px;
   left: 16px;
-  top: 553px;
+  top: 656px;
 
   display: flex;
   justify-content: center;
@@ -54,17 +54,19 @@ const NextButtonText = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 20px;
+  /* identical to box height, or 100% */
+
   color: #ffffff;
 `;
 
 const PrevisouButton = styled.button`
   position: absolute;
   width: 100px;
-  height: 44px;
+  height: 56px;
   left: 16px;
-  top: 553px;
+  top: 656px;
 
-  background: #5f5f5f;
+  background: var(--grey-color2);
 
   display: flex;
   justify-content: center;
@@ -84,11 +86,11 @@ const PreviousButtonText = styled.div`
 const SmallNextButton = styled.button`
   position: absolute;
   width: 231px;
-  height: 44px;
+  height: 56px;
   left: 128px;
-  top: 553px;
+  top: 656px;
 
-  background: #f57906;
+  background: var(--Main-color1);
 
   display: flex;
   justify-content: center;

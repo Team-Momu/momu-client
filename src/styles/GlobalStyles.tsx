@@ -24,6 +24,10 @@ const GlobalStyle = createGlobalStyle`
     --grey-color7:#f4f3f2; // tag
     --grey-color8:#f5f5f5; // navigation bar
     --grey-color9:#f9f7f7; // background
+
+    // black, white
+
+    --white : #ffffff
     
     
   }
