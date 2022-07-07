@@ -3,12 +3,15 @@ import { useCallback } from 'react';
 import {
   ChinaFoodText,
   ChinaLayOutBox,
+  ChoosenImageStyle,
   FusionFoodText,
   FusionLayOutBox,
+  ImageStyle,
   JapanFoodText,
   JapanLayOutBox,
   KoreaFoodText,
   KoreaLayOutBox,
+  PositionBox,
   SnackFoodText,
   SnackLayOutBox,
   WesternFoodText,
@@ -29,46 +32,143 @@ const MbtiArticle = () => {
   const router = useRouter();
   const stageNumber: number = Number(router.asPath.split('/')[2]);
   const dispatch = useDispatch();
+  const { korea, china, japan, western, fusion, snack } = useSelector(
+    (state: RootState) => state.mbti.stage1
+  );
 
-  const onClick = useCallback(() => {
-    dispatch(mbtiSlice.actions.changeState());
-  }, [dispatch]);
+  // const onClick = useCallback(() => {
+  //   dispatch(mbtiSlice.actions.changeState());
+  // }, [dispatch]);
+
+  const findTypeOfFood = (typeOfFood: string) => {
+    switch (typeOfFood) {
+      case '한식':
+        dispatch(mbtiSlice.actions.changeKoreaActiveInStage1());
+        break;
+      case '중식':
+        dispatch(mbtiSlice.actions.changeChinaActiveInStage1());
+        break;
+      case '일식':
+        dispatch(mbtiSlice.actions.changeJapanActiveInStage1());
+        break;
+      case '양식':
+        dispatch(mbtiSlice.actions.changeWesternActiveInStage1());
+        break;
+      case '퓨전':
+        dispatch(mbtiSlice.actions.changeFusionActiveInStage1());
+        break;
+      case '분식':
+        dispatch(mbtiSlice.actions.changeSnackActiveInStage1());
+        break;
+      default:
+        null;
+    }
+  };
+
+  const onClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
+    const typeOfFood: string = e.target.innerText;
+    // dispatch(mbtiSlice.actions.resetAllActiveInStage1());
+    findTypeOfFood(typeOfFood);
+  }, []);
 
   return (
     <>
       {stageNumber === 1 && (
         <>
-          {/* <KoreaFoodBox onClick={onClick}>
-            <Image src={Korea} />
-          </KoreaFoodBox>
-          <KoreaFoodText onClick={onClick} type="korea">
-            한식
-          </KoreaFoodText> */}
-
-          <KoreaLayOutBox>
-            <Image src={Korea} layout="fill" style={{ opacity: '0.8' }} />
-            <KoreaFoodText type="korea">한식</KoreaFoodText>
+          <KoreaLayOutBox active={korea} onClick={onClick}>
+            <PositionBox>
+              {korea ? (
+                <>
+                  <Image src={Korea} style={ChoosenImageStyle} />
+                  <KoreaFoodText>한식</KoreaFoodText>
+                </>
+              ) : (
+                <>
+                  <Image src={Korea} style={ImageStyle} />
+                  <KoreaFoodText>한식</KoreaFoodText>
+                </>
+              )}
+            </PositionBox>
           </KoreaLayOutBox>
 
-          <ChinaLayOutBox>
-            <Image src={China} layout="fill" style={{ opacity: '0.8' }} />
-            <ChinaFoodText type="china">중식</ChinaFoodText>
+          <ChinaLayOutBox active={china} onClick={onClick}>
+            <PositionBox>
+              {China ? (
+                <>
+                  <Image src={China} style={ChoosenImageStyle} />
+                  <ChinaFoodText>중식</ChinaFoodText>
+                </>
+              ) : (
+                <>
+                  <Image src={China} style={ImageStyle} />
+                  <ChinaFoodText>중식</ChinaFoodText>
+                </>
+              )}
+            </PositionBox>
           </ChinaLayOutBox>
-          <JapanLayOutBox>
-            <Image src={Japan} layout="fill" style={{ opacity: '0.8' }} />
-            <JapanFoodText type="japan">일식</JapanFoodText>
+
+          <JapanLayOutBox active={japan} onClick={onClick}>
+            <PositionBox>
+              {Japan ? (
+                <>
+                  <Image src={Japan} style={ChoosenImageStyle} />
+                  <JapanFoodText>일식</JapanFoodText>
+                </>
+              ) : (
+                <>
+                  <Image src={Japan} style={ImageStyle} />
+                  <JapanFoodText>일식</JapanFoodText>
+                </>
+              )}
+            </PositionBox>
           </JapanLayOutBox>
-          <WesternLayOutBox>
-            <Image src={Western} layout="fill" style={{ opacity: '0.8' }} />
-            <WesternFoodText type="western">양식</WesternFoodText>
+
+          <WesternLayOutBox active={western} onClick={onClick}>
+            <PositionBox>
+              {Western ? (
+                <>
+                  <Image src={Western} style={ChoosenImageStyle} />
+                  <WesternFoodText>양식</WesternFoodText>
+                </>
+              ) : (
+                <>
+                  <Image src={Western} style={ImageStyle} />
+                  <WesternFoodText>양식</WesternFoodText>
+                </>
+              )}
+            </PositionBox>
           </WesternLayOutBox>
-          <FusionLayOutBox>
-            <Image src={Fusion} layout="fill" style={{ opacity: '0.8' }} />
-            <FusionFoodText type="fusionn">퓨전</FusionFoodText>
+
+          <FusionLayOutBox active={fusion} onClick={onClick}>
+            <PositionBox>
+              {Fusion ? (
+                <>
+                  <Image src={Fusion} style={ChoosenImageStyle} />
+                  <FusionFoodText>퓨전</FusionFoodText>
+                </>
+              ) : (
+                <>
+                  <Image src={Fusion} style={ImageStyle} />
+                  <FusionFoodText>퓨전</FusionFoodText>
+                </>
+              )}
+            </PositionBox>
           </FusionLayOutBox>
-          <SnackLayOutBox>
-            <Image src={Snack} layout="fill" style={{ opacity: '0.8' }} />
-            <SnackFoodText type="snack">분식</SnackFoodText>
+
+          <SnackLayOutBox active={snack} onClick={onClick}>
+            <PositionBox>
+              {Snack ? (
+                <>
+                  <Image src={Snack} style={ChoosenImageStyle} />
+                  <SnackFoodText>분식</SnackFoodText>
+                </>
+              ) : (
+                <>
+                  <Image src={Snack} style={ImageStyle} />
+                  <SnackFoodText>분식</SnackFoodText>
+                </>
+              )}
+            </PositionBox>
           </SnackLayOutBox>
         </>
       )}

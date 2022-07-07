@@ -3,80 +3,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface IState {
+  result: [];
   stage1: {
-    active: boolean;
-    chooses: boolean;
-  };
-  stage2: {
-    active: boolean;
-    chooses: boolean;
-  };
-  stage3: {
-    active: boolean;
-    chooses: boolean;
-  };
-  stage4: {
-    active: boolean;
-    chooses: boolean;
-  };
-  stage5: {
-    active: boolean;
-    chooses: boolean;
-  };
-  stage6: {
-    active: boolean;
-    chooses: boolean;
-  };
-  stage7: {
-    active: boolean;
-    chooses: boolean;
-  };
-  stage8: {
-    active: boolean;
-    chooses: boolean;
-  };
-  stage9: {
-    active: boolean;
-    chooses: boolean;
+    korea: boolean;
+    china: boolean;
+    japan: boolean;
+    western: boolean;
+    fusion: boolean;
+    snack: boolean;
   };
 }
 
 export const initialState = {
   stage1: {
-    active: false,
-    choosen: false,
-  },
-  stage2: {
-    active: false,
-    choosen: false,
-  },
-  stage3: {
-    active: false,
-    choosen: false,
-  },
-  stage4: {
-    active: false,
-    choosen: false,
-  },
-  stage5: {
-    active: false,
-    choosen: false,
-  },
-  stage6: {
-    active: false,
-    choosen: false,
-  },
-  stage7: {
-    active: false,
-    choosen: false,
-  },
-  stage8: {
-    active: false,
-    choosen: false,
-  },
-  stage9: {
-    active: false,
-    choosen: false,
+    korea: false,
+    china: false,
+    japan: false,
+    western: false,
+    fusion: false,
+    snack: false,
   },
 };
 
@@ -84,11 +29,31 @@ const mbtiSlice = createSlice({
   name: 'mbti',
   initialState,
   reducers: {
-    changeActiveInState1: (state, action) => {
-      state.stage1.active = !state.stage1.active;
+    resetAllActiveInStage1: (state, action) => {
+      state.stage1.korea = false;
+      state.stage1.china = false;
+      state.stage1.japan = false;
+      state.stage1.western = false;
+      state.stage1.fusion = false;
+      state.stage1.snack = false;
     },
-    changeChoosenInState1: (state, action) => {
-      state.stage1.choosen = !state.stage1.choosen;
+    changeKoreaActiveInStage1: (state, action) => {
+      state.stage1.korea = !state.stage1.korea;
+    },
+    changeChinaActiveInStage1: (state, action) => {
+      state.stage1.china = !state.stage1.china;
+    },
+    changeJapanActiveInStage1: (state, action) => {
+      state.stage1.japan = !state.stage1.japan;
+    },
+    changeWesternActiveInStage1: (state, action) => {
+      state.stage1.western = !state.stage1.western;
+    },
+    changeFusionActiveInStage1: (state, action) => {
+      state.stage1.fusion = !state.stage1.fusion;
+    },
+    changeSnackActiveInStage1: (state, action) => {
+      state.stage1.snack = !state.stage1.snack;
     },
   },
 });
