@@ -7,12 +7,12 @@ export const LongBox = styled.div``;
 export const ShortBox = styled.div``;
 
 export const ImageStyle: React.CSSProperties = {
-  // opacity: '0.8',
+  opacity: '0.8',
   position: 'relative',
 };
 
 export const ChoosenImageStyle: React.CSSProperties = {
-  // opacity: '0.5',
+  opacity: '0.5',
   position: 'relative',
 };
 
