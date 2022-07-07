@@ -6,9 +6,9 @@ import FeedList from 'components/feed/FeedList';
 
 const Feed: NextPage = () => {
   return (
-    <>
+    <Wrapper>
       <FeedList />
-    </>
+    </Wrapper>
   );
 };
 
