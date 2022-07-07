@@ -103,11 +103,11 @@ const Question = styled.div`
   font-weight: 700;
   font-size: 28px;
   line-height: 33px;
-  text-decoration-line: underline;
 
   color: #191919;
 
   color: var(--grey-color1);
+  border-bottom: 2px solid black;
 `;
 
 export default MbtiHeader;

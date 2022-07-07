@@ -16,6 +16,7 @@
     "incremental": true,
     "baseUrl": "./src",
     "paths": {
+      "@public/*": ["../public/*"],
       "@common/*": ["components/common/*"],
       "@mbti/*": ["components/mbti/*"],
       "@actions/*": ["store/actions/*"],
