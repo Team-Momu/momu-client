@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import {
@@ -77,12 +77,114 @@ const MbtiStage5 = () => {
     }
   };
 
+  useEffect(() => {
+    switch (upLeftStage5) {
+      case true:
+        dispatch(mbtiSlice.actions.addNumberStage5());
+        break;
+      case false:
+        dispatch(mbtiSlice.actions.minusNumberStage5());
+        break;
+      default:
+        null;
+    }
+    switch (upMiddleStage5) {
+      case true:
+        dispatch(mbtiSlice.actions.addNumberStage5());
+        break;
+      case false:
+        dispatch(mbtiSlice.actions.minusNumberStage5());
+        break;
+      default:
+        null;
+    }
+    switch (upRightStage5) {
+      case true:
+        dispatch(mbtiSlice.actions.addNumberStage5());
+        break;
+      case false:
+        dispatch(mbtiSlice.actions.minusNumberStage5());
+        break;
+      default:
+        null;
+    }
+    switch (middleLeftStage5) {
+      case true:
+        dispatch(mbtiSlice.actions.addNumberStage5());
+        break;
+      case false:
+        dispatch(mbtiSlice.actions.minusNumberStage5());
+        break;
+      default:
+        null;
+    }
+    switch (middleMiddleStage5) {
+      case true:
+        dispatch(mbtiSlice.actions.addNumberStage5());
+        break;
+      case false:
+        dispatch(mbtiSlice.actions.minusNumberStage5());
+        break;
+      default:
+        null;
+    }
+    switch (middleRightStage5) {
+      case true:
+        dispatch(mbtiSlice.actions.addNumberStage5());
+        break;
+      case false:
+        dispatch(mbtiSlice.actions.minusNumberStage5());
+        break;
+      default:
+        null;
+    }
+    switch (downLeftStage5) {
+      case true:
+        dispatch(mbtiSlice.actions.addNumberStage5());
+        break;
+      case false:
+        dispatch(mbtiSlice.actions.minusNumberStage5());
+        break;
+      default:
+        null;
+    }
+    switch (downMiddleStage5) {
+      case true:
+        dispatch(mbtiSlice.actions.addNumberStage5());
+        break;
+      case false:
+        dispatch(mbtiSlice.actions.minusNumberStage5());
+        break;
+      default:
+        null;
+    }
+    switch (downRightStage5) {
+      case true:
+        dispatch(mbtiSlice.actions.addNumberStage5());
+        break;
+      case false:
+        dispatch(mbtiSlice.actions.minusNumberStage5());
+        break;
+      default:
+        null;
+    }
+  }, [
+    upLeftStage5,
+    upMiddleStage5,
+    upRightStage5,
+    middleLeftStage5,
+    middleMiddleStage5.middleRightStage5,
+    downLeftStage5,
+    downMiddleStage5,
+    downRightStage5,
+  ]);
+
   const onClick = useCallback(
     (e: React.MouseEvent<HTMLElement>): void => {
       //@ts-ignore
       const typeOfBox: string = e.target.innerText;
-      console.log(typeOfBox);
-      dispatch(mbtiSlice.actions.resetAllActiveInStage5());
+      // console.log(typeOfBox);
+      // dispatch(mbtiSlice.actions.resetAllActiveInStage5());
       findTypeOfBox(typeOfBox);
     },
     [

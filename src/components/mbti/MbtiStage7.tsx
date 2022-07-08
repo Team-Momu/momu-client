@@ -12,6 +12,7 @@ import openPhoto from '@public/img/mbti/open.png';
 import privatePhoto from '@public/img/mbti/private.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
+import { useEffect } from 'react';
 const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 const MbtiStage7 = () => {
   const leftStage7 = useSelector(
@@ -41,6 +42,15 @@ const MbtiStage7 = () => {
     dispatch(mbtiSlice.actions.resetAllInStage7());
     findTypeOfBox(typeOfBox);
   };
+
+  useEffect(() => {
+    if (leftStage7) {
+      dispatch(mbtiSlice.actions.addLeftStage7());
+    }
+    if (rightStage7) {
+      dispatch(mbtiSlice.actions.addRightStage7());
+    }
+  }, [leftStage7, rightStage7]);
 
   return (
     <>
