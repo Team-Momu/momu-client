@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   ChinaFoodText,
   ChinaLayOutBox,
@@ -18,14 +18,31 @@ import {
   WesternLayOutBox,
 } from './MbtiSelectBoxStyles';
 import Image from 'next/image';
-import Korea from '@public/img/Korea.png';
-import China from '@public/img/China.png';
-import Japan from '@public/img/Japan.png';
-import Western from '@public/img/Western.png';
-import Fusion from '@public/img/Fusion.png';
-import Snack from '@public/img/Snack.png';
+import Korea from '@public/img/mbti/Korea.png';
+import China from '@public/img/mbti/China.png';
+import Japan from '@public/img/mbti/Japan.png';
+import Western from '@public/img/mbti/Western.png';
+import Fusion from '@public/img/mbti/Fusion.png';
+import Snack from '@public/img/mbti/Snack.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
+import {
+  DownSideBoxPositionInStage2,
+  UpSideBoxPositionInStage2,
+} from './MbtiSelectBoxStage2';
+import {
+  DownSideBoxPositionInStage3,
+  UpSideBoxPositionInStage3,
+} from './MbtiSelectBoxStage3';
+import {
+  DownSideBoxPositionInStage4,
+  UpSideBoxPositionInStage4,
+} from './MbtiSelectBoxStage4';
+import { UpSideLeftBox } from './MbtiSelectBoxStage5';
+import MbtiStage5 from './MbtiStage5';
+import MbtiStage6 from './MbtiStage6';
+import MbtiStage7 from './MbtiStage7';
+import MbtiStage8 from './MbtiStage8';
 const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 
 const MbtiArticle = () => {
@@ -36,10 +53,17 @@ const MbtiArticle = () => {
     (state: RootState) => state.mbti.stage1
   );
 
-  // const onClick = useCallback(() => {
-  //   dispatch(mbtiSlice.actions.changeState());
-  // }, [dispatch]);
+  //stage2
+  const [active1, setActive1] = useState(false);
+  const [active2, setActive2] = useState(false);
+  //stage3
+  const [upStage3, setUpStage3] = useState(false);
+  const [downStage3, setDownStage3] = useState(false);
+  //stage4
+  const [upStage4, setUpStage4] = useState(false);
+  const [downStage4, setDownStage4] = useState(false);
 
+  // stage1 사용
   const findTypeOfFood = (typeOfFood: string) => {
     switch (typeOfFood) {
       case '한식':
@@ -71,6 +95,73 @@ const MbtiArticle = () => {
     // dispatch(mbtiSlice.actions.resetAllActiveInStage1());
     findTypeOfFood(typeOfFood);
   }, []);
+
+  const onClickStage2 = useCallback(
+    (e: React.MouseEvent<HTMLElement>): void => {
+      // @ts-ignore
+      const typeOfBox: string = e.target.innerText[0];
+      // 둘 중에 하나라도 누른 상태에서 다른 것을 눌렀을 때 처리
+
+      if (active1 === true || active2 === true) {
+        setActive1(false);
+        setActive2(false);
+      }
+      // 눌렀을 때 박스 인식 후 토글
+      if (typeOfBox === '가') {
+        //위쪽 박스
+        setActive1((prev) => !prev);
+      } else {
+        //아래쪽 박스 선택
+        setActive2((prev) => !prev);
+      }
+    },
+    [active1, active2]
+  );
+
+  // 여기서 최종 선택 점수 알고리즘
+  useEffect(() => {}, [active1, active2, upStage3, downStage3]);
+
+  const onClickStage3 = useCallback(
+    (e: React.MouseEvent<HTMLElement>): void => {
+      //@ts-ignore
+      const typeOfBox: string = e.target.innerText[0];
+
+      if (upStage3 === true || downStage3 === true) {
+        setUpStage3(false);
+        setDownStage3(false);
+      }
+      // 눌렀을 때 박스 인식 후 토글
+      if (typeOfBox === '신') {
+        //위쪽 박스
+        setUpStage3((prev) => !prev);
+      } else {
+        //아래쪽 박스 선택
+        setDownStage3((prev) => !prev);
+      }
+    },
+    [upStage3, downStage3]
+  );
+
+  const onClickStage4 = useCallback(
+    (e: React.MouseEvent<HTMLElement>): void => {
+      //@ts-ignore
+      const typeOfBox: string = e.target.innerText[0];
+
+      if (upStage4 === true || downStage4 === true) {
+        setUpStage4(false);
+        setDownStage4(false);
+      }
+      // 눌렀을 때 박스 인식 후 토글
+      if (typeOfBox === '음') {
+        //위쪽 박스
+        setUpStage4((prev) => !prev);
+      } else {
+        //아래쪽 박스 선택
+        setDownStage4((prev) => !prev);
+      }
+    },
+    [upStage4, downStage4]
+  );
 
   return (
     <>
@@ -173,6 +264,63 @@ const MbtiArticle = () => {
           </SnackLayOutBox>
         </>
       )}
+      {stageNumber === 2 && (
+        <>
+          <UpSideBoxPositionInStage2 onClick={onClickStage2} active={active1}>
+            가본 적 없는 새로운 식당
+          </UpSideBoxPositionInStage2>
+          <DownSideBoxPositionInStage2 onClick={onClickStage2} active={active2}>
+            항상 가는 익숙한 식당
+          </DownSideBoxPositionInStage2>
+        </>
+      )}
+      {stageNumber === 3 && (
+        <>
+          <UpSideBoxPositionInStage3 onClick={onClickStage3} active={upStage3}>
+            신메뉴는 궁금해서 못 참지.
+          </UpSideBoxPositionInStage3>
+          <DownSideBoxPositionInStage3
+            onClick={onClickStage3}
+            active={downStage3}
+          >
+            그래도 항상 먹던 게 편하지!
+          </DownSideBoxPositionInStage3>
+        </>
+      )}
+      {stageNumber === 4 && (
+        <>
+          <UpSideBoxPositionInStage4 onClick={onClickStage4} active={upStage4}>
+            음식 본연 맛 자체가 가장 중요!
+          </UpSideBoxPositionInStage4>
+          <DownSideBoxPositionInStage4
+            onClick={onClickStage4}
+            active={downStage4}
+          >
+            매장 분위기, 서비스, 인테리어도 맛만큼 중요!
+          </DownSideBoxPositionInStage4>
+        </>
+      )}
+      {stageNumber === 5 && (
+        <>
+          <MbtiStage5></MbtiStage5>
+        </>
+      )}
+      {stageNumber === 6 && (
+        <>
+          <MbtiStage6></MbtiStage6>
+        </>
+      )}
+      {stageNumber === 7 && (
+        <>
+          <MbtiStage7></MbtiStage7>
+        </>
+      )}
+      {stageNumber === 8 && (
+        <>
+          <MbtiStage8></MbtiStage8>
+        </>
+      )}
+      {stageNumber === 9 && <>{null}</>}
     </>
   );
 };
