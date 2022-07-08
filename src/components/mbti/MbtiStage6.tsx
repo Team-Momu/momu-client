@@ -1,4 +1,5 @@
 import {
+  Layer,
   LeftBoxParent,
   LeftBoxPosition,
   LeftTextStyle,
@@ -9,9 +10,9 @@ import {
 import Image from 'next/image';
 import openPhoto from '@public/img/mbti/open.png';
 import privatePhoto from '@public/img/mbti/private.png';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
-
+const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 const MbtiStage6 = () => {
   const leftStage6 = useSelector(
     (state: RootState) => state.mbti.stage6.leftStage6
@@ -20,18 +21,41 @@ const MbtiStage6 = () => {
     (state: RootState) => state.mbti.stage6.rightStage6
   );
 
+  const dispatch = useDispatch();
+
+  const findTypeOfBox = (findTypeOfBox: string) => {
+    switch (findTypeOfBox) {
+      case '오픈된 공간':
+        dispatch(mbtiSlice.actions.changeLeftInStage6());
+        break;
+      case '프라이빗한 공간':
+        dispatch(mbtiSlice.actions.changeRightInStage6());
+        break;
+      default:
+        null;
+    }
+  };
+  const onClick = (e: React.MouseEvent<HTMLElement>): void => {
+    //@ts-ignore
+    const typeOfBox: string = e.target.innerText;
+    dispatch(mbtiSlice.actions.resetAllInStage6());
+    findTypeOfBox(typeOfBox);
+  };
+
   return (
     <>
-      <LeftBoxPosition active={true}>
+      <LeftBoxPosition active={leftStage6}>
         <LeftBoxParent>
           <Image src={openPhoto} />
-          <LeftTextStyle>오픈된 공간</LeftTextStyle>
+          <Layer active={leftStage6} />
+          <LeftTextStyle onClick={onClick}>오픈된 공간</LeftTextStyle>
         </LeftBoxParent>
       </LeftBoxPosition>
-      <RightBoxPosition active={false}>
+      <RightBoxPosition active={rightStage6}>
         <RightBoxParent>
           <Image src={privatePhoto} />
-          <RightTextStyle>프라이빗한 공간</RightTextStyle>
+          <Layer active={rightStage6} />
+          <RightTextStyle onClick={onClick}>프라이빗한 공간</RightTextStyle>
         </RightBoxParent>
       </RightBoxPosition>
     </>

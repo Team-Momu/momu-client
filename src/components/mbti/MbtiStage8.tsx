@@ -1,4 +1,5 @@
 import {
+  Layer,
   LeftBoxParent,
   LeftBoxPosition,
   LeftTextStyle,
@@ -7,11 +8,12 @@ import {
   RightTextStyle,
 } from './MbtiSelectBoxStage678';
 import Image from 'next/image';
-import open2 from '@public/img/mbti/open2.png';
-import separated from '@public/img/mbti/separated.png';
-import { useSelector } from 'react-redux';
+import openPhoto from '@public/img/mbti/open.png';
+import privatePhoto from '@public/img/mbti/private.png';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 
+const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 const MbtiStage8 = () => {
   const leftStage8 = useSelector(
     (state: RootState) => state.mbti.stage8.leftStage8
@@ -19,18 +21,42 @@ const MbtiStage8 = () => {
   const rightStage8 = useSelector(
     (state: RootState) => state.mbti.stage8.rightStage8
   );
+
+  const dispatch = useDispatch();
+
+  const findTypeOfBox = (findTypeOfBox: string) => {
+    switch (findTypeOfBox) {
+      case '개방된 공간':
+        dispatch(mbtiSlice.actions.changeLeftInStage8());
+        break;
+      case '분리된 공간':
+        dispatch(mbtiSlice.actions.changeRightInStage8());
+        break;
+      default:
+        null;
+    }
+  };
+  const onClick = (e: React.MouseEvent<HTMLElement>): void => {
+    //@ts-ignore
+    const typeOfBox: string = e.target.innerText;
+    dispatch(mbtiSlice.actions.resetAllInStage8());
+    findTypeOfBox(typeOfBox);
+  };
+
   return (
     <>
-      <LeftBoxPosition>
+      <LeftBoxPosition active={leftStage8}>
         <LeftBoxParent>
-          <Image src={open2} />
-          <LeftTextStyle>개방된 공간</LeftTextStyle>
+          <Image src={openPhoto} />
+          <Layer active={leftStage8} />
+          <LeftTextStyle onClick={onClick}>개방된 공간</LeftTextStyle>
         </LeftBoxParent>
       </LeftBoxPosition>
-      <RightBoxPosition>
+      <RightBoxPosition active={rightStage8}>
         <RightBoxParent>
-          <Image src={separated} />
-          <RightTextStyle>분리된 공간</RightTextStyle>
+          <Image src={privatePhoto} />
+          <Layer active={rightStage8} />
+          <RightTextStyle onClick={onClick}>분리된 공간</RightTextStyle>
         </RightBoxParent>
       </RightBoxPosition>
     </>

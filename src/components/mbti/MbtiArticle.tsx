@@ -43,6 +43,7 @@ import MbtiStage5 from './MbtiStage5';
 import MbtiStage6 from './MbtiStage6';
 import MbtiStage7 from './MbtiStage7';
 import MbtiStage8 from './MbtiStage8';
+import MbtiStage9 from './MbtiStage9';
 const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 
 const MbtiArticle = () => {
@@ -320,7 +321,11 @@ const MbtiArticle = () => {
           <MbtiStage8></MbtiStage8>
         </>
       )}
-      {stageNumber === 9 && <>{null}</>}
+      {stageNumber === 9 && (
+        <>
+          <MbtiStage9></MbtiStage9>
+        </>
+      )}
     </>
   );
 };
