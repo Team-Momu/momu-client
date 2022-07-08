@@ -5,7 +5,11 @@ import GetCurationCard from './GetCurationCard';
 const FeedList = () => {
   return (
     <Wrapper>
-      <FeedHeader />
+      <GetCurationCard />
+      <GetCurationCard />
+      <GetCurationCard />
+      <GetCurationCard />
+      <GetCurationCard />
       <GetCurationCard />
       <GetCurationCard />
       <GetCurationCard />

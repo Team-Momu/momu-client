@@ -135,7 +135,6 @@ const AdditionalText = styled.div`
   width: 311px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 `;
 
 const Line = styled.div`
