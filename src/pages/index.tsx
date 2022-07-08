@@ -2,9 +2,11 @@ import type { NextPage } from 'next';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { useCallback } from 'react';
+import { useRouter } from 'next/router';
 const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const {
     mbti: { test },
   } = useSelector((state: RootState) => state);
@@ -17,9 +19,23 @@ const Home: NextPage = () => {
   console.log(onClick);
   return (
     <>
-      <span>hi</span>
-      <button onClick={onClick}>버튼</button>
-      {test && 'hi'}
+      <div
+        style={{
+          textAlign: 'center',
+          border: '1px dotted black',
+          marginTop: '100px',
+        }}
+      >
+        <h1>❌모무데브 개발 중❌</h1>
+
+        <button onClick={() => router.push('/profile/1')}>
+          누르면 먹비티아이로 넘어가는 버튼
+        </button>
+
+        <button onClick={() => router.push('/feed')}>
+          누르면 피드로 넘어가는 버튼
+        </button>
+      </div>
     </>
   );
 };
