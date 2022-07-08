@@ -3,7 +3,23 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface IState {
-  result: [];
+  result: {
+    stage1: string;
+    stage2: string;
+    stage3: string;
+    stage4: string;
+    stage5: number;
+    stage6: string;
+    stage7: string;
+    stage8: string;
+    stage9: string;
+  };
+  mbti: {
+    first: string;
+    second: string;
+    third: string;
+    fourth: string;
+  };
   stage1: {
     korea: boolean;
     china: boolean;
@@ -38,6 +54,18 @@ export interface IState {
 }
 
 export const initialState = {
+  result: {
+    stage1: '',
+    stage2: '',
+    stage3: '',
+    stage4: '',
+    stage5: 0,
+    stage6: '',
+    stage7: '',
+    stage8: '',
+    stage9: '',
+  },
+  mbti: { first: '', second: '', third: '', fourth: '' },
   stage1: {
     korea: false,
     china: false,
@@ -169,9 +197,55 @@ const mbtiSlice = createSlice({
       state.stage8.leftStage8 = false;
       state.stage8.rightStage8 = false;
     },
+    addStage1: (state, action) => {
+      state.result.stage1 = '퓨전식';
+    },
+    resetStage1: (state, action) => {
+      state.result.stage1 = '';
+    },
+    addUpStage2: (state, action) => {
+      state.result.stage2 = 'up';
+    },
+    addDownStage2: (state, action) => {
+      state.result.stage2 = 'down';
+    },
+    addUpStage3: (state, action) => {
+      state.result.stage3 = 'up';
+    },
+    addDownStage3: (state, action) => {
+      state.result.stage3 = 'down';
+    },
+    addUpStage4: (state, action) => {
+      state.result.stage4 = 'up';
+    },
+    addDownStage4: (state, action) => {
+      state.result.stage4 = 'down';
+    },
+    addNumberStage5: (state, action) => {
+      state.result.stage5 += 1;
+    },
+    minusNumberStage5: (state, action) => {
+      state.result.stage5 -= 1;
+    },
+    addLeftStage6: (state, action) => {
+      state.result.stage6 = 'left';
+    },
+    addRightStage6: (state, action) => {
+      state.result.stage6 = 'right';
+    },
+    addLeftStage7: (state, action) => {
+      state.result.stage7 = 'left';
+    },
+    addRightStage7: (state, action) => {
+      state.result.stage7 = 'right';
+    },
+    addLeftStage8: (state, action) => {
+      state.result.stage8 = 'left';
+    },
+    addRightStage8: (state, action) => {
+      state.result.stage8 = 'right';
+    },
   },
 });
-
-// export const { changeState } = mbtiSlice.actions;
 
 module.exports = mbtiSlice;

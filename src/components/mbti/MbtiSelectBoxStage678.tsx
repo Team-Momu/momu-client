@@ -10,10 +10,10 @@ export const LeftBoxPosition = styled.div<{ active: boolean }>`
   height: 112px;
   left: 16px;
   top: 363px;
-
-  background: ${({ active }) => (active ? '#F57906' : '#0c0b0b')}
+  
+  background:#0c0b0b
   mix-blend-mode: darken;
-  // opacity: ${({ active }) => (active ? '0.8' : '0.2')}
+  
 `;
 
 export const RightBoxPosition = styled.div<{ active: boolean }>`
@@ -25,7 +25,7 @@ export const RightBoxPosition = styled.div<{ active: boolean }>`
   
   background: #0c0b0b
   mix-blend-mode: darken;
-  // opacity: ${({ active }) => (active ? '0.2' : '0.8')}
+  
 `;
 
 export const LeftBoxParent = styled.div`
@@ -76,4 +76,12 @@ export const LeftTextStyle = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+`;
+
+export const Layer = styled.div<{ active: boolean }>`
+  position: absolute;
+  width: 168px;
+  height: 112px;
+  background: ${({ active }) => (active ? '#F57906' : '#0c0b0b')};
+  opacity: ${({ active }) => (active ? '0.4' : '0.2')};
 `;

@@ -1,4 +1,5 @@
 import {
+  Layer,
   LeftBoxParent,
   LeftBoxPosition,
   LeftTextStyle,
@@ -7,11 +8,12 @@ import {
   RightTextStyle,
 } from './MbtiSelectBoxStage678';
 import Image from 'next/image';
-import lively from '@public/img/mbti/lively.png';
-import snung from '@public/img/mbti/snug.png';
-import { useSelector } from 'react-redux';
+import openPhoto from '@public/img/mbti/open.png';
+import privatePhoto from '@public/img/mbti/private.png';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
-
+import { useEffect } from 'react';
+const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 const MbtiStage7 = () => {
   const leftStage7 = useSelector(
     (state: RootState) => state.mbti.stage7.leftStage7
@@ -19,18 +21,51 @@ const MbtiStage7 = () => {
   const rightStage7 = useSelector(
     (state: RootState) => state.mbti.stage7.rightStage7
   );
+
+  const dispatch = useDispatch();
+
+  const findTypeOfBox = (findTypeOfBox: string) => {
+    switch (findTypeOfBox) {
+      case '활기찬 공간':
+        dispatch(mbtiSlice.actions.changeLeftInStage7());
+        break;
+      case '아늑한 공간':
+        dispatch(mbtiSlice.actions.changeRightInStage7());
+        break;
+      default:
+        null;
+    }
+  };
+  const onClick = (e: React.MouseEvent<HTMLElement>): void => {
+    //@ts-ignore
+    const typeOfBox: string = e.target.innerText;
+    dispatch(mbtiSlice.actions.resetAllInStage7());
+    findTypeOfBox(typeOfBox);
+  };
+
+  useEffect(() => {
+    if (leftStage7) {
+      dispatch(mbtiSlice.actions.addLeftStage7());
+    }
+    if (rightStage7) {
+      dispatch(mbtiSlice.actions.addRightStage7());
+    }
+  }, [leftStage7, rightStage7]);
+
   return (
     <>
-      <LeftBoxPosition>
+      <LeftBoxPosition active={leftStage7}>
         <LeftBoxParent>
-          <Image src={lively} />
-          <LeftTextStyle>활기찬 공간</LeftTextStyle>
+          <Image src={openPhoto} />
+          <Layer active={leftStage7} />
+          <LeftTextStyle onClick={onClick}>활기찬 공간</LeftTextStyle>
         </LeftBoxParent>
       </LeftBoxPosition>
-      <RightBoxPosition>
+      <RightBoxPosition active={rightStage7}>
         <RightBoxParent>
-          <Image src={snung} />
-          <RightTextStyle>아늑한 공간</RightTextStyle>
+          <Image src={privatePhoto} />
+          <Layer active={rightStage7} />
+          <RightTextStyle onClick={onClick}>아늑한 공간</RightTextStyle>
         </RightBoxParent>
       </RightBoxPosition>
     </>
