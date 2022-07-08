@@ -21,9 +21,9 @@ const Wrapper = styled.div`
   width: 375px;
   height: 812px;
   position: relative;
-
   margin: auto;
   background: #ffffff;
+  overflow: auto;
 `;
 const Container = styled.div`
   position: relative;

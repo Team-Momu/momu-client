@@ -2,35 +2,36 @@ import styled from 'styled-components';
 
 const FeedHeader = () => {
   return (
-    <HeaderContainer>
-      <TextContainer>Request</TextContainer>
-      <FilterButton>
-        <FilterText>필터</FilterText>
-        <FilterIcon src={'img/filtericon.png'} />
-      </FilterButton>
-    </HeaderContainer>
+    <div>
+      <HeaderContainer>
+        <TextContainer>Request</TextContainer>
+        <ButtonContainer>
+          <FilterButton>
+            <FilterText>필터</FilterText>
+            <FilterIcon src={'img/filtericon.png'} />
+          </FilterButton>
+        </ButtonContainer>
+      </HeaderContainer>
+      <Line></Line>
+    </div>
   );
 };
 export default FeedHeader;
 
 const HeaderContainer = styled.div`
-  width: calc(100% + 16 * 2);
   margin: 0 -16px;
   padding: 0;
   width: 375px;
   height: 68px;
   line-height: 68px;
-  border-bottom: 2px solid #000000;
+
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 const TextContainer = styled.div`
-  position: absolute;
-  width: 113px;
+  padding-left: 20px;
   height: 42px;
-  left: 20px;
-  top: 13px;
-
   font-family: 'Prompt';
   font-style: normal;
   font-weight: 700;
@@ -40,15 +41,15 @@ const TextContainer = styled.div`
   color: #191919;
 `;
 
+const ButtonContainer = styled.div`
+  padding-right: 20px;
+`;
 const FilterButton = styled.button`
   background-color: transparent;
-  position: absolute;
   width: 76px;
   height: 36px;
-  left: 283px;
-  top: 15px;
 
-  border: 1.5px solid #000000;
+  border: 1.5px solid #191919;
   align-items: center;
   display: flex;
   align-items: center;
@@ -68,4 +69,11 @@ const FilterIcon = styled.img`
   width: 18px;
   height: 18px;
   margin-left: 38px;
+`;
+
+// 왜 헤더 밑에 라인 화면 넓이에 안맞는거임 아오ㅜ
+const Line = styled.div`
+  border-bottom: 2px solid #191919;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
 `;
