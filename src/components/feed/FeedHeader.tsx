@@ -1,31 +1,9 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const FeedHeader = () => {
-  const [ScrollY, setScrollY] = useState(0); // window 의 pageYOffset값을 저장
-  const [ScrollActive, setScrollActive] = useState(false);
-  function handleScroll() {
-    if (ScrollY > 50) {
-      setScrollY(window.pageYOffset);
-      setScrollActive(true);
-    } else {
-      setScrollY(window.pageYOffset);
-      setScrollActive(false);
-    }
-  }
-  useEffect(() => {
-    function scrollListener() {
-      window.addEventListener('scroll', handleScroll);
-    } //  window 에서 스크롤을 감시 시작
-    scrollListener(); // window 에서 스크롤을 감시
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    }; //  window 에서 스크롤을 감시를 종료
-  });
-
   return (
     <div>
-      <HeaderContainer className={ScrollActive ? 'fixed' : ''}>
+      <HeaderContainer>
         <TextContainer>Request</TextContainer>
         <ButtonContainer>
           <FilterButton>
@@ -50,11 +28,6 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  &fixed {
-    position: fixed;
-    top: 0;
-    right: 0;
-  }
 `;
 
 const TextContainer = styled.div`
@@ -90,16 +63,15 @@ const FilterText = styled.div`
   font-weight: 600;
   font-size: 15px;
   line-height: 18px;
-  margin-left: 6px;
+  margin-left: 12px;
 `;
 
 const FilterIcon = styled.img`
   width: 18px;
   height: 18px;
-  margin-left: 38px;
+  margin-left: 42px;
 `;
 
-// 왜 헤더 밑에 라인 화면 넓이에 안맞는거임 아오ㅜ
 const Line = styled.div`
   border-bottom: 2px solid #191919;
   width: calc(100% + 16px * 2);

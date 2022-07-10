@@ -9,8 +9,10 @@ export interface ICurationType {
   isDrink: string;
   personnel: string;
   additionalText: string;
-  isScrapped: boolean;
+  isScrapped: boolean|null;
 }
+
+
 
 export const initialState = {
   loading: false,
