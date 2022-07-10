@@ -27,7 +27,7 @@ const FeedHeader = () => {
         onDismiss={onDismiss}
         snapPoints={({ maxHeight }) => 0.8 * maxHeight}
       >
-        <FilterLayout />
+        <FilterLayout onDismiss={onDismiss} />
       </BottomSheet>
     </div>
   );
