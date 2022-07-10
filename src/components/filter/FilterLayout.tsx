@@ -5,8 +5,8 @@ interface DismissProps {
 const FilterLayout = ({ onDismiss }: DismissProps) => {
   return (
     <>
-      <div>hi</div>
-      <button onClick={onDismiss}>Dismiss</button>
+      <div>필터 레이아웃 구현</div>
+      <button onClick={onDismiss}>완료버튼</button>
     </>
   );
 };

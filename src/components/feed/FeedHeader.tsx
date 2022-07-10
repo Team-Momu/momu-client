@@ -22,13 +22,15 @@ const FeedHeader = () => {
         </ButtonContainer>
       </HeaderContainer>
       <Line></Line>
-      <BottomSheet
-        open={open}
-        onDismiss={onDismiss}
-        snapPoints={({ maxHeight }) => 0.8 * maxHeight}
-      >
-        <FilterLayout onDismiss={onDismiss} />
-      </BottomSheet>
+      <BottomSheetContainer>
+        <BottomSheet
+          open={open}
+          onDismiss={onDismiss}
+          snapPoints={({ maxHeight }) => 0.8 * maxHeight}
+        >
+          <FilterLayout onDismiss={onDismiss} />
+        </BottomSheet>
+      </BottomSheetContainer>
     </div>
   );
 };
@@ -92,4 +94,11 @@ const Line = styled.div`
   border-bottom: 2px solid #191919;
   width: calc(100% + 16px * 2);
   margin: 0 16px 0 -16px;
+`;
+
+const BottomSheetContainer = styled.div`
+  width: 375px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
