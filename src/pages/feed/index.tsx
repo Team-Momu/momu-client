@@ -10,46 +10,21 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 const Feed: NextPage = () => {
   return (
     <body>
-      <div>
+      <Wrapper>
         <MainFeed />
         <SliderContainer className="sticky top-0">
           <FeedHeader />
         </SliderContainer>
-
         <FeedList />
-      </div>
+      </Wrapper>
     </body>
   );
 };
 
-// const [container, setContainer] = useState<HTMLDivElement | null>(null);
-
-// return (
-//   <Wrapper>
-//     <SliderContainer className="scrollable-container" ref={setContainer}>
-//       <Container className="background">
-//         <MainFeed />
-//         <Affix target={() => container}>
-//           <FeedHeader />
-//         </Affix>
-//       </Container>
-//     </SliderContainer>
-//     <FeedList />
-//   </Wrapper>
-// );
-// };
-
 export default Feed;
 const Wrapper = styled.div`
-  height: 573px;
-  // overflow-y: scroll;
+  background: #ffffff;
 `;
 const SliderContainer = styled.div`
   background: #ffffff;
-`;
-
-const Container = styled.div`
-  height: 300px;
-  padding-top: 60px; //padding 593px
-  background-image: url('https://zos.alipayobjects.com/rmsportal/RmjwQiJorKyobvI.jpg');
 `;
