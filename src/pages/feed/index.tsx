@@ -9,15 +9,13 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 
 const Feed: NextPage = () => {
   return (
-    <body>
-      <Wrapper>
-        <MainFeed />
-        <SliderContainer className="sticky top-0">
-          <FeedHeader />
-        </SliderContainer>
-        <FeedList />
-      </Wrapper>
-    </body>
+    <Wrapper>
+      <MainFeed />
+      <SliderContainer className="sticky top-0">
+        <FeedHeader />
+      </SliderContainer>
+      <FeedList />
+    </Wrapper>
   );
 };
 
