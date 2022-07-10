@@ -1,18 +1,34 @@
 import styled from 'styled-components';
+import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
+import { useState } from 'react';
+import FilterLayout from 'components/filter/FilterLayout';
+import 'react-spring-bottom-sheet/dist/style.css';
 
 const FeedHeader = () => {
+  const [open, setOpen] = useState(false);
+  function onDismiss() {
+    setOpen(false);
+  }
+
   return (
     <div>
       <HeaderContainer>
         <TextContainer>Request</TextContainer>
         <ButtonContainer>
-          <FilterButton>
+          <FilterButton onClick={() => setOpen(true)}>
             <FilterText>필터</FilterText>
             <FilterIcon src={'img/filtericon.png'} />
           </FilterButton>
         </ButtonContainer>
       </HeaderContainer>
       <Line></Line>
+      <BottomSheet
+        open={open}
+        onDismiss={onDismiss}
+        snapPoints={({ maxHeight }) => 0.8 * maxHeight}
+      >
+        <FilterLayout />
+      </BottomSheet>
     </div>
   );
 };
