@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { ButtonContainer, ChoiceButton } from 'styles/CommonStyle';
 
@@ -6,6 +7,13 @@ interface DismissProps {
 }
 
 const FilterLayout = ({ onDismiss }: DismissProps) => {
+  const [color, setColor] = useState('');
+  const id = 'morning';
+  const onClick = () => {
+    color === '' ? setColor('#86B9FD') : setColor('');
+  };
+
+  console.log(color);
   return (
     <FilterContainer>
       <ChooseArea>
@@ -15,27 +23,49 @@ const FilterLayout = ({ onDismiss }: DismissProps) => {
       <ChooseTime>
         <FilterText>방문 예정 시간대</FilterText>
         <ButtonContainer>
-          <ChoiceButton>아침</ChoiceButton>
-          <ChoiceButton>점심</ChoiceButton>
-          <ChoiceButton>저녁</ChoiceButton>
-          <ChoiceButton>밤</ChoiceButton>
+          <ChoiceButton color={color} onClick={onClick}>
+            아침
+          </ChoiceButton>
+          <ChoiceButton color={color} onClick={onClick}>
+            점심
+          </ChoiceButton>
+          <ChoiceButton color={color} onClick={onClick}>
+            저녁
+          </ChoiceButton>
+          <ChoiceButton color={color} onClick={onClick}>
+            밤
+          </ChoiceButton>
         </ButtonContainer>
       </ChooseTime>
       <ChooseDrink>
         <FilterText>음주 여부</FilterText>
         <ButtonContainer>
-          <ChoiceButton>안 마셔요</ChoiceButton>
-          <ChoiceButton>간술만!</ChoiceButton>
-          <ChoiceButton>마실래요</ChoiceButton>
+          <ChoiceButton color={color} onClick={onClick}>
+            안 마셔요
+          </ChoiceButton>
+          <ChoiceButton color={color} onClick={onClick}>
+            간술만!
+          </ChoiceButton>
+          <ChoiceButton color={color} onClick={onClick}>
+            마실래요
+          </ChoiceButton>
         </ButtonContainer>
       </ChooseDrink>
       <ChoosePersonnel>
         <FilterText>방문 인원수</FilterText>
         <ButtonContainer>
-          <ChoiceButton>혼자</ChoiceButton>
-          <ChoiceButton>둘이서</ChoiceButton>
-          <ChoiceButton>3~4명</ChoiceButton>
-          <ChoiceButton>5인 이상</ChoiceButton>
+          <ChoiceButton color={color} onClick={onClick}>
+            혼자
+          </ChoiceButton>
+          <ChoiceButton color={color} onClick={onClick}>
+            둘이서
+          </ChoiceButton>
+          <ChoiceButton color={color} onClick={onClick}>
+            3~4명
+          </ChoiceButton>
+          <ChoiceButton color={color} onClick={onClick}>
+            5인 이상
+          </ChoiceButton>
         </ButtonContainer>
       </ChoosePersonnel>
       <DoneButton onClick={onDismiss}>완료</DoneButton>
