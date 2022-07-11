@@ -32,5 +32,4 @@ const Banner = styled.div`
   height: 508px;
   background-color: lightgray;
   margin-bottom: 15px;
-  overflow: ;
 `;
