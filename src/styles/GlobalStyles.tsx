@@ -36,6 +36,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     background-color: var(--grey-color8);
     -ms-overflow-style: none;
+    
    }
    ::-webkit-scrollbar {
   display: none;

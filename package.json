@@ -18,6 +18,7 @@
     "bootstrap-affix": "^1.0.1",
     "next": "12.2.0",
     "next-redux-wrapper": "^7.0.5",
+    "postcss-custom-properties-fallback": "^1.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native-sticky-parallax-header": "^0.4.2",
