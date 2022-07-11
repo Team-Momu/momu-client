@@ -81,7 +81,7 @@ const MbtiArticle = () => {
     if (downStage4) {
       dispatch(mbtiSlice.actions.addDownStage4());
     }
-  }, [active1, active2, upStage3, downStage3, upStage4, downStage4]);
+  }, [dispatch, active1, active2, upStage3, downStage3, upStage4, downStage4]);
 
   const onClickStage3 = useCallback(
     (e: React.MouseEvent<HTMLElement>): void => {
