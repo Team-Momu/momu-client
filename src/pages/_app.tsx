@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import GlobalStyle from 'styles/GlobalStyles';
 import withRedux from 'next-redux-wrapper';
 import AppLayout from '@common/AppLayOut';
 import wrapper from 'store/store';
-
-function MyApp({ Component, pageProps, store }: any) {
+import { AppProps } from 'next/app';
+import '../styles/globals.css';
+import '../styles/FilterStyle.css';
+function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <AppLayout>
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </AppLayout>
+    <>
+      <AppLayout>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </AppLayout>
+    </>
   );
 }
 

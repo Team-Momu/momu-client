@@ -6,30 +6,44 @@
     "dev": "node_modules/.bin/next dev",
     "build": "node_modules/.bin/next build",
     "start": "node_modules/.bin/next start",
-    "lint": "node_modules/.bin/next lint"
+    "lint": "node_modules/.bin/next lint",
+    "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
     "@react-spring/parallax": "^9.4.5",
     "@reduxjs/toolkit": "^1.8.3",
+    "@tailwindcss/forms": "^0.5.2",
     "@types/redux-logger": "^3.0.9",
     "babel-plugin-styled-components": "^2.0.7",
+    "bootstrap-affix": "^1.0.1",
     "next": "12.2.0",
     "next-redux-wrapper": "^7.0.5",
+    "postcss-custom-properties-fallback": "^1.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-native-sticky-parallax-header": "^0.4.2",
     "react-redux": "^8.0.2",
+    "react-spring": "^9.4.5",
+    "react-spring-bottom-sheet": "^3.4.1",
+    "react-sticky": "^6.0.3",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
+    "rsuite": "^5.16.0",
     "styled-components": "^5.3.5",
     "styled-normalize": "^8.0.7"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
     "@types/react": "18.0.14",
+    "@types/react-sticky": "^6.0.4",
     "@types/styled-components": "^5.1.25",
+    "autoprefixer": "^10.4.7",
     "eslint": "8.18.0",
     "eslint-config-next": "12.2.0",
+    "postcss": "^8.4.14",
     "prettier": "^2.7.1",
+    "tailwind-styled-components": "^2.1.8",
+    "tailwindcss": "^3.1.5",
     "typescript": "4.7.4"
   }
 }

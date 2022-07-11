@@ -9,7 +9,10 @@ export interface ICurationType {
   isDrink: string;
   personnel: string;
   additionalText: string;
+  isScrapped: boolean|null;
 }
+
+
 
 export const initialState = {
   loading: false,
@@ -18,6 +21,7 @@ export const initialState = {
   isDrink: '',
   personnel: '',
   additionalText: '',
+  isScrapped: false,
 };
 const curationSlice = createSlice({
   name: 'curation',
@@ -29,7 +33,9 @@ const curationSlice = createSlice({
       state.when = '점심';
       state.isDrink = '술도 같이';
       state.personnel = '4명 이상';
-      state.additionalText = '안녕';
+      state.additionalText =
+        '서울시가 잠이 든 시간에 아무 말 없는 밤 하늘은 침착해 그와 반대로 지금 내 심장은';
+      state.isScrapped = false;
     },
   },
   extraReducers: {

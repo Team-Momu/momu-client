@@ -19,38 +19,29 @@ const MbtiBody = () => {
     '선호하는 식당 공간을 골라주세요!',
     '매운 맛 이 정도까지 먹을 수 있어요!',
   ];
+  const questionTwo = [];
 
   return (
     <>
-      {/* {stageNumber === 4 && (
+      {stageNumber === 4 || stageNumber === 5 ? (
+        stageNumber === 4 ? (
+          <>
+            <QuestionLineOne>음식 맛을 평가할 때</QuestionLineOne>
+            <QuestionLineTwo>내가 중요하게 생각하는 것은</QuestionLineTwo>
+          </>
+        ) : (
+          <>
+            <QuestionLineOne>맛집 선택 시 중요한 항목들을</QuestionLineOne>
+            <QuestionLineTwo>모두 골라주세요!</QuestionLineTwo>
+          </>
+        )
+      ) : (
         <>
-          <Question>
-            {
-              <>
-                음식 맛을 평가할 때
-                <Br />
-                내가 중요하게 생각하는 것은
-              </>
-            }
-          </Question>
+          <Question>{question[stageNumber - 1]}</Question>
         </>
       )}
-      {stageNumber === 5 && (
-        <>
-          <Question>
-            {
-              <>
-                맛집 선택 시 중요한 항목들을
-                <Br />
-                모두 골라주세요!
-              </>
-            }
-          </Question>
-        </>
-      )} */}
 
-      <Question>{question[stageNumber - 1]}</Question>
-      <MbtiArticle></MbtiArticle>
+      <MbtiArticle />
     </>
   );
 };
@@ -72,7 +63,38 @@ const Question = styled.div`
   color: var(--grey-color1);
 `;
 
-const Question2 = styled.div``;
+const QuestionLineOne = styled.div`
+  position: absolute;
+  width: 253px;
+  height: 30px;
+  left: 16px;
+  top: 319px;
+
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height, or 150% */
+
+  color: #191919;
+`;
+const QuestionLineTwo = styled.div`
+  position: absolute;
+  width: 222px;
+  height: 30px;
+  left: 16px;
+  top: 351px;
+
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height, or 150% */
+
+  color: #191919;
+`;
 
 const Br = styled.br`
   margin-bottom: 6px;

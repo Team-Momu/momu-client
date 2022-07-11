@@ -1,36 +1,56 @@
 import styled from 'styled-components';
+import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
+import { useState } from 'react';
+import FilterLayout from 'components/filter/FilterLayout';
+import 'react-spring-bottom-sheet/dist/style.css';
 
 const FeedHeader = () => {
+  const [open, setOpen] = useState(false);
+  function onDismiss() {
+    setOpen(false);
+  }
+
   return (
-    <HeaderContainer>
-      <TextContainer>Request</TextContainer>
-      <FilterButton>
-        <FilterText>필터</FilterText>
-        <FilterIcon src={'img/filtericon.png'} />
-      </FilterButton>
-    </HeaderContainer>
+    <div>
+      <HeaderContainer>
+        <TextContainer>Request</TextContainer>
+        <ButtonContainer>
+          <FilterButton onClick={() => setOpen(true)}>
+            <FilterText>필터</FilterText>
+            <FilterIcon src={'img/filtericon.png'} />
+          </FilterButton>
+        </ButtonContainer>
+      </HeaderContainer>
+      <Line></Line>
+      <BottomSheetContainer>
+        <BottomSheet
+          open={open}
+          onDismiss={onDismiss}
+          snapPoints={({ maxHeight }) => 0.8 * maxHeight}
+        >
+          <FilterLayout onDismiss={onDismiss} />
+        </BottomSheet>
+      </BottomSheetContainer>
+    </div>
   );
 };
 export default FeedHeader;
 
 const HeaderContainer = styled.div`
-  width: calc(100% + 16 * 2);
   margin: 0 -16px;
   padding: 0;
   width: 375px;
   height: 68px;
   line-height: 68px;
-  border-bottom: 2px solid #000000;
+
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
-const TextContainer = styled.div`
-  position: absolute;
-  width: 113px;
-  height: 42px;
-  left: 20px;
-  top: 13px;
 
+const TextContainer = styled.div`
+  padding-left: 20px;
+  height: 42px;
   font-family: 'Prompt';
   font-style: normal;
   font-weight: 700;
@@ -40,15 +60,15 @@ const TextContainer = styled.div`
   color: #191919;
 `;
 
+const ButtonContainer = styled.div`
+  padding-right: 20px;
+`;
 const FilterButton = styled.button`
   background-color: transparent;
-  position: absolute;
   width: 76px;
   height: 36px;
-  left: 283px;
-  top: 15px;
 
-  border: 1.5px solid #000000;
+  border: 1.5px solid #191919;
   align-items: center;
   display: flex;
   align-items: center;
@@ -61,11 +81,24 @@ const FilterText = styled.div`
   font-weight: 600;
   font-size: 15px;
   line-height: 18px;
-  margin-left: 6px;
+  margin-left: 12px;
 `;
 
 const FilterIcon = styled.img`
   width: 18px;
   height: 18px;
-  margin-left: 38px;
+  margin-left: 42px;
+`;
+
+const Line = styled.div`
+  border-bottom: 2px solid #191919;
+  width: calc(100% + 16px * 2);
+  margin: 0 16px 0 -16px;
+`;
+
+const BottomSheetContainer = styled.div`
+  width: 375px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

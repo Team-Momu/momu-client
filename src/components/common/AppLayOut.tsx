@@ -21,16 +21,17 @@ const Wrapper = styled.div`
   width: 375px;
   height: 812px;
   position: relative;
-  overflow: scroll;
   margin: auto;
   background: #ffffff;
+  overflow: auto;
 `;
 const Container = styled.div`
   position: relative;
   padding: 0 16px;
-  height: 100%;
+  height: 812px;
   margin: auto;
   border: 1px solid red;
+  overflow: auto;
 `;
 
 export default AppLayout;
