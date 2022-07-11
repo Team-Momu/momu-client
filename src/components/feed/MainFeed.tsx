@@ -11,7 +11,10 @@ const MainFeed = () => {
 
 export default MainFeed;
 
-const BannerContainer = styled.div``;
+const BannerContainer = styled.div`
+  margin: 0;
+  padding: 0;
+`;
 
 const LogoContainer = styled.div`
   padding-left: 20px;
@@ -29,4 +32,5 @@ const Banner = styled.div`
   height: 508px;
   background-color: lightgray;
   margin-bottom: 15px;
+  overflow: ;
 `;

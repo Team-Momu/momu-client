@@ -26,7 +26,7 @@ const FeedHeader = () => {
         <BottomSheet
           open={open}
           onDismiss={onDismiss}
-          snapPoints={({ maxHeight }) => 0.8 * maxHeight}
+          snapPoints={({ maxHeight }) => 0.7 * maxHeight}
         >
           <FilterLayout onDismiss={onDismiss} />
         </BottomSheet>
@@ -38,8 +38,9 @@ export default FeedHeader;
 
 const HeaderContainer = styled.div`
   margin: 0 -16px;
+
   padding: 0;
-  width: 375px;
+  width: 373px;
   height: 68px;
   line-height: 68px;
 
@@ -92,6 +93,7 @@ const FilterIcon = styled.img`
 
 const Line = styled.div`
   border-bottom: 2px solid #191919;
+
   width: calc(100% + 16px * 2);
   margin: 0 16px 0 -16px;
 `;
@@ -101,4 +103,5 @@ const BottomSheetContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0px;
 `;

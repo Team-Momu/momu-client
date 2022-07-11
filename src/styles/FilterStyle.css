@@ -1,11 +1,11 @@
 :root {
   --rsbs-backdrop-bg: rgba(0, 0, 0, 0.6);
   --rsbs-bg: #fff;
-  --rsbs-handle-bg: hsla(0, 0%, 0%, 0.14);
+  --rsbs-handle-bg: hsla(0, 0%, 0%, 0);
   --rsbs-max-w: 375px;
   --rsbs-ml: auto;
   --rsbs-mr: auto;
-  --rsbs-overlay-rounded: 16px;
+  --rsbs-overlay-rounded: 0px;
   --rsbs-antigap-scale-y: 0;
   --rsbs-overlay-translate-y: 0px;
 }
