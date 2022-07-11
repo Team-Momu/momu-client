@@ -17,7 +17,7 @@ const FeedHeader = () => {
         <ButtonContainer>
           <FilterButton onClick={() => setOpen(true)}>
             <FilterText>필터</FilterText>
-            <FilterIcon src={'img/filtericon.png'} />
+            <FilterIcon src={'img/filter/filtericon.png'} />
           </FilterButton>
         </ButtonContainer>
       </HeaderContainer>

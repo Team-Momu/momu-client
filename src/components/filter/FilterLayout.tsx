@@ -67,9 +67,17 @@ const ChooseArea = styled.div`
 `;
 
 const AreaDropdown = styled.select`
+  padding-right: 4px;
   border: 1px solid #191919;
   width: 258px;
   height: 42px;
+  -webkit-appearance: none; /* for chrome */
+  -moz-appearance: none; /*for firefox*/
+  appearance: none;
+  background: url('img/filter/Dropdown.png') no-repeat 97% 50%/10px auto;
+  &:ms-expand {
+    display: none; /*for IE10,11*/
+  }
 `;
 
 const ChooseTime = styled.div`
