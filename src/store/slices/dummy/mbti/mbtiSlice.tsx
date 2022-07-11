@@ -1,6 +1,6 @@
 //GetCurationCard, AddCurationCard..등에 사용되는 내용.
 
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface IState {
   result: {
@@ -221,11 +221,11 @@ const mbtiSlice = createSlice({
     addDownStage4: (state, action) => {
       state.result.stage4 = 'down';
     },
-    addNumberStage5: (state, action) => {
-      state.result.stage5 += 1;
-    },
-    minusNumberStage5: (state, action) => {
-      state.result.stage5 -= 1;
+    setStage5Number: (
+      state,
+      action: PayloadAction<{ stage5Number: number }>
+    ) => {
+      state.result.stage5 = action.payload.stage5Number;
     },
     addLeftStage6: (state, action) => {
       state.result.stage6 = 'left';
