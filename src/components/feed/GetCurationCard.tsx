@@ -4,8 +4,8 @@ import { RootState } from 'store/store';
 import { useEffect, useState } from 'react';
 import React from 'react';
 
-const curationSlice = require('@slices/dummy/curation/curationSlice');
-const userSlice = require('@slices/dummy/user/userSlice');
+const curationSlice = require('@slices/curation/curationSlice');
+const userSlice = require('@slices/user/userSlice');
 
 const GetCurationCard = () => {
   //addFeed에서 받아와야하는 데이터: 지역, 시간대, 음주여부, 몇 명, 추가요청사항, 작성일, 답변 개수.

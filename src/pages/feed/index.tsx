@@ -3,12 +3,8 @@ import styled from 'styled-components';
 import FeedList from 'components/feed/FeedList';
 import MainFeed from 'components/feed/MainFeed';
 import FeedHeader from 'components/feed/FeedHeader';
-import { METHOD } from 'utils/interfaces/fetcher/fetcher';
-import fetcher from 'config/fetcher';
-const Feed: NextPage = () => {
-  const feeds: any = fetcher(METHOD.GET, '/feed/');
-  console.log(feeds);
 
+const Feed: NextPage = () => {
   return (
     <Wrapper>
       <MainFeed />

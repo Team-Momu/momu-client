@@ -17,7 +17,7 @@ import Japan from '@public/img/mbti/Japan.png';
 import Western from '@public/img/mbti/Western.png';
 import Fusion from '@public/img/mbti/Fusion.png';
 import Snack from '@public/img/mbti/Snack.png';
-const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
+const mbtiSlice = require('@slices/mbti/mbtiSlice');
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { useCallback, useEffect } from 'react';
