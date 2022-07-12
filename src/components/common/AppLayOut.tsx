@@ -30,7 +30,6 @@ const Container = styled.div`
   padding: 0 16px;
   height: 812px;
   margin: auto;
-  border: 1px solid red;
   overflow: auto;
 `;
 
