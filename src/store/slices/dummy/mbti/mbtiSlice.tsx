@@ -1,59 +1,14 @@
 //GetCurationCard, AddCurationCard..등에 사용되는 내용.
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { IMbti, IState } from 'interfaces.tsx/mbti/mbtiInterface';
+import { AppDispatch, RootState } from 'store/store';
 
-export interface IState {
-  result: {
-    stage1: string;
-    stage2: string;
-    stage3: string;
-    stage4: string;
-    stage5: number;
-    stage6: string;
-    stage7: string;
-    stage8: string;
-    stage9: string;
-  };
-  mbti: {
-    first: string;
-    second: string;
-    third: string;
-    fourth: string;
-  };
-  stage1: {
-    korea: boolean;
-    china: boolean;
-    japan: boolean;
-    western: boolean;
-    fusion: boolean;
-    snack: boolean;
-  };
-  stage5: {
-    upLeftStage5: boolean;
-    upMiddleStage5: boolean;
-    upRightStage5: boolean;
-    middleLeftStage5: boolean;
-    middleMiddleStage5: boolean;
-    middleRightStage5: boolean;
-    downLeftStage5: boolean;
-    downMiddleStage5: boolean;
-    downRightStage5: boolean;
-  };
-  stage6: {
-    leftStage6: boolean;
-    rightStage6: boolean;
-  };
-  stage7: {
-    leftStage7: boolean;
-    rightStage7: boolean;
-  };
-  stage8: {
-    leftStage8: boolean;
-    rightStage8: boolean;
-  };
-}
+export const initialState: IState = {
+  status: '',
+  error: null,
 
-export const initialState = {
   result: {
     stage1: '',
     stage2: '',
@@ -98,6 +53,14 @@ export const initialState = {
     rightStage8: false,
   },
 };
+
+export const addMbti = createAsyncThunk<{
+  dispatch: AppDispatch;
+  state: RootState;
+}>('mbti/addMbti', async (mbtiData) => {
+  const response = await axios.post('/user/types', mbtiData);
+  return response.data;
+});
 
 const mbtiSlice = createSlice({
   name: 'mbti',
@@ -245,6 +208,26 @@ const mbtiSlice = createSlice({
     addRightStage8: (state, action) => {
       state.result.stage8 = 'right';
     },
+    addStage9: (state, action: PayloadAction<{ checkedInputs: string }>) => {
+      state.result.stage9 = action.payload.checkedInputs;
+    },
+    setMbti: (state, action: PayloadAction<{ mbti: IMbti }>) => {
+      state.mbti.first = action.payload.mbti.first;
+      state.mbti.second = action.payload.mbti.second;
+      state.mbti.third = action.payload.mbti.third;
+      state.mbti.fourth = action.payload.mbti.fourth;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(addMbti.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(addMbti.fulfilled, (state, { payload }) => {
+      state.status = 'success';
+    });
+    builder.addCase(addMbti.rejected, (state, action) => {
+      state.status = 'failed';
+    });
   },
 });
 

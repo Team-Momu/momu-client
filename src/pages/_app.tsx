@@ -6,6 +6,10 @@ import wrapper from 'store/store';
 import { AppProps } from 'next/app';
 import '../styles/globals.css';
 import '../styles/FilterStyle.css';
+import axios from 'axios';
+
+axios.defaults.baseURL = process.env.BASE_URL;
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>

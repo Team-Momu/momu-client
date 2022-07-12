@@ -1,13 +1,57 @@
+import { addMbti } from '@slices/dummy/mbti/mbtiSlice';
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'store/store';
 import styled from 'styled-components';
+import { mbtiCalculator } from 'utils/mbtiCalculator';
+import { mbtiStageNineChecker, mbtiStageOneChecker } from 'utils/mbtiChecker';
 
+const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 const MbtiFooter = () => {
   const router = useRouter();
   const stageNumber: number = Number(router.asPath.split('/')[2]);
+  const finalResult = useSelector((state: RootState) => state.mbti.result);
+  const stage1 = useSelector((state: RootState) => state.mbti.stage1);
+  const dispatch = useDispatch();
 
-  const pushNextPage = (): void => {
+  const pushNextPageUtils = () => {
     const pageNumber = stageNumber + 1;
     router.push(`/profile/${pageNumber}`);
+  };
+
+  const pushNextPage = (): void => {
+    // if (stageNumber === 9) {
+    //   mbtiChecker(result);
+    // const mbti = mbtiCalculator(result);
+    // dispatch(mbtiSlice.actions.setMbti({ mbti }));
+    //   return;
+    // }
+    switch (stageNumber) {
+      case 1:
+        const result = mbtiStageOneChecker(stage1);
+        if (result) {
+          pushNextPageUtils();
+          break;
+        } else {
+          alert('값을 입력해 주세요.');
+          break;
+        }
+        break;
+      case 9:
+        const stageNineResult = mbtiStageNineChecker(finalResult);
+        console.log(stageNineResult, 'laisjdfoijasdoijf');
+        if (stageNineResult) {
+          const mbti = mbtiCalculator(finalResult);
+          const finalMbti = mbti.first + mbti.second + mbti.third + mbti.fourth;
+          console.log(finalMbti);
+          dispatch(mbtiSlice.actions.setMbti({ mbti }));
+          // dispatch(addMbti({ mbti: finalMbti }));
+          break;
+        }
+        break;
+      default:
+        pushNextPageUtils();
+    }
   };
   const pushPreviousPage = (): void => {
     const pageNumber = stageNumber - 1;

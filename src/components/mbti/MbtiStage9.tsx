@@ -1,9 +1,11 @@
 import styled, { CSSProperties } from 'styled-components';
 import useInput from 'hooks/useInput';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 const MbtiStage9 = () => {
   const [checkedInputs, setCheckedInputs] = useState('');
-
+  const dispatch = useDispatch();
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       // console.log(e.target.id);
@@ -11,7 +13,8 @@ const MbtiStage9 = () => {
     }
   };
   useEffect(() => {
-    console.log(checkedInputs);
+    // console.log(checkedInputs);
+    dispatch(mbtiSlice.actions.addStage9({ checkedInputs }));
   }, [checkedInputs]);
 
   return (
