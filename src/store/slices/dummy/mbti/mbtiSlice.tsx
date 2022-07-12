@@ -29,6 +29,18 @@ export const initialState: IState = {
     fusion: false,
     snack: false,
   },
+  stage2: {
+    up: false,
+    down: false,
+  },
+  stage3: {
+    up: false,
+    down: false,
+  },
+  stage4: {
+    up: false,
+    down: false,
+  },
   stage5: {
     upLeftStage5: false,
     upMiddleStage5: false,
@@ -53,14 +65,18 @@ export const initialState: IState = {
     rightStage8: false,
   },
 };
-
-export const addMbti = createAsyncThunk<{
-  dispatch: AppDispatch;
-  state: RootState;
-}>('mbti/addMbti', async (mbtiData) => {
-  const response = await axios.post('/user/types', mbtiData);
-  return response.data;
-});
+//<{ dispatch: AppDispatch;state: RootState;}>
+export const addMbti = createAsyncThunk(
+  'mbti/addMbti',
+  async (mbtiData: { mbti: string }, thunkAPI) => {
+    try {
+      const response = await axios.post('/user/types', mbtiData);
+      return response.data;
+    } catch (error: any) {
+      thunkAPI.rejectWithValue(await error.response.data);
+    }
+  }
+);
 
 const mbtiSlice = createSlice({
   name: 'mbti',
@@ -102,6 +118,36 @@ const mbtiSlice = createSlice({
     },
     changeSnackActiveInStage1: (state, action) => {
       state.stage1.snack = !state.stage1.snack;
+    },
+    resetAllInStage2: (state) => {
+      state.stage2.up = false;
+      state.stage2.down = false;
+    },
+    changeUpInStage2: (state) => {
+      state.stage2.up = !state.stage2.up;
+    },
+    changeDownInStage2: (state) => {
+      state.stage2.down = !state.stage2.down;
+    },
+    resetAllInStage3: (state) => {
+      state.stage3.up = false;
+      state.stage3.down = false;
+    },
+    changeUpInStage3: (state) => {
+      state.stage3.up = !state.stage3.up;
+    },
+    changeDownInStage3: (state) => {
+      state.stage3.down = !state.stage3.down;
+    },
+    resetAllInStage4: (state) => {
+      state.stage4.up = false;
+      state.stage4.down = false;
+    },
+    changeUpInStage4: (state) => {
+      state.stage4.up = !state.stage4.up;
+    },
+    changeDownInStage4: (state) => {
+      state.stage4.down = !state.stage4.down;
     },
     changeUpLeftInStage5: (state, action) => {
       state.stage5.upLeftStage5 = !state.stage5.upLeftStage5;

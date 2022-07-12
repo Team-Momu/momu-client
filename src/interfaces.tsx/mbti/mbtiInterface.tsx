@@ -45,6 +45,19 @@ export interface IState {
     fusion: boolean;
     snack: boolean;
   };
+  stage2: {
+    up: boolean;
+    down: boolean;
+  };
+  stage3: {
+    up: boolean;
+    down: boolean;
+  };
+  stage4: {
+    up: boolean;
+    down: boolean;
+  };
+
   stage5: {
     upLeftStage5: boolean;
     upMiddleStage5: boolean;
