@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+
 export interface IResult {
   stage1: string;
   stage2: string;
@@ -110,7 +112,9 @@ export const mbtiCalculator = (result: IResult) => {
 
   console.log(mbti);
 
-  return mbti;
+  const finalMbti = mbti.first + mbti.second + mbti.third + mbti.fourth;
+
+  return finalMbti;
 };
 
 export const test: IResult = {

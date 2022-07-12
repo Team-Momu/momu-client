@@ -2,7 +2,7 @@
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IMbti, IState } from 'interfaces.tsx/mbti/mbtiInterface';
+import { IState } from 'interfaces.tsx/mbti/mbtiInterface';
 import { AppDispatch, RootState } from 'store/store';
 
 export const initialState: IState = {
@@ -20,7 +20,7 @@ export const initialState: IState = {
     stage8: '',
     stage9: '',
   },
-  mbti: { first: '', second: '', third: '', fourth: '' },
+  mbti: '',
   stage1: {
     korea: false,
     china: false,
@@ -63,6 +63,15 @@ export const initialState: IState = {
   stage8: {
     leftStage8: false,
     rightStage8: false,
+  },
+  stage9: {
+    oneStage9: false,
+    twoStage9: false,
+    threeStage9: false,
+    fourStage9: false,
+    fiveStage9: false,
+    sixStage9: false,
+    sevenStage9: false,
   },
 };
 //<{ dispatch: AppDispatch;state: RootState;}>
@@ -257,11 +266,39 @@ const mbtiSlice = createSlice({
     addStage9: (state, action: PayloadAction<{ checkedInputs: string }>) => {
       state.result.stage9 = action.payload.checkedInputs;
     },
-    setMbti: (state, action: PayloadAction<{ mbti: IMbti }>) => {
-      state.mbti.first = action.payload.mbti.first;
-      state.mbti.second = action.payload.mbti.second;
-      state.mbti.third = action.payload.mbti.third;
-      state.mbti.fourth = action.payload.mbti.fourth;
+    resetAllStage9: (state) => {
+      state.stage9.oneStage9 = false;
+      state.stage9.twoStage9 = false;
+      state.stage9.threeStage9 = false;
+      state.stage9.fourStage9 = false;
+      state.stage9.fiveStage9 = false;
+      state.stage9.sixStage9 = false;
+      state.stage9.sevenStage9 = false;
+    },
+    changeOneStage9: (state) => {
+      state.stage9.oneStage9 = !state.stage9.oneStage9;
+    },
+    changeTwoStage9: (state) => {
+      state.stage9.twoStage9 = !state.stage9.twoStage9;
+    },
+    changeThreeStage9: (state) => {
+      state.stage9.threeStage9 = !state.stage9.threeStage9;
+    },
+    changeFourStage9: (state) => {
+      state.stage9.fourStage9 = !state.stage9.fourStage9;
+    },
+    changeFiveStage9: (state) => {
+      state.stage9.fiveStage9 = !state.stage9.fiveStage9;
+    },
+    changeSixStage9: (state) => {
+      state.stage9.sixStage9 = !state.stage9.sixStage9;
+    },
+    changeSevenStage9: (state) => {
+      state.stage9.sevenStage9 = !state.stage9.sevenStage9;
+    },
+
+    setMbti: (state, action: PayloadAction<{ mbti: string }>) => {
+      state.mbti = action.payload.mbti;
     },
   },
   extraReducers: (builder) => {
