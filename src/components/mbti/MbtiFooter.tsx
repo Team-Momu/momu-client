@@ -1,3 +1,4 @@
+import { addMbti } from '@slices/dummy/mbti/mbtiSlice';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
@@ -41,8 +42,10 @@ const MbtiFooter = () => {
         console.log(stageNineResult, 'laisjdfoijasdoijf');
         if (stageNineResult) {
           const mbti = mbtiCalculator(finalResult);
-          console.log(mbti);
+          const finalMbti = mbti.first + mbti.second + mbti.third + mbti.fourth;
+          console.log(finalMbti);
           dispatch(mbtiSlice.actions.setMbti({ mbti }));
+          // dispatch(addMbti({ mbti: finalMbti }));
           break;
         }
         break;

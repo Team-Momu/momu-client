@@ -3,6 +3,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IMbti, IState } from 'interfaces.tsx/mbti/mbtiInterface';
+import { AppDispatch, RootState } from 'store/store';
 
 export const initialState: IState = {
   status: '',
@@ -53,8 +54,11 @@ export const initialState: IState = {
   },
 };
 
-const addMbti = createAsyncThunk('mbti/addMbti', async (mbtiData) => {
-  const response = await axios.post('', mbtiData);
+export const addMbti = createAsyncThunk<{
+  dispatch: AppDispatch;
+  state: RootState;
+}>('mbti/addMbti', async (mbtiData) => {
+  const response = await axios.post('/user/types', mbtiData);
   return response.data;
 });
 
