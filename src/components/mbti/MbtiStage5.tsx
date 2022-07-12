@@ -43,6 +43,10 @@ const MbtiStage5 = () => {
   const downRightStage5 = useSelector(
     (state: RootState) => state.mbti.stage5.downRightStage5
   );
+  const stage5 = useSelector((state: RootState) => state.mbti.result.stage5);
+  const stage5Object = useSelector((state: RootState) => state.mbti.stage5);
+
+  const stage5Array = Object.values(stage5Object);
 
   const dispatch = useDispatch();
   const findTypeOfBox = (typeOfBox: string) => {
@@ -78,102 +82,21 @@ const MbtiStage5 = () => {
   };
 
   useEffect(() => {
-    switch (upLeftStage5) {
-      case true:
-        dispatch(mbtiSlice.actions.addNumberStage5());
-        break;
-      case false:
-        dispatch(mbtiSlice.actions.minusNumberStage5());
-        break;
-      default:
-        null;
-    }
-    switch (upMiddleStage5) {
-      case true:
-        dispatch(mbtiSlice.actions.addNumberStage5());
-        break;
-      case false:
-        dispatch(mbtiSlice.actions.minusNumberStage5());
-        break;
-      default:
-        null;
-    }
-    switch (upRightStage5) {
-      case true:
-        dispatch(mbtiSlice.actions.addNumberStage5());
-        break;
-      case false:
-        dispatch(mbtiSlice.actions.minusNumberStage5());
-        break;
-      default:
-        null;
-    }
-    switch (middleLeftStage5) {
-      case true:
-        dispatch(mbtiSlice.actions.addNumberStage5());
-        break;
-      case false:
-        dispatch(mbtiSlice.actions.minusNumberStage5());
-        break;
-      default:
-        null;
-    }
-    switch (middleMiddleStage5) {
-      case true:
-        dispatch(mbtiSlice.actions.addNumberStage5());
-        break;
-      case false:
-        dispatch(mbtiSlice.actions.minusNumberStage5());
-        break;
-      default:
-        null;
-    }
-    switch (middleRightStage5) {
-      case true:
-        dispatch(mbtiSlice.actions.addNumberStage5());
-        break;
-      case false:
-        dispatch(mbtiSlice.actions.minusNumberStage5());
-        break;
-      default:
-        null;
-    }
-    switch (downLeftStage5) {
-      case true:
-        dispatch(mbtiSlice.actions.addNumberStage5());
-        break;
-      case false:
-        dispatch(mbtiSlice.actions.minusNumberStage5());
-        break;
-      default:
-        null;
-    }
-    switch (downMiddleStage5) {
-      case true:
-        dispatch(mbtiSlice.actions.addNumberStage5());
-        break;
-      case false:
-        dispatch(mbtiSlice.actions.minusNumberStage5());
-        break;
-      default:
-        null;
-    }
-    switch (downRightStage5) {
-      case true:
-        dispatch(mbtiSlice.actions.addNumberStage5());
-        break;
-      case false:
-        dispatch(mbtiSlice.actions.minusNumberStage5());
-        break;
-      default:
-        null;
-    }
+    let stage5Number = 0;
+    stage5Array.map((k) => {
+      if (k) {
+        stage5Number++;
+      }
+      return stage5Number;
+    });
+    dispatch(mbtiSlice.actions.setStage5Number({ stage5Number }));
   }, [
     upLeftStage5,
     upMiddleStage5,
     upRightStage5,
     middleLeftStage5,
-    middleMiddleStage5.middleRightStage5,
+    middleMiddleStage5,
+    middleRightStage5,
     downLeftStage5,
     downMiddleStage5,
     downRightStage5,
