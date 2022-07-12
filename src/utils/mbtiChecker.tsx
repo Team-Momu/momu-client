@@ -3,12 +3,11 @@ import { IResult } from './mbtiCalculator';
 
 export const mbtiStageOneChecker = (status: IStageOne) => {
   const statusArray = Object.values(status);
-  let num = 0;
-  statusArray.find((e, i) => {
-    num++;
+
+  const result = statusArray.find((e, i) => {
     if (e === true) {
-      return;
+      return true;
     }
   });
-  console.log(num);
+  return result;
 };

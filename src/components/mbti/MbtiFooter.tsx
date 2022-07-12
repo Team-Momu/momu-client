@@ -25,9 +25,21 @@ const MbtiFooter = () => {
     //   dispatch(mbtiSlice.actions.setMbti({ mbti }));
     //   return;
     // }
-    mbtiStageOneChecker(stage1);
-
-    pushNextPageUtils();
+    switch (stageNumber) {
+      case 1:
+        const result = mbtiStageOneChecker(stage1);
+        if (result) {
+          pushNextPageUtils();
+          break;
+        } else {
+          alert('값을 입력해 주세요.');
+          break;
+        }
+        break;
+      case 2:
+        console.log('2 대기중');
+        break;
+    }
   };
   const pushPreviousPage = (): void => {
     const pageNumber = stageNumber - 1;
