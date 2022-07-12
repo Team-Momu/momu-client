@@ -1,4 +1,4 @@
-export interface result {
+export interface IResult {
   stage1: string;
   stage2: string;
   stage3: string;
@@ -16,7 +16,7 @@ export interface mbti {
   fourth: string;
 }
 
-export const mbtiCalculator = (result: result) => {
+export const mbtiCalculator = (result: IResult) => {
   const {
     stage1,
     stage2,
@@ -113,7 +113,7 @@ export const mbtiCalculator = (result: result) => {
   return mbti;
 };
 
-export const test: result = {
+export const test: IResult = {
   stage1: '퓨전식',
   stage2: 'up',
   stage3: 'up',
