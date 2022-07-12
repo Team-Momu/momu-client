@@ -60,7 +60,7 @@ const MbtiStage1 = () => {
   const onClick = useCallback((e: React.MouseEvent<HTMLElement>): void => {
     // @ts-ignore
     const typeOfFood: string = e.target.innerText;
-    dispatch(mbtiSlice.actions.resetAllActiveInStage1());
+    // dispatch(mbtiSlice.actions.resetAllActiveInStage1());
     findTypeOfFood(typeOfFood);
   }, []);
 

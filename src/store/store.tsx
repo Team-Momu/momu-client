@@ -17,9 +17,11 @@ export const store = configureStore({
   preloadedState,
 });
 
+// useSelector, useDispatch 에 대한 타입 정의
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
+// To use async function, use below code
+// Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 

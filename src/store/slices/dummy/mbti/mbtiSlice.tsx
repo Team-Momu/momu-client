@@ -2,7 +2,7 @@
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IMbti, IState } from 'interfaces.tsx/mbti/mbtiInterface';
+import { IState } from 'interfaces.tsx/mbti/mbtiInterface';
 import { AppDispatch, RootState } from 'store/store';
 
 export const initialState: IState = {
@@ -20,7 +20,7 @@ export const initialState: IState = {
     stage8: '',
     stage9: '',
   },
-  mbti: { first: '', second: '', third: '', fourth: '' },
+  mbti: '',
   stage1: {
     korea: false,
     china: false,
@@ -28,6 +28,18 @@ export const initialState: IState = {
     western: false,
     fusion: false,
     snack: false,
+  },
+  stage2: {
+    up: false,
+    down: false,
+  },
+  stage3: {
+    up: false,
+    down: false,
+  },
+  stage4: {
+    up: false,
+    down: false,
   },
   stage5: {
     upLeftStage5: false,
@@ -52,15 +64,28 @@ export const initialState: IState = {
     leftStage8: false,
     rightStage8: false,
   },
+  stage9: {
+    oneStage9: false,
+    twoStage9: false,
+    threeStage9: false,
+    fourStage9: false,
+    fiveStage9: false,
+    sixStage9: false,
+    sevenStage9: false,
+  },
 };
-
-export const addMbti = createAsyncThunk<{
-  dispatch: AppDispatch;
-  state: RootState;
-}>('mbti/addMbti', async (mbtiData) => {
-  const response = await axios.post('/user/types', mbtiData);
-  return response.data;
-});
+//<{ dispatch: AppDispatch;state: RootState;}>
+export const addMbti = createAsyncThunk(
+  'mbti/addMbti',
+  async (mbtiData: { mbti: string }, thunkAPI) => {
+    try {
+      const response = await axios.post('/user/types', mbtiData);
+      return response.data;
+    } catch (error: any) {
+      thunkAPI.rejectWithValue(await error.response.data);
+    }
+  }
+);
 
 const mbtiSlice = createSlice({
   name: 'mbti',
@@ -102,6 +127,36 @@ const mbtiSlice = createSlice({
     },
     changeSnackActiveInStage1: (state, action) => {
       state.stage1.snack = !state.stage1.snack;
+    },
+    resetAllInStage2: (state) => {
+      state.stage2.up = false;
+      state.stage2.down = false;
+    },
+    changeUpInStage2: (state) => {
+      state.stage2.up = !state.stage2.up;
+    },
+    changeDownInStage2: (state) => {
+      state.stage2.down = !state.stage2.down;
+    },
+    resetAllInStage3: (state) => {
+      state.stage3.up = false;
+      state.stage3.down = false;
+    },
+    changeUpInStage3: (state) => {
+      state.stage3.up = !state.stage3.up;
+    },
+    changeDownInStage3: (state) => {
+      state.stage3.down = !state.stage3.down;
+    },
+    resetAllInStage4: (state) => {
+      state.stage4.up = false;
+      state.stage4.down = false;
+    },
+    changeUpInStage4: (state) => {
+      state.stage4.up = !state.stage4.up;
+    },
+    changeDownInStage4: (state) => {
+      state.stage4.down = !state.stage4.down;
     },
     changeUpLeftInStage5: (state, action) => {
       state.stage5.upLeftStage5 = !state.stage5.upLeftStage5;
@@ -211,11 +266,39 @@ const mbtiSlice = createSlice({
     addStage9: (state, action: PayloadAction<{ checkedInputs: string }>) => {
       state.result.stage9 = action.payload.checkedInputs;
     },
-    setMbti: (state, action: PayloadAction<{ mbti: IMbti }>) => {
-      state.mbti.first = action.payload.mbti.first;
-      state.mbti.second = action.payload.mbti.second;
-      state.mbti.third = action.payload.mbti.third;
-      state.mbti.fourth = action.payload.mbti.fourth;
+    resetAllStage9: (state) => {
+      state.stage9.oneStage9 = false;
+      state.stage9.twoStage9 = false;
+      state.stage9.threeStage9 = false;
+      state.stage9.fourStage9 = false;
+      state.stage9.fiveStage9 = false;
+      state.stage9.sixStage9 = false;
+      state.stage9.sevenStage9 = false;
+    },
+    changeOneStage9: (state) => {
+      state.stage9.oneStage9 = !state.stage9.oneStage9;
+    },
+    changeTwoStage9: (state) => {
+      state.stage9.twoStage9 = !state.stage9.twoStage9;
+    },
+    changeThreeStage9: (state) => {
+      state.stage9.threeStage9 = !state.stage9.threeStage9;
+    },
+    changeFourStage9: (state) => {
+      state.stage9.fourStage9 = !state.stage9.fourStage9;
+    },
+    changeFiveStage9: (state) => {
+      state.stage9.fiveStage9 = !state.stage9.fiveStage9;
+    },
+    changeSixStage9: (state) => {
+      state.stage9.sixStage9 = !state.stage9.sixStage9;
+    },
+    changeSevenStage9: (state) => {
+      state.stage9.sevenStage9 = !state.stage9.sevenStage9;
+    },
+
+    setMbti: (state, action: PayloadAction<{ mbti: string }>) => {
+      state.mbti = action.payload.mbti;
     },
   },
   extraReducers: (builder) => {

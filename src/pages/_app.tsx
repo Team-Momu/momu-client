@@ -7,6 +7,7 @@ import { AppProps } from 'next/app';
 import '../styles/globals.css';
 import '../styles/FilterStyle.css';
 import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
 
 axios.defaults.baseURL = process.env.BASE_URL;
 

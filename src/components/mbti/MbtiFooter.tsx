@@ -1,17 +1,26 @@
 import { addMbti } from '@slices/dummy/mbti/mbtiSlice';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store/store';
+import { RootState, useAppDispatch } from 'store/store';
 import styled from 'styled-components';
 import { mbtiCalculator } from 'utils/mbtiCalculator';
-import { mbtiStageNineChecker, mbtiStageOneChecker } from 'utils/mbtiChecker';
-
+import { useEffect } from 'react';
+import { mbtiStageChecker } from 'utils/mbtiChecker';
+import { ToastContainer, toast } from 'react-toastify';
 const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 const MbtiFooter = () => {
   const router = useRouter();
   const stageNumber: number = Number(router.asPath.split('/')[2]);
-  const finalResult = useSelector((state: RootState) => state.mbti.result);
+  const result = useSelector((state: RootState) => state.mbti.result);
   const stage1 = useSelector((state: RootState) => state.mbti.stage1);
+  const stage2 = useSelector((state: RootState) => state.mbti.stage2);
+  const stage3 = useSelector((state: RootState) => state.mbti.stage3);
+  const stage4 = useSelector((state: RootState) => state.mbti.stage4);
+  const stage5 = useSelector((state: RootState) => state.mbti.stage5);
+  const stage6 = useSelector((state: RootState) => state.mbti.stage6);
+  const stage7 = useSelector((state: RootState) => state.mbti.stage7);
+  const stage8 = useSelector((state: RootState) => state.mbti.stage8);
+  const stage9 = useSelector((state: RootState) => state.mbti.stage9);
   const dispatch = useDispatch();
 
   const pushNextPageUtils = () => {
@@ -28,27 +37,99 @@ const MbtiFooter = () => {
     // }
     switch (stageNumber) {
       case 1:
-        const result = mbtiStageOneChecker(stage1);
-        if (result) {
+        const result1 = mbtiStageChecker(stage1);
+        if (result1) {
           pushNextPageUtils();
           break;
         } else {
-          alert('값을 입력해 주세요.');
+          alert('값을 입력해주세요');
           break;
         }
-        break;
+      case 2:
+        const result2 = mbtiStageChecker(stage2);
+        if (result2) {
+          pushNextPageUtils();
+          break;
+        } else {
+          alert('값을 입력해주세요');
+          break;
+        }
+      case 3:
+        const result3 = mbtiStageChecker(stage3);
+        if (result3) {
+          pushNextPageUtils();
+          break;
+        } else {
+          alert('값을 입력해주세요');
+          break;
+        }
+      case 4:
+        const result4 = mbtiStageChecker(stage4);
+        if (result4) {
+          pushNextPageUtils();
+          break;
+        } else {
+          alert('값을 입력해주세요');
+          break;
+        }
+      case 5:
+        const result5 = mbtiStageChecker(stage5);
+        if (result5) {
+          pushNextPageUtils();
+          break;
+        } else {
+          alert('값을 입력해주세요');
+          break;
+        }
+      case 6:
+        const result6 = mbtiStageChecker(stage6);
+        if (result6) {
+          pushNextPageUtils();
+          break;
+        } else {
+          alert('값을 입력해주세요');
+          break;
+        }
+      case 7:
+        const result7 = mbtiStageChecker(stage7);
+        if (result7) {
+          pushNextPageUtils();
+          break;
+        } else {
+          alert('값을 입력해주세요');
+          break;
+        }
+      case 8:
+        const result8 = mbtiStageChecker(stage8);
+        if (result8) {
+          pushNextPageUtils();
+          break;
+        } else {
+          alert('값을 입력해주세요');
+          break;
+        }
       case 9:
-        const stageNineResult = mbtiStageNineChecker(finalResult);
-        console.log(stageNineResult, 'laisjdfoijasdoijf');
-        if (stageNineResult) {
-          const mbti = mbtiCalculator(finalResult);
-          const finalMbti = mbti.first + mbti.second + mbti.third + mbti.fourth;
-          console.log(finalMbti);
+        const result9 = mbtiStageChecker(stage9);
+        if (result9) {
+          const mbti = mbtiCalculator(result);
+          console.log(mbti);
           dispatch(mbtiSlice.actions.setMbti({ mbti }));
-          // dispatch(addMbti({ mbti: finalMbti }));
+          router.push(`/profile`);
+          break;
+        } else {
+          alert('값을 입력해주세요');
           break;
         }
-        break;
+
+      // case 9:
+      //   const stageNineResult = mbtiStageNineChecker(finalResult);
+      //   if (stageNineResult) {
+      //     const mbti = mbtiCalculator(finalResult);
+      //     const finalMbti = mbti.first + mbti.second + mbti.third + mbti.fourth;
+      //     dispatch(mbtiSlice.actions.setMbti({ mbti }));
+      //     break;
+      //   }
+      //   break;
       default:
         pushNextPageUtils();
     }
