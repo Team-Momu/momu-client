@@ -1,14 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
-import {
-  DownSideBoxPositionInStage2,
-  UpSideBoxPositionInStage2,
-} from './MbtiSelectBoxStage2';
-import {
-  DownSideBoxPositionInStage3,
-  UpSideBoxPositionInStage3,
-} from './MbtiSelectBoxStage3';
+
 import {
   DownSideBoxPositionInStage4,
   UpSideBoxPositionInStage4,

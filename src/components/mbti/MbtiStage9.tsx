@@ -6,9 +6,38 @@ const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 const MbtiStage9 = () => {
   const [checkedInputs, setCheckedInputs] = useState('');
   const dispatch = useDispatch();
+  const findTypeOfButton = (text: string) => {
+    switch (text) {
+      case '진라면 순한맛':
+        dispatch(mbtiSlice.actions.changeOneStage9());
+        break;
+      case '진라면 매운맛':
+        dispatch(mbtiSlice.actions.changeTwoStage9());
+        break;
+      case '불닭볶음면 컵라면':
+        dispatch(mbtiSlice.actions.changeThreeStage9());
+        break;
+      case '불닭볶음면 봉지라면':
+        dispatch(mbtiSlice.actions.changeFourStage9());
+        break;
+      case '핵불닭볶음면 컵':
+        dispatch(mbtiSlice.actions.changeFiveStage9());
+        break;
+      case '틈새라면':
+        dispatch(mbtiSlice.actions.changeSixStage9());
+        break;
+      case '청양고추':
+        dispatch(mbtiSlice.actions.changeSevenStage9());
+        break;
+      default:
+        null;
+    }
+  };
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
-      // console.log(e.target.id);
+      dispatch(mbtiSlice.actions.resetAllStage9());
+      findTypeOfButton(e.target.id);
+
       setCheckedInputs(e.target.id);
     }
   };
