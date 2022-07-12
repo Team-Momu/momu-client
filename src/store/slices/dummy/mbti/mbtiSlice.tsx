@@ -1,9 +1,13 @@
 //GetCurationCard, AddCurationCard..등에 사용되는 내용.
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IMbti } from 'interfaces.tsx/rtkDataInterface';
+import axios from 'axios';
+import { IMbti, IState } from 'interfaces.tsx/mbti/mbtiInterface';
 
-export const initialState = {
+export const initialState: IState = {
+  status: '',
+  error: null,
+
   result: {
     stage1: '',
     stage2: '',
@@ -48,6 +52,11 @@ export const initialState = {
     rightStage8: false,
   },
 };
+
+const addMbti = createAsyncThunk('mbti/addMbti', async (mbtiData) => {
+  const response = await axios.post('', mbtiData);
+  return response.data;
+});
 
 const mbtiSlice = createSlice({
   name: 'mbti',
@@ -204,6 +213,17 @@ const mbtiSlice = createSlice({
       state.mbti.third = action.payload.mbti.third;
       state.mbti.fourth = action.payload.mbti.fourth;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(addMbti.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(addMbti.fulfilled, (state, { payload }) => {
+      state.status = 'success';
+    });
+    builder.addCase(addMbti.rejected, (state, action) => {
+      state.status = 'failed';
+    });
   },
 });
 

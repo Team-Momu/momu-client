@@ -3,25 +3,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import styled from 'styled-components';
 import { mbtiCalculator } from 'utils/mbtiCalculator';
-import { mbtiChecker } from 'utils/mbtiChecker';
+import { mbtiStageOneChecker } from 'utils/mbtiChecker';
+
 const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
 const MbtiFooter = () => {
   const router = useRouter();
   const stageNumber: number = Number(router.asPath.split('/')[2]);
   const result = useSelector((state: RootState) => state.mbti.result);
+  const stage1 = useSelector((state: RootState) => state.mbti.stage1);
   const dispatch = useDispatch();
 
-  const pushNextPage = (): void => {
-    if (stageNumber === 9) {
-      mbtiChecker(result);
-      const mbti = mbtiCalculator(result);
-      dispatch(mbtiSlice.actions.setMbti({ mbti }));
-
-      return;
-    }
-
+  const pushNextPageUtils = () => {
     const pageNumber = stageNumber + 1;
     router.push(`/profile/${pageNumber}`);
+  };
+
+  const pushNextPage = (): void => {
+    // if (stageNumber === 9) {
+    //   mbtiChecker(result);
+    //   const mbti = mbtiCalculator(result);
+    //   dispatch(mbtiSlice.actions.setMbti({ mbti }));
+    //   return;
+    // }
+    mbtiStageOneChecker(stage1);
+
+    pushNextPageUtils();
   };
   const pushPreviousPage = (): void => {
     const pageNumber = stageNumber - 1;
