@@ -55,9 +55,9 @@ const GetCurationCard = () => {
           </SecondLineInfo>
           <ScrapButton onClick={onClick}>
             {scrapState ? (
-              <img src={'img/Scrapped.png'} />
+              <img src={'img/scrap/Scrapped.png'} />
             ) : (
-              <img src={'img/Scrap.png'} />
+              <img src={'img/scrap/Scrap.svg'} />
             )}
           </ScrapButton>
         </UpperContainer>
