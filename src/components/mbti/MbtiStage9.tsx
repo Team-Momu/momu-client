@@ -1,5 +1,5 @@
 import styled, { CSSProperties } from 'styled-components';
-import useInput from 'hooks/useInput';
+import useInput from 'utils/hooks/useInput';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');

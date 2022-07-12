@@ -8,8 +8,10 @@ import '../styles/globals.css';
 import '../styles/FilterStyle.css';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
+import { backUrl } from '../config/backUrl';
 
-axios.defaults.baseURL = process.env.BASE_URL;
+axios.defaults.baseURL = backUrl;
+axios.defaults.withCredentials = true;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
