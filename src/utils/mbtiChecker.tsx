@@ -11,3 +11,15 @@ export const mbtiStageOneChecker = (status: IStageOne) => {
   });
   return result;
 };
+
+export const mbtiStageNineChecker = (status: IResult) => {
+  const statusArray = Object.values(status);
+  let check = false;
+  statusArray.map((c, i) => {
+    if (c === '') {
+      check = true;
+    }
+  });
+
+  return check;
+};

@@ -5,6 +5,18 @@ export interface IMbti {
   fourth: string;
 }
 
+export interface IResult {
+  stage1: string;
+  stage2: string;
+  stage3: string;
+  stage4: string;
+  stage5: number;
+  stage6: string;
+  stage7: string;
+  stage8: string;
+  stage9: string;
+}
+
 export interface IState {
   status: string;
   error: any;
