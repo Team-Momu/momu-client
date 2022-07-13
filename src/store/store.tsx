@@ -7,11 +7,15 @@ import logger from 'redux-logger';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { rootReducer } from '@slices/index';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
-
+import curationReducer from './slices/curation/curationPostSlice';
+import mbtiReducer from './slices/mbti/mbtiSlice';
 const preloadedState = {};
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    curation: curationReducer,
+    mbti: mbtiReducer,
+  },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',
   preloadedState,

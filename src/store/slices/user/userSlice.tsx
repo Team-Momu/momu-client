@@ -38,4 +38,5 @@ const userSlice = createSlice({
 });
 
 export const { fetchUserInfo } = userSlice.actions;
-module.exports = userSlice;
+
+export default userSlice;

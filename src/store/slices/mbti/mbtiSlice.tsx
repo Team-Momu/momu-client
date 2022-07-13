@@ -315,4 +315,4 @@ const mbtiSlice = createSlice({
   },
 });
 
-module.exports = mbtiSlice;
+export default mbtiSlice.reducer;

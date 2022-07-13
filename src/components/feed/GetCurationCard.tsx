@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store/store';
+import { RootState, useAppDispatch } from 'store/store';
 import { useEffect, useState } from 'react';
 import React from 'react';
 
@@ -9,32 +9,12 @@ const userSlice = require('@slices/user/userSlice');
 
 const GetCurationCard = () => {
   //addFeed에서 받아와야하는 데이터: 지역, 시간대, 음주여부, 몇 명, 추가요청사항, 작성일, 답변 개수.
-
-  const area = useSelector((state: RootState) => state.curation.area);
-  const when = useSelector((state: RootState) => state.curation.when);
-  const isDrink = useSelector((state: RootState) => state.curation.isDrink);
-  const personnel = useSelector((state: RootState) => state.curation.personnel);
-  const additionalText = useSelector(
-    (state: RootState) => state.curation.additionalText
-  );
-  const isScrapped = useSelector(
-    (state: RootState) => state.curation.isScrapped
-  );
-
-  const userId = useSelector((state: RootState) => state.user.id);
-  const mukbti = useSelector((state: RootState) => state.user.mbti);
-  const profileImg = useSelector((state: RootState) => state.user.img);
-
-  console.log(isScrapped);
-  const [scrapState, setScrapState] = useState(isScrapped);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(curationSlice.actions.fetchCurationInfo());
     dispatch(userSlice.actions.fetchUserInfo());
   }, [dispatch]);
-
-  console.log(area);
 
   const onClick = () => {
     scrapState ? setScrapState(false) : setScrapState(true);
