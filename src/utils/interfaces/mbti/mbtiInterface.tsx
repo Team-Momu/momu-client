@@ -20,6 +20,7 @@ export interface IResult {
 export interface IState {
   status: string;
   error: any;
+  accessToken: string | null;
   result: {
     stage1: string;
     stage2: string;

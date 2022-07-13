@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const redirect = process.env.KAKAO_REDIRECT_URI;
+  const apiKey = process.env.KAKAO_REST_API_KEY;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -39,6 +41,16 @@ const Home: NextPage = () => {
 
         <button onClick={() => router.push('/feed')}>
           누르면 피드로 넘어가는 버튼
+        </button>
+        <div>dd</div>
+        <button
+          onClick={() =>
+            router.push(
+              `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAO_REST_API_KEY}&redirect_uri=${process.env.KAKAO_REDIRECT_URI}`
+            )
+          }
+        >
+          카카오로그인
         </button>
       </div>
     </>
