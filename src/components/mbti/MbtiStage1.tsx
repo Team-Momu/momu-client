@@ -11,12 +11,12 @@ import {
 } from './MbtiSelectBoxStage1';
 
 import Image from 'next/image';
-import Korea from '@public/img/mbti/Korea.png';
-import China from '@public/img/mbti/China.png';
-import Japan from '@public/img/mbti/Japan.png';
-import Western from '@public/img/mbti/Western.png';
-import Fusion from '@public/img/mbti/Fusion.png';
-import Snack from '@public/img/mbti/Snack.png';
+import Korea from '@public/img/mbti/korea1.png';
+import China from '@public/img/mbti/china1.png';
+import Japan from '@public/img/mbti/japan1.png';
+import Western from '@public/img/mbti/western1.png';
+import Fusion from '@public/img/mbti/fusion1.png';
+import Snack from '@public/img/mbti/snack1.png';
 const mbtiSlice = require('@slices/mbti/mbtiSlice');
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
