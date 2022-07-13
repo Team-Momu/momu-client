@@ -11,10 +11,6 @@ const Home: NextPage = () => {
   const redirect = process.env.KAKAO_REDIRECT_URI;
   const apiKey = process.env.KAKAO_REST_API_KEY;
 
-  useEffect(() => {
-    axios.get('/user/kakao/authorize/');
-  }, []);
-
   return (
     <>
       <div
