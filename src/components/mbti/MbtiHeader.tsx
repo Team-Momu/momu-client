@@ -25,7 +25,7 @@ const MbtiHeader = () => {
       </ProgressBar>
       <MBTI>먹BTI</MBTI>
       <Description>
-        먹BTI는 모무가 개발한 음식 선호 조사예요!
+        먹BTI는 모무가 개발한 음식 선호 조사에요!
         <br />
         데이터 기반 먹BTI로 음식 취향 큐레이션을 받아보세요!
       </Description>

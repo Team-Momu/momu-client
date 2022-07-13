@@ -8,8 +8,8 @@ import {
   RightTextStyle,
 } from './MbtiSelectBoxStage678';
 import Image from 'next/image';
-import openPhoto from '@public/img/mbti/open.png';
-import privatePhoto from '@public/img/mbti/private.png';
+import open2 from '@public/img/mbti/open2.png';
+import separated from '@public/img/mbti/separated.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { useEffect } from 'react';
@@ -56,14 +56,14 @@ const MbtiStage8 = () => {
     <>
       <LeftBoxPosition active={leftStage8}>
         <LeftBoxParent>
-          <Image src={openPhoto} />
+          <Image src={open2} />
           <Layer active={leftStage8} />
           <LeftTextStyle onClick={onClick}>개방된 공간</LeftTextStyle>
         </LeftBoxParent>
       </LeftBoxPosition>
       <RightBoxPosition active={rightStage8}>
         <RightBoxParent>
-          <Image src={privatePhoto} />
+          <Image src={separated} />
           <Layer active={rightStage8} />
           <RightTextStyle onClick={onClick}>분리된 공간</RightTextStyle>
         </RightBoxParent>

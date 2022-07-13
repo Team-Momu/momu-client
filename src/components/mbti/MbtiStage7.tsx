@@ -8,8 +8,8 @@ import {
   RightTextStyle,
 } from './MbtiSelectBoxStage678';
 import Image from 'next/image';
-import openPhoto from '@public/img/mbti/open.png';
-import privatePhoto from '@public/img/mbti/private.png';
+import lively from '@public/img/mbti/lively.png';
+import snug from '@public/img/mbti/snug.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { useEffect } from 'react';
@@ -56,14 +56,14 @@ const MbtiStage7 = () => {
     <>
       <LeftBoxPosition active={leftStage7}>
         <LeftBoxParent>
-          <Image src={openPhoto} />
+          <Image src={lively} />
           <Layer active={leftStage7} />
           <LeftTextStyle onClick={onClick}>활기찬 공간</LeftTextStyle>
         </LeftBoxParent>
       </LeftBoxPosition>
       <RightBoxPosition active={rightStage7}>
         <RightBoxParent>
-          <Image src={privatePhoto} />
+          <Image src={snug} />
           <Layer active={rightStage7} />
           <RightTextStyle onClick={onClick}>아늑한 공간</RightTextStyle>
         </RightBoxParent>
