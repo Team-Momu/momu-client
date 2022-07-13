@@ -110,7 +110,7 @@ export const mbtiCalculator = (result: IResult) => {
   console.log('thirdCount', thirdCount);
   console.log('fourhCount', fourthCount);
 
-  console.log(mbti);
+  // console.log(mbti);
 
   const finalMbti = mbti.first + mbti.second + mbti.third + mbti.fourth;
 
