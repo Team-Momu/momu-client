@@ -1,4 +1,4 @@
-import { IStage } from 'interfaces.tsx/mbti/mbtiInterface';
+import { IStage } from 'utils/interfaces/mbti/mbtiInterface';
 import { IResult } from './mbtiCalculator';
 
 // 입력 값이 제대로 되었는지 확인해주는 함수

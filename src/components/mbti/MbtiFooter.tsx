@@ -1,4 +1,4 @@
-import { addMbti } from '@slices/dummy/mbti/mbtiSlice';
+import { addMbti } from '@slices/mbti/mbtiSlice';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from 'store/store';
@@ -7,7 +7,7 @@ import { mbtiCalculator } from 'utils/mbtiCalculator';
 import { useEffect } from 'react';
 import { mbtiStageChecker } from 'utils/mbtiChecker';
 import { ToastContainer, toast } from 'react-toastify';
-const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
+const mbtiSlice = require('@slices/mbti/mbtiSlice');
 const MbtiFooter = () => {
   const router = useRouter();
   const stageNumber: number = Number(router.asPath.split('/')[2]);

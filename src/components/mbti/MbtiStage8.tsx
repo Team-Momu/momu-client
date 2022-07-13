@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { useEffect } from 'react';
 
-const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
+const mbtiSlice = require('@slices/mbti/mbtiSlice');
 const MbtiStage8 = () => {
   const leftStage8 = useSelector(
     (state: RootState) => state.mbti.stage8.leftStage8

@@ -25,7 +25,7 @@ import MbtiStage1 from './MbtiStage1';
 import MbtiStage2 from './MbtiStage2';
 import MbtiStage3 from './MbtiStage3';
 import MbtiStage4 from './MbtiStage4';
-const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
+const mbtiSlice = require('@slices/mbti/mbtiSlice');
 
 const MbtiArticle = () => {
   const router = useRouter();

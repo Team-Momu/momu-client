@@ -2,7 +2,7 @@
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IState } from 'interfaces.tsx/mbti/mbtiInterface';
+import { IState } from 'utils/interfaces/mbti/mbtiInterface';
 import { AppDispatch, RootState } from 'store/store';
 
 export const initialState: IState = {
