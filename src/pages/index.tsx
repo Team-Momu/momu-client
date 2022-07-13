@@ -1,22 +1,32 @@
 import type { NextPage } from 'next';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store/store';
+import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
-const mbtiSlice = require('@slices/mbti/mbtiSlice');
+import { getCurationPostListsThunk } from '@slices/curation/curationPostSlice';
+import { useSelector } from 'react-redux';
 
 const Home: NextPage = () => {
   const router = useRouter();
   const redirect = process.env.KAKAO_REDIRECT_URI;
   const apiKey = process.env.KAKAO_REST_API_KEY;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCurationPostListsThunk());
+  }, []);
+
+  const curations = useAppSelector(
+    (state: RootState) => state.curation.CurationPostLists
+  );
+  const isLoading = useAppSelector((state) => state.curation.pending);
+  console.log(curations, isLoading);
 
   return (
     <>
       <div
         style={{
           textAlign: 'center',
-          border: '1px dotted black',
+          border: '1px dotted blackCurationPostLists',
           marginTop: '100px',
         }}
       >
