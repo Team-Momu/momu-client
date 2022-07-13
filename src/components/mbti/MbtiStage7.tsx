@@ -8,8 +8,8 @@ import {
   RightTextStyle,
 } from './MbtiSelectBoxStage678';
 import Image from 'next/image';
-import lively from '@public/img/mbti/lively.png';
-import snug from '@public/img/mbti/snug.png';
+import lively from '@public/img/mbti/lively1.png';
+import snug from '@public/img/mbti/snug1.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { useEffect } from 'react';

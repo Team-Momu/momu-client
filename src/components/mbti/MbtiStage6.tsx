@@ -8,8 +8,8 @@ import {
   RightTextStyle,
 } from './MbtiSelectBoxStage678';
 import Image from 'next/image';
-import openPhoto from '@public/img/mbti/open.png';
-import privatePhoto from '@public/img/mbti/private.png';
+import openPhoto from '@public/img/mbti/open1.png';
+import privatePhoto from '@public/img/mbti/private1.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { useEffect } from 'react';
