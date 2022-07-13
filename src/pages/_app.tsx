@@ -9,7 +9,7 @@ import '../styles/FilterStyle.css';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 
-// axios.defaults.baseURL = process.env.BASE_URL;
+axios.defaults.baseURL = 'http://3.39.85.242';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

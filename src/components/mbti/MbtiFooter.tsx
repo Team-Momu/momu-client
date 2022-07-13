@@ -1,14 +1,15 @@
-import { addMbti } from '@slices/mbti/mbtiSlice';
+import { addMbti } from '@slices/mbti/mbtiThunk';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from 'store/store';
 import styled from 'styled-components';
 import { mbtiCalculator } from 'utils/mbtiCalculator';
-import { useEffect } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { mbtiStageChecker } from 'utils/mbtiChecker';
 import { ToastContainer, toast } from 'react-toastify';
 const mbtiSlice = require('@slices/mbti/mbtiSlice');
 const MbtiFooter = () => {
+  const [mbti, setMbti] = useState('');
   const router = useRouter();
   const stageNumber: number = Number(router.asPath.split('/')[2]);
   const result = useSelector((state: RootState) => state.mbti.result);
@@ -21,7 +22,7 @@ const MbtiFooter = () => {
   const stage7 = useSelector((state: RootState) => state.mbti.stage7);
   const stage8 = useSelector((state: RootState) => state.mbti.stage8);
   const stage9 = useSelector((state: RootState) => state.mbti.stage9);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const pushNextPageUtils = () => {
     const pageNumber = stageNumber + 1;
@@ -114,7 +115,9 @@ const MbtiFooter = () => {
           const mbti = mbtiCalculator(result);
           console.log(mbti);
           dispatch(mbtiSlice.actions.setMbti({ mbti }));
+          dispatch(addMbti({ mbti }));
           router.push(`/profile`);
+
           break;
         } else {
           alert('값을 입력해주세요');

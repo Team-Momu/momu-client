@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IState } from 'utils/interfaces/mbti/mbtiInterface';
 import { AppDispatch, RootState } from 'store/store';
+import { addMbti } from './mbtiThunk';
 
 export const initialState: IState = {
   status: '',
@@ -75,17 +76,17 @@ export const initialState: IState = {
   },
 };
 //<{ dispatch: AppDispatch;state: RootState;}>
-export const addMbti = createAsyncThunk(
-  'mbti/addMbti',
-  async (mbtiData: { mbti: string }, thunkAPI) => {
-    try {
-      const response = await axios.post('/user/types', mbtiData);
-      return response.data;
-    } catch (error: any) {
-      thunkAPI.rejectWithValue(await error.response.data);
-    }
-  }
-);
+// export const addMbti = createAsyncThunk(
+//   'mbti/addMbti',
+//   async (mbtiData: { mbti: string }, thunkAPI) => {
+//     try {
+//       const response = await axios.post('/user/types', mbtiData);
+//       return response.data;
+//     } catch (error: any) {
+//       thunkAPI.rejectWithValue(await error.response.data);
+//     }
+//   }
+// );
 
 const mbtiSlice = createSlice({
   name: 'mbti',
