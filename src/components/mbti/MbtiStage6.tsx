@@ -13,7 +13,7 @@ import privatePhoto from '@public/img/mbti/private.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { useEffect } from 'react';
-const mbtiSlice = require('@slices/dummy/mbti/mbtiSlice');
+const mbtiSlice = require('@slices/mbti/mbtiSlice');
 const MbtiStage6 = () => {
   const leftStage6 = useSelector(
     (state: RootState) => state.mbti.stage6.leftStage6

@@ -23,6 +23,12 @@
       "@slices/*": ["store/slices/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/test.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/components/test.js",
+    "src/interfaces"
+  ],
   "exclude": ["./node_modules"]
 }
