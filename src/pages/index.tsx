@@ -15,11 +15,9 @@ const Home: NextPage = () => {
     dispatch(getCurationPostListsThunk());
   }, []);
 
-  const curations = useAppSelector(
-    (state: RootState) => state.curation.CurationPostLists
-  );
-  const isLoading = useAppSelector((state) => state.curation.pending);
-  console.log(curations, isLoading);
+  const curations = useAppSelector((state: RootState) => state.curation.data);
+
+  console.log(curations.results);
 
   return (
     <>
