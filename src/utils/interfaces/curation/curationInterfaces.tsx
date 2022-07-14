@@ -15,11 +15,17 @@ interface ICurationPost {
   member_count: number; //인원수
   comment_count: number; //답글 수
   description: string; //설명
+  selected_flag: boolean;
   scrap_flag: boolean; //스크랩 여부
 }
 
 interface ICurationPostLists {
-  CurationPostLists: ICurationPost[];
+  message: string;
+  data: {
+    next: string;
+    previous: string;
+    results: ICurationPost[];
+  };
   pending: boolean;
 }
 
