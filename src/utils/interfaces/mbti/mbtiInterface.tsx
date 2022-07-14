@@ -33,6 +33,7 @@ export interface IState {
     stage9: string;
   };
   mbti: string;
+  description?: string;
   stage1: {
     korea: boolean;
     china: boolean;
