@@ -1,4 +1,5 @@
 export interface IUser {
+  status: string;
   kakaoId: string;
   nickname: string;
   profileImg?: string;
@@ -6,4 +7,5 @@ export interface IUser {
   level: number;
   selectCount: number;
   refreshToken?: string;
+  auth: {};
 }

@@ -9,3 +9,8 @@ Wrapper > Container > children
 - Wrapper 는 375px, 821px 맞춰주고 가운데로 옮겨주는 역할
 - Container 는 그 위에 실제 components 올리는 역할
 - Children 은 Container 안에 존재
+
+
+# 헷갈리는 리덕스 구조
+
+thunk => slice => store 

@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IState } from 'utils/interfaces/mbti/mbtiInterface';
 import { AppDispatch, RootState } from 'store/store';
-import { addMbti, user } from './mbtiThunk';
+import { addMbti } from './mbtiThunk';
 
 export const initialState: IState = {
   status: '',
@@ -75,22 +75,9 @@ export const initialState: IState = {
     sevenStage9: false,
   },
 };
-//<{ dispatch: AppDispatch;state: RootState;}>
-// export const addMbti = createAsyncThunk(
-//   'mbti/addMbti',
-//   async (mbtiData: { mbti: string }, thunkAPI) => {
-//     try {
-//       const response = await axios.post('/user/types', mbtiData);
-//       return response.data;
-//     } catch (error: any) {
-//       thunkAPI.rejectWithValue(await error.response.data);
-//     }
-//   }
-// );
 
 const mbtiSlice = createSlice({
   name: 'mbti',
-
   initialState,
   reducers: {
     resetAllActiveInStage1: (state, action) => {
@@ -311,16 +298,6 @@ const mbtiSlice = createSlice({
       state.status = 'success';
     });
     builder.addCase(addMbti.rejected, (state, action) => {
-      state.status = 'failed';
-    });
-    builder.addCase(user.pending, (state) => {
-      state.status = 'loading';
-    });
-    builder.addCase(user.fulfilled, (state, { payload }) => {
-      state.status = 'success';
-      state.accessToken = payload;
-    });
-    builder.addCase(user.rejected, (state, action) => {
       state.status = 'failed';
     });
   },
