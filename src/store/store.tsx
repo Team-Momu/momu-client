@@ -15,6 +15,7 @@ const preloadedState = {};
 export const store = configureStore({
   reducer: {
     curation: curationReducer,
+    user: userReducer,
     mbti: mbtiReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),

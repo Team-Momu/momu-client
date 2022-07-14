@@ -12,15 +12,3 @@ export const addMbti = createAsyncThunk(
     }
   }
 );
-
-export const user = createAsyncThunk(
-  'mbti/user',
-  async (code: string, thunkAPI) => {
-    try {
-      const response = await axios.get(`/user/kakao/authorize?code=${code}`);
-      return response.data;
-    } catch (error: any) {
-      thunkAPI.rejectWithValue(await error.response.data);
-    }
-  }
-);

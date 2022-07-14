@@ -1,33 +1,43 @@
-import { user } from '@slices/mbti/mbtiThunk';
+import { kakao } from '@slices/user/userThunk';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useAppDispatch } from 'store/store';
+import Spinner from '@common/Spinner';
+import styled from 'styled-components';
 
 //@ts-ignore
 const KakaoRedirect = ({ query }) => {
   const dispatch = useAppDispatch();
   const code = query.code;
 
-  dispatch(user(code));
+  // dispatch(kakao(code))
+  //   .then((r) => console.log('🔥🔥🔥🔥🔥', r))
+  //   .catch((err) => console.error(err));
+
+  dispatch(kakao(code))
+    .unwrap()
+    .then((r) => {
+      console.log('🔥성공', r);
+    })
+    .catch((error) => {
+      console.error('🔥에러', error);
+    });
 
   return (
-    <>
-      <div
-        style={{
-          textAlign: 'center',
-          border: '1px dotted black',
-          marginTop: '100px',
-        }}
-      >
-        <h1>❌모무데브 개발 중❌</h1>
-
-        <div>리다이렉트</div>
-      </div>
-    </>
+    <Wrapper>
+      <Spinner />
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
 
 //@ts-ignore
 export const getServerSideProps: GetServerSideProps = async (context) => {

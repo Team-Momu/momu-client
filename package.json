@@ -10,6 +10,9 @@
     "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/material": "^5.9.0",
     "@react-spring/parallax": "^9.4.5",
     "@reduxjs/toolkit": "^1.8.3",
     "@tailwindcss/forms": "^0.5.2",
