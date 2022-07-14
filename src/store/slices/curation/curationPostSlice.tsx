@@ -8,7 +8,12 @@ import {
 import axios from 'axios';
 
 const initialState: ICurationPostLists = {
-  CurationPostLists: [],
+  message: '',
+  data: {
+    next: '',
+    previous: '',
+    results: [],
+  },
   pending: false,
 };
 
@@ -20,7 +25,7 @@ export const getCurationPostListsThunk = createAsyncThunk(
     if (!response) {
       console.log('error');
     }
-    return response.data.results;
+    return response.data;
   }
 );
 
@@ -34,8 +39,10 @@ export const curationPostSlice = createSlice({
         state.pending = true;
       })
       .addCase(getCurationPostListsThunk.fulfilled, (state, action) => {
-        state.CurationPostLists = action.payload as ICurationPost[];
+        state = action.payload;
         state.pending = false;
+        console.log(state);
+        console.log(state.data.results);
       })
       .addCase(getCurationPostListsThunk.rejected, (state, action) => {
         state.pending = false;
