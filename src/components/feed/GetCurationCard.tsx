@@ -1,25 +1,36 @@
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from 'store/store';
+import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import { useEffect, useState } from 'react';
 import React from 'react';
+import { getCurationPostListsThunk } from '@slices/curation/curationPostSlice';
+import { FC } from 'react';
+interface Props {
+  area: string;
+  isDrink: number;
+  when: string;
+  personnel: number;
+  additionalText: string;
+  userId: string;
+  profileImg: string;
+  mukbti: string;
+  commentNum: number;
+}
 
-const curationSlice = require('@slices/curation/curationSlice');
-const userSlice = require('@slices/user/userSlice');
-
-const GetCurationCard = () => {
-  //addFeed에서 받아와야하는 데이터: 지역, 시간대, 음주여부, 몇 명, 추가요청사항, 작성일, 답변 개수.
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(curationSlice.actions.fetchCurationInfo());
-    dispatch(userSlice.actions.fetchUserInfo());
-  }, [dispatch]);
-
-  const onClick = () => {
-    scrapState ? setScrapState(false) : setScrapState(true);
-    //scrapState 백에 넘겨줘야함.
-  };
+const GetCurationCard: FC<Props> = ({
+  area,
+  isDrink,
+  when,
+  personnel,
+  additionalText,
+  userId,
+  profileImg,
+  mukbti,
+  commentNum,
+}) => {
+  // const onClick = () => {
+  //   scrapState ? setScrapState(false) : setScrapState(true);
+  //   //scrapState 백에 넘겨줘야함.
+  // };
 
   return (
     <CurationContainer>
@@ -33,13 +44,14 @@ const GetCurationCard = () => {
             <InfoText>#{when}</InfoText>
             <InfoText>#{personnel}</InfoText>
           </SecondLineInfo>
-          <ScrapButton onClick={onClick}>
+          <ScrapButton />
+          {/* <ScrapButton onClick={onClick}>
             {scrapState ? (
               <img src={'img/scrap/Scrapped.png'} />
             ) : (
               <img src={'img/scrap/Scrap.svg'} />
             )}
-          </ScrapButton>
+          </ScrapButton> */}
         </UpperContainer>
         <AdditionalText>{additionalText}</AdditionalText>
         <Line />
@@ -53,7 +65,7 @@ const GetCurationCard = () => {
         </BottomInfo>
         <BottomInfo>
           <CardInfo>2022.07.07</CardInfo>
-          <CardInfo>큐레이션 3</CardInfo>
+          <CardInfo>큐레이션 {commentNum}</CardInfo>
         </BottomInfo>
       </BottomContainer>
     </CurationContainer>

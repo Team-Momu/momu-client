@@ -1,23 +1,11 @@
 import type { NextPage } from 'next';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
-import { useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getCurationPostListsThunk } from '@slices/curation/curationPostSlice';
-import { useSelector } from 'react-redux';
 
 const Home: NextPage = () => {
   const router = useRouter();
   const redirect = process.env.KAKAO_REDIRECT_URI;
   const apiKey = process.env.KAKAO_REST_API_KEY;
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getCurationPostListsThunk());
-  }, []);
-
-  const curations = useAppSelector((state: RootState) => state.curation.data);
-
-  console.log(curations.results);
 
   return (
     <>

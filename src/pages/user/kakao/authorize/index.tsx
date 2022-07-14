@@ -1,5 +1,4 @@
 import { kakao } from '@slices/user/userThunk';
-import axios from 'axios';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';

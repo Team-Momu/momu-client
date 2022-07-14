@@ -5,7 +5,6 @@ import {
 } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-// import { rootReducer } from '@slices/index';
 import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import curationReducer from '@slices/curation/curationPostSlice';
 import mbtiReducer from '@slices/mbti/mbtiSlice';
