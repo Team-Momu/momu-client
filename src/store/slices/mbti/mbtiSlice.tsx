@@ -6,7 +6,7 @@ import { IState } from 'utils/interfaces/mbti/mbtiInterface';
 import { AppDispatch, RootState } from 'store/store';
 import { addMbti } from './mbtiThunk';
 
-export const initialState: IState = {
+const initialState: IState = {
   status: '',
   error: null,
   accessToken: null,
