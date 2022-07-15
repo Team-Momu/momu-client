@@ -13,16 +13,16 @@ const FeedList = () => {
   );
   console.log(hasNext);
   const dispatch = useAppDispatch();
-
-  if (hasNext) {
-    useEffect(() => {
-      dispatch(getCurationPostListsThunk(hasNext));
-    }, [dispatch]);
-  } else {
-    useEffect(() => {
-      dispatch(getCurationPostListsThunk(''));
-    }, [dispatch]);
-  }
+  //
+  // if (hasNext) {
+  //   useEffect(() => {
+  //     dispatch(getCurationPostListsThunk(hasNext));
+  //   }, [dispatch]);
+  // } else {
+  //   useEffect(() => {
+  //     dispatch(getCurationPostListsThunk(''));
+  //   }, [dispatch]);
+  // }
 
   return (
     <Wrapper>

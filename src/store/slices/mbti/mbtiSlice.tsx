@@ -99,22 +99,22 @@ export const mbtiSlice = createSlice({
       state.stage5.downMiddleStage5 = false;
       state.stage5.downRightStage5 = false;
     },
-    changeKoreaActiveInStage1: (state, action) => {
+    changeKoreaActiveInStage1: (state) => {
       state.stage1.korea = !state.stage1.korea;
     },
-    changeChinaActiveInStage1: (state, action) => {
+    changeChinaActiveInStage1: (state) => {
       state.stage1.china = !state.stage1.china;
     },
-    changeJapanActiveInStage1: (state, action) => {
+    changeJapanActiveInStage1: (state) => {
       state.stage1.japan = !state.stage1.japan;
     },
-    changeWesternActiveInStage1: (state, action) => {
+    changeWesternActiveInStage1: (state) => {
       state.stage1.western = !state.stage1.western;
     },
-    changeFusionActiveInStage1: (state, action) => {
+    changeFusionActiveInStage1: (state) => {
       state.stage1.fusion = !state.stage1.fusion;
     },
-    changeSnackActiveInStage1: (state, action) => {
+    changeSnackActiveInStage1: (state) => {
       state.stage1.snack = !state.stage1.snack;
     },
     resetAllInStage2: (state) => {
@@ -147,85 +147,85 @@ export const mbtiSlice = createSlice({
     changeDownInStage4: (state) => {
       state.stage4.down = !state.stage4.down;
     },
-    changeUpLeftInStage5: (state, action) => {
+    changeUpLeftInStage5: (state) => {
       state.stage5.upLeftStage5 = !state.stage5.upLeftStage5;
     },
-    changeUpMiddleInStage5: (state, action) => {
+    changeUpMiddleInStage5: (state) => {
       state.stage5.upMiddleStage5 = !state.stage5.upMiddleStage5;
     },
-    changeUpRightInStage5: (state, action) => {
+    changeUpRightInStage5: (state) => {
       state.stage5.upRightStage5 = !state.stage5.upRightStage5;
     },
-    changeMiddleLeftInStage5: (state, action) => {
+    changeMiddleLeftInStage5: (state) => {
       state.stage5.middleLeftStage5 = !state.stage5.middleLeftStage5;
     },
-    changeMiddleMiddleInStage5: (state, action) => {
+    changeMiddleMiddleInStage5: (state) => {
       state.stage5.middleMiddleStage5 = !state.stage5.middleMiddleStage5;
     },
-    changeMiddleRightInStage5: (state, action) => {
+    changeMiddleRightInStage5: (state) => {
       state.stage5.middleRightStage5 = !state.stage5.middleRightStage5;
     },
-    changeDownLeftInStage5: (state, action) => {
+    changeDownLeftInStage5: (state) => {
       state.stage5.downLeftStage5 = !state.stage5.downLeftStage5;
     },
-    changeDownMiddleInStage5: (state, action) => {
+    changeDownMiddleInStage5: (state) => {
       state.stage5.downMiddleStage5 = !state.stage5.downMiddleStage5;
     },
-    changeDownRightInStage5: (state, action) => {
+    changeDownRightInStage5: (state) => {
       state.stage5.downRightStage5 = !state.stage5.downRightStage5;
     },
-    changeLeftInStage6: (state, action) => {
+    changeLeftInStage6: (state) => {
       state.stage6.leftStage6 = !state.stage6.leftStage6;
     },
-    changeRightInStage6: (state, action) => {
+    changeRightInStage6: (state) => {
       state.stage6.rightStage6 = !state.stage6.rightStage6;
     },
-    changeLeftInStage7: (state, action) => {
+    changeLeftInStage7: (state) => {
       state.stage7.leftStage7 = !state.stage7.leftStage7;
     },
-    changeRightInStage7: (state, action) => {
+    changeRightInStage7: (state) => {
       state.stage7.rightStage7 = !state.stage7.rightStage7;
     },
-    changeLeftInStage8: (state, action) => {
+    changeLeftInStage8: (state) => {
       state.stage8.leftStage8 = !state.stage8.leftStage8;
     },
-    changeRightInStage8: (state, action) => {
+    changeRightInStage8: (state) => {
       state.stage8.rightStage8 = !state.stage8.rightStage8;
     },
-    resetAllInStage6: (state, action) => {
+    resetAllInStage6: (state) => {
       state.stage6.leftStage6 = false;
       state.stage6.rightStage6 = false;
     },
-    resetAllInStage7: (state, action) => {
+    resetAllInStage7: (state) => {
       state.stage7.leftStage7 = false;
       state.stage7.rightStage7 = false;
     },
-    resetAllInStage8: (state, action) => {
+    resetAllInStage8: (state) => {
       state.stage8.leftStage8 = false;
       state.stage8.rightStage8 = false;
     },
-    addStage1: (state, action) => {
+    addStage1: (state) => {
       state.result.stage1 = '퓨전식';
     },
-    resetStage1: (state, action) => {
+    resetStage1: (state) => {
       state.result.stage1 = '';
     },
-    addUpStage2: (state, action) => {
+    addUpStage2: (state) => {
       state.result.stage2 = 'up';
     },
-    addDownStage2: (state, action) => {
+    addDownStage2: (state) => {
       state.result.stage2 = 'down';
     },
-    addUpStage3: (state, action) => {
+    addUpStage3: (state) => {
       state.result.stage3 = 'up';
     },
-    addDownStage3: (state, action) => {
+    addDownStage3: (state) => {
       state.result.stage3 = 'down';
     },
-    addUpStage4: (state, action) => {
+    addUpStage4: (state) => {
       state.result.stage4 = 'up';
     },
-    addDownStage4: (state, action) => {
+    addDownStage4: (state) => {
       state.result.stage4 = 'down';
     },
     setStage5Number: (
@@ -234,22 +234,22 @@ export const mbtiSlice = createSlice({
     ) => {
       state.result.stage5 = action.payload.stage5Number;
     },
-    addLeftStage6: (state, action) => {
+    addLeftStage6: (state) => {
       state.result.stage6 = 'left';
     },
-    addRightStage6: (state, action) => {
+    addRightStage6: (state) => {
       state.result.stage6 = 'right';
     },
-    addLeftStage7: (state, action) => {
+    addLeftStage7: (state) => {
       state.result.stage7 = 'left';
     },
-    addRightStage7: (state, action) => {
+    addRightStage7: (state) => {
       state.result.stage7 = 'right';
     },
-    addLeftStage8: (state, action) => {
+    addLeftStage8: (state) => {
       state.result.stage8 = 'left';
     },
-    addRightStage8: (state, action) => {
+    addRightStage8: (state) => {
       state.result.stage8 = 'right';
     },
     addStage9: (state, action: PayloadAction<{ checkedInputs: string }>) => {
@@ -297,7 +297,7 @@ export const mbtiSlice = createSlice({
     builder.addCase(addMbti.fulfilled, (state, { payload }) => {
       state.status = 'success';
     });
-    builder.addCase(addMbti.rejected, (state, action) => {
+    builder.addCase(addMbti.rejected, (state) => {
       state.status = 'failed';
     });
   },
