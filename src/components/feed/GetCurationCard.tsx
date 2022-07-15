@@ -14,6 +14,7 @@ interface Props {
   profileImg: string;
   mukbti: string;
   commentNum: number;
+  createAt: string;
 }
 
 const GetCurationCard: FC<Props> = ({
@@ -26,11 +27,14 @@ const GetCurationCard: FC<Props> = ({
   profileImg,
   mukbti,
   commentNum,
+  createAt,
 }) => {
   // const onClick = () => {
   //   scrapState ? setScrapState(false) : setScrapState(true);
   //   //scrapState 백에 넘겨줘야함.
   // };
+
+  console.log(createAt);
 
   return (
     <CurationContainer>
@@ -64,7 +68,7 @@ const GetCurationCard: FC<Props> = ({
           <Mukbti>{mukbti}</Mukbti>
         </BottomInfo>
         <BottomInfo>
-          <CardInfo>2022.07.07</CardInfo>
+          <CardInfo>{createAt}</CardInfo>
           <CardInfo>큐레이션 {commentNum}</CardInfo>
         </BottomInfo>
       </BottomContainer>
@@ -181,7 +185,7 @@ const CardInfo = styled.div`
   font-weight: 500;
   font-size: 11px;
   line-height: 17px;
-  padding-left: 4px;
+  padding-left: 8px;
   padding-top: 20px;
   //얘도 없는 색상이 추가 된건지 확인 필요
   color: #a09a9a;

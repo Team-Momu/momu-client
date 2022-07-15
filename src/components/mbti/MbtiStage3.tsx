@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store/store';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from 'store/store';
 
 import {
   DownSideBoxPositionInStage3,

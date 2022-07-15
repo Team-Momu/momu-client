@@ -8,7 +8,7 @@ const FeedList = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getCurationPostListsThunk());
-  }, []);
+  }, [dispatch]);
 
   const curations = useAppSelector(
     (state: RootState) => state.curation.data.results
@@ -29,6 +29,7 @@ const FeedList = () => {
               userId={curation.user.nickname}
               profileImg={curation.user.profile_img}
               mukbti={curation.user.mbti}
+              createAt={curation.created_at}
               commentNum={curation.comment_count}
             />
           </>
