@@ -91,44 +91,51 @@ const GetCurationCard: FC<Props> = ({
 
   return (
     <CurationContainer>
-      <InfoContainer>
-        <UpperContainer>
-          <FirstLineInfo>
-            <InfoText>#{area}</InfoText>
-            <InfoText>#{drink}</InfoText>
-          </FirstLineInfo>
-          <SecondLineInfo>
-            <InfoText>#{when}</InfoText>
-            <InfoText>#{countPerson}</InfoText>
-          </SecondLineInfo>
-          <ScrapButton onClick={onClick}>
-            {scrapState ? (
-              <img src={'img/scrap/Scrapped.png'} />
-            ) : (
-              <img src={'img/scrap/Scrap.svg'} />
-            )}
-          </ScrapButton>
-        </UpperContainer>
-        <AdditionalText>{additionalText}</AdditionalText>
-        <Line />
-      </InfoContainer>
-      <BottomContainer>
-        <BottomInfo>
-          <ProfileImg src={'img/ProfileTest.png'} />
-          <USerId>{usernickname}</USerId>
-          <LineImg src={'img/Line.png'} />
-          <Mukbti>{mukbti}</Mukbti>
-        </BottomInfo>
-        <BottomInfo>
-          <CardInfo>{createAt}</CardInfo>
-          <CardInfo>큐레이션 {commentNum}</CardInfo>
-        </BottomInfo>
-      </BottomContainer>
+      <GotoDetailButton>
+        <InfoContainer>
+          <UpperContainer>
+            <FirstLineInfo>
+              <InfoText>#{area}</InfoText>
+              <InfoText>#{drink}</InfoText>
+            </FirstLineInfo>
+            <SecondLineInfo>
+              <InfoText>#{when}</InfoText>
+              <InfoText>#{countPerson}</InfoText>
+            </SecondLineInfo>
+            <ScrapButton onClick={onClick}>
+              {scrapState ? (
+                <img src={'img/scrap/Scrapped.png'} />
+              ) : (
+                <img src={'img/scrap/Scrap.svg'} />
+              )}
+            </ScrapButton>
+          </UpperContainer>
+          <AdditionalText>{additionalText}</AdditionalText>
+          <Line />
+        </InfoContainer>
+        <BottomContainer>
+          <BottomInfo>
+            <ProfileImg src={'img/ProfileTest.png'} />
+            <USerId>{usernickname}</USerId>
+            <LineImg src={'img/Line.png'} />
+            <Mukbti>{mukbti}</Mukbti>
+          </BottomInfo>
+          <BottomInfo>
+            <CardInfo>{createAt}</CardInfo>
+            <CardInfo>큐레이션 {commentNum}</CardInfo>
+          </BottomInfo>
+        </BottomContainer>
+      </GotoDetailButton>
     </CurationContainer>
   );
 };
 
 export default React.memo(GetCurationCard);
+
+const GotoDetailButton = styled.button`
+  margin: 0;
+  padding: 0;
+`;
 
 const CurationContainer = styled.div`
   width: 341px;
@@ -164,6 +171,7 @@ const ScrapButton = styled.button`
   margin-left: auto;
 `;
 const InfoText = styled.div`
+  text-align: left;
   padding-left: 10px;
   padding-bottom: 7px;
   font-family: 'Pretendard';
@@ -174,6 +182,7 @@ const InfoText = styled.div`
 `;
 //카드 디자인 방해하지 않도록 width넘어가면 말줄임으로 표시
 const AdditionalText = styled.div`
+  text-align: left;
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 500;
