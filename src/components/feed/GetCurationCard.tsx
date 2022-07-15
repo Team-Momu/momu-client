@@ -2,7 +2,10 @@ import styled from 'styled-components';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
-import { postScrapStateThunk } from '@slices/scrap/scrapSlice';
+import {
+  deleteScrapStateThunk,
+  postScrapStateThunk,
+} from '@slices/scrap/scrapSlice';
 import { FC } from 'react';
 interface Props {
   area: string;
@@ -42,7 +45,6 @@ const GetCurationCard: FC<Props> = ({
   const [countPerson, setCountPerson] = useState('');
   const [scrapState, setScrapState] = useState(scrapFlag);
 
-  console.log('test');
   useEffect(() => {
     switch (isDrink) {
       case 0:
@@ -80,15 +82,12 @@ const GetCurationCard: FC<Props> = ({
 
   const onClick = useCallback(() => {
     scrapState ? setScrapState(false) : setScrapState(true);
-  }, []);
+    scrapState
+      ? dispatch(deleteScrapStateThunk({ user, post }))
+      : dispatch(postScrapStateThunk({ user, post }));
+  }, [scrapFlag]);
 
-  useEffect(() => {
-    if (scrapState) {
-      dispatch(postScrapStateThunk({ user, post }));
-    }
-  }, [scrapState]);
-
-  console.log(isScrapped);
+  console.log(scrapFlag, scrapState);
 
   return (
     <CurationContainer>
