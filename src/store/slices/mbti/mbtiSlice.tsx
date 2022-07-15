@@ -303,4 +303,4 @@ const mbtiSlice = createSlice({
   },
 });
 
-export default mbtiSlice.reducer;
+export default mbtiSlice;
