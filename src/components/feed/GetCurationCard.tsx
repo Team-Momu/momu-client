@@ -7,6 +7,8 @@ import {
   postScrapStateThunk,
 } from '@slices/scrap/scrapSlice';
 import { FC } from 'react';
+import { useRouter } from 'next/router';
+
 interface Props {
   area: string;
   isDrink: number;
@@ -38,6 +40,7 @@ const GetCurationCard: FC<Props> = ({
   user,
   post,
 }) => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const isScrapped = useAppSelector((state: RootState) => state.scrap);
@@ -87,11 +90,15 @@ const GetCurationCard: FC<Props> = ({
       : dispatch(postScrapStateThunk({ user, post }));
   }, [scrapFlag]);
 
+  const moveToDetail = useCallback(() => {
+    router.push(`/feed/${post}`);
+  }, []);
+
   console.log(scrapFlag, scrapState);
 
   return (
     <CurationContainer>
-      <GotoDetailButton>
+      <GotoDetailButton onClick={moveToDetail}>
         <InfoContainer>
           <UpperContainer>
             <FirstLineInfo>
