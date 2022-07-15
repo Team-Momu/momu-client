@@ -6,15 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cee230d0-8ba8-4605-8330-6eb290caf7f1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/user/kakao/authorize/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/kakao/authorize/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/slices/mbti/mbtiSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/slices/mbti/mbtiSlice.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/slices/mbti/mbtiThunk.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/slices/mbti/mbtiThunk.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/slices/user/userSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/slices/user/userSlice.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/store.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/interfaces/user/userInterface.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/interfaces/user/userInterface.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/axios.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/axios.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +28,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/jeonsiwon/Desktop/momu-client",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -80,7 +73,10 @@
       <workItem from="1657677113299" duration="2144000" />
       <workItem from="1657698961887" duration="419000" />
       <workItem from="1657699385254" duration="2685000" />
-      <workItem from="1657800287571" duration="6047000" />
+      <workItem from="1657800287571" duration="7649000" />
+      <workItem from="1657851714491" duration="45000" />
+      <workItem from="1657851865625" duration="85000" />
+      <workItem from="1657852220067" duration="3238000" />
     </task>
     <servers />
   </component>
