@@ -41,6 +41,7 @@ const FeedList = () => {
               mukbti={curation.user.mbti}
               createAt={curation.created_at}
               commentNum={curation.comment_count}
+              scrapFlag={curation.scrap_flag}
             />
           </>
         );

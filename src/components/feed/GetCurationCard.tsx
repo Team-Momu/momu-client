@@ -15,6 +15,7 @@ interface Props {
   mukbti: string;
   commentNum: number;
   createAt: string;
+  scrapFlag: boolean;
 }
 
 const GetCurationCard: FC<Props> = ({
@@ -28,13 +29,15 @@ const GetCurationCard: FC<Props> = ({
   mukbti,
   commentNum,
   createAt,
+  scrapFlag,
 }) => {
-  // const onClick = () => {
-  //   scrapState ? setScrapState(false) : setScrapState(true);
-  //   //scrapState 백에 넘겨줘야함.
-  // };
   const [drink, setDrink] = useState('');
   const [countPerson, setCountPerson] = useState('');
+  const [scrapState, setScrapState] = useState(false);
+
+  useEffect(() => {
+    setScrapState(scrapFlag);
+  }, [scrapFlag]);
 
   useEffect(() => {
     switch (isDrink) {
@@ -71,6 +74,11 @@ const GetCurationCard: FC<Props> = ({
     }
   }, [personnel]);
 
+  const onClick = () => {
+    scrapState ? setScrapState(false) : setScrapState(true);
+    //scrapState 백에 넘겨줘야함.
+  };
+
   return (
     <CurationContainer>
       <InfoContainer>
@@ -83,14 +91,13 @@ const GetCurationCard: FC<Props> = ({
             <InfoText>#{when}</InfoText>
             <InfoText>#{countPerson}</InfoText>
           </SecondLineInfo>
-          <ScrapButton />
-          {/* <ScrapButton onClick={onClick}>
+          <ScrapButton onClick={onClick}>
             {scrapState ? (
               <img src={'img/scrap/Scrapped.png'} />
             ) : (
               <img src={'img/scrap/Scrap.svg'} />
             )}
-          </ScrapButton> */}
+          </ScrapButton>
         </UpperContainer>
         <AdditionalText>{additionalText}</AdditionalText>
         <Line />
