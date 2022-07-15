@@ -78,13 +78,14 @@ const GetCurationCard: FC<Props> = ({
   }, [personnel]);
 
   const onClick = useCallback(() => {
+    scrapState ? setScrapState(false) : setScrapState(true);
+  }, []);
+  useEffect(() => {
     if (scrapState) {
       dispatch(postScrapStateThunk({ user, post }));
-      setScrapState(false);
-    } else {
-      setScrapState(true);
     }
-  }, []);
+  }, [scrapState]);
+
   console.log(isScrapped);
 
   return (

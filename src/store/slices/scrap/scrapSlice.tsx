@@ -8,9 +8,9 @@ import axios from 'axios';
 const initialState: IScrapInfo = {
   message: '',
   data: {
-    id: 1,
-    user: 1,
-    post: 1,
+    id: 0,
+    user: 0,
+    post: 0,
   },
   pending: false,
 };
@@ -44,6 +44,7 @@ export const scrapSlice = createSlice({
         state.data.user = action.payload.data.user;
         state.data.post = action.payload.data.post;
         state.pending = false;
+        console.log(state.data);
       })
       .addCase(postScrapStateThunk.rejected, (state, action) => {
         state.pending = false;
