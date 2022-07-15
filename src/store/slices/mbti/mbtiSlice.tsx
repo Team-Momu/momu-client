@@ -6,7 +6,7 @@ import { IState } from 'utils/interfaces/mbti/mbtiInterface';
 import { AppDispatch, RootState } from 'store/store';
 import { addMbti } from './mbtiThunk';
 
-const initialState: IState = {
+export const initialState: IState = {
   status: '',
   error: null,
   accessToken: null,
@@ -76,7 +76,7 @@ const initialState: IState = {
   },
 };
 
-const mbtiSlice = createSlice({
+export const mbtiSlice = createSlice({
   name: 'mbti',
   initialState,
   reducers: {
@@ -303,4 +303,4 @@ const mbtiSlice = createSlice({
   },
 });
 
-export default mbtiSlice;
+export default mbtiSlice.reducer;

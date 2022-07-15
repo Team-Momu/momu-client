@@ -18,20 +18,21 @@ import Western from '@public/img/mbti/western1.png';
 import Fusion from '@public/img/mbti/fusion1.png';
 import Snack from '@public/img/mbti/snack1.png';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store/store';
+import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import { useCallback, useEffect } from 'react';
-import mbtiSlice from '@slices/mbti/mbtiSlice';
+import { mbtiSlice } from '@slices/mbti/mbtiSlice';
 const MbtiStage1 = () => {
-  const dispatch = useDispatch();
-  const result = useSelector((state: RootState) => state.mbti.result);
-  const mbti = useSelector((state: RootState) => state.mbti.mbti);
-  const korea = useSelector((state: RootState) => state.mbti.stage1.korea);
-  const china = useSelector((state: RootState) => state.mbti.stage1.china);
-  const japan = useSelector((state: RootState) => state.mbti.stage1.japan);
-  const western = useSelector((state: RootState) => state.mbti.stage1.western);
-  const fusion = useSelector((state: RootState) => state.mbti.stage1.fusion);
-  const snack = useSelector((state: RootState) => state.mbti.stage1.snack);
+  const dispatch = useAppDispatch();
+  const result = useAppSelector((state: RootState) => state.mbti.result);
+  const mbti = useAppSelector((state: RootState) => state.mbti.mbti);
+  const korea = useAppSelector((state: RootState) => state.mbti.stage1.korea);
+  const china = useAppSelector((state: RootState) => state.mbti.stage1.china);
+  const japan = useAppSelector((state: RootState) => state.mbti.stage1.japan);
+  const western = useAppSelector(
+    (state: RootState) => state.mbti.stage1.western
+  );
+  const fusion = useAppSelector((state: RootState) => state.mbti.stage1.fusion);
+  const snack = useAppSelector((state: RootState) => state.mbti.stage1.snack);
 
   const findTypeOfFood = (typeOfFood: string) => {
     switch (typeOfFood) {

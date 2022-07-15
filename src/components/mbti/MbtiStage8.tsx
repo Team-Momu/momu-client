@@ -13,8 +13,7 @@ import separated from '@public/img/mbti/separated1.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { useEffect } from 'react';
-
-const mbtiSlice = require('@slices/mbti/mbtiSlice');
+import { mbtiSlice } from '@slices/mbti/mbtiSlice';
 const MbtiStage8 = () => {
   const leftStage8 = useSelector(
     (state: RootState) => state.mbti.stage8.leftStage8
