@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
-import { getCurationPostListsThunk } from '@slices/curation/curationPostSlice';
+import { postScrapStateThunk } from '@slices/scrap/scrapSlice';
 import { FC } from 'react';
 interface Props {
   area: string;
@@ -10,12 +10,14 @@ interface Props {
   when: string;
   personnel: number;
   additionalText: string;
-  userId: string;
+  usernickname: string;
   profileImg: string;
   mukbti: string;
   commentNum: number;
   createAt: string;
   scrapFlag: boolean;
+  user: number;
+  post: number;
 }
 
 const GetCurationCard: FC<Props> = ({
@@ -24,20 +26,21 @@ const GetCurationCard: FC<Props> = ({
   when,
   personnel,
   additionalText,
-  userId,
+  usernickname,
   profileImg,
   mukbti,
   commentNum,
   createAt,
   scrapFlag,
+  user,
+  post,
 }) => {
+  const dispatch = useAppDispatch();
+
+  const isScrapped = useAppSelector((state: RootState) => state.scrap);
   const [drink, setDrink] = useState('');
   const [countPerson, setCountPerson] = useState('');
-  const [scrapState, setScrapState] = useState(false);
-
-  useEffect(() => {
-    setScrapState(scrapFlag);
-  }, [scrapFlag]);
+  const [scrapState, setScrapState] = useState(scrapFlag);
 
   useEffect(() => {
     switch (isDrink) {
@@ -74,10 +77,15 @@ const GetCurationCard: FC<Props> = ({
     }
   }, [personnel]);
 
-  const onClick = () => {
-    scrapState ? setScrapState(false) : setScrapState(true);
-    //scrapState 백에 넘겨줘야함.
-  };
+  const onClick = useCallback(() => {
+    if (scrapState) {
+      dispatch(postScrapStateThunk({ user, post }));
+      setScrapState(false);
+    } else {
+      setScrapState(true);
+    }
+  }, []);
+  console.log(isScrapped);
 
   return (
     <CurationContainer>
@@ -105,7 +113,7 @@ const GetCurationCard: FC<Props> = ({
       <BottomContainer>
         <BottomInfo>
           <ProfileImg src={'img/ProfileTest.png'} />
-          <USerId>{userId}</USerId>
+          <USerId>{usernickname}</USerId>
           <LineImg src={'img/Line.png'} />
           <Mukbti>{mukbti}</Mukbti>
         </BottomInfo>

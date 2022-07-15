@@ -1,7 +1,16 @@
 interface IScrapInfo {
-  user: number;
-  post: number;
+  message: string;
+  data: {
+    id: number;
+    user: number;
+    post: number;
+  };
   pending: boolean;
 }
 
-export type { IScrapInfo };
+interface IPostScrapInfo {
+  user: number;
+  post: number;
+}
+
+export type { IScrapInfo, IPostScrapInfo };
