@@ -14,6 +14,8 @@ interface Props {
   profileImg: string;
   mukbti: string;
   commentNum: number;
+  createAt: string;
+  scrapFlag: boolean;
 }
 
 const GetCurationCard: FC<Props> = ({
@@ -26,11 +28,56 @@ const GetCurationCard: FC<Props> = ({
   profileImg,
   mukbti,
   commentNum,
+  createAt,
+  scrapFlag,
 }) => {
-  // const onClick = () => {
-  //   scrapState ? setScrapState(false) : setScrapState(true);
-  //   //scrapState 백에 넘겨줘야함.
-  // };
+  const [drink, setDrink] = useState('');
+  const [countPerson, setCountPerson] = useState('');
+  const [scrapState, setScrapState] = useState(false);
+
+  useEffect(() => {
+    setScrapState(scrapFlag);
+  }, [scrapFlag]);
+
+  useEffect(() => {
+    switch (isDrink) {
+      case 0:
+        setDrink('안 마셔요');
+        break;
+      case 1:
+        setDrink('간술만!');
+        break;
+      case 2:
+        setDrink('마실래요');
+        break;
+      default:
+        setDrink('');
+    }
+  }, [isDrink]);
+
+  useEffect(() => {
+    switch (personnel) {
+      case 1:
+        setCountPerson('혼자');
+        break;
+      case 2:
+        setCountPerson('둘이서');
+        break;
+      case 3:
+        setCountPerson('3~4명');
+        break;
+      case 4:
+        setCountPerson('5인 이상');
+        break;
+      default:
+        setDrink('');
+    }
+  }, [personnel]);
+
+  const onClick = () => {
+    scrapState ? setScrapState(false) : setScrapState(true);
+    //scrapState 백에 넘겨줘야함.
+  };
 
   return (
     <CurationContainer>
@@ -38,20 +85,19 @@ const GetCurationCard: FC<Props> = ({
         <UpperContainer>
           <FirstLineInfo>
             <InfoText>#{area}</InfoText>
-            <InfoText>#{isDrink}</InfoText>
+            <InfoText>#{drink}</InfoText>
           </FirstLineInfo>
           <SecondLineInfo>
             <InfoText>#{when}</InfoText>
-            <InfoText>#{personnel}</InfoText>
+            <InfoText>#{countPerson}</InfoText>
           </SecondLineInfo>
-          <ScrapButton />
-          {/* <ScrapButton onClick={onClick}>
+          <ScrapButton onClick={onClick}>
             {scrapState ? (
               <img src={'img/scrap/Scrapped.png'} />
             ) : (
               <img src={'img/scrap/Scrap.svg'} />
             )}
-          </ScrapButton> */}
+          </ScrapButton>
         </UpperContainer>
         <AdditionalText>{additionalText}</AdditionalText>
         <Line />
@@ -64,7 +110,7 @@ const GetCurationCard: FC<Props> = ({
           <Mukbti>{mukbti}</Mukbti>
         </BottomInfo>
         <BottomInfo>
-          <CardInfo>2022.07.07</CardInfo>
+          <CardInfo>{createAt}</CardInfo>
           <CardInfo>큐레이션 {commentNum}</CardInfo>
         </BottomInfo>
       </BottomContainer>
@@ -181,7 +227,7 @@ const CardInfo = styled.div`
   font-weight: 500;
   font-size: 11px;
   line-height: 17px;
-  padding-left: 4px;
+  padding-left: 8px;
   padding-top: 20px;
   //얘도 없는 색상이 추가 된건지 확인 필요
   color: #a09a9a;

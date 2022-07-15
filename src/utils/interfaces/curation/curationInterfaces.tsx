@@ -9,6 +9,7 @@ interface ICurationPost {
     level: number;
     select_count: number;
   };
+  created_at: string; // 작성일
   location: string; //장소
   time: string; //시간대
   drink: number; //음주 정도
