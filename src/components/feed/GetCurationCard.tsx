@@ -42,6 +42,7 @@ const GetCurationCard: FC<Props> = ({
   const [countPerson, setCountPerson] = useState('');
   const [scrapState, setScrapState] = useState(scrapFlag);
 
+  console.log('test');
   useEffect(() => {
     switch (isDrink) {
       case 0:
@@ -80,6 +81,7 @@ const GetCurationCard: FC<Props> = ({
   const onClick = useCallback(() => {
     scrapState ? setScrapState(false) : setScrapState(true);
   }, []);
+
   useEffect(() => {
     if (scrapState) {
       dispatch(postScrapStateThunk({ user, post }));
