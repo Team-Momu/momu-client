@@ -14,15 +14,11 @@ const FeedList = () => {
   console.log(hasNext);
   const dispatch = useAppDispatch();
 
-  if (hasNext) {
-    useEffect(() => {
-      dispatch(getCurationPostListsThunk(hasNext));
-    }, [dispatch]);
-  } else {
-    useEffect(() => {
-      dispatch(getCurationPostListsThunk(''));
-    }, [dispatch]);
-  }
+  useEffect(() => {
+    hasNext
+      ? dispatch(getCurationPostListsThunk(hasNext))
+      : dispatch(getCurationPostListsThunk(''));
+  }, [dispatch]);
 
   return (
     <Wrapper>
