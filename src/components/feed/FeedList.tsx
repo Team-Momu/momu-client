@@ -36,12 +36,14 @@ const FeedList = () => {
               when={curation.time}
               personnel={curation.member_count}
               additionalText={curation.description}
-              userId={curation.user.nickname}
+              usernickname={curation.user.nickname}
               profileImg={curation.user.profile_img}
               mukbti={curation.user.mbti}
               createAt={curation.created_at}
               commentNum={curation.comment_count}
               scrapFlag={curation.scrap_flag}
+              user={curation.user.id}
+              post={curation.id}
             />
           </>
         );

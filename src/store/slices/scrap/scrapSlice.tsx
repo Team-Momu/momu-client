@@ -1,16 +1,23 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IScrapInfo } from 'utils/interfaces/scrap/scrapinterface';
+import {
+  IPostScrapInfo,
+  IScrapInfo,
+} from 'utils/interfaces/scrap/scrapinterface';
 import axios from 'axios';
 
 const initialState: IScrapInfo = {
-  user: 0,
-  post: 0,
+  message: '',
+  data: {
+    id: 1,
+    user: 1,
+    post: 1,
+  },
   pending: false,
 };
 
 export const postScrapStateThunk = createAsyncThunk(
   'scrap/postScrapState',
-  async (scrapInfo: IScrapInfo, thunkAPI) => {
+  async (scrapInfo: IPostScrapInfo, thunkAPI) => {
     const response = await axios.post('/feed/scrap/', scrapInfo);
     return response.data;
   }
@@ -33,10 +40,16 @@ export const scrapSlice = createSlice({
       .addCase(postScrapStateThunk.pending, (state) => {
         state.pending = true;
       })
-      .addCase(postScrapStateThunk.fulfilled, (state, action) => {})
+      .addCase(postScrapStateThunk.fulfilled, (state, action) => {
+        state.data.user = action.payload.data.user;
+        state.data.post = action.payload.data.post;
+        state.pending = false;
+      })
       .addCase(postScrapStateThunk.rejected, (state, action) => {
         state.pending = false;
         console.error(action.error);
       });
   },
 });
+
+export default scrapSlice.reducer;
