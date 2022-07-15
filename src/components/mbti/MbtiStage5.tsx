@@ -13,7 +13,7 @@ import {
   UpSideRightBox,
 } from './MbtiSelectBoxStage5';
 
-const mbtiSlice = require('@slices/mbti/mbtiSlice');
+import { mbtiSlice } from '@slices/mbti/mbtiSlice';
 
 const MbtiStage5 = () => {
   const upLeftStage5 = useSelector(

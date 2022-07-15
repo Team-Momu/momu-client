@@ -15,7 +15,7 @@ export const store = configureStore({
   reducer: {
     curation: curationReducer,
     user: userReducer,
-    mbti: mbtiReducer.reducer,
+    mbti: mbtiReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',

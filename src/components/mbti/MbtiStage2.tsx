@@ -1,15 +1,15 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'store/store';
+import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import {
   DownSideBoxPositionInStage2,
   UpSideBoxPositionInStage2,
 } from './MbtiSelectBoxStage2';
-const mbtiSlice = require('@slices/mbti/mbtiSlice');
+import { mbtiSlice } from '@slices/mbti/mbtiSlice';
 export const MbtiStage2 = () => {
-  const up = useSelector((state: RootState) => state.mbti.stage2.up);
-  const down = useSelector((state: RootState) => state.mbti.stage2.down);
-  const dispatch = useDispatch();
+  const up = useAppSelector((state: RootState) => state.mbti.stage2.up);
+  const down = useAppSelector((state: RootState) => state.mbti.stage2.down);
+  const dispatch = useAppDispatch();
   const onClickStage2 = useCallback(
     (e: React.MouseEvent<HTMLElement>): void => {
       // @ts-ignore

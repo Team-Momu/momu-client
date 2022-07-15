@@ -7,7 +7,7 @@ import { mbtiCalculator } from 'utils/mbtiCalculator';
 import { useEffect, useCallback, useState } from 'react';
 import { mbtiStageChecker } from 'utils/mbtiChecker';
 import { ToastContainer, toast } from 'react-toastify';
-const mbtiSlice = require('@slices/mbti/mbtiSlice');
+import { mbtiSlice } from '@slices/mbti/mbtiSlice';
 const MbtiFooter = () => {
   const [mbti, setMbti] = useState('');
   const router = useRouter();

@@ -6,7 +6,7 @@ import {
   DownSideBoxPositionInStage4,
   UpSideBoxPositionInStage4,
 } from './MbtiSelectBoxStage4';
-const mbtiSlice = require('@slices/mbti/mbtiSlice');
+import { mbtiSlice } from '@slices/mbti/mbtiSlice';
 export const MbtiStage4 = () => {
   const up = useSelector((state: RootState) => state.mbti.stage4.up);
   const down = useSelector((state: RootState) => state.mbti.stage4.down);

@@ -13,7 +13,7 @@ import snug from '@public/img/mbti/snug1.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store/store';
 import { useEffect } from 'react';
-const mbtiSlice = require('@slices/mbti/mbtiSlice');
+import { mbtiSlice } from '@slices/mbti/mbtiSlice';
 const MbtiStage7 = () => {
   const leftStage7 = useSelector(
     (state: RootState) => state.mbti.stage7.leftStage7
