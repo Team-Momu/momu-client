@@ -33,8 +33,43 @@ const GetCurationCard: FC<Props> = ({
   //   scrapState ? setScrapState(false) : setScrapState(true);
   //   //scrapState 백에 넘겨줘야함.
   // };
+  const [drink, setDrink] = useState('');
+  const [countPerson, setCountPerson] = useState('');
 
-  console.log(createAt);
+  useEffect(() => {
+    switch (isDrink) {
+      case 0:
+        setDrink('안 마셔요');
+        break;
+      case 1:
+        setDrink('간술만!');
+        break;
+      case 2:
+        setDrink('마실래요');
+        break;
+      default:
+        setDrink('');
+    }
+  }, [isDrink]);
+
+  useEffect(() => {
+    switch (personnel) {
+      case 1:
+        setCountPerson('혼자');
+        break;
+      case 2:
+        setCountPerson('둘이서');
+        break;
+      case 3:
+        setCountPerson('3~4명');
+        break;
+      case 4:
+        setCountPerson('5인 이상');
+        break;
+      default:
+        setDrink('');
+    }
+  }, [personnel]);
 
   return (
     <CurationContainer>
@@ -42,11 +77,11 @@ const GetCurationCard: FC<Props> = ({
         <UpperContainer>
           <FirstLineInfo>
             <InfoText>#{area}</InfoText>
-            <InfoText>#{isDrink}</InfoText>
+            <InfoText>#{drink}</InfoText>
           </FirstLineInfo>
           <SecondLineInfo>
             <InfoText>#{when}</InfoText>
-            <InfoText>#{personnel}</InfoText>
+            <InfoText>#{countPerson}</InfoText>
           </SecondLineInfo>
           <ScrapButton />
           {/* <ScrapButton onClick={onClick}>

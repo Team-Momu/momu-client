@@ -20,12 +20,20 @@ const initialState: ICurationPostLists = {
 // createAsyncThunk(typePrefix: string, payloadCreator: AsyncThunkPayloadCreator, options?: AsyncThunkOptions): AsyncThunk
 export const getCurationPostListsThunk = createAsyncThunk(
   'curation/getCurationPostLists',
-  async (thunkAPI) => {
-    const response = await axios.get('/feed/');
-    if (!response) {
-      console.log('error');
+  async (hasNext: string, thunkAPI) => {
+    if (hasNext) {
+      const response = await axios.get(`/feed/?cursor=${hasNext}`);
+      if (!response) {
+        console.log('error');
+      }
+      return response.data;
+    } else if (hasNext === '') {
+      const response = await axios.get('/feed/');
+      if (!response) {
+        console.log('error');
+      }
+      return response.data;
     }
-    return response.data;
   }
 );
 

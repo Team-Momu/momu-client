@@ -5,14 +5,24 @@ import styled from 'styled-components';
 import GetCurationCard from './GetCurationCard';
 
 const FeedList = () => {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getCurationPostListsThunk());
-  }, [dispatch]);
-
   const curations = useAppSelector(
     (state: RootState) => state.curation.data.results
   );
+  const hasNext = useAppSelector(
+    (state: RootState) => state.curation.data.next
+  );
+  console.log(hasNext);
+  const dispatch = useAppDispatch();
+
+  if (hasNext) {
+    useEffect(() => {
+      dispatch(getCurationPostListsThunk(hasNext));
+    }, [dispatch]);
+  } else {
+    useEffect(() => {
+      dispatch(getCurationPostListsThunk(''));
+    }, [dispatch]);
+  }
 
   return (
     <Wrapper>
