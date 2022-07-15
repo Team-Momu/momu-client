@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cee230d0-8ba8-4605-8330-6eb290caf7f1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/feed/FeedList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/feed/FeedList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/axios.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/slices/mbti/mbtiSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/slices/mbti/mbtiSlice.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +79,7 @@
       <workItem from="1657851865625" duration="85000" />
       <workItem from="1657852220067" duration="3238000" />
       <workItem from="1657862540308" duration="537000" />
-      <workItem from="1657887769397" duration="1332000" />
+      <workItem from="1657887769397" duration="2899000" />
     </task>
     <servers />
   </component>
