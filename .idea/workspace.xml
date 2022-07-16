@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cee230d0-8ba8-4605-8330-6eb290caf7f1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/feed/FeedList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/feed/FeedList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +38,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "/Users/jeonsiwon/Desktop/momu-client/node_modules/prettier",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
+    "settings.editor.selected.configurable": "actions.on.save",
     "ts.external.directory.path": "/Users/jeonsiwon/Desktop/momu-client/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -79,7 +79,12 @@
       <workItem from="1657851865625" duration="85000" />
       <workItem from="1657852220067" duration="3238000" />
       <workItem from="1657862540308" duration="537000" />
-      <workItem from="1657887769397" duration="2899000" />
+      <workItem from="1657887769397" duration="4285000" />
+      <workItem from="1657901965396" duration="681000" />
+      <workItem from="1657931496605" duration="5000" />
+      <workItem from="1657935680689" duration="809000" />
+      <workItem from="1657976150721" duration="120000" />
+      <workItem from="1657976302073" duration="2420000" />
     </task>
     <servers />
   </component>

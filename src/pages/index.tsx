@@ -7,6 +7,8 @@ const Home: NextPage = () => {
   const redirect = process.env.KAKAO_REDIRECT_URI;
   const apiKey = process.env.KAKAO_REST_API_KEY;
 
+  console.log('🔥env test', redirect);
+
   return (
     <>
       <div
@@ -17,7 +19,7 @@ const Home: NextPage = () => {
         }}
       >
         <h1>❌모무데브 개발 중❌</h1>
-
+        {redirect}
         <button
           onClick={() => router.push('/profile/1')}
           style={{ marginBottom: '20px' }}
