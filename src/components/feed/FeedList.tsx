@@ -55,3 +55,5 @@ const Wrapper = styled.div`
   margin: 0;
   overflow: hidden;
 `;
+
+const GotoDetailButton = styled.button``;
