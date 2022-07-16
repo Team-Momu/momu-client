@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="cee230d0-8ba8-4605-8330-6eb290caf7f1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/user/kakao/authorize/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/kakao/authorize/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +85,7 @@
       <workItem from="1657931496605" duration="5000" />
       <workItem from="1657935680689" duration="809000" />
       <workItem from="1657976150721" duration="120000" />
-      <workItem from="1657976302073" duration="2420000" />
+      <workItem from="1657976302073" duration="6018000" />
     </task>
     <servers />
   </component>

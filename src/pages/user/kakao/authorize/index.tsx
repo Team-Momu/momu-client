@@ -11,6 +11,8 @@ import styled from 'styled-components';
 const KakaoRedirect = ({ query }) => {
   const dispatch = useAppDispatch();
   const code = query.code;
+  const router = useRouter();
+  // const test = 'https://jsonplaceholder.typicode.com/users';
 
   // dispatch(kakao(code))
   //   .then((r) => console.log('🔥🔥🔥🔥🔥', r))
@@ -22,7 +24,7 @@ const KakaoRedirect = ({ query }) => {
       console.log('🔥성공', r);
     })
     .catch((error) => {
-      console.error('🔥에러', error);
+      console.error('🔥에러🔥', error);
     });
 
   return (
