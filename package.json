@@ -28,6 +28,7 @@
     "react-dom": "18.2.0",
     "react-native-sticky-parallax-header": "^0.4.2",
     "react-redux": "^8.0.2",
+    "react-select": "^5.4.0",
     "react-spring": "^9.4.5",
     "react-spring-bottom-sheet": "^3.4.1",
     "react-sticky": "^6.0.3",
