@@ -6,8 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="cee230d0-8ba8-4605-8330-6eb290caf7f1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/user/kakao/authorize/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/user/kakao/authorize/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/slices/mbti/mbtiSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/slices/mbti/mbtiSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/slices/user/userSlice.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/slices/user/userSlice.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/slices/user/userThunk.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/slices/user/userThunk.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/interfaces/user/userInterface.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/interfaces/user/userInterface.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,23 +32,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/jeonsiwon/Desktop/momu-client",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "/Users/jeonsiwon/Desktop/momu-client/node_modules/prettier",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "ts.external.directory.path": "/Users/jeonsiwon/Desktop/momu-client/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jeonsiwon/Desktop/momu-client&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/jeonsiwon/Desktop/momu-client/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/jeonsiwon/Desktop/momu-client/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -85,6 +91,9 @@
       <workItem from="1657935680689" duration="809000" />
       <workItem from="1657976150721" duration="120000" />
       <workItem from="1657976302073" duration="2420000" />
+      <workItem from="1658138494807" duration="1122000" />
+      <workItem from="1658139723017" duration="2645000" />
+      <workItem from="1658142383529" duration="92000" />
     </task>
     <servers />
   </component>

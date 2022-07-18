@@ -1,4 +1,5 @@
 export interface IUser {
+  error: any;
   status: string;
   kakaoId: string;
   nickname: string;

@@ -6,6 +6,7 @@ import { kakao } from './userThunk';
 import { IUser } from '../../../utils/interfaces/user/userInterface';
 
 export const initialState: IUser = {
+  error: '',
   status: '',
   kakaoId: '',
   nickname: 'string',
@@ -31,6 +32,7 @@ const userSlice = createSlice({
     });
     builder.addCase(kakao.rejected, (state, action) => {
       state.status = 'failed';
+      state.error = action.payload;
     });
   },
 });
