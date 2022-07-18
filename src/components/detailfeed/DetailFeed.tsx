@@ -25,7 +25,6 @@ const DetailFeedContents: FC<Props> = ({ postId }) => {
 
   return (
     <>
-      <DetailFeedHeader />
       <CardWrapper>
         <GetCurationCard
           key={curation.id + `new Date()`}
