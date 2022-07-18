@@ -285,7 +285,6 @@ export const mbtiSlice = createSlice({
     changeSevenStage9: (state) => {
       state.stage9.sevenStage9 = !state.stage9.sevenStage9;
     },
-
     setMbti: (state, action: PayloadAction<{ mbti: string }>) => {
       state.mbti = action.payload.mbti;
     },
