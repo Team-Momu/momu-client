@@ -7,10 +7,10 @@ import { AppProps } from 'next/app';
 import '../styles/globals.css';
 import '../styles/FilterStyle.css';
 import axios from 'axios';
-import { ToastContainer } from 'react-toastify';
+import { instance } from '../lib/axios';
 
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-axios.defaults.withCredentials = true;
+// axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
+// axios.defaults.withCredentials = true;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
