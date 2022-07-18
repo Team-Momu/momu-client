@@ -1,9 +1,13 @@
 import type { NextPage } from 'next';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const Home: NextPage = () => {
   const router = useRouter();
+
+  const redirect = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
+  const apiKey = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
 
   return (
     <>

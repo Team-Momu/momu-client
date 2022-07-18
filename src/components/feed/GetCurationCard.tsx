@@ -98,9 +98,9 @@ const GetCurationCard: FC<Props> = ({
 
   return (
     <CurationContainer>
-      <GotoDetailButton onClick={moveToDetail}>
-        <InfoContainer>
-          <UpperContainer>
+      <InfoContainer>
+        <UpperContainer>
+          <GotoDetailButton onClick={moveToDetail}>
             <FirstLineInfo>
               <InfoText>#{area}</InfoText>
               <InfoText>#{drink}</InfoText>
@@ -109,30 +109,30 @@ const GetCurationCard: FC<Props> = ({
               <InfoText>#{when}</InfoText>
               <InfoText>#{countPerson}</InfoText>
             </SecondLineInfo>
-            <ScrapButton onClick={onClick}>
-              {scrapState ? (
-                <img src={'img/scrap/Scrapped.png'} />
-              ) : (
-                <img src={'img/scrap/Scrap.svg'} />
-              )}
-            </ScrapButton>
-          </UpperContainer>
-          <AdditionalText>{additionalText}</AdditionalText>
-          <Line />
-        </InfoContainer>
-        <BottomContainer>
-          <BottomInfo>
-            <ProfileImg src={'img/ProfileTest.png'} />
-            <USerId>{usernickname}</USerId>
-            <LineImg src={'img/Line.png'} />
-            <Mukbti>{mukbti}</Mukbti>
-          </BottomInfo>
-          <BottomInfo>
-            <CardInfo>{createAt}</CardInfo>
-            <CardInfo>큐레이션 {commentNum}</CardInfo>
-          </BottomInfo>
-        </BottomContainer>
-      </GotoDetailButton>
+          </GotoDetailButton>
+          <ScrapButton onClick={onClick}>
+            {scrapState ? (
+              <img src={'img/scrap/Scrapped.png'} />
+            ) : (
+              <img src={'img/scrap/Scrap.svg'} />
+            )}
+          </ScrapButton>
+        </UpperContainer>
+        <AdditionalText>{additionalText}</AdditionalText>
+        <Line />
+      </InfoContainer>
+      <BottomContainer>
+        <BottomInfo>
+          <ProfileImg src={'img/ProfileTest.png'} />
+          <USerId>{usernickname}</USerId>
+          <LineImg src={'img/Line.png'} />
+          <Mukbti>{mukbti}</Mukbti>
+        </BottomInfo>
+        <BottomInfo>
+          <CardInfo>{createAt}</CardInfo>
+          <CardInfo>큐레이션 {commentNum}</CardInfo>
+        </BottomInfo>
+      </BottomContainer>
     </CurationContainer>
   );
 };
@@ -142,6 +142,7 @@ export default React.memo(GetCurationCard);
 const GotoDetailButton = styled.button`
   margin: 0;
   padding: 0;
+  display: flex;
 `;
 
 const CurationContainer = styled.div`

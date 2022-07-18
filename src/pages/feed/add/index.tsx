@@ -1,5 +1,13 @@
+import RequestHeader from 'components/requestcuration/RequestHeader';
+import RequestInfo from 'components/requestcuration/RequestInfo';
+
 const AddCuration = () => {
-  return <h1>add Curation</h1>;
+  return (
+    <>
+      <RequestHeader />
+      <RequestInfo />
+    </>
+  );
 };
 
 export default AddCuration;

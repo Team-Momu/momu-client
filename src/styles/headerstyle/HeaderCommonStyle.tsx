@@ -30,3 +30,15 @@ export const HeaderTextContainer = styled.div`
 
   color: #191919;
 `;
+
+export const HeaderLeftSide = styled.div`
+  display: flex;
+  margin-left: 24px;
+`;
+
+export const BackIcon = styled.img`
+  width: 18px;
+  height: 18px;
+`;
+
+export const BackButton = styled.button``;
