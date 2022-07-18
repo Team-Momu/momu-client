@@ -19,7 +19,7 @@ const Home: NextPage = () => {
         }}
       >
         <h1>❌모무데브 개발 중❌</h1>
-
+        {redirect}
         <button
           onClick={() => router.push('/profile/1')}
           style={{ marginBottom: '20px' }}
