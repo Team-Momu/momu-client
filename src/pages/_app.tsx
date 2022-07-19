@@ -4,10 +4,9 @@ import withRedux from 'next-redux-wrapper';
 import AppLayout from '@common/AppLayOut';
 import wrapper from 'store/store';
 import { AppProps } from 'next/app';
-import '../styles/globals.css';
-import '../styles/FilterStyle.css';
+import 'styles/globals.css';
+import 'styles/FilterStyle.css';
 import axios from 'axios';
-import { instance } from '../lib/axios';
 
 // axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 // axios.defaults.withCredentials = true;

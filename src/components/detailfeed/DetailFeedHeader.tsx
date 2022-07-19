@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styled from 'styled-components';
 import {
   BackButton,
@@ -11,9 +12,20 @@ import {
 } from 'styles/headerstyle/HeaderCommonStyle';
 
 const DetailFeedHeader = () => {
+  const [url, setUrl] = useState('');
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, []);
+
   const router = useRouter();
+  console.log(url);
+
   const moveToFeed = useCallback(() => {
     router.push(`/feed/`);
+  }, []);
+
+  const shareUrl = useCallback(() => {
+    alert('url이 복사되었습니다! ');
   }, []);
   return (
     <>
@@ -24,8 +36,10 @@ const DetailFeedHeader = () => {
           </BackButton>
           <HeaderTextContainer>Curation</HeaderTextContainer>
         </HeaderLeftSide>
-        <ShareButton>
-          <ShareIcon src={'/img/header/sharebutton.svg'} />
+        <ShareButton onClick={shareUrl}>
+          <CopyToClipboard text={url}>
+            <ShareIcon src={'/img/header/sharebutton.svg'} />
+          </CopyToClipboard>
         </ShareButton>
       </HeaderContainer>
       <Line></Line>

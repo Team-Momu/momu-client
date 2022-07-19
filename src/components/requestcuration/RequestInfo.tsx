@@ -13,7 +13,11 @@ const RequestInfo = () => {
     <Wrapper>
       <ChooseArea>
         <QuestionText>어느 지역에서 식사하실 건가요?</QuestionText>
-        <AreaDropdown placeholder="신촌,홍대 부근 동네를 선택해주세요!"></AreaDropdown>
+        <AreaDropdown>
+          <option>신촌,홍대 부근 동네를 선택해주세요!</option>
+          <option>신촌동</option>
+          <option>창천동</option>
+        </AreaDropdown>
       </ChooseArea>
       <ChooseTime>
         <QuestionText>방문 예정 시간대를 골라주세요!</QuestionText>
@@ -117,6 +121,15 @@ const AreaDropdown = styled.select`
   -moz-appearance: none; /*for firefox*/
   appearance: none;
   background: url('/img/filter/Dropdown.png') no-repeat 97% 50%/10px auto;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  /* identical to box height, or 129% */
+
+  color: #767676;
+
   &:ms-expand {
     display: none; /*for IE10,11*/
   }
@@ -144,5 +157,18 @@ const AdditionalRequest = styled.div`
 `;
 
 const AdditionalInput = styled.input`
+  padding-left: 0;
   width: 343px;
+  border: none;
+  border-bottom: 1.5px solid #767676;
+  &:placeholder-shown {
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+
+    color: #767676;
+  }
 `;

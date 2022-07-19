@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   ICurationPost,
   ICurationPostLists,
+  IDetailCurationPost,
 } from '../../../utils/interfaces/curation/curationInterfaces';
 import axios from 'axios';
 
@@ -47,14 +48,14 @@ export const curationPostSlice = createSlice({
       .addCase(getCurationPostListsThunk.pending, (state) => {
         state.pending = true;
       })
+
       .addCase(getCurationPostListsThunk.fulfilled, (state, action) => {
         state.message = action.payload.message;
         state.data = action.payload.data;
         state.pending = action.payload.pending;
         state.pending = false;
-        // console.log(state);
-        // console.log(state.data.results);
       })
+
       .addCase(getCurationPostListsThunk.rejected, (state, action) => {
         state.pending = false;
         console.error(action.error);

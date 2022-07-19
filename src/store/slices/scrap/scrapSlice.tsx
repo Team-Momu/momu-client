@@ -17,16 +17,16 @@ const initialState: IScrapInfo = {
 
 export const postScrapStateThunk = createAsyncThunk(
   'scrap/postScrapState',
-  async (scrapInfo: IPostScrapInfo, thunkAPI) => {
-    const response = await axios.post('/feed/scrap/', scrapInfo);
+  async (post: number, thunkAPI) => {
+    const response = await axios.post('/feed/scrap/', post);
     return response.data;
   }
 );
 
 export const deleteScrapStateThunk = createAsyncThunk(
   'scrap/deleteScrapState',
-  async (scrapInfo: IPostScrapInfo, tunkAPI) => {
-    const response = await axios.delete('/feed/scrap/', { data: scrapInfo });
+  async (post: number, thunkAPI) => {
+    const response = await axios.delete('/feed/scrap/', { data: post });
     return response.data;
   }
 );

@@ -32,7 +32,6 @@ const userSlice = createSlice({
     });
     builder.addCase(kakao.rejected, (state, action) => {
       state.status = 'failed';
-      state.error = action.payload;
     });
   },
 });
