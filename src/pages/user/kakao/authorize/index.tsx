@@ -11,12 +11,14 @@ import styled from 'styled-components';
 const KakaoRedirect = ({ query }) => {
   const dispatch = useAppDispatch();
   const code = query.code;
+  const router = useRouter();
 
   useEffect(() => {
     dispatch(kakao(code))
       .unwrap()
       .then((r) => {
-        console.log('🔥성공🔥', r);
+        // console.log('🔥성공🔥', r);
+        router.push('/profile');
       })
       .catch((error) => {
         console.error('🔥에러🔥', error);

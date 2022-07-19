@@ -9,9 +9,9 @@ import { mbtiStageChecker } from 'utils/mbtiChecker';
 import { ToastContainer, toast } from 'react-toastify';
 import { mbtiSlice } from '@slices/mbti/mbtiSlice';
 const MbtiFooter = () => {
-  const [mbti, setMbti] = useState('');
   const router = useRouter();
   const stageNumber: number = Number(router.asPath.split('/')[2]);
+  const mbti = useSelector((state: RootState) => state.mbti.mbti);
   const result = useSelector((state: RootState) => state.mbti.result);
   const stage1 = useSelector((state: RootState) => state.mbti.stage1);
   const stage2 = useSelector((state: RootState) => state.mbti.stage2);
@@ -114,10 +114,9 @@ const MbtiFooter = () => {
         if (result9) {
           const mbti = mbtiCalculator(result);
           console.log(mbti);
-          dispatch(mbtiSlice.actions.setMbti({ mbti }));
-          dispatch(addMbti({ mbti }));
-          router.push(`/profile`);
-
+          dispatch(mbtiSlice.actions.setMbti({ mbti })); // set front
+          dispatch(addMbti({ mbti })); // set back db
+          router.push(`/result/${mbti}`);
           break;
         } else {
           alert('값을 입력해주세요');
