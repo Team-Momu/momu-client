@@ -10,21 +10,23 @@ import curationReducer from '@slices/curation/curationPostSlice';
 import mbtiReducer from '@slices/mbti/mbtiSlice';
 import userReducer from '@slices/user/userSlice';
 import scrapReducer from '@slices/scrap/scrapSlice';
+import detailCurationReducer from '@slices/curation/detailCurationPostSlice';
 const preloadedState = {};
 
 export const store = configureStore({
   reducer: {
     curation: curationReducer,
+    detailCuration: detailCurationReducer,
     user: userReducer,
     mbti: mbtiReducer,
     scrap: scrapReducer,
   },
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  //middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',
   preloadedState,
 });
 
-// useSelector, useDispatch 에 대한 타입 정의
+//useSelector, useDispatch 에 대한 타입 정의
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 // To use async function, use below code

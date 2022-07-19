@@ -43,7 +43,7 @@ const GetCurationCard: FC<Props> = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const isScrapped = useAppSelector((state: RootState) => state.scrap);
+  // const isScrapped = useAppSelector((state: RootState) => state.scrap);
   const [drink, setDrink] = useState('');
   const [countPerson, setCountPerson] = useState('');
   const [scrapState, setScrapState] = useState(scrapFlag);
@@ -86,8 +86,8 @@ const GetCurationCard: FC<Props> = ({
   const onClick = useCallback(() => {
     scrapState ? setScrapState(false) : setScrapState(true);
     scrapState
-      ? dispatch(deleteScrapStateThunk({ user, post }))
-      : dispatch(postScrapStateThunk({ user, post }));
+      ? dispatch(deleteScrapStateThunk(post))
+      : dispatch(postScrapStateThunk(post));
   }, [scrapFlag]);
 
   const moveToDetail = useCallback(() => {
@@ -112,9 +112,9 @@ const GetCurationCard: FC<Props> = ({
           </GotoDetailButton>
           <ScrapButton onClick={onClick}>
             {scrapState ? (
-              <img src={'img/scrap/Scrapped.png'} />
+              <img src={'/img/scrap/Scrapped.png'} />
             ) : (
-              <img src={'img/scrap/Scrap.svg'} />
+              <img src={'/img/scrap/Scrap.svg'} />
             )}
           </ScrapButton>
         </UpperContainer>
@@ -123,9 +123,9 @@ const GetCurationCard: FC<Props> = ({
       </InfoContainer>
       <BottomContainer>
         <BottomInfo>
-          <ProfileImg src={'img/ProfileTest.png'} />
+          <ProfileImg src={'/img/ProfileTest.png'} />
           <USerId>{usernickname}</USerId>
-          <LineImg src={'img/Line.png'} />
+          <LineImg src={'/img/Line.png'} />
           <Mukbti>{mukbti}</Mukbti>
         </BottomInfo>
         <BottomInfo>
