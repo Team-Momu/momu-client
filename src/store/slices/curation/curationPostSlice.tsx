@@ -1,4 +1,4 @@
-//GetCurationCard, AddCurationCard..등에 사용되는 내용.
+//GetCurationCard
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {

@@ -18,7 +18,7 @@ const initialState: IScrapInfo = {
 export const postScrapStateThunk = createAsyncThunk(
   'scrap/postScrapState',
   async (post: number, thunkAPI) => {
-    const response = await axios.post('/feed/scrap/', post);
+    const response = await axios.post('/feed/scrap/', { post });
     return response.data;
   }
 );
@@ -26,7 +26,9 @@ export const postScrapStateThunk = createAsyncThunk(
 export const deleteScrapStateThunk = createAsyncThunk(
   'scrap/deleteScrapState',
   async (post: number, thunkAPI) => {
-    const response = await axios.delete('/feed/scrap/', { data: post });
+    const response = await axios.delete('/feed/scrap/', {
+      data: { post: post },
+    });
     return response.data;
   }
 );
@@ -54,7 +56,6 @@ export const scrapSlice = createSlice({
       })
       .addCase(postScrapStateThunk.rejected, (state, action) => {
         state.pending = false;
-        console.error(action.error);
       })
       .addCase(deleteScrapStateThunk.rejected, (state, action) => {
         state.pending = false;

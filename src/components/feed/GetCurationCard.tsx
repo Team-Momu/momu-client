@@ -43,7 +43,7 @@ const GetCurationCard: FC<Props> = ({
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  // const isScrapped = useAppSelector((state: RootState) => state.scrap);
+  const isScrapped = useAppSelector((state: RootState) => state.scrap);
   const [drink, setDrink] = useState('');
   const [countPerson, setCountPerson] = useState('');
   const [scrapState, setScrapState] = useState(scrapFlag);
