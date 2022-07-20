@@ -17,7 +17,6 @@ const KakaoRedirect = ({ query }) => {
     dispatch(kakao(code))
       .unwrap()
       .then((r) => {
-        // console.log('🔥성공🔥', r);
         router.push('/profile');
       })
       .catch((error) => {
