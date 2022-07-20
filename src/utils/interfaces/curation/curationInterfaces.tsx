@@ -57,4 +57,17 @@ interface ICurationPostLists {
   pending: boolean;
 }
 
-export type { ICurationPost, ICurationPostLists, IDetailCurationPost };
+interface IAddCuration {
+  location: string; // #장소
+  time: string; // #시간대
+  drink: number; //#음주 정도
+  member_count: number; // #인원수
+  description: string; //추가 설명
+}
+
+export type {
+  ICurationPost,
+  ICurationPostLists,
+  IDetailCurationPost,
+  IAddCuration,
+};
