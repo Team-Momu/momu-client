@@ -63,9 +63,7 @@ const AddComment = () => {
       </InnerContainer>
       <InnerContainer>
         <GuideText>큐레이션 작성</GuideText>
-        <CommentTextInput
-          placeholder="자세하게 적어줄 수록 채택확률이 높아요! &#10;(최대 38자)"
-        ></CommentTextInput>
+        <CommentTextInput placeholder="자세하게 적어줄 수록 채택확률이 높아요!&#13;(최대 38자)"></CommentTextInput>
       </InnerContainer>
 
       <div style={{ position: 'relative' }}>
@@ -100,6 +98,14 @@ const Wrapper = styled.div`
 `;
 
 const PlaceInput = styled.input`
+  padding-left: 45px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  /* identical to box height, or 112% */
+
   width: 343px;
   height: 42px;
   border: 1px solid #191919;
@@ -145,16 +151,27 @@ const ImgUploadButton = styled.button`
 `;
 
 const CommentTextInput = styled.textarea`
+  padding: 16px;
   width: 343px;
   height: 80px;
   border: 1px solid #191919;
   resize: none;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  overflow: auto;
+  line-height: 24px;
+
+  /* or 150% */
+
+  color: #191919;
   &:placeholder-shown {
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 400;
-    font-size: 14px;
-    line-height: 30px;
+    font-size: 16px;
+    line-height: 24px;
     /* identical to box height, or 143% */
 
     color: #767676;
