@@ -1,19 +1,33 @@
 import React, { useEffect } from 'react';
 import GlobalStyle from 'styles/GlobalStyles';
-import withRedux from 'next-redux-wrapper';
+
 import AppLayout from '@common/AppLayOut';
 import wrapper from 'store/store';
 import { AppProps } from 'next/app';
 import 'styles/globals.css';
 import 'styles/FilterStyle.css';
 import axios from 'axios';
-
+import Script from 'next/script';
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 axios.defaults.withCredentials = true;
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+      />
+      <Script id="ga_init" strategy="lazyOnload">
+        {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+                    page_path: window.location.pathname,
+                    });
+                `}
+      </Script>
       <AppLayout>
         <GlobalStyle />
         <Component {...pageProps} />
@@ -21,15 +35,5 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   );
 }
-
-// const configureStore = (initialState, options) => {
-//   const middlewares = []; // 미들웨어들을 넣으면 된다.
-//   const enhancer =
-//     process.env.NODE_ENV === 'production'
-//       ? compose(applyMiddleware(...middlewares))
-//       : composeWithDevTools(applyMiddleware(...middlewares));
-//   const store = createStore(slices, initialState, enhancer);
-//   return store;
-// };
 
 export default wrapper.withRedux(MyApp);
