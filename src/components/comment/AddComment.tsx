@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import { getPlaceDatasThunk } from '@slices/comment/addCommentSlice';
+import PlaceLists from './PlaceLists';
 
 const AddComment = () => {
   const placeDatas = useAppSelector((state: RootState) => state.comments.data);
@@ -59,8 +60,12 @@ const AddComment = () => {
       </SearchPlace>
       <InnerContainer>
         <GuideText>사진 (선택)</GuideText>
-        <ImgUploadButton></ImgUploadButton>
+        <ImgUploadButton>
+          <PlusIcon src={'/img/upload/Upload.svg'} />
+          <ButtonText>원하는 사진을 첨부해주세요!</ButtonText>
+        </ImgUploadButton>
       </InnerContainer>
+
       <InnerContainer>
         <GuideText>큐레이션 작성</GuideText>
         <CommentTextInput placeholder="자세하게 적어줄 수록 채택확률이 높아요!&#13;(최대 38자)"></CommentTextInput>
@@ -86,7 +91,7 @@ const AddComment = () => {
           }}
         >
           <button onClick={closeModal}>close</button>
-          <div>I am a modal</div>
+          <PlaceLists placeDatas={placeDatas} />
         </Modal>
       </div>
     </Wrapper>
@@ -148,6 +153,21 @@ const ImgUploadButton = styled.button`
   width: 343px;
   height: 206px;
   background: #ededed;
+`;
+
+const PlusIcon = styled.img`
+  margin: auto;
+`;
+const ButtonText = styled.div`
+  padding-top: 16px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+
+  color: #767676;
 `;
 
 const CommentTextInput = styled.textarea`
