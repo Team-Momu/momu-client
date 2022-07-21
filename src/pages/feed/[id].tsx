@@ -6,11 +6,15 @@ import DetailFeedHeader from 'components/detailfeed/DetailFeedHeader';
 
 const DetailFeed = () => {
   const router = useRouter();
-  const onClick = useCallback(() => {
-    router.push(`/feed/add`);
+  const postId = router.query.id;
+
+  const getCuration = useCallback(() => {
+    router.push('/feed/add');
   }, []);
 
-  const postId = router.query.id;
+  const writeComment = useCallback(() => {
+    router.push(`/comment/${postId}`);
+  }, []);
 
   console.log(postId);
 
@@ -21,7 +25,12 @@ const DetailFeed = () => {
       <>
         <h1>큐레이션 답변카드</h1>
         <InputBox type="text" />
-        <AddCurationButton onClick={onClick}>큐레이션 받기</AddCurationButton>
+        <AddCurationButton onClick={getCuration}>
+          큐레이션 받기
+        </AddCurationButton>
+        <AddCurationButton onClick={writeComment}>
+          큐레이션 하기
+        </AddCurationButton>
       </>
     </Wrapper>
   );
@@ -38,6 +47,7 @@ const InputBox = styled.input`
 `;
 
 const AddCurationButton = styled.button`
+  margin-bottom: 10px;
   width: 340px;
   height: 72px;
   font-family: 'Pretendard';

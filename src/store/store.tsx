@@ -11,11 +11,13 @@ import mbtiReducer from '@slices/mbti/mbtiSlice';
 import userReducer from '@slices/user/userSlice';
 import scrapReducer from '@slices/scrap/scrapSlice';
 import detailCurationReducer from '@slices/curation/detailCurationPostSlice';
+import addCommentReducer from '@slices/comment/addCommentSlice';
 const preloadedState = {};
 
 export const store = configureStore({
   reducer: {
     curation: curationReducer,
+    comments: addCommentReducer,
     detailCuration: detailCurationReducer,
     user: userReducer,
     mbti: mbtiReducer,
