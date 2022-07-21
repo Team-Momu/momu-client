@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { getPlaceDatasThunk } from '@slices/comment/addCommentSlice';
 import useInput from 'utils/hooks/useInput';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
+import CommentHeader from 'components/comment/CommentHeader';
 
 const WriteComment = () => {
   const placeDatas = useAppSelector((state: RootState) => state.comments.data);
@@ -48,7 +49,7 @@ const WriteComment = () => {
   console.log(placeDatas);
   return (
     <>
-      <h1>답변</h1>
+      <CommentHeader />
       <form onSubmit={onSubmitPlace}>
         <PlaceInput
           type="text"

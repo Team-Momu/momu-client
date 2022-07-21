@@ -13,7 +13,7 @@ const DetailFeed = () => {
   }, []);
 
   const writeComment = useCallback(() => {
-    router.push(`/answer/${postId}`);
+    router.push(`/comment/${postId}`);
   }, []);
 
   console.log(postId);
