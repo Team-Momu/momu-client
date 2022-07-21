@@ -13,6 +13,17 @@ const AddComment = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [whereToGo, setWhereToGo] = useState('');
   const [keyword, setWhere] = useState('');
+  const [additionalComment, setAdditionalComment] = useState('');
+
+  // isSelected true이면 input 텍스트, 모달 클로즈,
+  const isSelected = useAppSelector(
+    (state: RootState) => state.placechoice.isSelected
+  );
+
+  //input에서 placeName보여주기
+  const placeName = useAppSelector(
+    (state: RootState) => state.placechoice.place.place_name
+  );
 
   const postId = router.query.id;
   console.log(postId);
@@ -23,6 +34,21 @@ const AddComment = () => {
     } = e;
     setWhereToGo(value);
   };
+
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const {
+      target: { value },
+    } = e;
+    console.log(value);
+    if (value.length > 35) {
+      alert('최대 35자까지 입력이 가능합니다.');
+      setAdditionalComment(value.substr(0, 35));
+    } else {
+      setAdditionalComment(value);
+    }
+  };
+
+  console.log(additionalComment);
 
   const onSubmitPlace = useCallback(
     (e: React.SyntheticEvent) => {
@@ -39,6 +65,12 @@ const AddComment = () => {
     setIsOpen(false);
   }
 
+  //   useEffect(() => {
+  //     setSelected(isSelected);
+  //     setIsOpen(false);
+  //   }, [selected]);
+
+  console.log(modalIsOpen);
   console.log(keyword);
   useEffect(() => {
     dispatch(getPlaceDatasThunk(keyword));
@@ -68,7 +100,12 @@ const AddComment = () => {
 
       <InnerContainer>
         <GuideText>큐레이션 작성</GuideText>
-        <CommentTextInput placeholder="자세하게 적어줄 수록 채택확률이 높아요!&#13;(최대 38자)"></CommentTextInput>
+        <CommentTextInput
+          onChange={handleTextareaChange}
+          placeholder="자세하게 적어줄 수록 채택확률이 높아요!&#13;(최대 38자)"
+        >
+          {additionalComment}
+        </CommentTextInput>
       </InnerContainer>
 
       <div style={{ position: 'relative' }}>
