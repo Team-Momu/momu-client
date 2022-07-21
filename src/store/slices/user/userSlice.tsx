@@ -4,6 +4,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { kakao } from './userThunk';
 import { IUser } from '../../../utils/interfaces/user/userInterface';
+import axios from 'axios';
 
 export const initialState: IUser = {
   error: '',
@@ -29,6 +30,8 @@ const userSlice = createSlice({
     builder.addCase(kakao.fulfilled, (state, { payload }) => {
       state.status = 'success';
       state.auth = payload;
+      const { access_token, refresh_token } = payload;
+      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
     });
     builder.addCase(kakao.rejected, (state, action) => {
       state.status = 'failed';
