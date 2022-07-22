@@ -10,8 +10,18 @@ import useCheckLength from 'utils/hooks/useCheckLength';
 const AddComment = () => {
   const { additionalComment, handleInputLength } = useCheckLength();
 
-  // 선택된 식당 데이터
-  const selectedPlace = useAppSelector((state: RootState) => state.placechoice);
+  // isSelected true이면 input 텍스트, 모달 클로즈,
+  const isSelected = useAppSelector(
+    (state: RootState) => state.placechoice.isSelected
+  );
+
+  //여러번 답글 작성시에는 어떻게 모달 클로즈할지
+  //const [selectedState, setSelectedState] = useState(false);
+
+  //input에서 placeName보여주기
+  const placeName = useAppSelector(
+    (state: RootState) => state.placechoice.place.place_name
+  );
 
   const placeDatas = useAppSelector((state: RootState) => state.comments.data);
   const dispatch = useAppDispatch();
@@ -40,16 +50,6 @@ const AddComment = () => {
     formData.append('image', imagePath);
   }, []);
 
-  // isSelected true이면 input 텍스트, 모달 클로즈,
-  const isSelected = useAppSelector(
-    (state: RootState) => state.placechoice.isSelected
-  );
-
-  //input에서 placeName보여주기
-  const placeName = useAppSelector(
-    (state: RootState) => state.placechoice.place.place_name
-  );
-
   const postId = router.query.id;
   console.log(postId);
 
@@ -73,14 +73,14 @@ const AddComment = () => {
     [whereToGo]
   );
 
+  // 모달에서 식당 클릭시 모달 창 꺼짐
+  useEffect(() => {
+    setIsOpen(!isSelected);
+  }, [isSelected]);
+
   function closeModal() {
     setIsOpen(false);
   }
-
-  //   useEffect(() => {
-  //     setSelected(isSelected);
-  //     setIsOpen(false);
-  //   }, [selected]);
 
   console.log(modalIsOpen);
   console.log(keyword);
@@ -163,7 +163,7 @@ const AddComment = () => {
           }}
         >
           <button onClick={closeModal}>close</button>
-          <PlaceLists placeDatas={placeDatas} />
+          <PlaceLists closeModal={closeModal} placeDatas={placeDatas} />
         </Modal>
       </div>
     </Wrapper>
