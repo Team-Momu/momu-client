@@ -14,39 +14,68 @@ const Home: NextPage = () => {
   const router = useRouter();
   const [nickname, setNickname] = useState('');
   const [active, setActive] = useState(false);
-  const [imagePath, setImagePath] = useState('');
-  const [createObjectURL, setCreateObjectURL] = useState(null);
+  const [imagePath, setImagePath] = useState<Blob | string>('');
+  const [createObjectURL, setCreateObjectURL] = useState<string | null>(null);
   const onChangeInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      // 정규 표현식 이용하여 한글 입력 방지
+      const notEngExp = /[^A-Za-z]/g;
+      const isNotEng = notEngExp.test(e.target.value);
+      if (isNotEng) {
+        alert('영어를 입력해주세요!');
+        e.preventDefault();
+        return;
+      }
+
+      // 버튼 색깔 바꿔주기
       if (e.target.value.length) {
         setActive(true);
       } else {
         setActive(false);
       }
+
+      // 값이 10자 이내면 저장
       if (e.target.value.length <= 10) {
         setNickname(e.target.value);
       }
     },
-    []
+    [active, nickname]
   );
 
   const onChangeImages = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const [file] = e.target.files;
-      console.log(URL.createObjectURL(file));
+      // typeof e.target.files is Array-like Objects
+      if (e.target.files) {
+        // 값이 존재하면 백엔드로 보낼 데이터 업데이트
+        setImagePath(e.target.files[0]);
+
+        // Image src 에 들어갈 값 업데이트
+        const [file] = e.target.files;
+        if (file) {
+          setCreateObjectURL(URL.createObjectURL(file));
+        } else {
+          setCreateObjectURL(null);
+        }
+      }
     },
-    []
+    [imagePath]
   );
 
-  // useEffect(() => {
-  //   console.log(createObjectURL);
-  // }, [createObjectURL]);
+  // 한글 입력 방지
+  const handleKeyDown = () => {};
 
-  const onSubmit = useCallback(() => {
-    const formData = new FormData();
-    formData.append('nickiname', nickname);
-    formData.append('image', imagePath);
-  }, []);
+  const onSubmit = useCallback(
+    (e: React.SyntheticEvent) => {
+      e.preventDefault();
+      const formData = new FormData();
+
+      formData.append('nickname', nickname);
+      formData.append('image', imagePath);
+
+      // 이 아래에 formData 를 전송해주면 됨.
+    },
+    [nickname, imagePath]
+  );
 
   const myLoader = ({ src, width, quality }: any) => {
     return `${src}?w=${width}&q=${quality || 75}`;
@@ -63,9 +92,15 @@ const Home: NextPage = () => {
     left: '16px',
     top: '432px',
   };
-
   const RelativeBox: CSSProperties = {
     position: 'relative',
+  };
+  const labelStyle: CSSProperties = {
+    cursor: 'pointer',
+    position: 'absolute',
+    bottom: '5px',
+    right: '0',
+    zIndex: '1',
   };
 
   return (
@@ -75,9 +110,12 @@ const Home: NextPage = () => {
         신촌, 홍대 지역 기반 맛집 큐레이션 서비스 모무입니다. 프로필 설정을 하고
         모무에서 활동을 시작해보세요!
       </ServiceDescriptionText>
-
       <div style={NicknameText}>닉네임</div>
-      <form action="">
+      <form
+        onSubmit={onSubmit}
+        encType="multipart/form-data"
+        autoComplete="off"
+      >
         <NicknameInput
           value={nickname}
           onChange={onChangeInput}
@@ -93,16 +131,8 @@ const Home: NextPage = () => {
               onChange={onChangeImages}
               pattern="[a-zA-Z0-9]"
             />
-            <label
-              htmlFor="image-upload"
-              style={{
-                cursor: 'pointer',
-                position: 'absolute',
-                bottom: '5px',
-                right: '0',
-                zIndex: '1',
-              }}
-            >
+
+            <label htmlFor="image-upload" style={labelStyle}>
               <Image width={25} height={20} src={camera}></Image>
             </label>
             <Image
@@ -115,10 +145,10 @@ const Home: NextPage = () => {
             ></Image>
           </div>
         </div>
+        <NextButton active={active} disabled={!active}>
+          다음
+        </NextButton>
       </form>
-      <NextButton onClick={() => router.push('/profile/1')} active={active}>
-        다음
-      </NextButton>
     </>
   );
 };
