@@ -5,41 +5,77 @@ import styled from 'styled-components';
 import { CSSProperties, useCallback, useEffect, useState } from 'react';
 import snug from '@public/img/mbti/snug1.png';
 import lively from '@public/img/mbti/lively1.png';
+import defaultProfile from '@public/img/defaultProfile.png';
+import camera from '@public/img/camera.png';
 import Image from 'next/image';
 
 const Home: NextPage = () => {
-  const [nickName, setNickName] = useState('');
+  const [nickname, setNickname] = useState('');
   const [active, setActive] = useState(false);
-  const [url, setUrl] = useState('');
-  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length) {
-      setActive(true);
-    } else {
-      setActive(false);
-    }
+  const [imagePath, setImagePath] = useState('');
+  const [createObjectURL, setCreateObjectURL] = useState(null);
+  const onChangeInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.value.length) {
+        setActive(true);
+      } else {
+        setActive(false);
+      }
+      if (e.target.value.length <= 10) {
+        setNickname(e.target.value);
+      }
+    },
+    []
+  );
 
-    if (e.target.value.length <= 10) {
-      setNickName(e.target.value);
-    }
+  const onChangeImages = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      // @ts-ignore
+      const [file] = e.target.files;
+      // @ts-ignore
+      setCreateObjectURL(URL.createObjectURL(file));
+
+      // const imageFormData = new FormData();
+      // [].forEach.call(e.target.files, (f) => {
+      //   imageFormData.append('image', f);
+      // });
+    },
+    []
+  );
+
+  // useEffect(() => {
+  //   console.log(createObjectURL);
+  // }, [createObjectURL]);
+
+  const onSubmit = useCallback(() => {
+    const formData = new FormData();
+    formData.append('nickiname', nickname);
+    formData.append('image', imagePath);
   }, []);
 
-  const mbti = useSelector((state: RootState) => state.mbti.mbti);
-  const onChangePhotoUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUrl(e.target.value);
-  };
-  useEffect(() => {
-    console.log(url);
-  }, [url]);
+  const example1 = 'https://unsplash.com/photos/z087QfkQu08';
+  const example2 = 'https://unsplash.com/photos/lNgmT9RokOQ';
 
-  // const onSubmit = () => {
-  //   const formData = new FormData();
-  //   formData.append('image', url);
-  //
-  //   dispatch({
-  //     type,
-  //     data: formData,
-  //   });
-  // };
+  const myLoader = ({ src, width, quality }: any) => {
+    return `${src}?w=${width}&q=${quality || 75}`;
+  };
+
+  const defaultImageStyle: CSSProperties = {
+    borderRadius: '50%',
+
+    background: '#EDEDED',
+  };
+  const ImagePositionBox: CSSProperties = {
+    position: 'absolute',
+    width: '88px',
+    height: '88px',
+    left: '16px',
+    top: '432px',
+  };
+
+  const RelativeBox: CSSProperties = {
+    position: 'relative',
+  };
 
   return (
     <>
@@ -49,35 +85,44 @@ const Home: NextPage = () => {
         모무에서 활동을 시작해보세요!
       </ServiceDescriptionText>
       <div style={NicknameText}>닉네임</div>
-      <NicknameInput
-        value={nickName}
-        onChange={onChange}
-        placeholder="10자 이내 영문으로 작성해주세요!"
-      />
-
-      <ProfileImageText>프로필 사진</ProfileImageText>
-
       <form action="">
-        <input
-          type="file"
-          id="image-upload"
-          hidden
-          onChange={onChangePhotoUrl}
-          value={url}
+        <NicknameInput
+          value={nickname}
+          onChange={onChangeInput}
+          placeholder="10자 이내 영문으로 작성해주세요!"
         />
-        <div style={{ width: '100px', height: '100px' }}>
-          {/*<Image src={`${lively || snug}`} alt="profile_image" />*/}
+        <ProfileImageText>프로필 사진</ProfileImageText>
+        <div style={ImagePositionBox}>
+          <div style={RelativeBox}>
+            <input
+              type="file"
+              id="image-upload"
+              hidden
+              onChange={onChangeImages}
+              pattern="[a-zA-Z0-9]"
+            />
+            <label
+              htmlFor="image-upload"
+              style={{
+                cursor: 'pointer',
+                position: 'absolute',
+                bottom: '5px',
+                right: '0',
+                zIndex: '1',
+              }}
+            >
+              <Image width={25} height={20} src={camera}></Image>
+            </label>
+            <Image
+              loader={myLoader}
+              src={createObjectURL || defaultProfile}
+              width={100}
+              height={100}
+              style={defaultImageStyle}
+              objectFit="cover"
+            ></Image>
+          </div>
         </div>
-        <label
-          htmlFor="image-upload"
-          style={{
-            fontSize: '1.5rem',
-            color: '#716F88',
-            cursor: 'pointer',
-          }}
-        >
-          프로필 사진 변경
-        </label>
       </form>
       <NextButton active={active}>다음</NextButton>
     </>

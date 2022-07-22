@@ -3,6 +3,7 @@ import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import styled from 'styled-components';
+import Image from 'next/image';
 
 const Home: NextPage = () => {
   const router = useRouter();

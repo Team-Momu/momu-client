@@ -8,6 +8,7 @@ import 'styles/globals.css';
 import 'styles/FilterStyle.css';
 import axios from 'axios';
 import Script from 'next/script';
+
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 axios.defaults.withCredentials = true;
 
