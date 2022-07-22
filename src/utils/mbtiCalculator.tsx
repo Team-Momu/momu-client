@@ -47,11 +47,11 @@ export const mbtiCalculator = (result: IResult) => {
   }
 
   if (firstCount >= 2) {
-    // Receptive (새로운 것을 잘 수용함, 도전적)
-    mbti.first = 'R';
+    // New (새로움을 추구하는)
+    mbti.first = 'N';
   } else {
-    //stable (안정적으로 기존의 것을 좋아함)
-    mbti.first = 'S';
+    //Careful (신중한 조심스러운)
+    mbti.first = 'C';
   }
 
   if (stage4 === 'down') {
@@ -62,7 +62,7 @@ export const mbtiCalculator = (result: IResult) => {
   }
 
   if (secondCount >= 6) {
-    // Mood 분위기를 선호
+    // Mood 분위기 중심
     mbti.second = 'M';
   } else {
     // Taste 맛을 선호
@@ -80,29 +80,29 @@ export const mbtiCalculator = (result: IResult) => {
   }
 
   if (thirdCount >= 2) {
-    // Open
+    // Open 개방적인 활기찬
     mbti.third = 'O';
   } else {
-    // Private
-    mbti.third = 'P';
+    // cAlm  분리된 조용한
+    mbti.third = 'A';
   }
 
   switch (stage9) {
     case '진라면 순한맛':
-      // 매운 거 못먹는 Cool
-      mbti.fourth = 'C';
+      //  맵찔이
+      mbti.fourth = 'J';
       break;
     case '진라몃 매운맛':
-      // 매운 거 못먹는 Cool
-      mbti.fourth = 'C';
+      //  맵찔이
+      mbti.fourth = 'J';
       break;
     case '불닭볶음면 컵라면':
-      // 매운 거 못먹는 Cool
-      mbti.fourth = 'C';
+      //  맵찔이
+      mbti.fourth = 'J';
       break;
     default:
-      // 그 외의 경우 Hot
-      mbti.fourth = 'H';
+      //  맵잘알
+      mbti.fourth = 'R';
       break;
   }
   console.log('firstCount', firstCount);
@@ -112,7 +112,7 @@ export const mbtiCalculator = (result: IResult) => {
 
   // console.log(mbti);
 
-  const finalMbti = mbti.first + mbti.second + mbti.third + mbti.fourth;
+  const finalMbti = mbti.first + mbti.third + mbti.second + mbti.fourth;
 
   return finalMbti;
 };

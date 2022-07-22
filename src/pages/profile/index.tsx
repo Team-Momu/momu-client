@@ -8,8 +8,10 @@ import lively from '@public/img/mbti/lively1.png';
 import defaultProfile from '@public/img/defaultProfile.png';
 import camera from '@public/img/camera.png';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
+  const router = useRouter();
   const [nickname, setNickname] = useState('');
   const [active, setActive] = useState(false);
   const [imagePath, setImagePath] = useState('');
@@ -31,7 +33,6 @@ const Home: NextPage = () => {
   const onChangeImages = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const [file] = e.target.files;
-
       console.log(URL.createObjectURL(file));
     },
     []
@@ -47,16 +48,12 @@ const Home: NextPage = () => {
     formData.append('image', imagePath);
   }, []);
 
-  const example1 = 'https://unsplash.com/photos/z087QfkQu08';
-  const example2 = 'https://unsplash.com/photos/lNgmT9RokOQ';
-
   const myLoader = ({ src, width, quality }: any) => {
     return `${src}?w=${width}&q=${quality || 75}`;
   };
 
   const defaultImageStyle: CSSProperties = {
     borderRadius: '50%',
-
     background: '#EDEDED',
   };
   const ImagePositionBox: CSSProperties = {
@@ -119,7 +116,9 @@ const Home: NextPage = () => {
           </div>
         </div>
       </form>
-      <NextButton active={active}>다음</NextButton>
+      <NextButton onClick={() => router.push('/profile/1')} active={active}>
+        다음
+      </NextButton>
     </>
   );
 };
