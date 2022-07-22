@@ -12,7 +12,9 @@ import userReducer from '@slices/user/userSlice';
 import scrapReducer from '@slices/scrap/scrapSlice';
 import detailCurationReducer from '@slices/curation/detailCurationPostSlice';
 import addCommentReducer from '@slices/comment/addCommentSlice';
+import profileSetReducer from '@slices//profileSet/profileSetSlice';
 import placeChoiceReducer from '@slices/comment/PlaceChoiceSlice';
+
 
 const preloadedState = {};
 
@@ -25,6 +27,7 @@ export const store = configureStore({
     user: userReducer,
     mbti: mbtiReducer,
     scrap: scrapReducer,
+    profileSet: profileSetReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',
