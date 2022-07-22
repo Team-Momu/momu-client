@@ -28,13 +28,11 @@ const Mbti = () => {
 
   return (
     <>
-      <Navbar>먹BTI 결과</Navbar>
-      <NavbarUnderLine />
       <Illustration />
       <CommentText>당신의 먹비티아이 유형은</CommentText>
       <CommentText second>
         {mbti}
-        <span style={{ color: '#191919' }}>입니다.</span>
+        <span style={{ color: '#191919' }}> 입니다.</span>
       </CommentText>
       <WhatIsMbti onClick={openModal}>먹비티아이란?</WhatIsMbti>
       <Line></Line>
@@ -54,7 +52,6 @@ const Mbti = () => {
               width: '335px',
               height: '723px',
               top: '72px',
-
               margin: 'auto',
             },
           }}
@@ -94,26 +91,28 @@ const NavbarUnderLine = styled.div`
 `;
 const Illustration = styled.div`
   position: absolute;
-  width: 120px;
-  height: 120px;
-  left: 16px;
-  top: 84px;
+  width: 160px;
+  height: 160px;
+  left: 107px;
+  top: 100px;
 
   background: #d9d9d9;
 `;
 
 const CommentText = styled.span<{ second?: boolean }>`
   position: absolute;
-  width: 305px;
+  width: 325px;
   height: 72px;
-  left: 16px;
-  top: ${({ second }) => (second ? '260px;' : '220px;')}
+  left: 25px;
+  
+  top: ${({ second }) => (second ? '340px;' : '300px;')}
 
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
   line-height: 36px;
+  text-align : center;
   /* or 150% */
 
   color:${({ second }) => (second ? '#F57906' : '#191919')} ;
