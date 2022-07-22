@@ -78,9 +78,30 @@ const AddComment = () => {
 
   console.log(placeDatas);
 
+  const [fileString, setFileString] = useState('');
+
+  const onFileChange = (e: any) => {
+    const {
+      target: { files },
+    } = e;
+    const theFile = files[0];
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent: any) => {
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setFileString(result);
+    };
+    reader.readAsDataURL(theFile);
+  };
+
+  console.log(fileString);
+
   return (
     <Wrapper>
       <SearchPlace>
+        <input type="file" accept="image/*" onChange={onFileChange}></input>
+        <img src={fileString} />
         <GuideText>큐레이션 식당 검색</GuideText>
         <form onSubmit={onSubmitPlace}>
           <PlaceInput
