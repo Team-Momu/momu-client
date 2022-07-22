@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { ButtonContainer, ChoiceButton } from 'styles/CommonStyle';
+import useCheckLength from 'utils/hooks/useCheckLength';
 
 const RequestInfo = () => {
   const [color, setColor] = useState('');
+  const { additionalComment, handleInputLength } = useCheckLength();
 
   const onClick = () => {
     color === '' ? setColor('#86B9FD') : setColor('');
@@ -74,10 +76,12 @@ const RequestInfo = () => {
           추가 요청사항을 알려주세요! <Optional>(선택)</Optional>
         </QuestionText>
         <AdditionalInput
-          maxLength={25}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            handleInputLength(e, 25);
+          }}
           type="text"
           placeholder="(25자 이내) 싫어하는 음식, 상황 등을 말씀해주세요!"
-        ></AdditionalInput>
+        />
       </AdditionalRequest>
     </Wrapper>
   );

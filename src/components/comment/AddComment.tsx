@@ -5,6 +5,7 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import { getPlaceDatasThunk } from '@slices/comment/addCommentSlice';
 import PlaceLists from './PlaceLists';
+import useCheckLength from 'utils/hooks/useCheckLength';
 
 const AddComment = () => {
   const placeDatas = useAppSelector((state: RootState) => state.comments.data);
@@ -13,8 +14,7 @@ const AddComment = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [whereToGo, setWhereToGo] = useState('');
   const [keyword, setWhere] = useState('');
-  const [additionalComment, setAdditionalComment] = useState('');
-
+  const { additionalComment, handleInputLength } = useCheckLength();
   // isSelected true이면 input 텍스트, 모달 클로즈,
   const isSelected = useAppSelector(
     (state: RootState) => state.placechoice.isSelected
@@ -33,19 +33,6 @@ const AddComment = () => {
       target: { value },
     } = e;
     setWhereToGo(value);
-  };
-
-  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const {
-      target: { value },
-    } = e;
-    console.log(value);
-    if (value.length > 35) {
-      alert('최대 35자까지 입력이 가능합니다.');
-      setAdditionalComment(value.substr(0, 35));
-    } else {
-      setAdditionalComment(value);
-    }
   };
 
   console.log(additionalComment);
@@ -78,30 +65,9 @@ const AddComment = () => {
 
   console.log(placeDatas);
 
-  const [fileString, setFileString] = useState('');
-
-  const onFileChange = (e: any) => {
-    const {
-      target: { files },
-    } = e;
-    const theFile = files[0];
-    const reader = new FileReader();
-    reader.onloadend = (finishedEvent: any) => {
-      const {
-        currentTarget: { result },
-      } = finishedEvent;
-      setFileString(result);
-    };
-    reader.readAsDataURL(theFile);
-  };
-
-  console.log(fileString);
-
   return (
     <Wrapper>
       <SearchPlace>
-        <input type="file" accept="image/*" onChange={onFileChange}></input>
-        <img src={fileString} />
         <GuideText>큐레이션 식당 검색</GuideText>
         <form onSubmit={onSubmitPlace}>
           <PlaceInput
@@ -113,20 +79,22 @@ const AddComment = () => {
       </SearchPlace>
       <InnerContainer>
         <GuideText>사진 (선택)</GuideText>
-        <ImgUploadButton>
+        <>
+          <ImgUploadInput type="file" />
           <PlusIcon src={'/img/upload/Upload.svg'} />
           <ButtonText>원하는 사진을 첨부해주세요!</ButtonText>
-        </ImgUploadButton>
+        </>
       </InnerContainer>
 
       <InnerContainer>
         <GuideText>큐레이션 작성</GuideText>
         <CommentTextInput
-          onChange={handleTextareaChange}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            handleInputLength(e, 35);
+          }}
           placeholder="자세하게 적어줄 수록 채택확률이 높아요!&#13;(최대 38자)"
-        >
-          {additionalComment}
-        </CommentTextInput>
+          value={additionalComment}
+        ></CommentTextInput>
       </InnerContainer>
 
       <div style={{ position: 'relative' }}>
@@ -207,7 +175,7 @@ const InnerContainer = styled.div`
   margin-top: 40px;
 `;
 
-const ImgUploadButton = styled.button`
+const ImgUploadInput = styled.input`
   width: 343px;
   height: 206px;
   background: #ededed;
