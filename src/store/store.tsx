@@ -13,6 +13,8 @@ import scrapReducer from '@slices/scrap/scrapSlice';
 import detailCurationReducer from '@slices/curation/detailCurationPostSlice';
 import addCommentReducer from '@slices/comment/addCommentSlice';
 import profileSetReducer from '@slices//profileSet/profileSetSlice';
+import placeChoiceReducer from '@slices/comment/PlaceChoiceSlice';
+
 
 const preloadedState = {};
 
@@ -20,6 +22,7 @@ export const store = configureStore({
   reducer: {
     curation: curationReducer,
     comments: addCommentReducer,
+    placechoice: placeChoiceReducer,
     detailCuration: detailCurationReducer,
     user: userReducer,
     mbti: mbtiReducer,

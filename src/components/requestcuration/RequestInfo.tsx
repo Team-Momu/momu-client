@@ -74,6 +74,7 @@ const RequestInfo = () => {
           추가 요청사항을 알려주세요! <Optional>(선택)</Optional>
         </QuestionText>
         <AdditionalInput
+          maxLength={25}
           type="text"
           placeholder="(25자 이내) 싫어하는 음식, 상황 등을 말씀해주세요!"
         ></AdditionalInput>
@@ -157,6 +158,15 @@ const AdditionalRequest = styled.div`
 `;
 
 const AdditionalInput = styled.input`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height, or 125% */
+
+  color: #191919;
+
   padding-left: 0;
   width: 343px;
   border: none;

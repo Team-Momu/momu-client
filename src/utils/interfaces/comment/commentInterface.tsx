@@ -15,6 +15,11 @@ interface IPlaceData {
   y: string; //#y좌표
 }
 
+interface IPlaceObject {
+  isSelected: boolean;
+  place: IPlaceData;
+}
+
 interface IGetPlaceData {
   pending: boolean;
   message: string;
@@ -23,4 +28,4 @@ interface IGetPlaceData {
   total: number;
 }
 
-export type { IPlaceData, IGetPlaceData };
+export type { IPlaceData, IGetPlaceData, IPlaceObject };
