@@ -131,7 +131,6 @@ const Home: NextPage = () => {
               onChange={onChangeImages}
               pattern="[a-zA-Z0-9]"
             />
-
             <label htmlFor="image-upload" style={labelStyle}>
               <Image width={25} height={20} src={camera}></Image>
             </label>

@@ -11,7 +11,6 @@ const useCheckLength = () => {
     const {
       target: { value },
     } = e;
-    console.log(value);
 
     if (value.length > maxLength) {
       alert(`최대 ${maxLength}자까지 입력이 가능합니다.`);
