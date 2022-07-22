@@ -8,13 +8,31 @@ import PlaceLists from './PlaceLists';
 import useCheckLength from 'utils/hooks/useCheckLength';
 
 const AddComment = () => {
+  const { additionalComment, handleInputLength } = useCheckLength();
   const placeDatas = useAppSelector((state: RootState) => state.comments.data);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [whereToGo, setWhereToGo] = useState('');
   const [keyword, setWhere] = useState('');
-  const { additionalComment, handleInputLength } = useCheckLength();
+
+  const [imagePath, setImagePath] = useState('');
+  const [createObjectURL, setCreateObjectURL] = useState(null);
+
+  const onChangeImages = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files;
+      // @ts-ignore
+      setCreateObjectURL(URL.createObjectURL(file));
+    },
+    []
+  );
+
+  const onSubmit = useCallback(() => {
+    const formData = new FormData();
+    formData.append('image', imagePath);
+  }, []);
+
   // isSelected true이면 input 텍스트, 모달 클로즈,
   const isSelected = useAppSelector(
     (state: RootState) => state.placechoice.isSelected
@@ -80,7 +98,12 @@ const AddComment = () => {
       <InnerContainer>
         <GuideText>사진 (선택)</GuideText>
         <>
-          <ImgUploadInput type="file" />
+          <ImgUploadInput
+            type="file"
+            accept="image/*"
+            onChange={onChangeImages}
+            required
+          />
           <PlusIcon src={'/img/upload/Upload.svg'} />
           <ButtonText>원하는 사진을 첨부해주세요!</ButtonText>
         </>
