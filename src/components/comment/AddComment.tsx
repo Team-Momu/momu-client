@@ -15,13 +15,14 @@ const AddComment = () => {
     (state: RootState) => state.placechoice.isSelected
   );
 
-  //여러번 답글 작성시에는 어떻게 모달 클로즈할지
-  //const [selectedState, setSelectedState] = useState(false);
-
   //input에서 placeName보여주기
   const placeName = useAppSelector(
     (state: RootState) => state.placechoice.place.place_name
   );
+  const [text, setText] = useState('');
+  useEffect(() => {
+    setText(placeName);
+  }, [placeName]);
 
   const placeDatas = useAppSelector((state: RootState) => state.comments.data);
   const dispatch = useAppDispatch();
@@ -57,6 +58,7 @@ const AddComment = () => {
     const {
       target: { value },
     } = e;
+    setText(value);
     setWhereToGo(value);
   };
 
@@ -73,17 +75,12 @@ const AddComment = () => {
     [whereToGo]
   );
 
-  // 모달에서 식당 클릭시 모달 창 꺼짐
-  useEffect(() => {
-    setIsOpen(!isSelected);
-  }, [isSelected]);
-
   function closeModal() {
     setIsOpen(false);
   }
 
-  console.log(modalIsOpen);
   console.log(keyword);
+
   useEffect(() => {
     dispatch(getPlaceDatasThunk(keyword));
   }, [keyword]);
@@ -99,6 +96,7 @@ const AddComment = () => {
             type="text"
             onChange={handleInputChange}
             placeholder="원하는 식당을 검색해주세요!"
+            value={text}
           ></PlaceInput>
         </form>
       </SearchPlace>
