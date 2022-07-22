@@ -14,7 +14,7 @@ import detailCurationReducer from '@slices/curation/detailCurationPostSlice';
 import addCommentReducer from '@slices/comment/addCommentSlice';
 import profileSetReducer from '@slices//profileSet/profileSetSlice';
 import placeChoiceReducer from '@slices/comment/PlaceChoiceSlice';
-
+import addCurationSliceReducer from '@slices/curation/addCurationSlice';
 
 const preloadedState = {};
 
@@ -24,6 +24,7 @@ export const store = configureStore({
     comments: addCommentReducer,
     placechoice: placeChoiceReducer,
     detailCuration: detailCurationReducer,
+    addCuration: addCurationSliceReducer,
     user: userReducer,
     mbti: mbtiReducer,
     scrap: scrapReducer,
