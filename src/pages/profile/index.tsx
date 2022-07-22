@@ -30,15 +30,9 @@ const Home: NextPage = () => {
 
   const onChangeImages = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      // @ts-ignore
       const [file] = e.target.files;
-      // @ts-ignore
-      setCreateObjectURL(URL.createObjectURL(file));
 
-      // const imageFormData = new FormData();
-      // [].forEach.call(e.target.files, (f) => {
-      //   imageFormData.append('image', f);
-      // });
+      console.log(URL.createObjectURL(file));
     },
     []
   );
@@ -84,6 +78,7 @@ const Home: NextPage = () => {
         신촌, 홍대 지역 기반 맛집 큐레이션 서비스 모무입니다. 프로필 설정을 하고
         모무에서 활동을 시작해보세요!
       </ServiceDescriptionText>
+
       <div style={NicknameText}>닉네임</div>
       <form action="">
         <NicknameInput
