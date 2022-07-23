@@ -1,22 +1,34 @@
 import type { NextPage } from 'next';
 import { useSelector } from 'react-redux';
-import { RootState } from 'store/store';
+import { RootState, useAppDispatch } from 'store/store';
 import styled from 'styled-components';
 import { CSSProperties, useCallback, useEffect, useState } from 'react';
-import snug from '@public/img/mbti/snug1.png';
-import lively from '@public/img/mbti/lively1.png';
 import defaultProfile from '@public/img/defaultProfile.png';
 import camera from '@public/img/camera.png';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { setProfile } from '@slices/profileSet/profileSetThunk';
+import { userInfo } from '@slices/user/userThunk';
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const [nickname, setNickname] = useState('');
   const [active, setActive] = useState(false);
   const [imagePath, setImagePath] = useState<Blob | string>('');
   const [createObjectURL, setCreateObjectURL] = useState<string | null>(null);
+  const status = useSelector((state: RootState) => state.profileSet.status);
+  const me = useSelector((state: RootState) => state.user.me);
+
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
+
+  useEffect(() => {
+    console.log('me🔥', me);
+  }, [me]);
+
   const onChangeInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       // 정규 표현식 이용하여 한글 입력 방지
@@ -67,16 +79,15 @@ const Home: NextPage = () => {
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const formData = new FormData();
+    const ask = confirm(`${nickname}으로 등록하시겠습니까?`);
+    if (ask) {
+      const formData = new FormData();
 
-    formData.append('nickname', nickname);
-    formData.append('profile_img', imagePath);
+      formData.append('nickname', nickname);
+      formData.append('profile_img', imagePath);
 
-    // 이 아래에 formData 를 전송해주면 됨.
-
-    const result = await axios.put('/user/profile/', formData);
-
-    console.log(result.data);
+      dispatch(setProfile(formData));
+    }
   };
 
   const myLoader = ({ src, width, quality }: any) => {
@@ -105,6 +116,14 @@ const Home: NextPage = () => {
     zIndex: '1',
   };
 
+  useEffect(() => {
+    console.log(imagePath);
+  }, [imagePath]);
+
+  // useEffect(() => {
+  //   router.push('/profile/1');
+  // }, [status]);
+
   return (
     <>
       <SetProfileText>프로필 설정</SetProfileText>
@@ -122,6 +141,7 @@ const Home: NextPage = () => {
           value={nickname}
           onChange={onChangeInput}
           placeholder="10자 이내 영문으로 작성해주세요!"
+          required
         />
         <ProfileImageText>프로필 사진</ProfileImageText>
         <div style={ImagePositionBox}>

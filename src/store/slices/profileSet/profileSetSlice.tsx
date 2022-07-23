@@ -1,9 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit';
 import defaultImage from '@public/img/defaultProfile.png';
+import { setProfile } from '@slices/profileSet/profileSetThunk';
+import { StaticImageData } from 'next/image';
 
-const initialState = {
+interface IInitialState {
+  defaultImage: string | null | StaticImageData;
+  currentImagePath: string | null;
+  status: string;
+  error: string | unknown;
+  result: string;
+}
+
+const initialState: IInitialState = {
   defaultImage,
   currentImagePath: null,
+  status: '',
+  error: '',
+  result: '',
 };
 
 const profileSetSlice = createSlice({
@@ -13,6 +26,19 @@ const profileSetSlice = createSlice({
     changeProfileImage: (state, { payload }) => {
       state.currentImagePath = payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(setProfile.pending, (state) => {
+      state.status = 'loading';
+    });
+    builder.addCase(setProfile.fulfilled, (state, { payload }) => {
+      state.status = 'success';
+      state.result = payload;
+    });
+    builder.addCase(setProfile.rejected, (state, { payload }) => {
+      state.status = 'failed';
+      state.error = payload;
+    });
   },
 });
 
