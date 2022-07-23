@@ -6,9 +6,17 @@ import styled from 'styled-components';
 import { getPlaceDatasThunk } from '@slices/comment/addCommentSlice';
 import PlaceLists from './PlaceLists';
 import useCheckLength from 'utils/hooks/useCheckLength';
+import {
+  BackButton,
+  BackIcon,
+  HeaderContainer,
+  HeaderLeftSide,
+  Line,
+} from 'styles/headerstyle/HeaderCommonStyle';
 
 const AddComment = () => {
   const { additionalComment, handleInputLength } = useCheckLength();
+  const router = useRouter();
 
   // isSelected true이면 input 텍스트, 모달 클로즈,
   const isSelected = useAppSelector(
@@ -19,6 +27,7 @@ const AddComment = () => {
   const placeName = useAppSelector(
     (state: RootState) => state.placechoice.place.place_name
   );
+
   const [text, setText] = useState('');
   useEffect(() => {
     setText(placeName);
@@ -26,7 +35,6 @@ const AddComment = () => {
 
   const placeDatas = useAppSelector((state: RootState) => state.comments.data);
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [whereToGo, setWhereToGo] = useState('');
   const [keyword, setWhere] = useState('');
@@ -89,6 +97,17 @@ const AddComment = () => {
 
   return (
     <Wrapper>
+      <>
+        <HeaderContainer>
+          <HeaderLeftSide>
+            <BackButton onClick={() => router.back()}>
+              <BackIcon src={'/img/header/backbutton.svg'} />
+            </BackButton>
+          </HeaderLeftSide>
+          <SubmitButton>완료</SubmitButton>
+        </HeaderContainer>
+        <Line></Line>
+      </>
       <SearchPlace>
         <GuideText>큐레이션 식당 검색</GuideText>
         <form onSubmit={onSubmitPlace}>
@@ -286,4 +305,16 @@ const CommentTextInput = styled.textarea`
 
     color: #767676;
   }
+`;
+
+const SubmitButton = styled.button`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+  /* identical to box height, or 100% */
+
+  color: #999999;
+  margin-right: 24px;
 `;

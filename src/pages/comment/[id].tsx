@@ -6,7 +6,6 @@ import AddComment from 'components/comment/AddComment';
 const WriteComment = () => {
   return (
     <Wrapper>
-      <CommentHeader />
       <AddComment />
     </Wrapper>
   );
