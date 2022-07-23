@@ -3,13 +3,22 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
-import { getPlaceDatasThunk } from '@slices/comment/addCommentSlice';
+import { getPlaceDatasThunk } from '@slices/comment/getPlaceSlice';
 import PlaceLists from './PlaceLists';
 import useCheckLength from 'utils/hooks/useCheckLength';
+import {
+  BackButton,
+  BackIcon,
+  HeaderContainer,
+  HeaderLeftSide,
+  Line,
+} from 'styles/headerstyle/HeaderCommonStyle';
+import { addCommentThunk, setComment } from '@slices/comment/addComment';
+import { IAddComment } from 'utils/interfaces/comment/commentInterface';
 
 const AddComment = () => {
   const { additionalComment, handleInputLength } = useCheckLength();
-
+  const router = useRouter();
   // isSelected true이면 input 텍스트, 모달 클로즈,
   const isSelected = useAppSelector(
     (state: RootState) => state.placechoice.isSelected
@@ -19,6 +28,9 @@ const AddComment = () => {
   const placeName = useAppSelector(
     (state: RootState) => state.placechoice.place.place_name
   );
+  const place = useAppSelector((state: RootState) => state.placechoice.place);
+  console.log(place);
+
   const [text, setText] = useState('');
   useEffect(() => {
     setText(placeName);
@@ -26,7 +38,6 @@ const AddComment = () => {
 
   const placeDatas = useAppSelector((state: RootState) => state.comments.data);
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [whereToGo, setWhereToGo] = useState('');
   const [keyword, setWhere] = useState('');
@@ -44,15 +55,25 @@ const AddComment = () => {
     },
     []
   );
+  const postId = router.query.id;
+  const post = parseInt(postId as string);
+
+  console.log(postId);
 
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
-  const onSubmitImage = useCallback(() => {
+  const onSubmit = useCallback(() => {
     const formData = new FormData();
-    formData.append('image', imagePath);
-  }, []);
 
-  const postId = router.query.id;
-  console.log(postId);
+    formData.append('image', imagePath);
+    //@ts-ignore
+    formData.append('place', place);
+    formData.append('additionalComment', additionalComment);
+
+    //const comment=useAppSelector((state:RootState)=>)
+    //const comment = Object.assign(place:{place}, formData, additionalComment);
+    //console.log(comment);
+    //dispatch(addCommentThunk({ post, comment }));
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const {
@@ -89,6 +110,17 @@ const AddComment = () => {
 
   return (
     <Wrapper>
+      <>
+        <HeaderContainer>
+          <HeaderLeftSide>
+            <BackButton onClick={() => router.back()}>
+              <BackIcon src={'/img/header/backbutton.svg'} />
+            </BackButton>
+          </HeaderLeftSide>
+          <SubmitButton onClick={onSubmit}>완료</SubmitButton>
+        </HeaderContainer>
+        <Line></Line>
+      </>
       <SearchPlace>
         <GuideText>큐레이션 식당 검색</GuideText>
         <form onSubmit={onSubmitPlace}>
@@ -286,4 +318,16 @@ const CommentTextInput = styled.textarea`
 
     color: #767676;
   }
+`;
+
+const SubmitButton = styled.button`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 20px;
+  /* identical to box height, or 100% */
+
+  color: #999999;
+  margin-right: 24px;
 `;

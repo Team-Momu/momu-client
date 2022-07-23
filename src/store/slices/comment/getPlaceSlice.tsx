@@ -18,7 +18,7 @@ export const getPlaceDatasThunk = createAsyncThunk(
   }
 );
 
-export const addCommentSlice = createSlice({
+export const getCommentSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {},
@@ -41,4 +41,4 @@ export const addCommentSlice = createSlice({
   },
 });
 
-export default addCommentSlice.reducer;
+export default getCommentSlice.reducer;
