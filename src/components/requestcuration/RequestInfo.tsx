@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ButtonContainer, ChoiceButton } from 'styles/CommonStyle';
 import useCheckLength from 'utils/hooks/useCheckLength';
@@ -53,6 +53,7 @@ const RequestInfo = () => {
     (state: RootState) => state.addCuration.member_count
   );
   const data = useSelector((state: RootState) => state.addCuration.data);
+  const status = useSelector((state: RootState) => state.addCuration.status);
 
   const findTypeOfLocation = (location: string) => {
     switch (location) {
@@ -168,10 +169,22 @@ const RequestInfo = () => {
     [text]
   );
 
-  const onClickComplete = useCallback(() => {
+  const onClickComplete = () => {
+    if (data.location === '') {
+      return alert('장소를 선택해 주세요!1');
+    }
+    if (data.location === '신촌,홍대 부근 동네를 선택해주세요!') {
+      return alert('장소를 선택해 주세요!2');
+    }
     dispatch(addCurationSlice.actions.onClickComplete(text));
     dispatch(addCurationData(data));
-  }, [text]);
+  };
+
+  useEffect(() => {
+    if (status === 'success') {
+      router.push('/feed');
+    }
+  }, [status]);
 
   return (
     <>

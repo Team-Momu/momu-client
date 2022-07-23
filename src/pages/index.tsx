@@ -4,12 +4,23 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import styled from 'styled-components';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { userInfo } from '@slices/user/userThunk';
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
-  const redirect = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
-  const apiKey = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
+  const me = useSelector((state: RootState) => state.user.me);
+
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
+
+  useEffect(() => {
+    console.log('me', me);
+  }, [me]);
 
   return (
     <>

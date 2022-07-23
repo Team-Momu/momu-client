@@ -8,3 +8,8 @@ export const kakao = createAsyncThunk(
     return response.data;
   }
 );
+
+export const userInfo = createAsyncThunk('user/userInfo', async (thunkAPI) => {
+  const response = await axios.get(`/user/profile/`);
+  return response.data;
+});
