@@ -9,6 +9,7 @@ import defaultProfile from '@public/img/defaultProfile.png';
 import camera from '@public/img/camera.png';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -64,18 +65,19 @@ const Home: NextPage = () => {
   // 한글 입력 방지
   const handleKeyDown = () => {};
 
-  const onSubmit = useCallback(
-    (e: React.SyntheticEvent) => {
-      e.preventDefault();
-      const formData = new FormData();
+  const onSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const formData = new FormData();
 
-      formData.append('nickname', nickname);
-      formData.append('image', imagePath);
+    formData.append('nickname', nickname);
+    formData.append('profile_img', imagePath);
 
-      // 이 아래에 formData 를 전송해주면 됨.
-    },
-    [nickname, imagePath]
-  );
+    // 이 아래에 formData 를 전송해주면 됨.
+
+    const result = await axios.put('/user/profile/', formData);
+
+    console.log(result.data);
+  };
 
   const myLoader = ({ src, width, quality }: any) => {
     return `${src}?w=${width}&q=${quality || 75}`;
