@@ -84,7 +84,7 @@ export const mbtiCalculator = (result: IResult) => {
     mbti.third = 'O';
   } else {
     // cAlm  분리된 조용한
-    mbti.third = 'A';
+    mbti.third = 'I';
   }
 
   switch (stage9) {

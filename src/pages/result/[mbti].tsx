@@ -1,19 +1,31 @@
 import styled from 'styled-components';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
+import { RootState, useAppDispatch } from '../../store/store';
+import { userInfo } from '@slices/user/userThunk';
 
 const Mbti = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const asPathArray = router.asPath.split('/');
   const mbti = asPathArray[asPathArray.length - 1];
   // const mbti = useSelector((state: RootState) => state.mbti.mbti);
   const [second, setSecond] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  const me = useSelector((state: RootState) => state.user.me);
+
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
+
+  useEffect(() => {
+    console.log('me', me);
+  }, [me]);
 
   function openModal() {
     setIsOpen(true);

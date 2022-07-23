@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import styled from 'styled-components';
 import GetCurationCard from './GetCurationCard';
+import { useSelector } from 'react-redux';
+import { userInfo } from '@slices/user/userThunk';
 
 const FeedList = () => {
   const curations = useAppSelector(
@@ -11,14 +13,20 @@ const FeedList = () => {
   const hasNext = useAppSelector(
     (state: RootState) => state.curation.data.next
   );
-  console.log(hasNext);
+
   const dispatch = useAppDispatch();
+
+  const me = useSelector((state: RootState) => state.user.me);
+
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
 
   useEffect(() => {
     hasNext
       ? dispatch(getCurationPostListsThunk(hasNext))
       : dispatch(getCurationPostListsThunk(''));
-  }, []);
+  }, [hasNext]);
 
   return (
     <Wrapper>

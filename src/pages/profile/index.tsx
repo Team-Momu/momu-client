@@ -7,7 +7,6 @@ import defaultProfile from '@public/img/defaultProfile.png';
 import camera from '@public/img/camera.png';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { setProfile } from '@slices/profileSet/profileSetThunk';
 import { userInfo } from '@slices/user/userThunk';
 
@@ -23,11 +22,13 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     dispatch(userInfo());
-  }, []);
+  }, [status]);
 
   useEffect(() => {
-    console.log('me🔥', me);
-  }, [me]);
+    if (me.data?.nickname) {
+      router.push('/profile/1');
+    }
+  }, [me, status]);
 
   const onChangeInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,13 +117,17 @@ const Home: NextPage = () => {
     zIndex: '1',
   };
 
-  useEffect(() => {
-    console.log(imagePath);
-  }, [imagePath]);
-
   // useEffect(() => {
-  //   router.push('/profile/1');
-  // }, [status]);
+  //   console.log(imagePath);
+  // }, [imagePath]);
+
+  useEffect(() => {
+    if (status === 'success') {
+      // if (me.data.nickname) {
+      router.push('/profile/1');
+      // }
+    }
+  }, [status]);
 
   return (
     <>

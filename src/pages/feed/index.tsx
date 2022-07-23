@@ -3,8 +3,28 @@ import styled from 'styled-components';
 import FeedList from 'components/feed/FeedList';
 import MainFeed from 'components/feed/MainFeed';
 import FeedHeader from 'components/feed/FeedHeader';
+import { RootState, useAppDispatch } from '../../store/store';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { userInfo } from '@slices/user/userThunk';
+import { useRouter } from 'next/router';
 
 const Feed: NextPage = () => {
+  // 유저 정보 불러오기
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const me = useSelector((state: RootState) => state.user.me);
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
+
+  useEffect(() => {
+    if (!me) {
+      alert('로그인이 필요합니다.');
+      router.push('/');
+    }
+  }, [me]);
+
   return (
     <Wrapper>
       <MainFeed />

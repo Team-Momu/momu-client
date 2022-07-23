@@ -32,7 +32,7 @@ const userSlice = createSlice({
       state.status = 'success';
       state.auth = payload;
       const { access_token, refresh_token } = payload;
-      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+      localStorage.setItem('access_token', access_token);
     });
     builder.addCase(kakao.rejected, (state, action) => {
       state.status = 'failed';
