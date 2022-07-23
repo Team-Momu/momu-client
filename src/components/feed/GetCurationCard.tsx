@@ -17,14 +17,7 @@ interface Props {
   additionalText: string;
   usernickname: string;
   profileImg: string;
-  mukbti:
-    | {
-        description: string;
-        id: number;
-        mbti: string;
-        type: string;
-      }
-    | string;
+  mukbti: any;
   commentNum: number;
   createAt: string;
   scrapFlag: boolean;
