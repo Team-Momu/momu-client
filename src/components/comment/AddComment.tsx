@@ -9,29 +9,6 @@ import useCheckLength from 'utils/hooks/useCheckLength';
 
 const AddComment = () => {
   const { additionalComment, handleInputLength } = useCheckLength();
-  const placeDatas = useAppSelector((state: RootState) => state.comments.data);
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [whereToGo, setWhereToGo] = useState('');
-  const [keyword, setWhere] = useState('');
-
-  const [imagePath, setImagePath] = useState('');
-  const [createObjectURL, setCreateObjectURL] = useState(null);
-
-  const onChangeImages = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files;
-      // @ts-ignore
-      setCreateObjectURL(URL.createObjectURL(file));
-    },
-    []
-  );
-
-  const onSubmit = useCallback(() => {
-    const formData = new FormData();
-    formData.append('image', imagePath);
-  }, []);
 
   // isSelected true이면 input 텍스트, 모달 클로즈,
   const isSelected = useAppSelector(
@@ -42,6 +19,37 @@ const AddComment = () => {
   const placeName = useAppSelector(
     (state: RootState) => state.placechoice.place.place_name
   );
+  const [text, setText] = useState('');
+  useEffect(() => {
+    setText(placeName);
+  }, [placeName]);
+
+  const placeDatas = useAppSelector((state: RootState) => state.comments.data);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [whereToGo, setWhereToGo] = useState('');
+  const [keyword, setWhere] = useState('');
+
+  const [imagePath, setImagePath] = useState('');
+  const [createObjectURL, setCreateObjectURL] = useState(null);
+
+  //이미지 업로드를 위한 코드
+  const onChangeImages = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      //@ts-ignore
+      const [file] = e.target.files;
+      // @ts-ignore
+      setCreateObjectURL(URL.createObjectURL(file));
+    },
+    []
+  );
+
+  //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
+  const onSubmitImage = useCallback(() => {
+    const formData = new FormData();
+    formData.append('image', imagePath);
+  }, []);
 
   const postId = router.query.id;
   console.log(postId);
@@ -50,6 +58,7 @@ const AddComment = () => {
     const {
       target: { value },
     } = e;
+    setText(value);
     setWhereToGo(value);
   };
 
@@ -70,13 +79,8 @@ const AddComment = () => {
     setIsOpen(false);
   }
 
-  //   useEffect(() => {
-  //     setSelected(isSelected);
-  //     setIsOpen(false);
-  //   }, [selected]);
-
-  console.log(modalIsOpen);
   console.log(keyword);
+
   useEffect(() => {
     dispatch(getPlaceDatasThunk(keyword));
   }, [keyword]);
@@ -92,23 +96,40 @@ const AddComment = () => {
             type="text"
             onChange={handleInputChange}
             placeholder="원하는 식당을 검색해주세요!"
+            value={text}
           ></PlaceInput>
         </form>
       </SearchPlace>
       <InnerContainer>
         <GuideText>사진 (선택)</GuideText>
-        <>
-          <ImgUploadInput
-            type="file"
-            accept="image/*"
-            onChange={onChangeImages}
-            required
-          />
-          <PlusIcon src={'/img/upload/Upload.svg'} />
-          <ButtonText>원하는 사진을 첨부해주세요!</ButtonText>
-        </>
+        <ImageWrapper>
+          <form action="">
+            <ImgUploadInput
+              type="file"
+              id="image-upload"
+              hidden
+              onChange={onChangeImages}
+              pattern="[a-zA-Z0-9]"
+            />
+            <label
+              htmlFor="image-upload"
+              style={{
+                cursor: 'pointer',
+                // position: 'absolute',
+                // bottom: '5px',
+                // right: '1px',
+                // zIndex: '1',
+              }}
+            >
+              <ImageUploadArea>
+                <UploadedImg src={createObjectURL || undefined} />
+                <PlusIcon src={'/img/upload/Upload.svg'} />
+                <ButtonText>원하는 사진을 첨부해주세요!</ButtonText>
+              </ImageUploadArea>
+            </label>
+          </form>
+        </ImageWrapper>
       </InnerContainer>
-
       <InnerContainer>
         <GuideText>큐레이션 작성</GuideText>
         <CommentTextInput
@@ -140,7 +161,7 @@ const AddComment = () => {
           }}
         >
           <button onClick={closeModal}>close</button>
-          <PlaceLists placeDatas={placeDatas} />
+          <PlaceLists closeModal={closeModal} placeDatas={placeDatas} />
         </Modal>
       </div>
     </Wrapper>
@@ -148,7 +169,30 @@ const AddComment = () => {
 };
 export default AddComment;
 const Wrapper = styled.div`
-  width: 375px;
+  width: 343px;
+  margin: 0;
+  padding: 0;
+`;
+
+const ImageWrapper = styled.div`
+  height: 206px;
+`;
+
+const UploadedImg = styled.img`
+  position: absolute;
+  top: 0px;
+  width: 343px;
+  height: 206px;
+`;
+const ImageUploadArea = styled.div`
+  padding-top: 70px;
+  position: absolute;
+  width: 343px;
+  height: 206px;
+  left: 16px;
+  top: 262px;
+
+  background: #ededed;
 `;
 
 const PlaceInput = styled.input`
@@ -198,16 +242,13 @@ const InnerContainer = styled.div`
   margin-top: 40px;
 `;
 
-const ImgUploadInput = styled.input`
-  width: 343px;
-  height: 206px;
-  background: #ededed;
-`;
+const ImgUploadInput = styled.input``;
 
 const PlusIcon = styled.img`
   margin: auto;
 `;
 const ButtonText = styled.div`
+  text-align: center;
   padding-top: 16px;
   font-family: 'Pretendard';
   font-style: normal;
