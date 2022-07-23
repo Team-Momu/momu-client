@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import useInput from 'utils/hooks/useInput';
-import CommentHeader from 'components/comment/CommentHeader';
 import AddComment from 'components/comment/AddComment';
 
 const WriteComment = () => {

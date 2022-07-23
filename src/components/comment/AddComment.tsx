@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
-import { getPlaceDatasThunk } from '@slices/comment/addCommentSlice';
+import { getPlaceDatasThunk } from '@slices/comment/getPlaceSlice';
 import PlaceLists from './PlaceLists';
 import useCheckLength from 'utils/hooks/useCheckLength';
 import {
@@ -13,11 +13,12 @@ import {
   HeaderLeftSide,
   Line,
 } from 'styles/headerstyle/HeaderCommonStyle';
+import { addCommentThunk, setComment } from '@slices/comment/addComment';
+import { IAddComment } from 'utils/interfaces/comment/commentInterface';
 
 const AddComment = () => {
   const { additionalComment, handleInputLength } = useCheckLength();
   const router = useRouter();
-
   // isSelected true이면 input 텍스트, 모달 클로즈,
   const isSelected = useAppSelector(
     (state: RootState) => state.placechoice.isSelected
@@ -27,6 +28,8 @@ const AddComment = () => {
   const placeName = useAppSelector(
     (state: RootState) => state.placechoice.place.place_name
   );
+  const place = useAppSelector((state: RootState) => state.placechoice.place);
+  console.log(place);
 
   const [text, setText] = useState('');
   useEffect(() => {
@@ -52,15 +55,25 @@ const AddComment = () => {
     },
     []
   );
+  const postId = router.query.id;
+  const post = parseInt(postId as string);
+
+  console.log(postId);
 
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
-  const onSubmitImage = useCallback(() => {
+  const onSubmit = useCallback(() => {
     const formData = new FormData();
-    formData.append('image', imagePath);
-  }, []);
 
-  const postId = router.query.id;
-  console.log(postId);
+    formData.append('image', imagePath);
+    //@ts-ignore
+    formData.append('place', place);
+    formData.append('additionalComment', additionalComment);
+
+    //const comment=useAppSelector((state:RootState)=>)
+    //const comment = Object.assign(place:{place}, formData, additionalComment);
+    //console.log(comment);
+    //dispatch(addCommentThunk({ post, comment }));
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const {
@@ -104,7 +117,7 @@ const AddComment = () => {
               <BackIcon src={'/img/header/backbutton.svg'} />
             </BackButton>
           </HeaderLeftSide>
-          <SubmitButton>완료</SubmitButton>
+          <SubmitButton onClick={onSubmit}>완료</SubmitButton>
         </HeaderContainer>
         <Line></Line>
       </>

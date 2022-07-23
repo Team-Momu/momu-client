@@ -28,4 +28,10 @@ interface IGetPlaceData {
   total: number;
 }
 
-export type { IPlaceData, IGetPlaceData, IPlaceObject };
+interface IAddComment {
+  place: IPlaceData;
+  place_img: FormData | null;
+  description: string;
+}
+
+export type { IPlaceData, IGetPlaceData, IPlaceObject, IAddComment };

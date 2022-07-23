@@ -5,7 +5,6 @@ import useCheckLength from 'utils/hooks/useCheckLength';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
 import { addCurationSlice } from '@slices/curation/addCurationSlice';
-import { mbtiSlice } from '@slices/mbti/mbtiSlice';
 import {
   BackButton,
   BackIcon,

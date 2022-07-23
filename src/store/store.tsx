@@ -11,17 +11,18 @@ import mbtiReducer from '@slices/mbti/mbtiSlice';
 import userReducer from '@slices/user/userSlice';
 import scrapReducer from '@slices/scrap/scrapSlice';
 import detailCurationReducer from '@slices/curation/detailCurationPostSlice';
-import addCommentReducer from '@slices/comment/addCommentSlice';
+import getPlaceReducer from '@slices/comment/getPlaceSlice';
 import profileSetReducer from '@slices//profileSet/profileSetSlice';
 import placeChoiceReducer from '@slices/comment/PlaceChoiceSlice';
 import addCurationSliceReducer from '@slices/curation/addCurationSlice';
-
+import addCommentReducer from '@slices/comment/addComment';
 const preloadedState = {};
 
 export const store = configureStore({
   reducer: {
     curation: curationReducer,
-    comments: addCommentReducer,
+    addComment: addCommentReducer,
+    comments: getPlaceReducer,
     placechoice: placeChoiceReducer,
     detailCuration: detailCurationReducer,
     addCuration: addCurationSliceReducer,
