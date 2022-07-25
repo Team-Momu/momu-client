@@ -205,6 +205,15 @@ const RequestInfo = () => {
             <option>신촌,홍대 부근 동네를 선택해주세요!</option>
             <option>신촌동</option>
             <option>창천동</option>
+            <option>연희동</option>
+            <option>대현동</option>
+            <option>대신동</option>
+            <option>연남동</option>
+            <option>서교동</option>
+            <option>동교동</option>
+            <option>합정동</option>
+            <option>망원동</option>
+            <option>상수동</option>
           </AreaDropdown>
         </ChooseArea>
         <ChooseTime>

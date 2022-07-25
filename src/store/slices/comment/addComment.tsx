@@ -5,7 +5,7 @@ import {
   IPlaceData,
 } from 'utils/interfaces/comment/commentInterface';
 
-const initialState: IAddComment = {
+const initialState: IAddComment | FormData = {
   place: {
     address_name: '',
     category_group_code: '',
@@ -26,7 +26,10 @@ const initialState: IAddComment = {
 
 export const addCommentThunk = createAsyncThunk(
   'addComment/addComment',
-  async (addComment: { postId: number; comment: IAddComment }, thunkAPI) => {
+  async (
+    addComment: { postId: number; comment: IAddComment | FormData },
+    thunkAPI
+  ) => {
     const response = await axios.post(
       `/feed/${addComment.postId}/comment/`,
       addComment.comment

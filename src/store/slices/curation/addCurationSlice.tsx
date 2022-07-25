@@ -17,6 +17,8 @@ const initialState = {
     default: true,
     sinchon: false,
     changchon: false,
+    yeonhui: false,
+    daehyeon: false,
   },
   time: {
     morning: false,
