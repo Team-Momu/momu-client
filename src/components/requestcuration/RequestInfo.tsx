@@ -225,20 +225,37 @@ const RequestInfo = () => {
       return alert('장소를 선택해 주세요!2');
     }
     dispatch(addCurationSlice.actions.onClickComplete(text));
+    //data가 아니라 보내는 api 문서 참고해서 보내야할 듯..
+    //userid랑 먹비티아ㅣ이도 안가는 듯.
     dispatch(addCurationData(data));
-  };
-
-  useEffect(() => {
-    if (status === 'sucßcess') {
+    if (status === 'success') {
       router.push('/feed');
     }
-  }, []);
+    dispatch(addCurationSlice.actions.resetLocation);
+    dispatch(addCurationSlice.actions.resetActiveInTime);
+    dispatch(addCurationSlice.actions.resetActiveInDrink);
+    dispatch(addCurationSlice.actions.resetActiveInCount);
+  };
+  console.log(data);
+
+  const onClickBackButton = () => {
+    router.back();
+    dispatch(addCurationSlice.actions.resetLocation());
+    dispatch(addCurationSlice.actions.resetActiveInTime());
+    dispatch(addCurationSlice.actions.resetActiveInDrink());
+    dispatch(addCurationSlice.actions.resetActiveInCount());
+    setText('');
+  };
+
+  // useEffect(() => {
+
+  // }, []);
 
   return (
     <>
       <HeaderContainer>
         <HeaderLeftSide>
-          <BackButton onClick={() => router.back()}>
+          <BackButton onClick={onClickBackButton}>
             <BackIcon src={'/img/header/backbutton.svg'} />
           </BackButton>
           <HeaderTextContainer>Request</HeaderTextContainer>

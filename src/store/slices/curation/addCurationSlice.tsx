@@ -177,7 +177,7 @@ export const addCurationSlice = createSlice({
       state.data.member_count = payload;
     },
     onClickComplete: (state, { payload }) => {
-      state.data.description = payload.text;
+      state.data.description = payload;
     },
   },
   extraReducers: (builder) => {
