@@ -9,8 +9,10 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { setProfile } from '@slices/profileSet/profileSetThunk';
 import { userInfo } from '@slices/user/userThunk';
+import { GetServerSideProps } from 'next';
+import axios from 'axios';
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ result }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [nickname, setNickname] = useState('');
@@ -18,17 +20,17 @@ const Home: NextPage = () => {
   const [imagePath, setImagePath] = useState<Blob | string>('');
   const [createObjectURL, setCreateObjectURL] = useState<string | null>(null);
   const status = useSelector((state: RootState) => state.profileSet.status);
-  const me = useSelector((state: RootState) => state.user.me);
 
-  useEffect(() => {
-    dispatch(userInfo());
-  }, [status]);
+  console.log('🔥', result);
+  // useEffect(() => {
+  //   dispatch(userInfo());
+  // }, [status]);
 
-  useEffect(() => {
-    if (me.data?.nickname) {
-      router.push('/profile/1');
-    }
-  }, [me, status]);
+  // useEffect(() => {
+  //   if (me.data?.nickname) {
+  //     router.push('/profile/1');
+  //   }
+  // }, [me, status]);
 
   const onChangeInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -283,5 +285,7 @@ const NextButton = styled.button<{ active?: boolean }>`
 
   background: ${({ active }) => (active ? '#F57A08' : '#BFBFBF')};
 `;
+
+// @ts-ignore
 
 export default Home;

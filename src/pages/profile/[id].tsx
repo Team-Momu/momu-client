@@ -12,19 +12,19 @@ const Profile = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const mbti = useSelector((state: RootState) => state.mbti.mbti);
-  const me = useSelector((state: RootState) => state.user.me);
+  // const me = useSelector((state: RootState) => state.user.me);
 
   // 로딩하면 유저 정보 불러오기
-  useEffect(() => {
-    dispatch(userInfo());
-  }, []);
-
-  // mbti 등록한 유저면 피드로 넘어감
-  useEffect(() => {
-    if (me.data?.mbti) {
-      router.push('/feed');
-    }
-  }, [me]);
+  // useEffect(() => {
+  //   dispatch(userInfo());
+  // }, []);
+  //
+  // // mbti 등록한 유저면 피드로 넘어감
+  // useEffect(() => {
+  //   if (me.data?.mbti) {
+  //     router.push('/feed');
+  //   }
+  // }, [me]);
 
   return (
     <>
