@@ -88,7 +88,7 @@ const GetCurationCard: FC<Props> = ({
     scrapState
       ? dispatch(deleteScrapStateThunk(post))
       : dispatch(postScrapStateThunk(post));
-  }, [scrapFlag]);
+  }, [scrapState]);
 
   const moveToDetail = useCallback(() => {
     router.push(`/feed/${post}`);

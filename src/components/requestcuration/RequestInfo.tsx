@@ -74,6 +74,53 @@ const RequestInfo = () => {
           addCurationSlice.actions.changeActiveChangchonInLocation('창천동')
         );
         break;
+      case '연희동':
+        dispatch(
+          addCurationSlice.actions.changeActiveYeonhuiInLocation('연희동')
+        );
+        break;
+      case '대현동':
+        dispatch(
+          addCurationSlice.actions.changeActiveDaehyeonInLocation('대현동')
+        );
+        break;
+      case '대신동':
+        dispatch(
+          addCurationSlice.actions.changeActiveDaeshinInLocation('대신동')
+        );
+        break;
+
+      case '연남동':
+        dispatch(
+          addCurationSlice.actions.changeActiveYeonnamInLocation('연남동')
+        );
+        break;
+      case '서교동':
+        dispatch(
+          addCurationSlice.actions.changeActiveSeogyoInLocation('서교동')
+        );
+        break;
+      case '동교동':
+        dispatch(
+          addCurationSlice.actions.changeActiveDonggyoInLocation('동교동')
+        );
+        break;
+      case '합정동':
+        dispatch(
+          addCurationSlice.actions.changeActiveHapjeongInLocation('합정동')
+        );
+        break;
+      case '망원동':
+        dispatch(
+          addCurationSlice.actions.changeActiveMangwonInLocation('망원동')
+        );
+        break;
+      case '상수동':
+        dispatch(
+          addCurationSlice.actions.changeActiveSangsuInLocation('상수동')
+        );
+        break;
+
       default:
         break;
     }
@@ -165,11 +212,12 @@ const RequestInfo = () => {
       handleInputLength(e, 25);
 
       setText(e.target.value);
+      console.log(text);
     },
     [text]
   );
 
-  const onClickComplete = () => {
+  const onClickSubmit = () => {
     if (data.location === '') {
       return alert('장소를 선택해 주세요!1');
     }
@@ -181,10 +229,10 @@ const RequestInfo = () => {
   };
 
   useEffect(() => {
-    if (status === 'success') {
+    if (status === 'sucßcess') {
       router.push('/feed');
     }
-  }, [status]);
+  }, []);
 
   return (
     <>
@@ -195,7 +243,7 @@ const RequestInfo = () => {
           </BackButton>
           <HeaderTextContainer>Request</HeaderTextContainer>
         </HeaderLeftSide>
-        <SubmitButton onClick={onClickComplete}>완료</SubmitButton>
+        <SubmitButton onClick={onClickSubmit}>완료</SubmitButton>
       </HeaderContainer>
       <Line></Line>
       <Wrapper>

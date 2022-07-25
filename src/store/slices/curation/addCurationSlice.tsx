@@ -19,6 +19,13 @@ const initialState = {
     changchon: false,
     yeonhui: false,
     daehyeon: false,
+    daeshin: false,
+    yeonnam: false,
+    seogyo: false,
+    donggyo: false,
+    hapjeong: false,
+    mangwon: false,
+    sangsu: false,
   },
   time: {
     morning: false,
@@ -50,6 +57,15 @@ export const addCurationSlice = createSlice({
       state.location.default = false;
       state.location.sinchon = false;
       state.location.changchon = false;
+      state.location.yeonhui = false;
+      state.location.daehyeon = false;
+      state.location.daeshin = false;
+      state.location.yeonnam = false;
+      state.location.seogyo = false;
+      state.location.donggyo = false;
+      state.location.hapjeong = false;
+      state.location.mangwon = false;
+      state.location.sangsu = false;
     },
     setDefaultLocation: (state, { payload }) => {
       state.location.default = !state.location.default;
@@ -61,6 +77,42 @@ export const addCurationSlice = createSlice({
     },
     changeActiveChangchonInLocation: (state, { payload }) => {
       state.location.changchon = !state.location.changchon;
+      state.data.location = payload;
+    },
+    changeActiveYeonhuiInLocation: (state, { payload }) => {
+      state.location.yeonhui = !state.location.yeonhui;
+      state.data.location = payload;
+    },
+    changeActiveDaehyeonInLocation: (state, { payload }) => {
+      state.location.daehyeon = !state.location.daehyeon;
+      state.data.location = payload;
+    },
+    changeActiveDaeshinInLocation: (state, { payload }) => {
+      state.location.daeshin = !state.location.daeshin;
+      state.data.location = payload;
+    },
+    changeActiveYeonnamInLocation: (state, { payload }) => {
+      state.location.yeonnam = !state.location.yeonnam;
+      state.data.location = payload;
+    },
+    changeActiveSeogyoInLocation: (state, { payload }) => {
+      state.location.seogyo = !state.location.seogyo;
+      state.data.location = payload;
+    },
+    changeActiveDonggyoInLocation: (state, { payload }) => {
+      state.location.donggyo = !state.location.donggyo;
+      state.data.location = payload;
+    },
+    changeActiveHapjeongInLocation: (state, { payload }) => {
+      state.location.hapjeong = !state.location.hapjeong;
+      state.data.location = payload;
+    },
+    changeActiveMangwonInLocation: (state, { payload }) => {
+      state.location.mangwon = !state.location.mangwon;
+      state.data.location = payload;
+    },
+    changeActiveSangsuInLocation: (state, { payload }) => {
+      state.location.sangsu = !state.location.sangsu;
       state.data.location = payload;
     },
     resetActiveInTime: (state) => {
@@ -125,7 +177,7 @@ export const addCurationSlice = createSlice({
       state.data.member_count = payload;
     },
     onClickComplete: (state, { payload }) => {
-      state.data.description = payload;
+      state.data.description = payload.text;
     },
   },
   extraReducers: (builder) => {
