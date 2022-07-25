@@ -28,7 +28,7 @@ interface IGetPlaceData {
   total: number;
 }
 
-interface IAddComment {
+interface IAddComment| FormData {
   place: IPlaceData;
   place_img: FormData | null;
   description: string;

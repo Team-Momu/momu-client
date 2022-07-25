@@ -55,25 +55,30 @@ const AddComment = () => {
     },
     []
   );
-  const postId = router.query.id;
-  const post = parseInt(postId as string);
+  const post = router.query.id;
+  const postId = parseInt(post as string);
 
   console.log(postId);
 
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
-  const onSubmit = useCallback(() => {
-    const formData = new FormData();
-
-    formData.append('image', imagePath);
+  const onSubmit = () => {
+    const comment = new FormData();
+    comment.append('image', imagePath);
     //@ts-ignore
-    formData.append('place', place);
-    formData.append('additionalComment', additionalComment);
+    comment.append('place', place);
+    comment.append('additionalComment', additionalComment);
+
+    for (const [name, value] of comment) {
+      console.log(`🍓name : ${name}`);
+      console.log(` 🍓value: ${value}`);
+    }
 
     //const comment=useAppSelector((state:RootState)=>)
     //const comment = Object.assign(place:{place}, formData, additionalComment);
     //console.log(comment);
-    //dispatch(addCommentThunk({ post, comment }));
-  }, []);
+
+    dispatch(addCommentThunk({ postId, comment }));
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const {

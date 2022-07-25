@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ButtonContainer, ChoiceButton } from 'styles/CommonStyle';
 import useCheckLength from 'utils/hooks/useCheckLength';
@@ -74,6 +74,53 @@ const RequestInfo = () => {
           addCurationSlice.actions.changeActiveChangchonInLocation('창천동')
         );
         break;
+      case '연희동':
+        dispatch(
+          addCurationSlice.actions.changeActiveYeonhuiInLocation('연희동')
+        );
+        break;
+      case '대현동':
+        dispatch(
+          addCurationSlice.actions.changeActiveDaehyeonInLocation('대현동')
+        );
+        break;
+      case '대신동':
+        dispatch(
+          addCurationSlice.actions.changeActiveDaeshinInLocation('대신동')
+        );
+        break;
+
+      case '연남동':
+        dispatch(
+          addCurationSlice.actions.changeActiveYeonnamInLocation('연남동')
+        );
+        break;
+      case '서교동':
+        dispatch(
+          addCurationSlice.actions.changeActiveSeogyoInLocation('서교동')
+        );
+        break;
+      case '동교동':
+        dispatch(
+          addCurationSlice.actions.changeActiveDonggyoInLocation('동교동')
+        );
+        break;
+      case '합정동':
+        dispatch(
+          addCurationSlice.actions.changeActiveHapjeongInLocation('합정동')
+        );
+        break;
+      case '망원동':
+        dispatch(
+          addCurationSlice.actions.changeActiveMangwonInLocation('망원동')
+        );
+        break;
+      case '상수동':
+        dispatch(
+          addCurationSlice.actions.changeActiveSangsuInLocation('상수동')
+        );
+        break;
+
       default:
         break;
     }
@@ -133,6 +180,16 @@ const RequestInfo = () => {
     }
   };
 
+  //backbutton 클릭하거나 완료 버튼 클릭시 state reset
+  const resetState = () => {
+    dispatch(addCurationSlice.actions.resetLocation());
+    dispatch(addCurationSlice.actions.resetActiveInTime());
+    dispatch(addCurationSlice.actions.resetActiveInDrink());
+    dispatch(addCurationSlice.actions.resetActiveInCount());
+
+    setText('');
+  };
+
   const onChangeLocation = useCallback((e: any) => {
     const location = e.target.value;
     dispatch(addCurationSlice.actions.resetLocation());
@@ -166,10 +223,15 @@ const RequestInfo = () => {
 
       setText(e.target.value);
     },
+
     [text]
   );
 
-  const onClickComplete = () => {
+  useEffect(() => {
+    dispatch(addCurationSlice.actions.onClickComplete(text));
+  }, [text]);
+
+  const onClickSubmit = (e: React.SyntheticEvent) => {
     if (data.location === '') {
       return alert('장소를 선택해 주세요!1');
     }
@@ -178,24 +240,35 @@ const RequestInfo = () => {
     }
     dispatch(addCurationSlice.actions.onClickComplete(text));
     dispatch(addCurationData(data));
-  };
 
-  useEffect(() => {
     if (status === 'success') {
       router.push('/feed');
     }
-  }, [status]);
+
+    resetState();
+  };
+
+  console.log(data);
+
+  const onClickBackButton = () => {
+    router.back();
+    resetState();
+  };
+
+  // useEffect(() => {
+
+  // }, []);
 
   return (
     <>
       <HeaderContainer>
         <HeaderLeftSide>
-          <BackButton onClick={() => router.back()}>
+          <BackButton onClick={onClickBackButton}>
             <BackIcon src={'/img/header/backbutton.svg'} />
           </BackButton>
           <HeaderTextContainer>Request</HeaderTextContainer>
         </HeaderLeftSide>
-        <SubmitButton onClick={onClickComplete}>완료</SubmitButton>
+        <SubmitButton onClick={onClickSubmit}>완료</SubmitButton>
       </HeaderContainer>
       <Line></Line>
       <Wrapper>
@@ -205,6 +278,15 @@ const RequestInfo = () => {
             <option>신촌,홍대 부근 동네를 선택해주세요!</option>
             <option>신촌동</option>
             <option>창천동</option>
+            <option>연희동</option>
+            <option>대현동</option>
+            <option>대신동</option>
+            <option>연남동</option>
+            <option>서교동</option>
+            <option>동교동</option>
+            <option>합정동</option>
+            <option>망원동</option>
+            <option>상수동</option>
           </AreaDropdown>
         </ChooseArea>
         <ChooseTime>
