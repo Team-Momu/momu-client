@@ -7,6 +7,7 @@ import {
   IDetailCurationPost,
 } from '../../../utils/interfaces/curation/curationInterfaces';
 import axios from 'axios';
+import { getFilteredCurationThunk } from '@slices/filter/filterThunk';
 
 const initialState: ICurationPostLists = {
   message: '',
@@ -48,6 +49,9 @@ export const curationPostSlice = createSlice({
       .addCase(getCurationPostListsThunk.pending, (state) => {
         state.pending = true;
       })
+      .addCase(getFilteredCurationThunk.pending, (state) => {
+        state.pending = true;
+      })
 
       .addCase(getCurationPostListsThunk.fulfilled, (state, action) => {
         state.message = action.payload.message;
@@ -55,8 +59,18 @@ export const curationPostSlice = createSlice({
         state.pending = action.payload.pending;
         state.pending = false;
       })
+      .addCase(getFilteredCurationThunk.fulfilled, (state, action) => {
+        state.message = action.payload.message;
+        state.data = action.payload.data;
+        state.pending = action.payload.pending;
+        state.pending = false;
+      })
 
       .addCase(getCurationPostListsThunk.rejected, (state, action) => {
+        state.pending = false;
+        console.error(action.error);
+      })
+      .addCase(getFilteredCurationThunk.rejected, (state, action) => {
         state.pending = false;
         console.error(action.error);
       });

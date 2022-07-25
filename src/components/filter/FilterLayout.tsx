@@ -1,4 +1,5 @@
 import { addCurationSlice } from '@slices/curation/addCurationSlice';
+import { getFilteredCuration } from '@slices/filter/filterThunk';
 import { useState } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import styled from 'styled-components';
@@ -46,6 +47,7 @@ const FilterLayout = ({ onDismiss }: DismissProps) => {
   const { moreThanFive } = useAppSelector(
     (state: RootState) => state.addCuration.member_count
   );
+  const data = useAppSelector((state: RootState) => state.addCuration.data);
 
   const resetState = () => {
     dispatch(addCurationSlice.actions.resetLocation());
@@ -57,7 +59,7 @@ const FilterLayout = ({ onDismiss }: DismissProps) => {
   const onFilterSubmit = (e: React.SyntheticEvent) => {
     //필터에 쿼리 스트링으로 보내줄 애들.
     //dispatch(addCurationData(data));
-
+    dispatch(getFilteredCuration(data));
     resetState();
   };
 
@@ -188,9 +190,7 @@ const FilterLayout = ({ onDismiss }: DismissProps) => {
           </ChoiceButton>
         </ButtonContainer>
       </ChoosePersonnel>
-      <DoneButton onClick={onDismiss} onSubmit={onFilterSubmit}>
-        완료
-      </DoneButton>
+      <DoneButton onClick={onDismiss}>완료</DoneButton>
     </FilterContainer>
   );
 };
