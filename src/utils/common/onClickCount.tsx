@@ -1,10 +1,10 @@
 import { addCurationSlice } from '@slices/curation/addCurationSlice';
-import { useCallback } from 'react';
+import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { useAppDispatch } from 'store/store';
+import { findTypeOfCount } from './findTypeOfCount';
 
-export const onClickCount = useCallback((e: any) => {
-  const dispatch = useAppDispatch();
+export const onClickCount = (e: any, dispatch: Dispatch<AnyAction>) => {
   const count = e.target.innerText;
   dispatch(addCurationSlice.actions.resetActiveInCount());
-  findTypeOfCount(count);
-}, []);
+  findTypeOfCount(count, dispatch);
+};

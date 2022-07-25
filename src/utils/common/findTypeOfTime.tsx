@@ -1,8 +1,7 @@
 import { addCurationSlice } from '@slices/curation/addCurationSlice';
-import { useAppDispatch } from 'store/store';
+import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 
-export const findTypeOfTime = (time: string) => {
-  const dispatch = useAppDispatch();
+export const findTypeOfTime = (time: string, dispatch: Dispatch<AnyAction>) => {
   switch (time) {
     case '아침':
       dispatch(addCurationSlice.actions.changeActiveMorningInTime('아침'));

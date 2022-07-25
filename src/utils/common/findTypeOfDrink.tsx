@@ -1,8 +1,11 @@
 import { addCurationSlice } from '@slices/curation/addCurationSlice';
-import { useAppDispatch } from 'store/store';
+import { useDispatch } from 'react-redux';
+import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 
-export const findTypeOfDrink = (drink: string) => {
-  const dispatch = useAppDispatch();
+export const findTypeOfDrink = (
+  drink: string,
+  dispatch: Dispatch<AnyAction>
+) => {
   switch (drink) {
     case '안 마셔요':
       dispatch(addCurationSlice.actions.changeActiveNotInDrink(0));

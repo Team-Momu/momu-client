@@ -1,8 +1,11 @@
+import { AnyAction, Dispatch } from '@reduxjs/toolkit';
 import { addCurationSlice } from '@slices/curation/addCurationSlice';
-import { useAppDispatch } from 'store/store';
+import { useDispatch } from 'react-redux';
 
-export const findTypeOfCount = (count: string) => {
-  const dispatch = useAppDispatch();
+export const findTypeOfCount = (
+  count: string,
+  dispatch: Dispatch<AnyAction>
+) => {
   switch (count) {
     case '혼자':
       dispatch(addCurationSlice.actions.changeActiveAlonInCount(1));
