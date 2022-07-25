@@ -1,13 +1,36 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { useState } from 'react';
 import { IAddCuration } from '../../../utils/interfaces/curation/curationInterfaces';
 
 export const getFilteredCurationThunk = createAsyncThunk(
   'curation/getFilteredCuration',
   async (curationData: IAddCuration, thunkAPI) => {
-    const response = await axios.get(
-      `/feed/?location=${curationData.location}&time=${curationData.time}&drink=${curationData.drink}&member_count=${curationData.member_count}`
-    );
+    let location = '';
+    let time = '';
+    let drink = '';
+    let member = '';
+    let queryString = '';
+    if (curationData.location) {
+      location = `&location=${curationData.location}`;
+    }
+    if (curationData.time) {
+      time = `&time=${curationData.time}`;
+    }
+    if (curationData.drink) {
+      drink = `&drink=${curationData.drink}`;
+    }
+    if (curationData.member_count) {
+      member = `&member_count=${curationData.member_count}`;
+    }
+    queryString = location + time + drink + member;
+
+    if (queryString[0] === '&') {
+      queryString = '?' + queryString.substring(1, queryString.length);
+    }
+
+    const response = await axios.get(`/feed/${queryString}`);
+
     return response.data;
   }
 );
