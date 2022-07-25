@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ButtonContainer, ChoiceButton } from 'styles/CommonStyle';
 import useCheckLength from 'utils/hooks/useCheckLength';
@@ -180,6 +180,16 @@ const RequestInfo = () => {
     }
   };
 
+  //backbutton 클릭하거나 완료 버튼 클릭시 state reset
+  const resetState = () => {
+    dispatch(addCurationSlice.actions.resetLocation());
+    dispatch(addCurationSlice.actions.resetActiveInTime());
+    dispatch(addCurationSlice.actions.resetActiveInDrink());
+    dispatch(addCurationSlice.actions.resetActiveInCount());
+
+    setText('');
+  };
+
   const onChangeLocation = useCallback((e: any) => {
     const location = e.target.value;
     dispatch(addCurationSlice.actions.resetLocation());
@@ -212,12 +222,16 @@ const RequestInfo = () => {
       handleInputLength(e, 25);
 
       setText(e.target.value);
-      console.log(text);
     },
+
     [text]
   );
 
-  const onClickSubmit = () => {
+  useEffect(() => {
+    dispatch(addCurationSlice.actions.onClickComplete(text));
+  }, [text]);
+
+  const onClickSubmit = (e: React.SyntheticEvent) => {
     if (data.location === '') {
       return alert('장소를 선택해 주세요!1');
     }
@@ -225,26 +239,20 @@ const RequestInfo = () => {
       return alert('장소를 선택해 주세요!2');
     }
     dispatch(addCurationSlice.actions.onClickComplete(text));
-    //data가 아니라 보내는 api 문서 참고해서 보내야할 듯..
-    //userid랑 먹비티아ㅣ이도 안가는 듯.
     dispatch(addCurationData(data));
+
     if (status === 'success') {
       router.push('/feed');
     }
-    dispatch(addCurationSlice.actions.resetLocation);
-    dispatch(addCurationSlice.actions.resetActiveInTime);
-    dispatch(addCurationSlice.actions.resetActiveInDrink);
-    dispatch(addCurationSlice.actions.resetActiveInCount);
+
+    resetState();
   };
+
   console.log(data);
 
   const onClickBackButton = () => {
     router.back();
-    dispatch(addCurationSlice.actions.resetLocation());
-    dispatch(addCurationSlice.actions.resetActiveInTime());
-    dispatch(addCurationSlice.actions.resetActiveInDrink());
-    dispatch(addCurationSlice.actions.resetActiveInCount());
-    setText('');
+    resetState();
   };
 
   // useEffect(() => {

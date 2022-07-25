@@ -53,6 +53,9 @@ export const addCurationSlice = createSlice({
   name: 'addCuration',
   initialState,
   reducers: {
+    resetStatus: (state) => {
+      state.status = '';
+    },
     resetLocation: (state) => {
       state.location.default = false;
       state.location.sinchon = false;
