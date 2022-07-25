@@ -10,6 +10,8 @@ export const kakao = createAsyncThunk(
 );
 
 export const userInfo = createAsyncThunk('user/userInfo', async (thunkAPI) => {
+  const access_token = localStorage.getItem('access_token');
+  axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
   const response = await axios.get(`/user/profile/`);
   return response.data;
 });

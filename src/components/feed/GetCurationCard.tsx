@@ -17,11 +17,11 @@ interface Props {
   additionalText: string;
   usernickname: string;
   profileImg: string;
-  mukbti: string;
+  mukbti: any;
   commentNum: number;
   createAt: string;
   scrapFlag: boolean;
-  user: number;
+  user: any;
   post: number;
 }
 
@@ -126,7 +126,7 @@ const GetCurationCard: FC<Props> = ({
           <ProfileImg src={'/img/ProfileTest.png'} />
           <USerId>{usernickname}</USerId>
           <LineImg src={'/img/Line.png'} />
-          <Mukbti>{mukbti}</Mukbti>
+          <Mukbti>{mukbti.mbti}</Mukbti>
         </BottomInfo>
         <BottomInfo>
           <CardInfo>{createAt}</CardInfo>
