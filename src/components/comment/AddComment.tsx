@@ -13,8 +13,6 @@ import {
   HeaderLeftSide,
   Line,
 } from 'styles/headerstyle/HeaderCommonStyle';
-import { addCommentThunk, setComment } from '@slices/comment/addComment';
-import { IAddComment } from 'utils/interfaces/comment/commentInterface';
 
 const AddComment = () => {
   const { additionalComment, handleInputLength } = useCheckLength();
@@ -77,7 +75,7 @@ const AddComment = () => {
     //const comment = Object.assign(place:{place}, formData, additionalComment);
     //console.log(comment);
 
-    dispatch(addCommentThunk({ postId, comment }));
+    //dispatch(addCommentThunk({ postId, comment }));
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {

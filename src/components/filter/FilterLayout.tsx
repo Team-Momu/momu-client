@@ -18,7 +18,20 @@ const FilterLayout = ({ onDismiss }: DismissProps) => {
     <FilterContainer>
       <ChooseArea>
         <FilterText>지역 설정</FilterText>
-        <AreaDropdown></AreaDropdown>
+        <AreaDropdown>
+          <option> </option>
+          <option>신촌동</option>
+          <option>창천동</option>
+          <option>연희동</option>
+          <option>대현동</option>
+          <option>대신동</option>
+          <option>연남동</option>
+          <option>서교동</option>
+          <option>동교동</option>
+          <option>합정동</option>
+          <option>망원동</option>
+          <option>상수동</option>
+        </AreaDropdown>
       </ChooseArea>
       <ChooseTime>
         <FilterText>방문 예정 시간대</FilterText>

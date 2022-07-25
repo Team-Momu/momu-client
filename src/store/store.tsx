@@ -15,13 +15,11 @@ import getPlaceReducer from '@slices/comment/getPlaceSlice';
 import profileSetReducer from '@slices//profileSet/profileSetSlice';
 import placeChoiceReducer from '@slices/comment/PlaceChoiceSlice';
 import addCurationSliceReducer from '@slices/curation/addCurationSlice';
-import addCommentReducer from '@slices/comment/addComment';
 const preloadedState = {};
 
 export const store = configureStore({
   reducer: {
     curation: curationReducer,
-    addComment: addCommentReducer,
     comments: getPlaceReducer,
     placechoice: placeChoiceReducer,
     detailCuration: detailCurationReducer,
