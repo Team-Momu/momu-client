@@ -19,7 +19,7 @@ const Mbti = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   const me = useSelector((state: RootState) => state.user.me);
-  const mbti = me.data.mbti;
+  const mbti = me.data?.mbti;
 
   useEffect(() => {
     dispatch(userInfo());
@@ -45,10 +45,10 @@ const Mbti = () => {
       <Illustration />
       <CommentText>당신의 먹비티아이 유형은</CommentText>
       <CommentText second>
-        {mbti.mbti}({mbti.type})
+        {/*{mbti.mbti}({mbti.type})*/}
         <span style={{ color: '#191919' }}> 입니다.</span>
       </CommentText>
-      <Description>{mbti.description}</Description>
+      <Description>{mbti?.description}</Description>
 
       <WhatIsMbti onClick={openModal}>먹비티아이란?</WhatIsMbti>
 

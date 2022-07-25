@@ -12,7 +12,7 @@ import { userInfo } from '@slices/user/userThunk';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 
-const Home: NextPage = ({ result }) => {
+const Home: NextPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [nickname, setNickname] = useState('');
@@ -21,7 +21,6 @@ const Home: NextPage = ({ result }) => {
   const [createObjectURL, setCreateObjectURL] = useState<string | null>(null);
   const status = useSelector((state: RootState) => state.profileSet.status);
 
-  console.log('🔥', result);
   // useEffect(() => {
   //   dispatch(userInfo());
   // }, [status]);
