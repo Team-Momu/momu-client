@@ -27,7 +27,7 @@ const Feed: NextPage = () => {
   }, [me]);
 
   return (
-    <Wrapper>
+    <Wrapper className="relative">
       <MainFeed />
       <SliderContainer className="sticky top-0">
         <FeedHeader />
@@ -42,6 +42,7 @@ const Feed: NextPage = () => {
 
 export default Feed;
 const Wrapper = styled.div`
+  height: 812px;
   background: #ffffff;
 `;
 const SliderContainer = styled.div`

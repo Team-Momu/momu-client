@@ -4,10 +4,12 @@ import { useCallback } from 'react';
 import DetailFeedContents from 'components/detailfeed/DetailFeed';
 import DetailFeedHeader from 'components/detailfeed/DetailFeedHeader';
 import NavBar from '@common/NavBar';
+import CommentList from 'components/detailfeed/CommentList';
 
 const DetailFeed = () => {
   const router = useRouter();
-  const postId = router.query.id;
+  const post = router.query.id;
+  const postId = parseInt(post as string);
 
   const writeComment = useCallback(() => {
     router.push(`/comment/${postId}`);
@@ -18,14 +20,14 @@ const DetailFeed = () => {
   return (
     <Wrapper>
       <DetailFeedHeader />
-      <DetailFeedContents postId={postId} />
-      <>
-        <h1>큐레이션 답변카드</h1>
-        <InputBox type="text" />
-        <AddCurationButton onClick={writeComment}>
-          큐레이션 하기
-        </AddCurationButton>
-      </>
+      <DetailFeedContents postId={post} />
+      <CommentListContainer>
+        <CommentList postId={postId} />
+      </CommentListContainer>
+      <AddCurationButton onClick={writeComment}>
+        큐레이션 하기
+      </AddCurationButton>
+
       <NavContainer className="sticky bottom-0">
         <NavBar />
       </NavContainer>
@@ -35,6 +37,9 @@ const DetailFeed = () => {
 export default DetailFeed;
 
 const Wrapper = styled.div``;
+const CommentListContainer = styled.div`
+  height: 357px;
+`;
 const NavContainer = styled.div``;
 const InputBox = styled.input`
   width: 340px;
@@ -43,13 +48,14 @@ const InputBox = styled.input`
 
 const AddCurationButton = styled.button`
   margin-bottom: 10px;
-  width: 340px;
-  height: 72px;
+  width: calc(100% + 16px * 2);
+  margin: 0 -16px;
+  height: 64px;
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
-  line-height: 29px;
+  font-size: 20px;
+  line-height: 24px;
   /* identical to box height */
 
   color: #ffffff;

@@ -21,8 +21,6 @@ const DetailFeedContents: FC<Props> = ({ postId }) => {
     dispatch(getCurationByIdThunk(post));
   }, [dispatch]);
 
-  console.log(curation);
-
   return (
     <>
       <CardWrapper>
