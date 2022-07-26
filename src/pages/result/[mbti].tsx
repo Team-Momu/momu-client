@@ -7,6 +7,29 @@ import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../store/store';
 import { userInfo } from '@slices/user/userThunk';
 import close from '@public/img/closeModal.png';
+import Korea from '@public/img/mbti/korea1.png';
+import Image from 'next/image';
+import {
+  Box,
+  ButtonContainer,
+  CloseButtonStyle,
+  CloseStyle,
+  ColorText,
+  ContentText,
+  HeaderBottomLine,
+  HeaderText1,
+  HeaderText2,
+  LeftBox,
+  LeftInnerBox,
+  LeftInnerDownBox,
+  LeftInnerUpBox,
+  NoneColorText,
+  RightBox,
+  RightInnerBox,
+  RightInnerDownBox,
+  RightInnerUpBox,
+  TitleText,
+} from './mbtiStyle';
 
 const Mbti = () => {
   const router = useRouter();
@@ -17,6 +40,8 @@ const Mbti = () => {
   const [second, setSecond] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [mbtiState, setMbtiState] = useState<string | undefined>('');
+  const [type, setType] = useState<string | undefined>('');
 
   const me = useSelector((state: RootState) => state.user.me);
   const mbti = me.data?.mbti;
@@ -26,7 +51,10 @@ const Mbti = () => {
   }, []);
 
   useEffect(() => {
-    console.log('me', me);
+    if (me) {
+      setMbtiState(me.data?.mbti.mbti);
+      setType(me.data.mbti.type);
+    }
   }, [me]);
 
   function openModal() {
@@ -45,13 +73,10 @@ const Mbti = () => {
       <Illustration />
       <CommentText>당신의 먹비티아이 유형은</CommentText>
       <CommentText second>
-        {/*{mbti.mbti}({mbti.type})*/}
-        <span style={{ color: '#191919' }}> 입니다.</span>
+        {mbtiState}({type})<span style={{ color: '#191919' }}> 입니다.</span>
       </CommentText>
       <Description>{mbti?.description}</Description>
-
       <WhatIsMbti onClick={openModal}>먹비티아이란?</WhatIsMbti>
-
       <MomuStartButton onClick={pushToFeed}>모무 시작하기</MomuStartButton>
 
       <Modal
@@ -59,11 +84,10 @@ const Mbti = () => {
         onRequestClose={closeModal}
         style={{
           overlay: {
-            background: 'none',
+            background: '#727272',
           },
           content: {
             position: 'absolute',
-            color: 'lightsteelblue',
             width: '335px',
             height: '723px',
             top: '16px',
@@ -72,54 +96,118 @@ const Mbti = () => {
         }}
       >
         <Wrapper>
-          <button onClick={closeModal}>닫기</button>
-          {kindOfMbti.map((c) => {
-            return (
-              <>
-                <Container>
-                  <div>{c.title}</div>
-                  <div>{c.content}</div>
-                </Container>
-              </>
-            );
-          })}
+          <Header>
+            <ButtonContainer>
+              <CloseStyle>
+                <CloseButtonStyle onClick={closeModal}>
+                  <Image src={close} />
+                </CloseButtonStyle>
+              </CloseStyle>
+            </ButtonContainer>
+            <HeaderText1>먹BTI는</HeaderText1>
+            <HeaderText2>
+              MBTI와 유사한 모무만의 맛집 취향 유형입니다.
+            </HeaderText2>
+            <HeaderBottomLine />
+          </Header>
+          <Article>
+            {kindOfMbti.map((c) => {
+              return (
+                <>
+                  <Container>
+                    <TitleText>{c.title}</TitleText>
+                    <ContentText>{c.content}</ContentText>
+                    <Box>
+                      <LeftBox>
+                        <LeftInnerBox>
+                          <LeftInnerUpBox>
+                            <ColorText>{c.typeLeft[0]}</ColorText>
+                            <NoneColorText>{c.typeLeft.slice(1)}</NoneColorText>
+                          </LeftInnerUpBox>
+                          <LeftInnerDownBox>
+                            {c.typeLeftDescription}
+                          </LeftInnerDownBox>
+                        </LeftInnerBox>
+                      </LeftBox>
+                      <RightBox>
+                        <RightInnerBox>
+                          <RightInnerUpBox>
+                            <ColorText>{c.typeRight[0]}</ColorText>
+                            <NoneColorText>
+                              {c.typeRight.slice(1)}
+                            </NoneColorText>
+                          </RightInnerUpBox>
+                          <RightInnerDownBox>
+                            {c.typeRightDescription}
+                          </RightInnerDownBox>
+                        </RightInnerBox>
+                      </RightBox>
+                    </Box>
+                  </Container>
+                </>
+              );
+            })}
+          </Article>
         </Wrapper>
       </Modal>
     </>
   );
 };
 
+const Article = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const kindOfMbti = [
   {
     title: '새로움에 대한 자세',
     content: '새로운 음식, 도전하는 것을 즐기는가?',
+    typeLeft: 'NEW',
+    typeLeftDescription: '새로움을 추구하는',
+    typeRight: 'CAREFUL',
+    typeRightDescription: '신중한, 조심스러운',
   },
   {
     title: '선호하는 공간',
     content: '좋아하는 공간의 분위기, 특성이 어떤가요?',
+    typeLeft: 'OPEN',
+    typeLeftDescription: '개방적인, 활기찬',
+    typeRight: 'INDIVIDUAL',
+    typeRightDescription: '개인적인, 조용한',
   },
   {
     title: '만족의 기준',
     content: '음식의 맛이 중요한가요? 서비스, 분위기 등도 중요한가요?',
+    typeLeft: 'TASTE',
+    typeLeftDescription: '맛 중심',
+    typeRight: 'MOOD',
+    typeRightDescription: '분위기 중심',
   },
   {
     title: '매운 음식을 먹는 정도',
     content: '매운 음식을 잘 먹는가요? 잘 못 먹는가요?',
+    typeLeft: 'MAEPJALR',
+    typeLeftDescription: '맵잘알',
+    typeRight: 'MAEPJJIL',
+    typeRightDescription: '맵찔이',
   },
 ];
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 21px;
-  padding-right: 21px;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 24px;
 `;
 
 const Description = styled.div`
