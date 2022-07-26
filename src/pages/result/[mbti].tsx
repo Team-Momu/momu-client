@@ -45,7 +45,6 @@ const Mbti = () => {
       <Illustration />
       <CommentText>당신의 먹비티아이 유형은</CommentText>
       <CommentText second>
-        {/*{mbti.mbti}({mbti.type})*/}
         <span style={{ color: '#191919' }}> 입니다.</span>
       </CommentText>
       <Description>{mbti?.description}</Description>
