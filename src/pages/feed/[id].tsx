@@ -3,14 +3,11 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import DetailFeedContents from 'components/detailfeed/DetailFeed';
 import DetailFeedHeader from 'components/detailfeed/DetailFeedHeader';
+import NavBar from '@common/NavBar';
 
 const DetailFeed = () => {
   const router = useRouter();
   const postId = router.query.id;
-
-  const getCuration = useCallback(() => {
-    router.push('/feed/add');
-  }, []);
 
   const writeComment = useCallback(() => {
     router.push(`/comment/${postId}`);
@@ -25,22 +22,20 @@ const DetailFeed = () => {
       <>
         <h1>큐레이션 답변카드</h1>
         <InputBox type="text" />
-        <AddCurationButton onClick={getCuration}>
-          큐레이션 받기
-        </AddCurationButton>
         <AddCurationButton onClick={writeComment}>
           큐레이션 하기
         </AddCurationButton>
       </>
+      <NavContainer className="sticky bottom-0">
+        <NavBar />
+      </NavContainer>
     </Wrapper>
   );
 };
 export default DetailFeed;
 
-const Wrapper = styled.div`
-  width: 375px;
-`;
-
+const Wrapper = styled.div``;
+const NavContainer = styled.div``;
 const InputBox = styled.input`
   width: 340px;
   margin-bottom: 200px;

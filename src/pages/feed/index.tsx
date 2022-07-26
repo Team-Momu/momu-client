@@ -33,7 +33,9 @@ const Feed: NextPage = () => {
         <FeedHeader />
       </SliderContainer>
       <FeedList />
-      <NavBar />
+      <NavContainer className="sticky bottom-0">
+        <NavBar />
+      </NavContainer>
     </Wrapper>
   );
 };
@@ -45,3 +47,4 @@ const Wrapper = styled.div`
 const SliderContainer = styled.div`
   background: #ffffff;
 `;
+const NavContainer = styled.div``;

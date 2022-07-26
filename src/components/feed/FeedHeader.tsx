@@ -26,9 +26,9 @@ const FeedHeader = () => {
   };
 
   function onDismiss() {
-    setOpen(false);
     dispatch(getFilteredCurationThunk(data));
     resetState();
+    setOpen(false);
   }
 
   return (

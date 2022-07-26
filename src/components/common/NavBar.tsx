@@ -8,10 +8,10 @@ const NavBar = () => {
   const [isFeedHover, setIsFeedHover] = useState(false);
   const [isProfileHover, setIsProfileHover] = useState(false);
   const onClickRequset = useCallback(() => {
-    router.push('feed/add');
+    router.push('/feed/add');
   }, []);
   const onClickFeed = useCallback(() => {
-    router.push('feed');
+    router.push('/feed');
   }, []);
   const onClickProfile = useCallback(() => {
     //router.push('');
