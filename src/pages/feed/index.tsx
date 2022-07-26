@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { userInfo } from '@slices/user/userThunk';
 import { useRouter } from 'next/router';
+import NavBar from '@common/NavBar';
 
 const Feed: NextPage = () => {
   // 유저 정보 불러오기
@@ -32,6 +33,7 @@ const Feed: NextPage = () => {
         <FeedHeader />
       </SliderContainer>
       <FeedList />
+      <NavBar />
     </Wrapper>
   );
 };
