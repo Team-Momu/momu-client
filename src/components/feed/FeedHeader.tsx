@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FilterLayout from 'components/filter/FilterLayout';
 import 'react-spring-bottom-sheet/dist/style.css';
 import {
@@ -8,11 +8,27 @@ import {
   HeaderTextContainer,
   Line,
 } from 'styles/headerstyle/HeaderCommonStyle';
+import { getFilteredCurationThunk } from '@slices/filter/filterThunk';
+import { RootState, useAppDispatch, useAppSelector } from 'store/store';
+import { addCurationSlice } from '@slices/curation/addCurationSlice';
 
 const FeedHeader = () => {
   const [open, setOpen] = useState(false);
+
+  const dispatch = useAppDispatch();
+  const data = useAppSelector((state: RootState) => state.addCuration.data);
+
+  const resetState = () => {
+    dispatch(addCurationSlice.actions.resetLocation());
+    dispatch(addCurationSlice.actions.resetActiveInTime());
+    dispatch(addCurationSlice.actions.resetActiveInDrink());
+    dispatch(addCurationSlice.actions.resetActiveInCount());
+  };
+
   function onDismiss() {
     setOpen(false);
+    dispatch(getFilteredCurationThunk(data));
+    resetState();
   }
 
   return (

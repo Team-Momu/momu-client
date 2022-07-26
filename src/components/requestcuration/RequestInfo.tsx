@@ -15,6 +15,10 @@ import {
 } from '../../styles/headerstyle/HeaderCommonStyle';
 import { useRouter } from 'next/router';
 import { addCurationData } from '@slices/curation/addCurationThunk';
+import { onClickTime } from 'utils/common/onClickTime';
+import { onClickDrink } from 'utils/common/onClickDrink';
+import { onClickCount } from 'utils/common/onClickCount';
+import { onChangeLocation } from 'utils/common/onChangeLocation';
 
 const RequestInfo = () => {
   const dispatch = useAppDispatch();
@@ -55,131 +59,6 @@ const RequestInfo = () => {
   const data = useSelector((state: RootState) => state.addCuration.data);
   const status = useSelector((state: RootState) => state.addCuration.status);
 
-  const findTypeOfLocation = (location: string) => {
-    switch (location) {
-      case '신촌,홍대 부근 동네를 선택해주세요!':
-        dispatch(
-          addCurationSlice.actions.setDefaultLocation(
-            '신촌,홍대 부근 동네를 선택해주세요!'
-          )
-        );
-        break;
-      case '신촌동':
-        dispatch(
-          addCurationSlice.actions.changeActiveSinchonInLocation('신촌동')
-        );
-        break;
-      case '창천동':
-        dispatch(
-          addCurationSlice.actions.changeActiveChangchonInLocation('창천동')
-        );
-        break;
-      case '연희동':
-        dispatch(
-          addCurationSlice.actions.changeActiveYeonhuiInLocation('연희동')
-        );
-        break;
-      case '대현동':
-        dispatch(
-          addCurationSlice.actions.changeActiveDaehyeonInLocation('대현동')
-        );
-        break;
-      case '대신동':
-        dispatch(
-          addCurationSlice.actions.changeActiveDaeshinInLocation('대신동')
-        );
-        break;
-
-      case '연남동':
-        dispatch(
-          addCurationSlice.actions.changeActiveYeonnamInLocation('연남동')
-        );
-        break;
-      case '서교동':
-        dispatch(
-          addCurationSlice.actions.changeActiveSeogyoInLocation('서교동')
-        );
-        break;
-      case '동교동':
-        dispatch(
-          addCurationSlice.actions.changeActiveDonggyoInLocation('동교동')
-        );
-        break;
-      case '합정동':
-        dispatch(
-          addCurationSlice.actions.changeActiveHapjeongInLocation('합정동')
-        );
-        break;
-      case '망원동':
-        dispatch(
-          addCurationSlice.actions.changeActiveMangwonInLocation('망원동')
-        );
-        break;
-      case '상수동':
-        dispatch(
-          addCurationSlice.actions.changeActiveSangsuInLocation('상수동')
-        );
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  const findTypeOfTime = (time: string) => {
-    switch (time) {
-      case '아침':
-        dispatch(addCurationSlice.actions.changeActiveMorningInTime('아침'));
-        break;
-      case '점심':
-        dispatch(addCurationSlice.actions.changeActiveAfternoonInTime('점심'));
-        break;
-      case '저녁':
-        dispatch(addCurationSlice.actions.changeActiveEveningInTime('저녁'));
-        break;
-      case '밤':
-        dispatch(addCurationSlice.actions.changeActiveMidnightInTime('밤'));
-        break;
-      default:
-        break;
-    }
-  };
-
-  const findTypeOfDrink = (drink: string) => {
-    switch (drink) {
-      case '안 마셔요':
-        dispatch(addCurationSlice.actions.changeActiveNotInDrink(0));
-        break;
-      case '간술만!':
-        dispatch(addCurationSlice.actions.changeActiveLittleInDrink(1));
-        break;
-      case '마실래요':
-        dispatch(addCurationSlice.actions.changeActiveMuchInDrink(2));
-        break;
-      default:
-        break;
-    }
-  };
-
-  const findTypeOfCount = (count: string) => {
-    switch (count) {
-      case '혼자':
-        dispatch(addCurationSlice.actions.changeActiveAlonInCount(1));
-        break;
-      case '둘이서':
-        dispatch(addCurationSlice.actions.changeActiveTwoInCount(2));
-        break;
-      case '3~4명':
-        dispatch(addCurationSlice.actions.changeActiveThreeInCount(3));
-        break;
-      case '5인 이상':
-        dispatch(addCurationSlice.actions.changeActiveMoreThanFiveInCount(4));
-        break;
-      default:
-        break;
-    }
-  };
-
   //backbutton 클릭하거나 완료 버튼 클릭시 state reset
   const resetState = () => {
     dispatch(addCurationSlice.actions.resetLocation());
@@ -189,33 +68,6 @@ const RequestInfo = () => {
 
     setText('');
   };
-
-  const onChangeLocation = useCallback((e: any) => {
-    const location = e.target.value;
-    dispatch(addCurationSlice.actions.resetLocation());
-    findTypeOfLocation(location);
-  }, []);
-
-  const onClickTime = useCallback((e: any) => {
-    const time = e.target.innerText;
-
-    dispatch(addCurationSlice.actions.resetActiveInTime());
-
-    findTypeOfTime(time);
-  }, []);
-
-  const onClickDrink = useCallback((e: any) => {
-    const drink = e.target.innerText;
-
-    dispatch(addCurationSlice.actions.resetActiveInDrink());
-    findTypeOfDrink(drink);
-  }, []);
-
-  const onClickCount = useCallback((e: any) => {
-    const count = e.target.innerText;
-    dispatch(addCurationSlice.actions.resetActiveInCount());
-    findTypeOfCount(count);
-  }, []);
 
   const onChangeDescription = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -227,6 +79,7 @@ const RequestInfo = () => {
     [text]
   );
 
+  // 분리 해줘야 description 데이터 넘어감
   useEffect(() => {
     dispatch(addCurationSlice.actions.onClickComplete(text));
   }, [text]);
@@ -238,7 +91,7 @@ const RequestInfo = () => {
     if (data.location === '신촌,홍대 부근 동네를 선택해주세요!') {
       return alert('장소를 선택해 주세요!2');
     }
-    dispatch(addCurationSlice.actions.onClickComplete(text));
+
     dispatch(addCurationData(data));
 
     if (status === 'success') {
@@ -255,10 +108,6 @@ const RequestInfo = () => {
     resetState();
   };
 
-  // useEffect(() => {
-
-  // }, []);
-
   return (
     <>
       <HeaderContainer>
@@ -274,7 +123,11 @@ const RequestInfo = () => {
       <Wrapper>
         <ChooseArea>
           <QuestionText>어느 지역에서 식사하실 건가요?</QuestionText>
-          <AreaDropdown onChange={onChangeLocation}>
+          <AreaDropdown
+            onChange={(e: any) => {
+              onChangeLocation(e, dispatch);
+            }}
+          >
             <option>신촌,홍대 부근 동네를 선택해주세요!</option>
             <option>신촌동</option>
             <option>창천동</option>
@@ -293,16 +146,36 @@ const RequestInfo = () => {
           <QuestionText>방문 예정 시간대를 골라주세요!</QuestionText>
 
           <ButtonContainer>
-            <ChoiceButton active={morning} onClick={onClickTime}>
+            <ChoiceButton
+              active={morning}
+              onClick={(e: any) => {
+                onClickTime(e, dispatch);
+              }}
+            >
               아침
             </ChoiceButton>
-            <ChoiceButton active={afternoon} onClick={onClickTime}>
+            <ChoiceButton
+              active={afternoon}
+              onClick={(e: any) => {
+                onClickTime(e, dispatch);
+              }}
+            >
               점심
             </ChoiceButton>
-            <ChoiceButton active={evening} onClick={onClickTime}>
+            <ChoiceButton
+              active={evening}
+              onClick={(e: any) => {
+                onClickTime(e, dispatch);
+              }}
+            >
               저녁
             </ChoiceButton>
-            <ChoiceButton active={midnight} onClick={onClickTime}>
+            <ChoiceButton
+              active={midnight}
+              onClick={(e: any) => {
+                onClickTime(e, dispatch);
+              }}
+            >
               밤
             </ChoiceButton>
           </ButtonContainer>
@@ -310,13 +183,28 @@ const RequestInfo = () => {
         <ChooseDrink>
           <QuestionText>음주 여부를 선택해주세요!</QuestionText>
           <ButtonContainer>
-            <ChoiceButton active={not} onClick={onClickDrink}>
+            <ChoiceButton
+              active={not}
+              onClick={(e: any) => {
+                onClickDrink(e, dispatch);
+              }}
+            >
               안 마셔요
             </ChoiceButton>
-            <ChoiceButton active={little} onClick={onClickDrink}>
+            <ChoiceButton
+              active={little}
+              onClick={(e: any) => {
+                onClickDrink(e, dispatch);
+              }}
+            >
               간술만!
             </ChoiceButton>
-            <ChoiceButton active={much} onClick={onClickDrink}>
+            <ChoiceButton
+              active={much}
+              onClick={(e: any) => {
+                onClickDrink(e, dispatch);
+              }}
+            >
               마실래요
             </ChoiceButton>
           </ButtonContainer>
@@ -324,16 +212,36 @@ const RequestInfo = () => {
         <ChoosePersonnel>
           <QuestionText>몇 명이서 방문 예정인가요?</QuestionText>
           <ButtonContainer>
-            <ChoiceButton active={alone} onClick={onClickCount}>
+            <ChoiceButton
+              active={alone}
+              onClick={(e: any) => {
+                onClickCount(e, dispatch);
+              }}
+            >
               혼자
             </ChoiceButton>
-            <ChoiceButton active={two} onClick={onClickCount}>
+            <ChoiceButton
+              active={two}
+              onClick={(e: any) => {
+                onClickCount(e, dispatch);
+              }}
+            >
               둘이서
             </ChoiceButton>
-            <ChoiceButton active={three} onClick={onClickCount}>
+            <ChoiceButton
+              active={three}
+              onClick={(e: any) => {
+                onClickCount(e, dispatch);
+              }}
+            >
               3~4명
             </ChoiceButton>
-            <ChoiceButton active={moreThanFive} onClick={onClickCount}>
+            <ChoiceButton
+              active={moreThanFive}
+              onClick={(e: any) => {
+                onClickCount(e, dispatch);
+              }}
+            >
               5인 이상
             </ChoiceButton>
           </ButtonContainer>

@@ -26,7 +26,7 @@ const FeedList = () => {
     hasNext
       ? dispatch(getCurationPostListsThunk(hasNext))
       : dispatch(getCurationPostListsThunk(''));
-  }, [hasNext]);
+  }, []);
 
   return (
     <Wrapper>
