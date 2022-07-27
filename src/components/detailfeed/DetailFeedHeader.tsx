@@ -18,7 +18,6 @@ const DetailFeedHeader = () => {
   }, []);
 
   const router = useRouter();
-  console.log(url);
 
   const moveToFeed = useCallback(() => {
     router.push(`/feed/`);

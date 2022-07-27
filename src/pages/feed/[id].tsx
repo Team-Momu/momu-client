@@ -19,32 +19,36 @@ const DetailFeed = () => {
 
   return (
     <Wrapper>
-      <DetailFeedHeader />
+      <HeaderContainer className="sticky top-0">
+        <DetailFeedHeader />
+      </HeaderContainer>
       <DetailFeedContents postId={post} />
       <CommentListContainer>
         <CommentList postId={postId} />
       </CommentListContainer>
-      <AddCurationButton onClick={writeComment}>
-        큐레이션 하기
-      </AddCurationButton>
-
-      <NavContainer className="sticky bottom-0">
-        <NavBar />
-      </NavContainer>
+      <ButtonContainer className="sticky bottom-0">
+        <AddCurationButton onClick={writeComment}>
+          큐레이션 하기
+        </AddCurationButton>
+      </ButtonContainer>
     </Wrapper>
   );
 };
 export default DetailFeed;
 
 const Wrapper = styled.div``;
+
+const HeaderContainer = styled.div`
+  background: #ffffff;
+  z-index: 1;
+`;
+
 const CommentListContainer = styled.div`
-  height: 357px;
+  height: 815px;
+  overflow: auto;
 `;
-const NavContainer = styled.div``;
-const InputBox = styled.input`
-  width: 340px;
-  margin-bottom: 200px;
-`;
+
+const ButtonContainer = styled.div``;
 
 const AddCurationButton = styled.button`
   margin-bottom: 10px;

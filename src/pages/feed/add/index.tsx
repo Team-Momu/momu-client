@@ -6,16 +6,10 @@ const AddCuration = () => {
   return (
     <Wrapper>
       <RequestInfo />
-      <NavBar />
     </Wrapper>
   );
 };
 
 export default AddCuration;
 
-const Wrapper = styled.div`
-  height: 812px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
+const Wrapper = styled.div``;
