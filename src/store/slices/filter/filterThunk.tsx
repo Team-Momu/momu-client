@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IAddCuration } from '../../../utils/interfaces/curation/curationInterfaces';
 
 export const getFilteredCurationThunk = createAsyncThunk(
@@ -29,8 +29,9 @@ export const getFilteredCurationThunk = createAsyncThunk(
       queryString = '?' + queryString.substring(1, queryString.length);
     }
 
-    const response = await axios.get(`/feed/${queryString}`);
+    console.log(queryString);
 
+    const response = await axios.get(`/feed/${queryString}`);
     return response.data;
   }
 );

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { userInfo } from '@slices/user/userThunk';
 import { useRouter } from 'next/router';
+import NavBar from '@common/NavBar';
 
 const Feed: NextPage = () => {
   // 유저 정보 불러오기
@@ -26,20 +27,25 @@ const Feed: NextPage = () => {
   }, [me]);
 
   return (
-    <Wrapper>
+    <Wrapper className="relative">
       <MainFeed />
       <SliderContainer className="sticky top-0">
         <FeedHeader />
       </SliderContainer>
       <FeedList />
+      <NavContainer className="sticky bottom-0">
+        <NavBar />
+      </NavContainer>
     </Wrapper>
   );
 };
 
 export default Feed;
 const Wrapper = styled.div`
+  height: 812px;
   background: #ffffff;
 `;
 const SliderContainer = styled.div`
   background: #ffffff;
 `;
+const NavContainer = styled.div``;
