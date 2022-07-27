@@ -25,15 +25,15 @@ const CommentCard: FC<Props> = ({
   placeAddress,
   placeCategory,
 }) => {
+  console.log(writerProfile);
   return (
     <Wrapper>
       <PlaceImgContainer>
-        {/* src placeImg로 변경 필요 */}
         {placeImg === null ? (
           <></>
         ) : (
           <Image
-            src={'/img/TestImg.jpg'}
+            src={placeImg}
             width={'343'}
             height={'206'}
             objectFit="cover"
@@ -43,13 +43,22 @@ const CommentCard: FC<Props> = ({
       <BottomContainer>
         <UserInfo>
           <ProfileImgContainer>
-            {/* src writerProfile로 변경 필요 */}
-            <Image
-              src={'/img/ProfileTest.png'}
-              width={'28'}
-              height={'28'}
-              objectFit="cover"
-            />
+            {/* src writerProfile로 바꿔야함. */}
+            {writerProfile === null ? (
+              <Image
+                src={'/img/defaultProfile.png'}
+                width={'28'}
+                height={'28'}
+                objectFit="cover"
+              />
+            ) : (
+              <Image
+                src={writerProfile}
+                width={'28'}
+                height={'28'}
+                objectFit="cover"
+              />
+            )}
           </ProfileImgContainer>
           <UserNickName>{writerName}</UserNickName>
           <UserMbti>ENFJ</UserMbti>
@@ -82,6 +91,7 @@ const ProfileImgContainer = styled.div`
   width: 28px;
   height: 28px;
   border-radius: 50%;
+  overflow: hidden;
 `;
 const UserNickName = styled.div`
   font-family: 'Pretendard';
