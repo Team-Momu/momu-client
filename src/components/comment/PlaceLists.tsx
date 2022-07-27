@@ -4,13 +4,18 @@ import { IPlaceData } from 'utils/interfaces/comment/commentInterface';
 import EachPlace from './EachPlace';
 
 interface Props {
+  text: string;
   placeDatas: IPlaceData[];
   closeModal: () => void;
 }
-const PlaceLists: FC<Props> = ({ placeDatas, closeModal }) => {
+const PlaceLists: FC<Props> = ({ text, placeDatas, closeModal }) => {
   return (
     <Wrapper>
-      <h1>식당 리스트</h1>
+      <>
+        <SearchedWord>{text}</SearchedWord>
+        <PlaceHolder>에 대한 검색 결과를 알려드릴게요</PlaceHolder>
+        <UnderLine></UnderLine>
+      </>
       {placeDatas?.map((placeData) => {
         return (
           <>
@@ -30,4 +35,34 @@ const PlaceLists: FC<Props> = ({ placeDatas, closeModal }) => {
 
 export default PlaceLists;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  padding: 0;
+  margin: 0;
+`;
+
+const UnderLine = styled.div`
+  border-top: 1px solid #000000;
+`;
+
+const SearchedWord = styled.div`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  /* identical to box height, or 150% */
+
+  color: #f57a08;
+`;
+
+const PlaceHolder = styled.div`
+  padding-bottom: 40px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 160%;
+  /* or 22px */
+
+  color: #191919;
+`;

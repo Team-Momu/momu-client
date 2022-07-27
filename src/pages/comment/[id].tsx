@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 import useInput from 'utils/hooks/useInput';
 import AddComment from 'components/comment/AddComment';
-import NavBar from '@common/NavBar';
 
 const WriteComment = () => {
   return (
     <Wrapper>
       <AddComment />
-      <NavBar />
     </Wrapper>
   );
 };
