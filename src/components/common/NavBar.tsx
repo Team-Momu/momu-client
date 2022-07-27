@@ -7,6 +7,8 @@ const NavBar = () => {
   const [isRequestHover, setIsRequestHover] = useState(false);
   const [isFeedHover, setIsFeedHover] = useState(false);
   const [isProfileHover, setIsProfileHover] = useState(false);
+  const page = router.pathname;
+  console.log(page);
   const onClickRequset = useCallback(() => {
     router.push('/feed/add');
   }, []);
@@ -14,7 +16,7 @@ const NavBar = () => {
     router.push('/feed');
   }, []);
   const onClickProfile = useCallback(() => {
-    //router.push('');
+    router.push('/mypage');
   }, []);
   return (
     <Wrapper>
@@ -35,17 +37,18 @@ const NavBar = () => {
           onMouseOver={() => setIsFeedHover(true)}
           onMouseOut={() => setIsFeedHover(false)}
         >
-          {isFeedHover ? (
+          {isFeedHover || page === '/feed' ? (
             <img src={'/img/nav/activeFeed.svg '} />
           ) : (
             <img src={'/img/nav/navFeed.svg'} />
           )}
         </NavButton>
         <NavButton
+          onClick={onClickProfile}
           onMouseOver={() => setIsProfileHover(true)}
           onMouseOut={() => setIsProfileHover(false)}
         >
-          {isProfileHover ? (
+          {isProfileHover || page === '/mypage' ? (
             <img src={'/img/nav/activeProfile.svg '} />
           ) : (
             <img src={'/img/nav/navProfile.svg'} />

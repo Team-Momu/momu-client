@@ -27,26 +27,19 @@ const DetailFeed = () => {
       <AddCurationButton onClick={writeComment}>
         큐레이션 하기
       </AddCurationButton>
-
-      <NavContainer className="sticky bottom-0">
-        <NavBar />
-      </NavContainer>
     </Wrapper>
   );
 };
 export default DetailFeed;
 
 const Wrapper = styled.div``;
-const CommentListContainer = styled.div`
-  height: 357px;
-`;
-const NavContainer = styled.div``;
-const InputBox = styled.input`
-  width: 340px;
-  margin-bottom: 200px;
-`;
+const CommentListContainer = styled.div``;
 
 const AddCurationButton = styled.button`
+  position: absolute;
+  left: 0px;
+  top: 748px;
+
   margin-bottom: 10px;
   width: calc(100% + 16px * 2);
   margin: 0 -16px;
