@@ -29,7 +29,7 @@ import {
   RightInnerDownBox,
   RightInnerUpBox,
   TitleText,
-} from './mbtiStyle';
+} from '@mbti/mbtiStyle';
 
 const Mbti = () => {
   const router = useRouter();
