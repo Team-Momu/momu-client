@@ -3,8 +3,14 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { DivisionLine } from 'styles/commentstyle/CommentStyle';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
+import {
+  postSelectedStateThunk,
+  deleteSelectedStateThunk,
+} from '@slices/select/selectSlice';
 
 interface Props {
+  commentId: number;
+  postId: number;
   selectedFlag: boolean;
   placeImg: string;
   writerName: string;
@@ -18,6 +24,8 @@ interface Props {
 }
 
 const CommentCard: FC<Props> = ({
+  postId,
+  commentId,
   selectedFlag,
   placeImg,
   writerName,
@@ -35,9 +43,9 @@ const CommentCard: FC<Props> = ({
 
   const onClick = useCallback(() => {
     selectedState && me ? setSelectedState(false) : setSelectedState(true);
-    // selectedState && me
-    //   ? dispatch(deleteScrapStateThunk(post))
-    //   : dispatch(postScrapStateThunk(post));
+    selectedState && me
+      ? dispatch(deleteSelectedStateThunk({ postId, commentId }))
+      : dispatch(postSelectedStateThunk({ postId, commentId }));
   }, [selectedState]);
   return (
     <>

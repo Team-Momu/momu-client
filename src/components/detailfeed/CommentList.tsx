@@ -25,11 +25,6 @@ const CommentList: FC<Props> = ({ postId }) => {
   }, []);
   const commentCount = commentLists.length;
 
-  //넘겨줘야 할 것-식당이미지
-  // 답글 작성 유저 이미지, 이름, 먹비티아이
-  // description
-  // 식당정보: 이름, 도로명주소, 카테고리
-  console.log(commentLists);
   return (
     <Wrapper>
       <CommentCountHeader commentCount={commentCount} />
@@ -37,7 +32,9 @@ const CommentList: FC<Props> = ({ postId }) => {
         return (
           <>
             <CommentCard
-              key={comment.id}
+              key={comment.id + `${new Date()}`}
+              postId={postId}
+              commentId={comment.id}
               selectedFlag={comment.select_flag}
               placeImg={comment.place_img}
               writerName={comment.user.nickname}

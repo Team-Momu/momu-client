@@ -20,7 +20,7 @@ const DetailFeedContents: FC<Props> = ({ postId }) => {
 
   useEffect(() => {
     dispatch(getCurationByIdThunk(post));
-  }, [dispatch]);
+  }, []);
 
   return (
     <>
