@@ -2,7 +2,7 @@ import { FC, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { DivisionLine } from 'styles/commentstyle/CommentStyle';
-import { useAppDispatch } from 'store/store';
+import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 
 interface Props {
   selectedFlag: boolean;
@@ -31,10 +31,11 @@ const CommentCard: FC<Props> = ({
 }) => {
   const [selectedState, setSelectedState] = useState(selectedFlag);
   const dispatch = useAppDispatch();
+  const me = useAppSelector((state: RootState) => state.user.me);
 
   const onClick = useCallback(() => {
-    selectedState ? setSelectedState(false) : setSelectedState(true);
-    // selectedState
+    selectedState && me ? setSelectedState(false) : setSelectedState(true);
+    // selectedState && me
     //   ? dispatch(deleteScrapStateThunk(post))
     //   : dispatch(postScrapStateThunk(post));
   }, [selectedState]);
@@ -88,10 +89,15 @@ const CommentCard: FC<Props> = ({
             </PlaceContainer>
             <ButtonContainer>
               <SelectedButton onClick={onClick}>
-                {selectedState ? (
+                {selectedState && me ? (
                   <img src={'/img/select/SelectedButton.svg'} />
                 ) : (
                   <img src={'/img/select/unSelectedButton.svg'} />
+                )}
+                {selectedState && !me ? (
+                  <img src={'/img/select/OtherUserSelectedButton.svg'} />
+                ) : (
+                  <></>
                 )}
               </SelectedButton>
             </ButtonContainer>
