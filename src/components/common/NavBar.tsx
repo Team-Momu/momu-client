@@ -8,7 +8,7 @@ const NavBar = () => {
   const [isFeedHover, setIsFeedHover] = useState(false);
   const [isProfileHover, setIsProfileHover] = useState(false);
   const page = router.pathname;
-  console.log(page);
+
   const onClickRequset = useCallback(() => {
     router.push('/feed/add');
   }, []);
