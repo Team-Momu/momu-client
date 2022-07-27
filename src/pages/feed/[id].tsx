@@ -44,6 +44,7 @@ const HeaderContainer = styled.div`
 `;
 
 const CommentListContainer = styled.div`
+  height: 815px;
   overflow: auto;
 `;
 

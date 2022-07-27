@@ -28,16 +28,22 @@ const CommentCard: FC<Props> = ({
   return (
     <Wrapper>
       <PlaceImgContainer>
-        <Image
-          src={'/img/TestImg.jpg'}
-          width={'343'}
-          height={'206'}
-          objectFit="cover"
-        />
+        {/* src placeImg로 변경 필요 */}
+        {placeImg === null ? (
+          <></>
+        ) : (
+          <Image
+            src={'/img/TestImg.jpg'}
+            width={'343'}
+            height={'206'}
+            objectFit="cover"
+          />
+        )}
       </PlaceImgContainer>
       <BottomContainer>
         <UserInfo>
           <ProfileImgContainer>
+            {/* src writerProfile로 변경 필요 */}
             <Image
               src={'/img/ProfileTest.png'}
               width={'28'}
