@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import styled from 'styled-components';
+import { DivisionLine } from 'styles/commentstyle/CommentStyle';
 import CommentCard from './CommentCard';
 import CommentCountHeader from './CommentCountHeader';
 
@@ -46,6 +47,7 @@ const CommentList: FC<Props> = ({ postId }) => {
               placeName={comment.place.place_name}
               placeAddress={comment.place.road_address_name}
               placeCategory={comment.place.category_name}
+              createAt={comment.created_at}
             />
           </>
         );
