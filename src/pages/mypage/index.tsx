@@ -1,9 +1,9 @@
 import NavBar from '@common/NavBar';
-
+import ProfileCard from 'components/mypage/ProfileCard';
 const mypage = () => {
   return (
     <>
-      <h1>마이페이지..</h1>
+      <ProfileCard />
       <NavBar />
     </>
   );
