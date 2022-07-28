@@ -16,26 +16,50 @@ const initialState: ICurationPostLists = {
     previous: '',
     results: [],
   },
-  pending: false,
+  status: '',
+  error: null,
+  cursor: null,
 };
+
+// [
+//   {
+//     id: 1,
+//     user: {
+//       id: 1,
+//       nickname: 'siwon',
+//       profile_img: '',
+//       mbti: '',
+//       level: 1,
+//       select_count: 0,
+//     },
+//     created_at: '2022.07.28',
+//     location: '대현동',
+//     time: '점심',
+//     drink: 1,
+//     member_count: 2,
+//     comment_count: 0,
+//     description: 'dd',
+//     selected_flag: false,
+//     scrap_flag: false,
+//   },
+// ]
 
 // createAsyncThunk(typePrefix: string, payloadCreator: AsyncThunkPayloadCreator, options?: AsyncThunkOptions): AsyncThunk
 export const getCurationPostListsThunk = createAsyncThunk(
   'curation/getCurationPostLists',
-  async (hasNext: string, thunkAPI) => {
-    if (hasNext) {
-      const response = await axios.get(`/feed/?cursor=${hasNext}`);
-      if (!response) {
-        console.log('error');
-      }
-      return response.data;
-    } else if (hasNext === '') {
-      const response = await axios.get('/feed/');
-      if (!response) {
-        console.log('error');
-      }
-      return response.data;
-    }
+  async () => {
+    const response = await axios.get('/feed/');
+    return response.data;
+  }
+);
+
+export const getMoreCurationPostListsThunk = createAsyncThunk(
+  'curation/getMoreCurationPostLists',
+  async () => {
+    const response = await axios.get(
+      `/feed/?cursor=cj0xJnA9MjAyMi0wNy0xMSsxMiUzQTQ0JTNBNDEuOTAzNjU2JTJCMDAlM0EwMA%3D%3D`
+    );
+    return response.data;
   }
 );
 
@@ -47,32 +71,43 @@ export const curationPostSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getCurationPostListsThunk.pending, (state) => {
-        state.pending = true;
+        state.status = 'pending';
       })
       .addCase(getFilteredCurationThunk.pending, (state) => {
-        state.pending = true;
+        state.status = 'pending';
       })
-
+      .addCase(getMoreCurationPostListsThunk.pending, (state) => {
+        state.status = 'pending';
+      })
       .addCase(getCurationPostListsThunk.fulfilled, (state, action) => {
         state.message = action.payload.message;
         state.data = action.payload.data;
-        state.pending = action.payload.pending;
-        state.pending = false;
+        state.status = action.payload.pending;
+        state.status = 'success';
       })
       .addCase(getFilteredCurationThunk.fulfilled, (state, action) => {
         state.message = action.payload.message;
         state.data = action.payload.data;
-        state.pending = action.payload.pending;
-        state.pending = false;
+        state.status = action.payload.pending;
+        state.status = 'success';
       })
-
+      .addCase(getMoreCurationPostListsThunk.fulfilled, (state, action) => {
+        state.data.results = state.data.results.concat(
+          action.payload.data.results
+        );
+        state.status = 'success';
+      })
       .addCase(getCurationPostListsThunk.rejected, (state, action) => {
-        state.pending = false;
-        console.error(action.error);
+        state.status = 'rejected';
+        state.error = action.error;
       })
       .addCase(getFilteredCurationThunk.rejected, (state, action) => {
-        state.pending = false;
-        console.error(action.error);
+        state.status = 'rejected';
+        state.error = action.error;
+      })
+      .addCase(getMoreCurationPostListsThunk.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.error;
       });
   },
 });

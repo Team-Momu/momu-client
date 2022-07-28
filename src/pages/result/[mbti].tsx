@@ -78,7 +78,6 @@ const Mbti = () => {
       <Description>{mbti?.description}</Description>
       <WhatIsMbti onClick={openModal}>먹비티아이란?</WhatIsMbti>
       <MomuStartButton onClick={pushToFeed}>모무 시작하기</MomuStartButton>
-
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
