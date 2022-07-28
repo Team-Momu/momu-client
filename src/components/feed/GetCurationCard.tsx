@@ -94,8 +94,6 @@ const GetCurationCard: FC<Props> = ({
     router.push(`/feed/${post}`);
   }, []);
 
-  console.log(scrapFlag, scrapState);
-
   return (
     <CurationContainer>
       <InfoContainer>

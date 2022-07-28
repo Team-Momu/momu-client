@@ -36,12 +36,9 @@ const FeedList = ({ hasNext, percent }: Props) => {
 
   useEffect(() => {
     // 더 가져오는 thunk 실행
-    if (hasNext) {
-      dispatch(getMoreCurationPostListsThunk());
-    }
-    if (percent === 100) {
-      dispatch(getMoreCurationPostListsThunk());
-    }
+    // if (hasNext) {
+    //   dispatch(getMoreCurationPostListsThunk());
+    // }
   }, [hasNext, percent]);
 
   return (

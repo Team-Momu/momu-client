@@ -34,7 +34,7 @@ const Feed: NextPage = () => {
       const b = e.target.scrollHeight - e.target.clientHeight;
       const percent = Math.round((a / b) * 100);
 
-      if (percent >= 70) {
+      if (percent >= 90) {
         setHasNext(true);
         setPercent(percent);
       } else {
