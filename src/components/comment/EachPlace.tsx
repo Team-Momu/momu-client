@@ -29,8 +29,10 @@ const EachPlace: FC<Props> = ({ placeData, address, name, closeModal }) => {
   return (
     <Wrapper>
       <button onClick={onClick}>
-        <div>{name}</div>
-        <div>{address}</div>
+        <PlaceContainer>
+          <PlaceName>{name}</PlaceName>
+          <PlaceAddress>{address}</PlaceAddress>
+        </PlaceContainer>
       </button>
     </Wrapper>
   );
@@ -39,5 +41,33 @@ const EachPlace: FC<Props> = ({ placeData, address, name, closeModal }) => {
 export default EachPlace;
 
 const Wrapper = styled.div`
-  border: 1px solid black;
+  border-bottom: 1px solid #000000;
+`;
+const PlaceContainer = styled.div`
+  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
+`;
+const PlaceName = styled.div`
+  text-align: left;
+  padding: 14px 0 4px 0;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #191919;
+`;
+
+const PlaceAddress = styled.div`
+  text-align: left;
+  padding-bottom: 14px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+
+  color: #6f6a69;
 `;

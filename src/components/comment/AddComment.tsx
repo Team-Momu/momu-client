@@ -101,6 +101,7 @@ const AddComment = () => {
 
   function closeModal() {
     setIsOpen(false);
+    setText('');
   }
 
   console.log(keyword);
@@ -186,17 +187,24 @@ const AddComment = () => {
             },
             content: {
               position: 'absolute',
-              color: 'lightsteelblue',
-              width: '335px',
-              height: '723px',
-              top: '72px',
+              width: '343px',
+              height: '743px',
+              top: '-35px',
 
               margin: 'auto',
             },
           }}
         >
-          <button onClick={closeModal}>close</button>
-          <PlaceLists closeModal={closeModal} placeDatas={placeDatas} />
+          <button onClick={closeModal}>
+            <ButtonContainer>
+              <img src={'/img/modal/closeButton.svg'} />
+            </ButtonContainer>
+          </button>
+          <PlaceLists
+            text={text}
+            closeModal={closeModal}
+            placeDatas={placeDatas}
+          />
         </Modal>
       </div>
     </Wrapper>
@@ -208,7 +216,9 @@ const Wrapper = styled.div`
   margin: 0;
   padding: 0;
 `;
-
+const ButtonContainer = styled.div`
+  padding-left: 280px;
+`;
 const ImageWrapper = styled.div`
   height: 206px;
 `;

@@ -57,6 +57,7 @@ interface ICommentPost {
   visit_flag: boolean;
   description: string;
   select_flag: boolean; //# 해당 답글의 채택 여부
+  created_at: string;
 }
 
 interface ICommentPostLists {

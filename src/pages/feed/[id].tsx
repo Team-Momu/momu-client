@@ -5,6 +5,7 @@ import DetailFeedContents from 'components/detailfeed/DetailFeed';
 import DetailFeedHeader from 'components/detailfeed/DetailFeedHeader';
 import NavBar from '@common/NavBar';
 import CommentList from 'components/detailfeed/CommentList';
+import { relative } from 'path';
 
 const DetailFeed = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const DetailFeed = () => {
   console.log(postId);
 
   return (
-    <Wrapper>
+    <Wrapper className="relative">
       <HeaderContainer className="sticky top-0">
         <DetailFeedHeader />
       </HeaderContainer>
@@ -36,7 +37,9 @@ const DetailFeed = () => {
 };
 export default DetailFeed;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: 815px;
+`;
 
 const HeaderContainer = styled.div`
   background: #ffffff;
@@ -44,8 +47,7 @@ const HeaderContainer = styled.div`
 `;
 
 const CommentListContainer = styled.div`
-  height: 815px;
-  overflow: auto;
+  height: 100%;
 `;
 
 const ButtonContainer = styled.div``;

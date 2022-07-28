@@ -4,6 +4,7 @@ import { FC, useEffect } from 'react';
 import DetailFeedHeader from './DetailFeedHeader';
 import GetCurationCard from 'components/feed/GetCurationCard';
 import styled from 'styled-components';
+import { DivisionLine } from 'styles/commentstyle/CommentStyle';
 
 interface Props {
   postId: string | string[] | undefined;
@@ -19,7 +20,7 @@ const DetailFeedContents: FC<Props> = ({ postId }) => {
 
   useEffect(() => {
     dispatch(getCurationByIdThunk(post));
-  }, [dispatch]);
+  }, []);
 
   return (
     <>
@@ -49,12 +50,4 @@ const DetailFeedContents: FC<Props> = ({ postId }) => {
 export default DetailFeedContents;
 const CardWrapper = styled.div`
   padding: 8px 0;
-`;
-
-const DivisionLine = styled.div`
-  width: 375px;
-  height: 10px;
-  background-color: #f8f6f6;
-  width: calc(100% + 16px * 2);
-  margin: 0 16px 0 -16px;
 `;
