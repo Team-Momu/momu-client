@@ -234,7 +234,7 @@ const ProfileImg = styled.div`
   height: 28px;
   border-radius: 50%;
   overflow: hidden;
-  margin-top: 12px;
+  margin-top: 11px;
 `;
 const USerId = styled.div`
   font-family: 'Pretendard';
@@ -242,13 +242,13 @@ const USerId = styled.div`
   font-weight: 700;
   font-size: 14px;
   padding-left: 10px;
-  padding-top: 20px;
+  padding-top: 17px;
 `;
 
 const LineImg = styled.img`
   padding: 2px 8px 0 8px;
   height: 15px;
-  margin-top: 20px;
+  margin-top: 17px;
 `;
 
 const Mukbti = styled.div`
@@ -257,7 +257,7 @@ const Mukbti = styled.div`
   font-weight: 700;
   font-size: 14px;
 
-  padding-top: 20px;
+  padding-top: 17px;
 
   //얘도 없는 색상이 추가 된건지 확인 필요
   color: #2260d8;
@@ -270,7 +270,7 @@ const CardInfo = styled.div`
   font-size: 11px;
   line-height: 17px;
   padding-left: 8px;
-  padding-top: 20px;
+  padding-top: 17px;
   //얘도 없는 색상이 추가 된건지 확인 필요
   color: #a09a9a;
 `;
