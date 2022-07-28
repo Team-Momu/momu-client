@@ -5,7 +5,7 @@ import MainFeed from 'components/feed/MainFeed';
 import FeedHeader from 'components/feed/FeedHeader';
 import { RootState, useAppDispatch } from '../../store/store';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { UIEventHandler, useCallback, useEffect, useState } from 'react';
 import { userInfo } from '@slices/user/userThunk';
 import { useRouter } from 'next/router';
 import NavBar from '@common/NavBar';
@@ -15,16 +15,34 @@ const Feed: NextPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const me = useSelector((state: RootState) => state.user.me);
+  const [hasNext, setHasNext] = useState(false);
+  const [percent, setPercent] = useState(0);
   useEffect(() => {
     dispatch(userInfo());
   }, []);
 
-  useEffect(() => {
-    if (!me) {
-      alert('로그인이 필요합니다.');
-      router.push('/');
-    }
-  }, [me]);
+  // useEffect(() => {
+  //   if (!me) {
+  //     alert('로그인이 필요합니다.');
+  //     router.push('/');
+  //   }
+  // }, [me]);
+
+  const onScroll = useCallback(
+    (e: any) => {
+      const a = e.target.scrollTop;
+      const b = e.target.scrollHeight - e.target.clientHeight;
+      const percent = Math.round((a / b) * 100);
+
+      if (percent >= 90) {
+        setHasNext(true);
+        setPercent(percent);
+      } else {
+        setHasNext(false);
+      }
+    },
+    [percent, hasNext]
+  );
 
   return (
     <Wrapper>
@@ -32,8 +50,8 @@ const Feed: NextPage = () => {
       <SliderContainer className="sticky top-0">
         <FeedHeader />
       </SliderContainer>
-      <FeedContainer>
-        <FeedList />
+      <FeedContainer onScroll={onScroll}>
+        <FeedList hasNext={hasNext} percent={percent} />
       </FeedContainer>
       <NavContainer className="sticky bottom-0">
         <NavBar />

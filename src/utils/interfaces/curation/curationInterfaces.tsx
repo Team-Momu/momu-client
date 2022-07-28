@@ -54,7 +54,9 @@ interface ICurationPostLists {
     previous: string;
     results: ICurationPost[];
   };
-  pending: boolean;
+  status: string | undefined | null | boolean;
+  error: any;
+  cursor: null | string;
 }
 
 interface IAddCuration {
