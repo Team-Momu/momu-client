@@ -47,6 +47,7 @@ const CommentCard: FC<Props> = ({
       ? dispatch(deleteSelectedStateThunk({ postId, commentId }))
       : dispatch(postSelectedStateThunk({ postId, commentId }));
   }, [selectedState]);
+
   return (
     <>
       <Wrapper>
@@ -92,7 +93,10 @@ const CommentCard: FC<Props> = ({
           <DescriptionText>{description}</DescriptionText>
           <PlaceInfoBox>
             <PlaceContainer>
-              <PlaceName>{placeName}</PlaceName>
+              <CategoryContainer>
+                <PlaceName>{placeName}</PlaceName>
+                <CategoryName>{placeCategory}</CategoryName>
+              </CategoryContainer>
               <PlaceAddress>{placeAddress}</PlaceAddress>
             </PlaceContainer>
             <ButtonContainer>
@@ -199,6 +203,25 @@ const PlaceInfoBox = styled.div`
 
 const PlaceContainer = styled.div``;
 
+const CategoryContainer = styled.div`
+  display: flex;
+`;
+
+const CategoryName = styled.div`
+  margin-top: 14px;
+  margin-left: 5px;
+  line-height: 20px;
+  text-align: center;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  color: #878787;
+
+  width: 33px;
+  height: 20px;
+  background: #ededed;
+`;
 const ButtonContainer = styled.div`
   border-left: 1px solid #191919;
   width: 74px;
