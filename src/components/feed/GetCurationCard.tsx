@@ -141,7 +141,7 @@ const GetCurationCard: FC<Props> = ({
           </ProfileImg>
           <USerId>{usernickname}</USerId>
           <LineImg src={'/img/Line.png'} />
-          <Mukbti>{mukbti.mbti}</Mukbti>
+          <Mukbti>{mukbti}</Mukbti>
         </BottomInfo>
         <BottomInfo>
           <CardInfo>{createAt}</CardInfo>
@@ -257,7 +257,7 @@ const Mukbti = styled.div`
   font-weight: 700;
   font-size: 14px;
 
-  padding-top: 17px;
+  padding-top: 18px;
 
   //얘도 없는 색상이 추가 된건지 확인 필요
   color: #2260d8;
