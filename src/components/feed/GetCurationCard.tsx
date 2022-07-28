@@ -8,6 +8,7 @@ import {
 } from '@slices/scrap/scrapSlice';
 import { FC } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 interface Props {
   area: string;
@@ -121,7 +122,23 @@ const GetCurationCard: FC<Props> = ({
       </InfoContainer>
       <BottomContainer>
         <BottomInfo>
-          <ProfileImg src={'/img/ProfileTest.png'} />
+          <ProfileImg>
+            {profileImg === null ? (
+              <Image
+                src={'/img/defaultProfile.png'}
+                width={'80'}
+                height={'80'}
+                objectFit="cover"
+              />
+            ) : (
+              <Image
+                src={profileImg}
+                width={'80'}
+                height={'80'}
+                objectFit="cover"
+              />
+            )}
+          </ProfileImg>
           <USerId>{usernickname}</USerId>
           <LineImg src={'/img/Line.png'} />
           <Mukbti>{mukbti.mbti}</Mukbti>
@@ -206,18 +223,18 @@ const Line = styled.div`
 `;
 
 const BottomContainer = styled.div`
-  margin: 0;
   padding: 0 4px 0 6px;
 
   display: flex;
   justify-content: space-between;
 `;
 
-const ProfileImg = styled.img`
+const ProfileImg = styled.div`
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  margin-top: 14px;
+  overflow: hidden;
+  margin-top: 12px;
 `;
 const USerId = styled.div`
   font-family: 'Pretendard';
