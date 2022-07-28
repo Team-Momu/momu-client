@@ -17,6 +17,7 @@ export const initialState: IUser = {
   level: 0,
   selectCount: 0,
   refreshToken: '',
+  id: 0,
   auth: {},
 };
 
@@ -42,6 +43,7 @@ const userSlice = createSlice({
     });
     builder.addCase(userInfo.fulfilled, (state, { payload }) => {
       state.status = 'fulfilled';
+      state.id = payload.id;
       state.nickname = payload.nickname;
       state.profileImg = payload.profile_img;
       state.mbti = payload.mbti;
