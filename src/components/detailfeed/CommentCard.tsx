@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { DivisionLine } from 'styles/commentstyle/CommentStyle';
@@ -7,8 +7,10 @@ import {
   postSelectedStateThunk,
   deleteSelectedStateThunk,
 } from '@slices/select/selectSlice';
+import { userInfo } from '@slices/user/userThunk';
 
 interface Props {
+  userId: number;
   commentId: number;
   postId: number;
   selectedFlag: boolean;
@@ -24,6 +26,7 @@ interface Props {
 }
 
 const CommentCard: FC<Props> = ({
+  userId,
   postId,
   commentId,
   selectedFlag,
@@ -39,13 +42,34 @@ const CommentCard: FC<Props> = ({
 }) => {
   const [selectedState, setSelectedState] = useState(selectedFlag);
   const dispatch = useAppDispatch();
-  const me = useAppSelector((state: RootState) => state.user.me);
+  const user = useAppSelector((state: RootState) => state.user.me.data.id);
+
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
+
+  function ButtonChoice() {
+    if (selectedState === true && user === userId) {
+      return <img src={'/img/select/SelectedButton.svg'} />;
+    } else if (selectedState === false && user === userId) {
+      return <img src={'/img/select/unSelectedButton.svg'} />;
+    }
+    if (selectedState === true && user !== userId) {
+      return <img src={'/img/select/OtherUserSelectedButton.svg'} />;
+    } else if (selectedState === false && user !== userId) {
+      return <></>;
+    }
+  }
 
   const onClick = useCallback(() => {
-    selectedState && me ? setSelectedState(false) : setSelectedState(true);
-    selectedState && me
-      ? dispatch(deleteSelectedStateThunk({ postId, commentId }))
-      : dispatch(postSelectedStateThunk({ postId, commentId }));
+    if (selectedState === true && user === userId) {
+      setSelectedState(false);
+    } else if (selectedState === false && user === userId)
+      setSelectedState(true);
+    if (selectedState === true && user === userId) {
+      dispatch(deleteSelectedStateThunk({ postId, commentId }));
+    } else if (selectedState === false && user === userId)
+      dispatch(postSelectedStateThunk({ postId, commentId }));
   }, [selectedState]);
 
   return (
@@ -100,16 +124,7 @@ const CommentCard: FC<Props> = ({
             </PlaceContainer>
             <ButtonContainer>
               <SelectedButton onClick={onClick}>
-                {selectedState && me ? (
-                  <img src={'/img/select/SelectedButton.svg'} />
-                ) : (
-                  <img src={'/img/select/unSelectedButton.svg'} />
-                )}
-                {selectedState && !me ? (
-                  <img src={'/img/select/OtherUserSelectedButton.svg'} />
-                ) : (
-                  <></>
-                )}
+                {ButtonChoice()}
               </SelectedButton>
             </ButtonContainer>
           </PlaceInfoBox>
