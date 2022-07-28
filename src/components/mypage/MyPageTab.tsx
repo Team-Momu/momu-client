@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ScrappedCard from './ScrappedCard';
 import WrittenByUser from './WrittenByUser';
+import styled from 'styled-components';
 
 const MyPageTab = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -12,38 +13,56 @@ const MyPageTab = () => {
   const tabContArr = [
     {
       tabTitle: (
-        <li
+        <TabList
           className={activeIndex === 0 ? 'is-active' : ''}
           onClick={() => tabClickHandler(0)}
         >
           내 게시글
-        </li>
+        </TabList>
       ),
-      tabCont: <WrittenByUser />,
+      tabCont: (
+        <div>
+          <WrittenByUser />
+        </div>
+      ),
     },
     {
       tabTitle: (
-        <li
+        <TabList
           className={activeIndex === 1 ? 'is-active' : ''}
           onClick={() => tabClickHandler(1)}
         >
           가보자고
-        </li>
+        </TabList>
       ),
-      tabCont: <ScrappedCard />,
+      tabCont: (
+        <div>
+          <ScrappedCard />
+        </div>
+      ),
     },
   ];
 
   return (
     <div>
-      <ul className="tabs is-boxed">
-        {tabContArr.map((section, index) => {
-          return section.tabTitle;
-        })}
-      </ul>
+      <TabListContainer>
+        <ul className="mypageTab">
+          {tabContArr.map((section, index) => {
+            return section.tabTitle;
+          })}
+        </ul>
+      </TabListContainer>
       <div>{tabContArr[activeIndex].tabCont}</div>
     </div>
   );
 };
 
 export default MyPageTab;
+
+const TabListContainer = styled.div`
+  width: 340px;
+`;
+const TabList = styled.li`
+  float: left;
+  width: 170px;
+`;

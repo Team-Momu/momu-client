@@ -67,7 +67,6 @@ const CommentCard: FC<Props> = ({
           <UserInfo>
             <UserContainer>
               <ProfileImgContainer>
-                {/* src writerProfile로 바꿔야함. */}
                 {writerProfile === null ? (
                   <Image
                     src={'/img/defaultProfile.png'}

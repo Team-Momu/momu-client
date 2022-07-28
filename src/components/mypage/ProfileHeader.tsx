@@ -1,7 +1,17 @@
+import {
+  HeaderContainer,
+  HeaderLeftSide,
+  HeaderTextContainer,
+  Line,
+} from 'styles/headerstyle/HeaderCommonStyle';
+
 const ProfileHeader = () => {
   return (
     <>
-      <h1>hi</h1>
+      <HeaderContainer>
+        <HeaderTextContainer>Profile</HeaderTextContainer>
+      </HeaderContainer>
+      <Line></Line>
     </>
   );
 };
