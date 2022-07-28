@@ -7,7 +7,7 @@ import Image from 'next/image';
 const ProfileCard = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state: RootState) => state.user.me.data);
-  const profileImg = user.profile_img;
+  const profileImg = user?.profile_img;
 
   useEffect(() => {
     dispatch(userInfo());
@@ -21,32 +21,32 @@ const ProfileCard = () => {
             {profileImg === null ? (
               <Image
                 src={'/img/defaultProfile.png'}
-                width={'80'}
-                height={'80'}
+                width={'28'}
+                height={'28'}
                 objectFit="cover"
               />
             ) : (
               <Image
                 src={profileImg}
-                width={'80'}
-                height={'80'}
+                width={'28'}
+                height={'28'}
                 objectFit="cover"
               />
             )}
           </ProfileImg>
         </ImgContainer>
         <UserInfo>
-          <UserName>{user.nickname}</UserName>
-          <UserMbti>{user.mbti}</UserMbti>
+          <UserName>{user?.nickname}</UserName>
+          <UserMbti>{user?.mbti}</UserMbti>
         </UserInfo>
         <BottomInfo>
           <UserLevel>
             <PlaceHolder>등급</PlaceHolder>
-            <DetailUserInfo>{user.level}등급</DetailUserInfo>
+            <DetailUserInfo>{user?.level}등급</DetailUserInfo>
           </UserLevel>
           <UserSelected>
             <PlaceHolder>채택</PlaceHolder>
-            <DetailUserInfo>{user.select_count}</DetailUserInfo>
+            <DetailUserInfo>{user?.select_count}</DetailUserInfo>
           </UserSelected>
         </BottomInfo>
         <Line></Line>
