@@ -59,7 +59,7 @@ const GetCurationCard: FC<Props> = ({
 
   useEffect(() => {
     setScrapState(scrapFlag);
-  });
+  }, [scrapFlag]);
 
   useEffect(() => {
     switch (isDrink) {
