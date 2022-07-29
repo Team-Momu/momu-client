@@ -8,6 +8,7 @@ import {
 } from '@slices/scrap/scrapSlice';
 import { FC } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 interface Props {
   area: string;
@@ -121,10 +122,26 @@ const GetCurationCard: FC<Props> = ({
       </InfoContainer>
       <BottomContainer>
         <BottomInfo>
-          <ProfileImg src={'/img/ProfileTest.png'} />
+          <ProfileImg>
+            {profileImg === null ? (
+              <Image
+                src={'/img/defaultProfile.png'}
+                width={'80'}
+                height={'80'}
+                objectFit="cover"
+              />
+            ) : (
+              <Image
+                src={profileImg}
+                width={'80'}
+                height={'80'}
+                objectFit="cover"
+              />
+            )}
+          </ProfileImg>
           <USerId>{usernickname}</USerId>
           <LineImg src={'/img/Line.png'} />
-          <Mukbti>{mukbti.mbti}</Mukbti>
+          <Mukbti>{mukbti}</Mukbti>
         </BottomInfo>
         <BottomInfo>
           <CardInfo>{createAt}</CardInfo>
@@ -206,18 +223,18 @@ const Line = styled.div`
 `;
 
 const BottomContainer = styled.div`
-  margin: 0;
   padding: 0 4px 0 6px;
 
   display: flex;
   justify-content: space-between;
 `;
 
-const ProfileImg = styled.img`
+const ProfileImg = styled.div`
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  margin-top: 14px;
+  overflow: hidden;
+  margin-top: 11px;
 `;
 const USerId = styled.div`
   font-family: 'Pretendard';
@@ -225,13 +242,13 @@ const USerId = styled.div`
   font-weight: 700;
   font-size: 14px;
   padding-left: 10px;
-  padding-top: 20px;
+  padding-top: 17px;
 `;
 
 const LineImg = styled.img`
   padding: 2px 8px 0 8px;
   height: 15px;
-  margin-top: 20px;
+  margin-top: 17px;
 `;
 
 const Mukbti = styled.div`
@@ -240,7 +257,7 @@ const Mukbti = styled.div`
   font-weight: 700;
   font-size: 14px;
 
-  padding-top: 20px;
+  padding-top: 18px;
 
   //얘도 없는 색상이 추가 된건지 확인 필요
   color: #2260d8;
@@ -253,7 +270,7 @@ const CardInfo = styled.div`
   font-size: 11px;
   line-height: 17px;
   padding-left: 8px;
-  padding-top: 20px;
+  padding-top: 17px;
   //얘도 없는 색상이 추가 된건지 확인 필요
   color: #a09a9a;
 `;

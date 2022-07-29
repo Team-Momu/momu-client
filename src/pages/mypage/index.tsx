@@ -1,11 +1,15 @@
 import NavBar from '@common/NavBar';
-
+import MyPageTab from 'components/mypage/MyPageTab';
+import ProfileCard from 'components/mypage/ProfileCard';
+import ProfileHeader from 'components/mypage/ProfileHeader';
 const mypage = () => {
   return (
-    <>
-      <h1>마이페이지..</h1>
+    <div>
+      <ProfileHeader />
+      <ProfileCard />
+      <MyPageTab />
       <NavBar />
-    </>
+    </div>
   );
 };
 

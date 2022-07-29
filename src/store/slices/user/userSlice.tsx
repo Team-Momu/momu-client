@@ -11,12 +11,13 @@ export const initialState: IUser = {
   status: '',
   me: '',
   kakaoId: '',
-  nickname: 'string',
-  profileImg: 'string',
+  nickname: '',
+  profileImg: '',
   mbti: 0,
   level: 0,
   selectCount: 0,
   refreshToken: '',
+  id: 0,
   auth: {},
 };
 
@@ -42,6 +43,13 @@ const userSlice = createSlice({
     });
     builder.addCase(userInfo.fulfilled, (state, { payload }) => {
       state.status = 'fulfilled';
+      state.id = payload.id;
+      state.nickname = payload.nickname;
+      state.profileImg = payload.profile_img;
+      state.mbti = payload.mbti;
+      state.level = payload.level;
+      state.selectCount = payload.select_count;
+
       state.me = payload;
     });
     builder.addCase(userInfo.rejected, (state, { payload }) => {

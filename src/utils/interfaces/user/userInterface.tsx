@@ -9,5 +9,6 @@ export interface IUser {
   level: number;
   selectCount: number;
   refreshToken?: string;
+  id: number;
   auth: {};
 }
