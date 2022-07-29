@@ -21,6 +21,10 @@ const CommentList: FC<Props> = ({ postId }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
+  useEffect(() => {
     dispatch(getCommentPostListsThunk({ hasNext, postId }));
   }, []);
   const commentCount = commentLists.length;

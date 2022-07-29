@@ -53,7 +53,7 @@ const Feed: NextPage = () => {
       <FeedContainer onScroll={onScroll}>
         <FeedList hasNext={hasNext} percent={percent} />
       </FeedContainer>
-      <NavContainer className="sticky bottom-0">
+      <NavContainer className="fixed">
         <NavBar />
       </NavContainer>
     </Wrapper>
@@ -64,13 +64,18 @@ export default Feed;
 
 const Wrapper = styled.div``;
 const FeedContainer = styled.div`
-  height: 812px;
   background: #ffffff;
-  overflow: auto;
+  margin-bottom: 85px;
 `;
 
 const SliderContainer = styled.div`
   background: #ffffff;
   z-index: 1;
 `;
-const NavContainer = styled.div``;
+const NavContainer = styled.div`
+  width: 343px;
+  &.fixed {
+    position: fixed;
+    top: 740px;
+  }
+`;

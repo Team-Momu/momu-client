@@ -60,6 +60,9 @@ const MyPageTab = () => {
 export default MyPageTab;
 
 const TabListContainer = styled.div`
+  background: #ffffff;
+  z-index: 1;
+
   width: calc(100% + 16px * 2);
   margin: 0 16px 0 -16px;
 `;

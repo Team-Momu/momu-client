@@ -166,7 +166,7 @@ const GotoDetailButton = styled.button`
 `;
 
 const CurationContainer = styled.div`
-  width: 341px;
+  width: 339px;
   height: 193px;
   border: 1px solid #191919;
   margin: 16px 0;
@@ -208,7 +208,7 @@ const InfoText = styled.div`
   font-size: 20px;
   line-height: 24px;
 `;
-//카드 디자인 방해하지 않도록 width넘어가면 말줄임으로 표시
+
 const AdditionalText = styled.div`
   text-align: left;
   font-family: 'Pretendard';
