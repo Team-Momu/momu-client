@@ -93,7 +93,7 @@ const CommentCard: FC<Props> = ({
               <ProfileImgContainer>
                 {writerProfile === null ? (
                   <Image
-                    src="/img/defaultProfile.png"
+                    src={'/img/defaultProfile.png'}
                     width={'28'}
                     height={'28'}
                     objectFit="cover"
