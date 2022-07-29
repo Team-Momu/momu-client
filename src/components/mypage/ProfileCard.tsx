@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import styled from 'styled-components';
 import Image from 'next/image';
+import defaultImage from '@public/img/defaultProfile.png';
 
 const ProfileCard = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,7 @@ const ProfileCard = () => {
           <ProfileImg>
             {profileImg === null ? (
               <Image
-                src="/img/defaultProfile.png"
+                src={defaultImage}
                 width={'80'}
                 height={'80'}
                 objectFit="cover"

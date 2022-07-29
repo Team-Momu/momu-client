@@ -12,6 +12,7 @@ import Image from 'next/image';
 import defaultImage from '@public/img/defaultProfile.png';
 import scrapped from '@public/img/scrap/Scrapped.png';
 import scrap from '@public/img/scrap/Scrap.svg';
+import line from '@public/img/Line.png';
 
 interface Props {
   area: string;
@@ -142,7 +143,9 @@ const GetCurationCard: FC<Props> = ({
             />
           </ProfileImg>
           <USerId>{usernickname}</USerId>
-          <LineImg src={'/img/Line.png'} />
+          <LineImg>
+            <Image src={line} height={'15'} />
+          </LineImg>
           <Mukbti>{mukbti}</Mukbti>
         </BottomInfo>
         <BottomInfo>
@@ -247,9 +250,8 @@ const USerId = styled.div`
   padding-top: 17px;
 `;
 
-const LineImg = styled.img`
+const LineImg = styled.div`
   padding: 2px 8px 0 8px;
-  height: 15px;
   margin-top: 17px;
 `;
 
