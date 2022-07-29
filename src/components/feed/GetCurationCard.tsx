@@ -10,6 +10,8 @@ import { FC } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import defaultImage from '@public/img/defaultProfile.png';
+import scrapped from '@public/img/scrap/Scrapped.png';
+import scrap from '@public/img/scrap/Scrap.svg';
 
 interface Props {
   area: string;
@@ -51,7 +53,12 @@ const GetCurationCard: FC<Props> = ({
   const isScrapped = useAppSelector((state: RootState) => state.scrap);
   const [drink, setDrink] = useState('');
   const [countPerson, setCountPerson] = useState('');
-  const [scrapState, setScrapState] = useState(scrapFlag);
+
+  const [scrapState, setScrapState] = useState<boolean>();
+
+  useEffect(() => {
+    setScrapState(scrapFlag);
+  });
 
   useEffect(() => {
     switch (isDrink) {
@@ -118,11 +125,7 @@ const GetCurationCard: FC<Props> = ({
             </SecondLineInfo>
           </GotoDetailButton>
           <ScrapButton onClick={onClick}>
-            {scrapState ? (
-              <img src={'/img/scrap/Scrapped.png'} />
-            ) : (
-              <img src={'/img/scrap/Scrap.svg'} />
-            )}
+            {scrapState ? <Image src={scrapped} /> : <Image src={scrap} />}
           </ScrapButton>
         </UpperContainer>
         <AdditionalText>{additionalText}</AdditionalText>

@@ -13,7 +13,6 @@ const ScrappedCard = () => {
   useEffect(() => {
     dispatch(getCurationScrappedByUserThunk());
   }, []);
-
   return (
     <Wrapper>
       {scrappedCurations?.map((curation) => {

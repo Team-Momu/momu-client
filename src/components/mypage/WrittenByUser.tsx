@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const WrittenByUser = () => {
   const writtenCurations = useAppSelector(
-    (state: RootState) => state.mypage?.data.post.results
+    (state: RootState) => state.mypage.data.post.results
   );
   const dispatch = useAppDispatch();
   useEffect(() => {
