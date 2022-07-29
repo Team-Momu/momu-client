@@ -60,9 +60,29 @@ const MyPageTab = () => {
 export default MyPageTab;
 
 const TabListContainer = styled.div`
-  width: 340px;
+  width: calc(100% + 16px * 2);
+  margin: 0 16px 0 -16px;
 `;
 const TabList = styled.li`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-size: 20px;
   float: left;
-  width: 170px;
+  width: 187.5px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #999999;
+  border-bottom: 1px solid #999999;
+
+  &:hover {
+    cursor: pointer;
+  }
+  &.is-active {
+    font-weight: 800;
+    font-size: 20px;
+    border-bottom: 3px solid #191919;
+    color: #191919;
+  }
 `;

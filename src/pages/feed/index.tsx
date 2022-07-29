@@ -71,5 +71,6 @@ const FeedContainer = styled.div`
 
 const SliderContainer = styled.div`
   background: #ffffff;
+  z-index: 1;
 `;
 const NavContainer = styled.div``;

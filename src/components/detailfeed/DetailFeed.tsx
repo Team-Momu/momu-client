@@ -26,7 +26,7 @@ const DetailFeedContents: FC<Props> = ({ postId }) => {
     <>
       <CardWrapper>
         <GetCurationCard
-          key={curation.id + `new Date()`}
+          key={curation.id + `${new Date()}`}
           area={curation.location}
           isDrink={curation.drink}
           when={curation.time}
