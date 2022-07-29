@@ -22,6 +22,10 @@ const DetailFeedContents: FC<Props> = ({ postId }) => {
     dispatch(getCurationByIdThunk(post));
   }, []);
 
+  useEffect(() => {
+    console.log('curation', curation);
+  }, [curation]);
+
   return (
     <>
       <CardWrapper>
@@ -42,7 +46,7 @@ const DetailFeedContents: FC<Props> = ({ postId }) => {
           post={curation.id}
         />
       </CardWrapper>
-      <DivisionLine></DivisionLine>
+      <DivisionLine />
     </>
   );
 };

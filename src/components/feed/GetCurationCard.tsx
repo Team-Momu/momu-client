@@ -9,6 +9,7 @@ import {
 import { FC } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import defaultImage from '@public/img/defaultProfile.png';
 
 interface Props {
   area: string;
@@ -43,6 +44,9 @@ const GetCurationCard: FC<Props> = ({
 }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const curation = useAppSelector(
+    (state: RootState) => state.detailCuration.data
+  );
 
   const isScrapped = useAppSelector((state: RootState) => state.scrap);
   const [drink, setDrink] = useState('');
@@ -95,6 +99,10 @@ const GetCurationCard: FC<Props> = ({
     router.push(`/feed/${post}`);
   }, []);
 
+  useEffect(() => {
+    console.log(profileImg);
+  }, [profileImg]);
+
   return (
     <CurationContainer>
       <InfoContainer>
@@ -123,21 +131,12 @@ const GetCurationCard: FC<Props> = ({
       <BottomContainer>
         <BottomInfo>
           <ProfileImg>
-            {profileImg === null ? (
-              <Image
-                src="/img/defaultProfile.png"
-                width={'28'}
-                height={'28'}
-                objectFit="cover"
-              />
-            ) : (
-              <Image
-                src={profileImg}
-                width={'28'}
-                height={'28'}
-                objectFit="cover"
-              />
-            )}
+            <Image
+              src={profileImg || defaultImage}
+              width={28}
+              height={28}
+              objectFit="cover"
+            />
           </ProfileImg>
           <USerId>{usernickname}</USerId>
           <LineImg src={'/img/Line.png'} />
