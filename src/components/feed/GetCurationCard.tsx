@@ -125,7 +125,7 @@ const GetCurationCard: FC<Props> = ({
           <ProfileImg>
             {profileImg === null ? (
               <Image
-                src={'/img/defaultProfile.png'}
+                src="/img/defaultProfile.png"
                 width={'28'}
                 height={'28'}
                 objectFit="cover"

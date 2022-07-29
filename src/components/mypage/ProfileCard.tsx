@@ -20,7 +20,7 @@ const ProfileCard = () => {
           <ProfileImg>
             {profileImg === null ? (
               <Image
-                src={'/img/defaultProfile.png'}
+                src="/img/defaultProfile.png"
                 width={'80'}
                 height={'80'}
                 objectFit="cover"
