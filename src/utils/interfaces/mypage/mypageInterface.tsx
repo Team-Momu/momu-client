@@ -18,6 +18,7 @@ interface ICurationInfo {
   description: string;
   selected_flag: boolean;
   scrap_flag: boolean;
+  created_at: string;
 }
 
 interface IProfileContent {

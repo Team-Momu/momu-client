@@ -29,8 +29,7 @@ const ScrappedCard = () => {
               usernickname={curation.user.nickname}
               profileImg={curation.user.profile_img}
               mukbti={curation.user.mbti}
-              createAt={'2022.07.29'}
-              //createAt={curation.created_at}
+              createAt={curation.created_at}
               commentNum={curation.comment_count}
               scrapFlag={curation.scrap_flag}
               user={curation.user.id}
