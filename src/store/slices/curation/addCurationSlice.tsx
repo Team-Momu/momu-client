@@ -9,8 +9,8 @@ const initialState = {
   data: {
     location: '',
     time: '',
-    drink: 0,
-    member_count: 0,
+    drink: null || '',
+    member_count: 0 || '',
     description: '',
   },
   location: {
@@ -53,6 +53,13 @@ export const addCurationSlice = createSlice({
   name: 'addCuration',
   initialState,
   reducers: {
+    resetData: (state) => {
+      state.data.description = '';
+      state.data.drink = '';
+      state.data.location = '';
+      state.data.member_count = '';
+      state.data.time = '';
+    },
     resetStatus: (state) => {
       state.status = '';
     },

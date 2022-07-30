@@ -17,7 +17,7 @@ export const getFilteredCurationThunk = createAsyncThunk(
     if (curationData.time) {
       time = `&time=${curationData.time}`;
     }
-    if (curationData.drink) {
+    if (curationData.drink === 0 || curationData.drink) {
       drink = `&drink=${curationData.drink}`;
     }
     if (curationData.member_count) {
@@ -28,8 +28,6 @@ export const getFilteredCurationThunk = createAsyncThunk(
     if (queryString[0] === '&') {
       queryString = '?' + queryString.substring(1, queryString.length);
     }
-
-    console.log(queryString);
 
     const response = await axios.get(`/feed/${queryString}`);
     return response.data;

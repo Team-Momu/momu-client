@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import FilterLayout from 'components/filter/FilterLayout';
 import 'react-spring-bottom-sheet/dist/style.css';
 import {
@@ -25,6 +25,12 @@ const FeedHeader = () => {
     dispatch(addCurationSlice.actions.resetActiveInCount());
   };
 
+  const onClick = () => {
+    setOpen(true);
+    resetState();
+    dispatch(addCurationSlice.actions.resetData());
+  };
+
   function onDismiss() {
     dispatch(getFilteredCurationThunk(data));
     resetState();
@@ -36,7 +42,7 @@ const FeedHeader = () => {
       <HeaderContainer>
         <HeaderTextContainer>Feed</HeaderTextContainer>
         <ButtonContainer>
-          <FilterButton onClick={() => setOpen(true)}>
+          <FilterButton onClick={onClick}>
             <FilterText>필터</FilterText>
             <FilterIcon src={'img/filter/filtericon.png'} />
           </FilterButton>

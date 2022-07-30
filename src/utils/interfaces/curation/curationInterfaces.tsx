@@ -62,8 +62,8 @@ interface ICurationPostLists {
 interface IAddCuration {
   location: string; // #장소
   time: string; // #시간대
-  drink: number; //#음주 정도
-  member_count: number; // #인원수
+  drink: number | string; //#음주 정도
+  member_count: number | string; // #인원수
   description: string; //추가 설명
 }
 
