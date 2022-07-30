@@ -1,4 +1,7 @@
-import { setPlaceData } from '@slices/comment/PlaceChoiceSlice';
+import {
+  postPlaceDataThunk,
+  setPlaceData,
+} from '@slices/comment/PlaceChoiceSlice';
 import { FC, useCallback } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import styled from 'styled-components';
@@ -21,6 +24,7 @@ const EachPlace: FC<Props> = ({ placeData, address, name, closeModal }) => {
 
   const onClick = useCallback(() => {
     dispatch(setPlaceData({ placeData: placeData, isSelected: true }));
+    dispatch(postPlaceDataThunk(placeData));
     closeModal();
   }, []);
 

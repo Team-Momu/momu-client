@@ -17,25 +17,21 @@ import axios from 'axios';
 import { tryParsePattern } from 'next/dist/build/webpack/plugins/jsconfig-paths-plugin';
 import useImage from '../../utils/hooks/useImage';
 import Image from 'next/image';
+import { resetPlaceData } from '@slices/comment/PlaceChoiceSlice';
+import { addCommentThunk } from '@slices/comment/addCommentSlice';
 
 const AddComment = () => {
   const { description, handleInputLength } = useCheckLength();
   const router = useRouter();
-  // isSelected true이면 input 텍스트, 모달 클로즈,
-  const isSelected = useAppSelector(
-    (state: RootState) => state.placechoice.isSelected
-  );
+  const nullText = '';
 
   //input에서 placeName보여주기
   const placeName = useAppSelector(
     (state: RootState) => state.placechoice.place.place_name
   );
-  const place = useAppSelector((state: RootState) => state.placechoice.place);
-
-  useEffect(() => {
-    console.log('place', place);
-    console.log('typeof place', typeof place);
-  }, [place]);
+  const place_id = useAppSelector(
+    (state: RootState) => state.placechoice.place.id
+  );
 
   const [text, setText] = useState('');
   useEffect(() => {
@@ -56,30 +52,21 @@ const AddComment = () => {
 
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
   const onSubmit = async (e: React.SyntheticEvent) => {
-    router.push(`/feed/${postId}`);
-    e.preventDefault();
+    if (placeName === '') {
+      alert('식당을 선택해주세요!');
+    } else {
+      router.push(`/feed/${postId}`);
+      e.preventDefault();
 
-    try {
-      // const formData = new FormData();
-      // formData.append('place_image', imagePath);
+      const formData = new FormData();
+      formData.append('place_id', place_id);
+      formData.append('place_img', imagePath);
+      formData.append('description', description);
 
-      const data = {
-        place,
-        description,
-        place_image: imagePath,
-      };
-
-      // formData.append('place', stringPlace);
-      // formData.append('place_image', imagePath);
-      // formData.append('description', description);
-
-      const access_token = localStorage.getItem('access_token');
-      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-      const res = axios.post(`/feed/${postId}/comment/`, data);
-      console.log('res', res);
-    } catch (error) {
-      console.error('error', error);
+      dispatch(addCommentThunk({ formData, postId }));
     }
+
+    dispatch(resetPlaceData({ nullText }));
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -110,12 +97,18 @@ const AddComment = () => {
     }
   }, [where]);
 
+  const onClickBack = () => {
+    router.back();
+    dispatch(resetPlaceData({ nullText }));
+    setText('');
+  };
+
   return (
     <Wrapper>
       <>
         <HeaderContainer>
           <HeaderLeftSide>
-            <BackButton onClick={() => router.back()}>
+            <BackButton onClick={onClickBack}>
               <BackIcon src={'/img/header/backbutton.svg'} />
             </BackButton>
           </HeaderLeftSide>
