@@ -94,9 +94,7 @@ const RequestInfo = () => {
 
     dispatch(addCurationData(data));
 
-    if (status === 'success') {
-      router.push('/feed');
-    }
+    router.push('/feed');
 
     resetState();
   };
