@@ -54,29 +54,35 @@ const AddComment = () => {
 
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
   const onSubmit = async (e: React.SyntheticEvent) => {
-    router.push(`/feed/${postId}`);
-    e.preventDefault();
+    if (placeName === '') {
+      alert('식당을 선택해주세요!');
+    } else {
+      router.push(`/feed/${postId}`);
+      e.preventDefault();
 
-    try {
-      // const formData = new FormData();
-      // formData.append('place_image', imagePath);
+      try {
+        // const formData = new FormData();
+        // formData.append('place_image', imagePath);
 
-      const data = {
-        place,
-        description,
-        place_image: imagePath,
-      };
+        const data = {
+          place,
+          description,
+          place_image: imagePath,
+        };
 
-      // formData.append('place', stringPlace);
-      // formData.append('place_image', imagePath);
-      // formData.append('description', description);
+        // formData.append('place', stringPlace);
+        // formData.append('place_image', imagePath);
+        // formData.append('description', description);
 
-      const access_token = localStorage.getItem('access_token');
-      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-      const res = axios.post(`/feed/${postId}/comment/`, data);
-      console.log('res', res);
-    } catch (error) {
-      console.error('error', error);
+        const access_token = localStorage.getItem('access_token');
+        axios.defaults.headers.common[
+          'Authorization'
+        ] = `Bearer ${access_token}`;
+        const res = axios.post(`/feed/${postId}/comment/`, data);
+        console.log('res', res);
+      } catch (error) {
+        console.error('error', error);
+      }
     }
   };
 
@@ -113,6 +119,7 @@ const AddComment = () => {
     dispatch(resetPlaceData({ nullText }));
     setText('');
   };
+
   return (
     <Wrapper>
       <>
