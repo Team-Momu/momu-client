@@ -8,6 +8,11 @@ import {
   deleteSelectedStateThunk,
 } from '@slices/select/selectSlice';
 import { userInfo } from '@slices/user/userThunk';
+import defaultImage from '@public/img/defaultProfile.png';
+import selectedButton from '@public/img/select/SelectedButton.svg';
+import unselectedButton from '@public/img/select/unSelectedButton.svg';
+import otherUserSelectedButton from '@public/img/select/OtherUserSelectedButton.svg';
+import line from '@public/img/Line.png';
 
 interface Props {
   userId: number;
@@ -50,12 +55,12 @@ const CommentCard: FC<Props> = ({
 
   function ButtonChoice() {
     if (selectedState === true && user === userId) {
-      return <img src={'/img/select/SelectedButton.svg'} />;
+      return <Image src={selectedButton} />;
     } else if (selectedState === false && user === userId) {
-      return <img src={'/img/select/unSelectedButton.svg'} />;
+      return <Image src={unselectedButton} />;
     }
     if (selectedState === true && user !== userId) {
-      return <img src={'/img/select/OtherUserSelectedButton.svg'} />;
+      return <Image src={otherUserSelectedButton} />;
     } else if (selectedState === false && user !== userId) {
       return <></>;
     }
@@ -93,7 +98,7 @@ const CommentCard: FC<Props> = ({
               <ProfileImgContainer>
                 {writerProfile === null ? (
                   <Image
-                    src={'/img/defaultProfile.png'}
+                    src={defaultImage}
                     width={'28'}
                     height={'28'}
                     objectFit="cover"
@@ -108,7 +113,9 @@ const CommentCard: FC<Props> = ({
                 )}
               </ProfileImgContainer>
               <UserNickName>{writerName}</UserNickName>
-              <LineImg src={'/img/Line.png'} />
+              <LineImg>
+                <Image src={line} height={'15'} />
+              </LineImg>
               <UserMbti>{writerMbti}</UserMbti>
             </UserContainer>
             <WrittenDate>{createAt}</WrittenDate>
@@ -169,9 +176,8 @@ const UserNickName = styled.div`
   color: #191919;
 `;
 
-const LineImg = styled.img`
+const LineImg = styled.div`
   padding: 2px 8px 0 8px;
-  height: 15px;
   margin-top: 5px;
 `;
 const UserMbti = styled.div`

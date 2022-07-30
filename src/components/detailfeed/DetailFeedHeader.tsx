@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styled from 'styled-components';
+import Image from 'next/image';
+import shareButton from '@public/img/header/sharebutton.svg';
 import {
   BackButton,
   BackIcon,
@@ -37,7 +39,7 @@ const DetailFeedHeader = () => {
         </HeaderLeftSide>
         <ShareButton onClick={shareUrl}>
           <CopyToClipboard text={url}>
-            <ShareIcon src={'/img/header/sharebutton.svg'} />
+            <Image src={shareButton} width={'19'} height={'26'} />
           </CopyToClipboard>
         </ShareButton>
       </HeaderContainer>
@@ -50,9 +52,4 @@ export default DetailFeedHeader;
 
 const ShareButton = styled.button`
   margin-right: 21px;
-`;
-
-const ShareIcon = styled.img`
-  width: 18.67px;
-  height: 25.67px;
 `;

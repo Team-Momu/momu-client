@@ -34,4 +34,4 @@ interface IProfileContent {
   };
 }
 
-export type { IProfileContent };
+export type { IProfileContent, ICurationInfo };

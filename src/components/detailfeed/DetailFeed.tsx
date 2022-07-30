@@ -1,25 +1,33 @@
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import { getCurationByIdThunk } from '@slices/curation/detailCurationPostSlice';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import DetailFeedHeader from './DetailFeedHeader';
 import GetCurationCard from 'components/feed/GetCurationCard';
 import styled from 'styled-components';
 import { DivisionLine } from 'styles/commentstyle/CommentStyle';
+import { useRouter } from 'next/router';
 
 interface Props {
   postId: string | string[] | undefined;
 }
 
 const DetailFeedContents: FC<Props> = ({ postId }) => {
-  const post = parseInt(postId as string);
+  const router = useRouter();
+  const post = router.query.id;
+
+  console.log(post);
+
+  // console.log(postNum);
   const curation = useAppSelector(
     (state: RootState) => state.detailCuration.data
   );
-
+  // console.log(post);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getCurationByIdThunk(post));
+    // const post = parseInt(postId as string);
+    const postNum = parseInt(post as string);
+    dispatch(getCurationByIdThunk(postNum));
   }, []);
 
   useEffect(() => {

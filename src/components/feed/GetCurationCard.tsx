@@ -10,6 +10,9 @@ import { FC } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import defaultImage from '@public/img/defaultProfile.png';
+import scrapped from '@public/img/scrap/Scrapped.png';
+import scrap from '@public/img/scrap/Scrap.svg';
+import line from '@public/img/Line.png';
 
 interface Props {
   area: string;
@@ -51,7 +54,12 @@ const GetCurationCard: FC<Props> = ({
   const isScrapped = useAppSelector((state: RootState) => state.scrap);
   const [drink, setDrink] = useState('');
   const [countPerson, setCountPerson] = useState('');
-  const [scrapState, setScrapState] = useState(scrapFlag);
+
+  const [scrapState, setScrapState] = useState<boolean>();
+
+  useEffect(() => {
+    setScrapState(scrapFlag);
+  }, [scrapFlag]);
 
   useEffect(() => {
     switch (isDrink) {
@@ -118,11 +126,7 @@ const GetCurationCard: FC<Props> = ({
             </SecondLineInfo>
           </GotoDetailButton>
           <ScrapButton onClick={onClick}>
-            {scrapState ? (
-              <img src={'/img/scrap/Scrapped.png'} />
-            ) : (
-              <img src={'/img/scrap/Scrap.svg'} />
-            )}
+            {scrapState ? <Image src={scrapped} /> : <Image src={scrap} />}
           </ScrapButton>
         </UpperContainer>
         <AdditionalText>{additionalText}</AdditionalText>
@@ -139,7 +143,9 @@ const GetCurationCard: FC<Props> = ({
             />
           </ProfileImg>
           <USerId>{usernickname}</USerId>
-          <LineImg src={'/img/Line.png'} />
+          <LineImg>
+            <Image src={line} height={'15'} />
+          </LineImg>
           <Mukbti>{mukbti}</Mukbti>
         </BottomInfo>
         <BottomInfo>
@@ -160,7 +166,7 @@ const GotoDetailButton = styled.button`
 `;
 
 const CurationContainer = styled.div`
-  width: 341px;
+  width: 339px;
   height: 193px;
   border: 1px solid #191919;
   margin: 16px 0;
@@ -202,7 +208,7 @@ const InfoText = styled.div`
   font-size: 20px;
   line-height: 24px;
 `;
-//카드 디자인 방해하지 않도록 width넘어가면 말줄임으로 표시
+
 const AdditionalText = styled.div`
   text-align: left;
   font-family: 'Pretendard';
@@ -244,9 +250,8 @@ const USerId = styled.div`
   padding-top: 17px;
 `;
 
-const LineImg = styled.img`
+const LineImg = styled.div`
   padding: 2px 8px 0 8px;
-  height: 15px;
   margin-top: 17px;
 `;
 

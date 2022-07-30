@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import DetailFeedContents from 'components/detailfeed/DetailFeed';
 import DetailFeedHeader from 'components/detailfeed/DetailFeedHeader';
 import NavBar from '@common/NavBar';
@@ -16,18 +16,18 @@ const DetailFeed = () => {
     router.push(`/comment/${postId}`);
   }, []);
 
-  console.log(postId);
-
   return (
     <Wrapper className="relative">
       <HeaderContainer className="sticky top-0">
         <DetailFeedHeader />
       </HeaderContainer>
-      <DetailFeedContents postId={post} />
-      <CommentListContainer>
+      <DetailFeedContentsContainer>
+        <DetailFeedContents postId={post} />
+      </DetailFeedContentsContainer>
+      <ContentContainer>
         <CommentList postId={postId} />
-      </CommentListContainer>
-      <ButtonContainer className="sticky bottom-0">
+      </ContentContainer>
+      <ButtonContainer className="fixed">
         <AddCurationButton onClick={writeComment}>
           큐레이션 하기
         </AddCurationButton>
@@ -46,11 +46,18 @@ const HeaderContainer = styled.div`
   z-index: 1;
 `;
 
-const CommentListContainer = styled.div`
-  height: 100%;
+const DetailFeedContentsContainer = styled.div`
+  justify-items: center;
+  margin-left: 2px;
 `;
 
-const ButtonContainer = styled.div``;
+const ButtonContainer = styled.div`
+  width: 343px;
+  &.fixed {
+    position: fixed;
+    top: 748px;
+  }
+`;
 
 const AddCurationButton = styled.button`
   margin-bottom: 10px;
@@ -67,4 +74,8 @@ const AddCurationButton = styled.button`
   color: #ffffff;
 
   background-color: #f57a08;
+`;
+
+const ContentContainer = styled.div`
+  padding-bottom: 64px;
 `;
