@@ -16,6 +16,7 @@ import {
 import axios from 'axios';
 import { tryParsePattern } from 'next/dist/build/webpack/plugins/jsconfig-paths-plugin';
 import useImage from '../../utils/hooks/useImage';
+import Image from 'next/image';
 
 const AddComment = () => {
   const { description, handleInputLength } = useCheckLength();
@@ -51,6 +52,8 @@ const AddComment = () => {
   const post = router.query.id;
   const postId = parseInt(post as string);
 
+  console.log(imagePath);
+
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
   const onSubmit = async (e: React.SyntheticEvent) => {
     router.push(`/feed/${postId}`);
@@ -58,6 +61,7 @@ const AddComment = () => {
 
     try {
       // const formData = new FormData();
+      // formData.append('place_image', imagePath);
 
       const data = {
         place,
@@ -222,6 +226,7 @@ const UploadedImg = styled.img`
   top: 0px;
   width: 343px;
   height: 206px;
+  object-fit: cover;
 `;
 const ImageUploadArea = styled.div`
   padding-top: 70px;

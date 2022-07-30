@@ -64,8 +64,6 @@ const RequestInfo = () => {
     dispatch(addCurationSlice.actions.resetActiveInTime());
     dispatch(addCurationSlice.actions.resetActiveInDrink());
     dispatch(addCurationSlice.actions.resetActiveInCount());
-
-    setText('');
   };
 
   const onChangeDescription = useCallback(
