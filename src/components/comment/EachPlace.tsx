@@ -24,8 +24,6 @@ const EachPlace: FC<Props> = ({ placeData, address, name, closeModal }) => {
     closeModal();
   }, []);
 
-  console.log(selectedPlace);
-
   return (
     <Wrapper>
       <button onClick={onClick}>

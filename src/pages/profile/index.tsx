@@ -68,6 +68,11 @@ const Home: NextPage = () => {
       formData.append('nickname', nickname);
       formData.append('profile_img', imagePath);
 
+      for (const [name, value] of formData) {
+        console.log(`name🔥 : ${name}`);
+        console.log(`value🔥 : ${value}`);
+      }
+
       dispatch(setProfile(formData));
     }
   };

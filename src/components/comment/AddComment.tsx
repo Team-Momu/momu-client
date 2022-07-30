@@ -31,6 +31,11 @@ const AddComment = () => {
   );
   const place = useAppSelector((state: RootState) => state.placechoice.place);
 
+  useEffect(() => {
+    console.log('place', place);
+    console.log('typeof place', typeof place);
+  }, [place]);
+
   const [text, setText] = useState('');
   useEffect(() => {
     setText(placeName);
@@ -47,23 +52,19 @@ const AddComment = () => {
   const postId = parseInt(post as string);
 
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
-  const onSubmit = async () => {
+  const onSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
     try {
-      const comment = new FormData();
+      const formData = new FormData();
+      const stringPlace = JSON.stringify(place);
 
-      comment.append('place_image', imagePath);
-      comment.append('place', place);
-      comment.append('description', description);
-      comment.append('select_flag', 'this is test code');
+      formData.append('place_image', imagePath);
+      formData.append('place', stringPlace);
+      formData.append('description', description);
 
-      for (const [name, value] of comment) {
-        console.log(`name🔥 : ${name}`);
-        console.log(`value🔥 : ${value}`);
-      }
-
-      const access_token = localStorage.getItem('access_token');
-      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-      const res = axios.post(`/feed/${post}/comment/`, comment);
+      // const access_token = localStorage.getItem('access_token');
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+      const res = axios.post(`/feed/${post}/comment/`, formData);
       console.log('res', res);
     } catch (error) {
       console.error('error', error);
@@ -125,7 +126,7 @@ const AddComment = () => {
       <InnerContainer>
         <GuideText>사진 (선택)</GuideText>
         <ImageWrapper>
-          <form action="">
+          <form>
             <ImgUploadInput
               type="file"
               id="image-upload"

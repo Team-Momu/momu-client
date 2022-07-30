@@ -23,7 +23,7 @@ import { onChangeLocation } from 'utils/common/onChangeLocation';
 const RequestInfo = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { additionalComment, handleInputLength } = useCheckLength();
+  const { description, handleInputLength } = useCheckLength();
   const [text, setText] = useState('');
 
   const { sinchon } = useSelector(
@@ -100,8 +100,6 @@ const RequestInfo = () => {
 
     resetState();
   };
-
-  console.log(data);
 
   const onClickBackButton = () => {
     router.back();
