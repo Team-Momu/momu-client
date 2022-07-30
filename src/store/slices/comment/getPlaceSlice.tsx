@@ -4,7 +4,8 @@ import axios from 'axios';
 
 const initialState: IGetPlaceData = {
   status: '',
-  error: null,
+  error: '',
+  pending: false,
   message: '',
   data: [],
   page: 0,
@@ -19,27 +20,27 @@ export const getPlaceDatasThunk = createAsyncThunk(
   }
 );
 
-export const getCommentSlice = createSlice({
+export const getPlaceSlice = createSlice({
   name: 'comments',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getPlaceDatasThunk.pending, (state) => {
-        state.status = 'pending';
+        state.pending = true;
       })
-      .addCase(getPlaceDatasThunk.fulfilled, (state, { payload }) => {
-        state.message = payload.message;
-        state.data = payload.data;
-        state.page = payload.page;
-        state.total = payload.total;
-        state.status = 'fulfilled';
+      .addCase(getPlaceDatasThunk.fulfilled, (state, action) => {
+        state.message = action.payload.message;
+        state.data = action.payload.data;
+        state.page = action.payload.page;
+        state.total = action.payload.total;
+        state.pending = false;
       })
       .addCase(getPlaceDatasThunk.rejected, (state, action) => {
-        state.status = 'rejected';
-        state.error = action.error;
+        state.pending = false;
+        console.error(action.error);
       });
   },
 });
 
-export default getCommentSlice.reducer;
+export default getPlaceSlice.reducer;
