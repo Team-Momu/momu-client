@@ -11,15 +11,17 @@ import { setProfile } from '@slices/profileSet/profileSetThunk';
 import { userInfo } from '@slices/user/userThunk';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
+import useImage from '../../utils/hooks/useImage';
 
 const Home: NextPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [nickname, setNickname] = useState('');
   const [active, setActive] = useState(false);
-  const [imagePath, setImagePath] = useState<Blob | string>('');
-  const [createObjectURL, setCreateObjectURL] = useState<string | null>(null);
+
   const status = useSelector((state: RootState) => state.profileSet.status);
+
+  const { imagePath, createObjectURL, handleImagePath } = useImage();
 
   // useEffect(() => {
   //   dispatch(userInfo());
@@ -56,28 +58,6 @@ const Home: NextPage = () => {
     },
     [active, nickname]
   );
-
-  const onChangeImages = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      // typeof e.target.files is Array-like Objects
-      if (e.target.files) {
-        // 값이 존재하면 백엔드로 보낼 데이터 업데이트
-        setImagePath(e.target.files[0]);
-
-        // Image src 에 들어갈 값 업데이트
-        const [file] = e.target.files;
-        if (file) {
-          setCreateObjectURL(URL.createObjectURL(file));
-        } else {
-          setCreateObjectURL(null);
-        }
-      }
-    },
-    [imagePath]
-  );
-
-  // 한글 입력 방지
-  const handleKeyDown = () => {};
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -156,7 +136,7 @@ const Home: NextPage = () => {
               type="file"
               id="image-upload"
               hidden
-              onChange={onChangeImages}
+              onChange={handleImagePath}
               pattern="[a-zA-Z0-9]"
             />
             <label htmlFor="image-upload" style={labelStyle}>

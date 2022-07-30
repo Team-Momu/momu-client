@@ -13,9 +13,12 @@ import {
   HeaderLeftSide,
   Line,
 } from 'styles/headerstyle/HeaderCommonStyle';
+import axios from 'axios';
+import { tryParsePattern } from 'next/dist/build/webpack/plugins/jsconfig-paths-plugin';
+import useImage from '../../utils/hooks/useImage';
 
 const AddComment = () => {
-  const { additionalComment, handleInputLength } = useCheckLength();
+  const { description, handleInputLength } = useCheckLength();
   const router = useRouter();
   // isSelected true이면 input 텍스트, 모달 클로즈,
   const isSelected = useAppSelector(
@@ -27,7 +30,6 @@ const AddComment = () => {
     (state: RootState) => state.placechoice.place.place_name
   );
   const place = useAppSelector((state: RootState) => state.placechoice.place);
-  console.log(place);
 
   const [text, setText] = useState('');
   useEffect(() => {
@@ -38,44 +40,34 @@ const AddComment = () => {
   const dispatch = useAppDispatch();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [whereToGo, setWhereToGo] = useState('');
-  const [keyword, setWhere] = useState('');
+  const [where, setWhere] = useState('');
+  const { imagePath, createObjectURL, handleImagePath } = useImage();
 
-  const [imagePath, setImagePath] = useState('');
-  const [createObjectURL, setCreateObjectURL] = useState(null);
-
-  //이미지 업로드를 위한 코드
-  const onChangeImages = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      //@ts-ignore
-      const [file] = e.target.files;
-      // @ts-ignore
-      setCreateObjectURL(URL.createObjectURL(file));
-    },
-    []
-  );
   const post = router.query.id;
   const postId = parseInt(post as string);
 
-  console.log(postId);
-
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
-  const onSubmit = () => {
-    const comment = new FormData();
-    comment.append('image', imagePath);
-    //@ts-ignore
-    comment.append('place', place);
-    comment.append('additionalComment', additionalComment);
+  const onSubmit = async () => {
+    try {
+      const comment = new FormData();
 
-    for (const [name, value] of comment) {
-      console.log(`🍓name : ${name}`);
-      console.log(` 🍓value: ${value}`);
+      comment.append('place_image', imagePath);
+      comment.append('place', place);
+      comment.append('description', description);
+      comment.append('select_flag', 'this is test code');
+
+      for (const [name, value] of comment) {
+        console.log(`name🔥 : ${name}`);
+        console.log(`value🔥 : ${value}`);
+      }
+
+      const access_token = localStorage.getItem('access_token');
+      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+      const res = axios.post(`/feed/${post}/comment/`, comment);
+      console.log('res', res);
+    } catch (error) {
+      console.error('error', error);
     }
-
-    //const comment=useAppSelector((state:RootState)=>)
-    //const comment = Object.assign(place:{place}, formData, additionalComment);
-    //console.log(comment);
-
-    //dispatch(addCommentThunk({ postId, comment }));
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -86,14 +78,11 @@ const AddComment = () => {
     setWhereToGo(value);
   };
 
-  console.log(additionalComment);
-
   const onSubmitPlace = useCallback(
     (e: React.SyntheticEvent) => {
       e.preventDefault();
       setWhereToGo('');
       setWhere(whereToGo);
-
       setIsOpen(true);
     },
     [whereToGo]
@@ -103,14 +92,11 @@ const AddComment = () => {
     setIsOpen(false);
     setText('');
   }
-
-  console.log(keyword);
-
   useEffect(() => {
-    dispatch(getPlaceDatasThunk(keyword));
-  }, [keyword]);
-
-  console.log(placeDatas);
+    if (where !== '') {
+      dispatch(getPlaceDatasThunk(where));
+    }
+  }, [where]);
 
   return (
     <Wrapper>
@@ -144,7 +130,7 @@ const AddComment = () => {
               type="file"
               id="image-upload"
               hidden
-              onChange={onChangeImages}
+              onChange={handleImagePath}
               pattern="[a-zA-Z0-9]"
             />
             <label
@@ -173,7 +159,7 @@ const AddComment = () => {
             handleInputLength(e, 35);
           }}
           placeholder="자세하게 적어줄 수록 채택확률이 높아요!&#13;(최대 38자)"
-          value={additionalComment}
+          value={description}
         ></CommentTextInput>
       </InnerContainer>
 
