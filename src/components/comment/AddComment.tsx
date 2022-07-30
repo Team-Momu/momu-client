@@ -54,12 +54,13 @@ const AddComment = () => {
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+
     try {
       const formData = new FormData();
       const stringPlace = JSON.stringify(place);
 
-      formData.append('place_image', imagePath);
       formData.append('place', stringPlace);
+      formData.append('place_image', imagePath);
       formData.append('description', description);
 
       // const access_token = localStorage.getItem('access_token');
