@@ -17,14 +17,12 @@ import axios from 'axios';
 import { tryParsePattern } from 'next/dist/build/webpack/plugins/jsconfig-paths-plugin';
 import useImage from '../../utils/hooks/useImage';
 import Image from 'next/image';
+import { resetPlaceData } from '@slices/comment/PlaceChoiceSlice';
 
 const AddComment = () => {
   const { description, handleInputLength } = useCheckLength();
   const router = useRouter();
-  // isSelected true이면 input 텍스트, 모달 클로즈,
-  const isSelected = useAppSelector(
-    (state: RootState) => state.placechoice.isSelected
-  );
+  const nullText = '';
 
   //input에서 placeName보여주기
   const placeName = useAppSelector(
@@ -110,12 +108,17 @@ const AddComment = () => {
     }
   }, [where]);
 
+  const onClickBack = () => {
+    router.back();
+    dispatch(resetPlaceData({ nullText }));
+    setText('');
+  };
   return (
     <Wrapper>
       <>
         <HeaderContainer>
           <HeaderLeftSide>
-            <BackButton onClick={() => router.back()}>
+            <BackButton onClick={onClickBack}>
               <BackIcon src={'/img/header/backbutton.svg'} />
             </BackButton>
           </HeaderLeftSide>
