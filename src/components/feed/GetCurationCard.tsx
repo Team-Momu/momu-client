@@ -129,7 +129,12 @@ const GetCurationCard: FC<Props> = ({
             {scrapState ? <Image src={scrapped} /> : <Image src={scrap} />}
           </ScrapButton>
         </UpperContainer>
-        <AdditionalText>{additionalText}</AdditionalText>
+        {additionalText === '' ? (
+          <NullTextContainer></NullTextContainer>
+        ) : (
+          <AdditionalText>{additionalText}</AdditionalText>
+        )}
+
         <Line />
       </InfoContainer>
       <BottomContainer>
@@ -207,6 +212,9 @@ const InfoText = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
+`;
+const NullTextContainer = styled.div`
+  height: 57px;
 `;
 
 const AdditionalText = styled.div`
