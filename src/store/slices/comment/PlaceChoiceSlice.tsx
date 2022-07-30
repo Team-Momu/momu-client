@@ -1,10 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   IPlaceData,
   IPlaceObject,
 } from 'utils/interfaces/comment/commentInterface';
+import axios from 'axios';
 
 const initialState: any = {
+  message: '',
+  pending: false,
   isSelected: false,
   place: {
     address_name: '',
@@ -21,6 +24,14 @@ const initialState: any = {
     y: '',
   },
 };
+
+export const postPlaceDataThunk = createAsyncThunk(
+  'placechoice/postPlaceData',
+  async (placeData: IPlaceData, thunkAPI) => {
+    const response = await axios.post('/feed/search/', placeData);
+    return response.data;
+  }
+);
 
 export const PlaceChoiceSlice = createSlice({
   name: 'placechoice',
@@ -48,6 +59,21 @@ export const PlaceChoiceSlice = createSlice({
       state.place = action.payload.placeData;
       state.isSelected = action.payload.isSelected;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(postPlaceDataThunk.pending, (state) => {
+        state.pending = true;
+      })
+      .addCase(postPlaceDataThunk.fulfilled, (state, action) => {
+        state.place = action.payload.data;
+        state.message = action.payload.message;
+        state.pending = false;
+      })
+      .addCase(postPlaceDataThunk.rejected, (state, action) => {
+        state.pending = false;
+        console.error(action.error);
+      });
   },
 });
 

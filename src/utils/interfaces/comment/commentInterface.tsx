@@ -78,6 +78,11 @@ interface ICommentThunkProps {
   postId: number;
 }
 
+interface IAddCommentProps {
+  formData: any;
+  postId: number;
+}
+
 export type {
   IPlaceData,
   IGetPlaceData,
@@ -85,4 +90,5 @@ export type {
   ICommentPost,
   ICommentPostLists,
   ICommentThunkProps,
+  IAddCommentProps,
 };

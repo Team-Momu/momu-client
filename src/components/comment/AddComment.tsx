@@ -18,6 +18,7 @@ import { tryParsePattern } from 'next/dist/build/webpack/plugins/jsconfig-paths-
 import useImage from '../../utils/hooks/useImage';
 import Image from 'next/image';
 import { resetPlaceData } from '@slices/comment/PlaceChoiceSlice';
+import { addCommentThunk } from '@slices/comment/addCommentSlice';
 
 const AddComment = () => {
   const { description, handleInputLength } = useCheckLength();
@@ -28,12 +29,9 @@ const AddComment = () => {
   const placeName = useAppSelector(
     (state: RootState) => state.placechoice.place.place_name
   );
-  const place = useAppSelector((state: RootState) => state.placechoice.place);
-
-  useEffect(() => {
-    console.log('place', place);
-    console.log('typeof place', typeof place);
-  }, [place]);
+  const place_id = useAppSelector(
+    (state: RootState) => state.placechoice.place.id
+  );
 
   const [text, setText] = useState('');
   useEffect(() => {
@@ -60,30 +58,15 @@ const AddComment = () => {
       router.push(`/feed/${postId}`);
       e.preventDefault();
 
-      try {
-        // const formData = new FormData();
-        // formData.append('place_image', imagePath);
+      const formData = new FormData();
+      formData.append('place_id', place_id);
+      formData.append('place_img', imagePath);
+      formData.append('description', description);
 
-        const data = {
-          place,
-          description,
-          place_image: imagePath,
-        };
-
-        // formData.append('place', stringPlace);
-        // formData.append('place_image', imagePath);
-        // formData.append('description', description);
-
-        const access_token = localStorage.getItem('access_token');
-        axios.defaults.headers.common[
-          'Authorization'
-        ] = `Bearer ${access_token}`;
-        const res = axios.post(`/feed/${postId}/comment/`, data);
-        console.log('res', res);
-      } catch (error) {
-        console.error('error', error);
-      }
+      dispatch(addCommentThunk({ formData, postId }));
     }
+
+    dispatch(resetPlaceData({ nullText }));
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
