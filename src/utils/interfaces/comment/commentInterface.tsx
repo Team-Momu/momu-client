@@ -21,6 +21,7 @@ interface IPlaceObject {
 }
 
 interface IGetPlaceData {
+  pending: boolean;
   status: any;
   error: any;
   message: string;
