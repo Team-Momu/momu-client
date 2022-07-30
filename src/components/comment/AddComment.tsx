@@ -53,6 +53,7 @@ const AddComment = () => {
 
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
   const onSubmit = async (e: React.SyntheticEvent) => {
+    router.push(`/feed/${postId}`);
     e.preventDefault();
 
     try {
