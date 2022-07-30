@@ -56,16 +56,21 @@ const AddComment = () => {
     e.preventDefault();
 
     try {
-      const formData = new FormData();
-      const stringPlace = JSON.stringify(place);
+      // const formData = new FormData();
 
-      formData.append('place', stringPlace);
-      formData.append('place_image', imagePath);
-      formData.append('description', description);
+      const data = {
+        place,
+        description,
+        place_image: imagePath,
+      };
 
-      // const access_token = localStorage.getItem('access_token');
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-      const res = axios.post(`/feed/${post}/comment/`, formData);
+      // formData.append('place', stringPlace);
+      // formData.append('place_image', imagePath);
+      // formData.append('description', description);
+
+      const access_token = localStorage.getItem('access_token');
+      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+      const res = axios.post(`/feed/${postId}/comment/`, data);
       console.log('res', res);
     } catch (error) {
       console.error('error', error);
