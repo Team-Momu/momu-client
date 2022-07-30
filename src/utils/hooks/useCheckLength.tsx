@@ -1,6 +1,6 @@
 import { useState } from 'react';
 const useCheckLength = () => {
-  const [additionalComment, setAdditionalComment] = useState('');
+  const [description, setAdditionalComment] = useState('');
 
   const handleInputLength = (
     e:
@@ -20,7 +20,7 @@ const useCheckLength = () => {
     }
   };
 
-  return { additionalComment, handleInputLength };
+  return { description, handleInputLength };
 };
 
 export default useCheckLength;

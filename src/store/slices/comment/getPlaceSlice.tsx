@@ -3,7 +3,8 @@ import { IGetPlaceData } from 'utils/interfaces/comment/commentInterface';
 import axios from 'axios';
 
 const initialState: IGetPlaceData = {
-  pending: false,
+  status: '',
+  error: null,
   message: '',
   data: [],
   page: 0,
@@ -25,18 +26,18 @@ export const getCommentSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getPlaceDatasThunk.pending, (state) => {
-        state.pending = true;
+        state.status = 'pending';
       })
-      .addCase(getPlaceDatasThunk.fulfilled, (state, action) => {
-        state.message = action.payload.message;
-        state.data = action.payload.data;
-        state.page = action.payload.page;
-        state.total = action.payload.total;
-        state.pending = false;
+      .addCase(getPlaceDatasThunk.fulfilled, (state, { payload }) => {
+        state.message = payload.message;
+        state.data = payload.data;
+        state.page = payload.page;
+        state.total = payload.total;
+        state.status = 'fulfilled';
       })
       .addCase(getPlaceDatasThunk.rejected, (state, action) => {
-        state.pending = false;
-        console.error(action.error);
+        state.status = 'rejected';
+        state.error = action.error;
       });
   },
 });

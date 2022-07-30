@@ -4,7 +4,7 @@ import {
   IPlaceObject,
 } from 'utils/interfaces/comment/commentInterface';
 
-const initialState: IPlaceObject = {
+const initialState: any = {
   isSelected: false,
   place: {
     address_name: '',
