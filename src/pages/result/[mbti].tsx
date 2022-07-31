@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../store/store';
+import wrapper, { RootState, useAppDispatch } from '../../store/store';
 import { userInfo } from '@slices/user/userThunk';
 import close from '@public/img/closeModal.png';
 import Korea from '@public/img/mbti/korea1.png';
@@ -30,32 +30,26 @@ import {
   RightInnerUpBox,
   TitleText,
 } from '@mbti/mbtiStyle';
+import axios from 'axios';
 
-const Mbti = () => {
+const Mbti = ({ data, cookie }: any) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  // const asPathArray = router.asPath.split('/');
-  // const mbti = asPathArray[asPathArray.length - 1];
-  // const mbti = useSelector((state: RootState) => state.mbti.mbti);
+
   const [second, setSecond] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [mbtiState, setMbtiState] = useState<string | undefined>('');
   const [type, setType] = useState<string | undefined>('');
 
-  const me = useSelector((state: RootState) => state.user.me);
-  const mbti = me.data?.mbti;
+  const mbti = data?.mbti;
 
   useEffect(() => {
-    dispatch(userInfo());
-  }, []);
-
-  useEffect(() => {
-    if (me) {
-      setMbtiState(me.data?.mbti.mbti);
-      setType(me.data.mbti.type);
+    if (data) {
+      setMbtiState(data?.mbti.mbti);
+      setType(data?.mbti.type);
     }
-  }, [me]);
+  }, [data]);
 
   function openModal() {
     setIsOpen(true);
@@ -324,5 +318,18 @@ const MomuStartButton = styled.button`
   font-size: 20px;
   line-height: 20px;
 `;
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req }) => {
+      const cookie = req ? req.headers.cookie : '';
+      if (cookie && req) {
+        axios.defaults.headers.common['Cookie'] = cookie;
+      }
+      const { payload } = await store.dispatch(userInfo());
+      const data = payload;
+      return { props: { data, cookie } };
+    }
+);
 
 export default Mbti;
