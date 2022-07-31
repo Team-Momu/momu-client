@@ -8,9 +8,9 @@ import { GetServerSideProps } from 'next';
 
 const DetailFeed = ({ id }: any) => {
   const router = useRouter();
-  console.log('➡️', id);
+
   const postId = Number(id);
-  console.log('➡️123', id);
+
   const writeComment = useCallback(() => {
     router.push(`/comment/${postId}`);
   }, []);
@@ -21,11 +21,9 @@ const DetailFeed = ({ id }: any) => {
         <DetailFeedHeader />
       </HeaderContainer>
       <DetailFeedContentsContainer>
-        <DetailFeedContents postId={postId} />
+        {/*<DetailFeedContents postId={postId} />*/}
       </DetailFeedContentsContainer>
-      <ContentContainer>
-        <CommentList postId={postId} />
-      </ContentContainer>
+      <ContentContainer>{/*<CommentList postId={postId} />*/}</ContentContainer>
       <ButtonContainer className="fixed">
         <AddCurationButton onClick={writeComment}>
           큐레이션 하기
