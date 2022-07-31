@@ -65,9 +65,9 @@ const FeedList = ({ hasNext, percent }: Props) => {
     moreChecker(next);
   }, [curationInfo]);
 
-  useEffect(() => {
-    console.log('🔥', curations);
-  }, [curations]);
+  // useEffect(() => {
+  //   console.log('🔥', curations);
+  // }, [curations]);
 
   return (
     <Wrapper>
