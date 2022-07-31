@@ -33,7 +33,7 @@ const profileSetSlice = createSlice({
     });
     builder.addCase(setProfile.fulfilled, (state, { payload }) => {
       state.status = 'success';
-      state.result = payload;
+      state.result = payload.message;
     });
     builder.addCase(setProfile.rejected, (state, { payload }) => {
       state.status = 'failed';

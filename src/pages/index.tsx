@@ -11,15 +11,12 @@ import { userInfo } from '@slices/user/userThunk';
 import { useEffect } from 'react';
 import Spinner from '@common/Spinner';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 // @ts-ignore
 const Home: NextPage = ({ data, cookie }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   dispatch(userInfo());
-  // });
 
   // SSR 방식
   useEffect(() => {

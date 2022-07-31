@@ -1,6 +1,10 @@
 import type { NextPage } from 'next';
 import { useSelector } from 'react-redux';
-import wrapper, { RootState, useAppDispatch } from 'store/store';
+import wrapper, {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from 'store/store';
 import styled from 'styled-components';
 import { CSSProperties, useCallback, useEffect, useState } from 'react';
 import defaultProfile from '@public/img/defaultProfile.png';
@@ -22,21 +26,29 @@ const Home: NextPage = ({ data }) => {
   const [active, setActive] = useState(false);
   const status = useSelector((state: RootState) => state.profileSet.status);
   const { imagePath, createObjectURL, handleImagePath } = useImage();
+  const message = useAppSelector((state: RootState) => state.profileSet.result);
+
+  useEffect(() => {
+    console.log('🔥message🔥', message);
+    if (message === '프로필 설정 성공') {
+      router.push('/profile/1');
+    }
+  }, [message]);
 
   // 서버사이드 유저 인증 과정
   useEffect(() => {
     // 닉네임은 설정했고 mbti 안하면
-    if (data?.data?.nickname && data?.data?.mbti !== '') {
-      router.push('/feed');
-    }
-    // 닉네임, mbti 모두 설정했으면
-    if (data?.data?.nickname && data?.data?.mbti === '') {
-      router.push('/profile/1');
-    }
-    if (data?.data?.nickname) {
-      router.push('/profile/1');
-    }
-  }, [data]);
+    // if (data?.data?.nickname && data?.data?.mbti !== '') {
+    //   router.push('/feed');
+    // }
+    // // 닉네임, mbti 모두 설정했으면
+    // if (data?.data?.nickname && data?.data?.mbti === '') {
+    //   router.push('/profile/1');
+    // }
+    // if (data?.data?.nickname) {
+    //   router.push('/profile/1');
+    // }
+  }, []);
 
   const onChangeInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
