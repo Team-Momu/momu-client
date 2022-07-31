@@ -21,7 +21,7 @@ const DetailFeed = ({ id }: any) => {
         <DetailFeedHeader />
       </HeaderContainer>
       <DetailFeedContentsContainer>
-        {/*<DetailFeedContents postId={postId} />*/}
+        <DetailFeedContents postId={postId} />
       </DetailFeedContentsContainer>
       <ContentContainer>{/*<CommentList postId={postId} />*/}</ContentContainer>
       <ButtonContainer className="fixed">
