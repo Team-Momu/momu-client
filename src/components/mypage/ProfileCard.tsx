@@ -19,21 +19,12 @@ const ProfileCard = () => {
       <Wrapper>
         <ImgContainer>
           <ProfileImg>
-            {profileImg === null ? (
-              <Image
-                src={defaultImage}
-                width={'80'}
-                height={'80'}
-                objectFit="cover"
-              />
-            ) : (
-              <Image
-                src={profileImg}
-                width={'80'}
-                height={'80'}
-                objectFit="cover"
-              />
-            )}
+            <Image
+              src={profileImg || defaultImage}
+              width={80}
+              height={80}
+              objectFit="cover"
+            />
           </ProfileImg>
         </ImgContainer>
         <UserInfo>

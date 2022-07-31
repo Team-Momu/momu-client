@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import GetCurationCard from './GetCurationCard';
 import { useSelector } from 'react-redux';
 import { userInfo } from '@slices/user/userThunk';
+import { useState } from 'react';
 import Spinner from '@common/Spinner';
 
 interface Props {
@@ -19,6 +20,13 @@ const FeedList = ({ hasNext, percent }: Props) => {
   const curations = useAppSelector(
     (state: RootState) => state.curation.data.results
   );
+  const curationInfo = useAppSelector(
+    (state: RootState) => state.curation.data
+  );
+  const [end, setEnd] = useState(false);
+  const [next, setNext] = useState('');
+  const [previous, setPrevious] = useState('');
+  const [cursor, setCursor] = useState('');
 
   // 인증 정보 확인
   const dispatch = useAppDispatch();
@@ -34,12 +42,31 @@ const FeedList = ({ hasNext, percent }: Props) => {
 
   // hasNext === true
 
+  // useEffect(() => {
+  //   // 더 가져오는 thunk 실행
+  //   if (hasNext && !end) {
+  //     dispatch(getMoreCurationPostListsThunk());
+  //   }
+  // }, [hasNext, percent, end]);
+
+  const moreChecker = (next: string) => {
+    if (next === null) {
+      // 끝인 경우
+      setEnd(true);
+      return;
+    }
+    const queryString = next.split('=')[1];
+    setCursor(queryString);
+    return;
+  };
+
   useEffect(() => {
-    // 더 가져오는 thunk 실행
-    // if (hasNext) {
-    //   dispatch(getMoreCurationPostListsThunk());
-    // }
-  }, [hasNext, percent]);
+    const { next } = curationInfo;
+    const { previous } = curationInfo;
+    setNext(next);
+    setPrevious(previous);
+    moreChecker(next);
+  }, [curationInfo]);
 
   return (
     <Wrapper>
@@ -75,7 +102,6 @@ const Wrapper = styled.div`
   padding: 0;
   margin: 0;
   overflow: scroll;
-  border: 2px dotted red;
 `;
 
 const GotoDetailButton = styled.button``;
