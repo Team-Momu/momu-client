@@ -25,28 +25,32 @@ const CommentList: FC<Props> = ({ postId }) => {
   }, [commentLists.length]);
   const commentCount = commentLists.length;
 
+  useEffect(() => {
+    console.log('commentLsits', commentLists);
+  }, [commentLists]);
+
   return (
     <Wrapper>
       <CommentCountHeader commentCount={commentCount} />
       {commentLists.map((comment) => {
         return (
           <>
-            {/*<CommentCard*/}
-            {/*  key={comment.id + `${new Date()}`}*/}
-            {/*  userId={comment.post_user}*/}
-            {/*  postId={postId}*/}
-            {/*  commentId={comment.id}*/}
-            {/*  selectedFlag={comment.select_flag}*/}
-            {/*  placeImg={comment.place_img}*/}
-            {/*  writerName={comment.user.nickname}*/}
-            {/*  writerProfile={comment.user.profile_img}*/}
-            {/*  writerMbti={comment.user.mbti}*/}
-            {/*  description={comment.description}*/}
-            {/*  placeName={comment.place.place_name}*/}
-            {/*  placeAddress={comment.place.road_address_name}*/}
-            {/*  placeCategory={comment.place.category_name}*/}
-            {/*  createAt={comment.created_at}*/}
-            {/*/>*/}
+            <CommentCard
+              key={comment.id + `${new Date()}`}
+              userId={comment.post_user}
+              postId={postId}
+              commentId={comment.id}
+              selectedFlag={comment.select_flag}
+              placeImg={comment.place_img}
+              writerName={comment.user.nickname}
+              writerProfile={comment.user.profile_img}
+              writerMbti={comment.user.mbti}
+              description={comment.description}
+              placeName={comment.place.place_name}
+              placeAddress={comment.place.road_address_name}
+              placeCategory={comment.place.category_name}
+              createAt={comment.created_at}
+            />
           </>
         );
       })}

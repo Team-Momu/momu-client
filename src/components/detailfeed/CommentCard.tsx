@@ -48,11 +48,8 @@ const CommentCard: FC<Props> = ({
   const [selectedState, setSelectedState] = useState(selectedFlag);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state: RootState) => state.user.me.data.id);
-
-  useEffect(() => {
-    dispatch(userInfo());
-  }, []);
-
+  const test = useAppSelector((state: RootState) => state.user);
+  console.log('test🥶', test);
   function ButtonChoice() {
     if (selectedState === true && user === userId) {
       return <Image src={selectedButton} />;
