@@ -38,7 +38,7 @@ const CommentList: FC<Props> = ({ postId }) => {
             <CommentCard
               key={comment.id + `${new Date()}`}
               userId={comment.post_user}
-              postId={postId}
+              postId={3}
               commentId={comment.id}
               selectedFlag={comment.select_flag}
               placeImg={comment.place_img}
