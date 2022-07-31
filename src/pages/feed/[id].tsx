@@ -3,9 +3,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import DetailFeedContents from 'components/detailfeed/DetailFeed';
 import DetailFeedHeader from 'components/detailfeed/DetailFeedHeader';
-import NavBar from '@common/NavBar';
 import CommentList from 'components/detailfeed/CommentList';
-import { relative } from 'path';
 
 const DetailFeed = () => {
   const router = useRouter();

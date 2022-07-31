@@ -1,5 +1,9 @@
 import type { NextPage } from 'next';
-import { RootState, useAppDispatch, useAppSelector } from 'store/store';
+import wrapper, {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from 'store/store';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -11,13 +15,14 @@ import { userInfo } from '@slices/user/userThunk';
 const Home: NextPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const me = useSelector((state: RootState) => state.user.me);
-  useEffect(() => {
-    dispatch(userInfo());
-  }, []);
-  useEffect(() => {
-    console.log('me', me);
-  }, [me]);
+
+  // const me = useSelector((state: RootState) => state.user.me);
+  // useEffect(() => {
+  //   dispatch(userInfo());
+  // }, []);
+  // useEffect(() => {
+  //   console.log('me', me);
+  // }, [me]);
 
   return (
     <>
@@ -79,5 +84,13 @@ const KakaoText = styled.div`
 
   color: #000000;
 `;
+
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) =>
+//     async ({ req, res }) => {
+//       const me = await store.dispatch(userInfo());
+//       return { props: { me } };
+//     }
+// );
 
 export default Home;
