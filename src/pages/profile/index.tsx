@@ -12,6 +12,7 @@ import { userInfo } from '@slices/user/userThunk';
 import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import useImage from '../../utils/hooks/useImage';
+import Spinner from '@common/Spinner';
 
 // @ts-ignore
 const Home: NextPage = ({ data }) => {
@@ -71,11 +72,6 @@ const Home: NextPage = ({ data }) => {
       formData.append('nickname', nickname);
       formData.append('profile_img', imagePath);
 
-      for (const [name, value] of formData) {
-        console.log(`name🔥 : ${name}`);
-        console.log(`value🔥 : ${value}`);
-      }
-
       dispatch(setProfile(formData));
     }
   };
@@ -106,64 +102,58 @@ const Home: NextPage = ({ data }) => {
     zIndex: '1',
   };
 
-  // useEffect(() => {
-  //   console.log(imagePath);
-  // }, [imagePath]);
-
-  useEffect(() => {
-    if (status === 'success') {
-      // if (me.data.nickname) {
-      router.push('/profile/1');
-      // }
-    }
-  }, [status]);
-
   return (
     <>
-      <SetProfileText>프로필 설정</SetProfileText>
-      <ServiceDescriptionText>
-        신촌, 홍대 지역 기반 맛집 큐레이션 서비스 모무입니다. 프로필 설정을 하고
-        모무에서 활동을 시작해보세요!
-      </ServiceDescriptionText>
-      <div style={NicknameText}>닉네임</div>
-      <form
-        onSubmit={onSubmit}
-        encType="multipart/form-data"
-        autoComplete="off"
-      >
-        <NicknameInput
-          value={nickname}
-          onChange={onChangeInput}
-          placeholder="10자 이내 영문으로 작성해주세요!"
-          required
-        />
-        <ProfileImageText>프로필 사진</ProfileImageText>
-        <div style={ImagePositionBox}>
-          <div style={RelativeBox}>
-            <input
-              type="file"
-              id="image-upload"
-              hidden
-              onChange={handleImagePath}
-              pattern="[a-zA-Z0-9]"
+      {data ? (
+        <Spinner />
+      ) : (
+        <>
+          <SetProfileText>프로필 설정</SetProfileText>
+          <ServiceDescriptionText>
+            신촌, 홍대 지역 기반 맛집 큐레이션 서비스 모무입니다. 프로필 설정을
+            하고 모무에서 활동을 시작해보세요!
+          </ServiceDescriptionText>
+          <div style={NicknameText}>닉네임</div>
+          <form
+            onSubmit={onSubmit}
+            encType="multipart/form-data"
+            autoComplete="off"
+          >
+            <NicknameInput
+              value={nickname}
+              onChange={onChangeInput}
+              placeholder="10자 이내 영문으로 작성해주세요!"
+              required
             />
-            <label htmlFor="image-upload" style={labelStyle}>
-              <Image width={25} height={20} src={camera}></Image>
-            </label>
-            <Image
-              loader={myLoader}
-              src={createObjectURL || defaultProfile}
-              width={100}
-              height={100}
-              style={defaultImageStyle}
-              objectFit="cover"
-            ></Image>
-          </div>
-        </div>
-        <NextButton active={active} disabled={!active}>
-          다음
-        </NextButton>
-      </form>
+            <ProfileImageText>프로필 사진</ProfileImageText>
+            <div style={ImagePositionBox}>
+              <div style={RelativeBox}>
+                <input
+                  type="file"
+                  id="image-upload"
+                  hidden
+                  onChange={handleImagePath}
+                  pattern="[a-zA-Z0-9]"
+                />
+                <label htmlFor="image-upload" style={labelStyle}>
+                  <Image width={25} height={20} src={camera}></Image>
+                </label>
+                <Image
+                  loader={myLoader}
+                  src={createObjectURL || defaultProfile}
+                  width={100}
+                  height={100}
+                  style={defaultImageStyle}
+                  objectFit="cover"
+                ></Image>
+              </div>
+            </div>
+            <NextButton active={active} disabled={!active}>
+              다음
+            </NextButton>
+          </form>
+        </>
+      )}
     </>
   );
 };
