@@ -28,16 +28,16 @@ const Home: NextPage = ({ data }) => {
   }, []);
 
   // 서버사이드 유저 인증 과정
-  // useEffect(() => {
-  //   // 닉네임은 설정했고 mbti 안하면
-  //   if (data.nickname && data.mbti !== '') {
-  //     router.push('/feed');
-  //   }
-  //   // 닉네임, mbti 모두 설정했으면
-  //   if (data.nickname && data.mbti === '') {
-  //     router.push('/profile/1');
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    // 닉네임은 설정했고 mbti 안하면
+    if (data.nickname && data.mbti !== '') {
+      router.push('/feed');
+    }
+    // 닉네임, mbti 모두 설정했으면
+    if (data.nickname && data.mbti === '') {
+      router.push('/profile/1');
+    }
+  }, [data]);
 
   const onChangeInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -270,9 +270,10 @@ export const getServerSideProps = wrapper.getServerSideProps(
     async ({ req, res }) => {
       const { payload } = await store.dispatch(userInfo());
       const cookie = req ? req.headers.cookie : '';
+      if (cookie && req) {
+        axios.defaults.headers.common['Cookie'] = cookie;
+      }
 
-      console.log('cookie🔥', cookie);
-      console.log('payload🔥', payload);
       const { data } = payload;
 
       return { props: { data } };
