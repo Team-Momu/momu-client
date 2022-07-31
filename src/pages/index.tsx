@@ -22,17 +22,20 @@ const Home: NextPage = ({ data, cookie }) => {
   // });
 
   // SSR 방식
-  // useEffect(() => {
-  //   if (data.nickname === null) {
-  //     router.push('/profile');
-  //   }
-  //   if (data.nickname && data.mbti === null) {
-  //     router.push('/profile/1');
-  //   }
-  //   if (data.nickname && data.mbti) {
-  //     router.push('/feed');
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (data.message === 'Request failed with status code 401') {
+      data = null;
+    }
+    if (data.nickname === null) {
+      router.push('/profile');
+    }
+    if (data.nickname && data.mbti === null) {
+      router.push('/profile/1');
+    }
+    if (data.nickname && data.mbti) {
+      router.push('/feed');
+    }
+  }, [data]);
 
   useEffect(() => {
     console.log('data🔥🔥', data);
