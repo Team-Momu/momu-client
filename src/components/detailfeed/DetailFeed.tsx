@@ -14,7 +14,7 @@ interface Props {
 
 const DetailFeedContents = ({ req }: any) => {
   const router = useRouter();
-  console.log(req);
+  console.log('🔥req🔥', req);
   // console.log(postNum);
   const curation = useAppSelector(
     (state: RootState) => state.detailCuration.data
@@ -22,11 +22,10 @@ const DetailFeedContents = ({ req }: any) => {
   // console.log(post);
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   // const post = parseInt(postId as string);
-  //
-  //   // dispatch(getCurationByIdThunk(postNum));
-  // }, []);
+  useEffect(() => {
+    // const post = parseInt(postId as string);
+    dispatch(getCurationByIdThunk(3));
+  }, []);
 
   useEffect(() => {
     console.log('curation', curation);
