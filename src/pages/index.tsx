@@ -101,14 +101,14 @@ const KakaoText = styled.div`
 // 유저 정보를 서버사이드에서 받아옴
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
-    async ({ req, res }) => {
+    async ({ req }) => {
       const { payload } = await store.dispatch(userInfo());
       const cookie = req ? req.headers.cookie : '';
+      if (cookie && req) {
+        axios.defaults.headers.common['Cookie'] = cookie;
+      }
 
-      console.log(cookie);
-      const { data } = payload;
-
-      return { props: { data } };
+      return { props: {} };
     }
 );
 
