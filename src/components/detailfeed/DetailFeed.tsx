@@ -9,10 +9,10 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 
 interface Props {
-  ssrPostId: string;
+  postId: number;
 }
 
-const DetailFeedContents = ({ ssrPostId }: Props) => {
+const DetailFeedContents = ({ postId }: Props) => {
   const router = useRouter();
 
   const curation = useAppSelector(
@@ -22,8 +22,7 @@ const DetailFeedContents = ({ ssrPostId }: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const id = Number(ssrPostId);
-    dispatch(getCurationByIdThunk(id));
+    dispatch(getCurationByIdThunk(postId));
   }, []);
 
   useEffect(() => {

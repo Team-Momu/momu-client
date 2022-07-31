@@ -9,8 +9,10 @@ import { GetServerSideProps } from 'next';
 const DetailFeed = ({ id }: any) => {
   const router = useRouter();
 
+  const postId = Number(id);
+
   const writeComment = useCallback(() => {
-    router.push(`/comment/${id}`);
+    router.push(`/comment/${postId}`);
   }, []);
 
   return (
@@ -19,10 +21,10 @@ const DetailFeed = ({ id }: any) => {
         <DetailFeedHeader />
       </HeaderContainer>
       <DetailFeedContentsContainer>
-        <DetailFeedContents ssrPostId={id} />
+        <DetailFeedContents postId={postId} />
       </DetailFeedContentsContainer>
       <ContentContainer>
-        <CommentList postId={id} />
+        <CommentList postId={postId} />
       </ContentContainer>
       <ButtonContainer className="fixed">
         <AddCurationButton onClick={writeComment}>

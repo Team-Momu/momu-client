@@ -8,7 +8,7 @@ import CommentCard from './CommentCard';
 import CommentCountHeader from './CommentCountHeader';
 
 interface Props {
-  postId: string;
+  postId: number;
 }
 
 const CommentList: FC<Props> = ({ postId }) => {
