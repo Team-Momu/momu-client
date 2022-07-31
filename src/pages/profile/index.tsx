@@ -277,7 +277,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, res }) => {
       const { payload } = await store.dispatch(userInfo());
-      // console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥', payload);
+
       const { data } = payload;
       return { props: { data } };
     }

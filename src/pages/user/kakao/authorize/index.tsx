@@ -24,19 +24,8 @@ const KakaoRedirect = ({ query }) => {
       });
   }, []);
 
-  return (
-    <Wrapper>
-      <Spinner />
-    </Wrapper>
-  );
+  return <Spinner />;
 };
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
 
 //@ts-ignore
 export const getServerSideProps: GetServerSideProps = async (context) => {
