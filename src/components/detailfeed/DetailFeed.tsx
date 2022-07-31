@@ -9,22 +9,21 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 
 interface Props {
-  params: string | undefined;
+  ssrPostId: string;
 }
 
-const DetailFeedContents = ({ req }: any) => {
+const DetailFeedContents = ({ ssrPostId }: Props) => {
   const router = useRouter();
-  console.log('🔥req🔥', req);
-  // console.log(postNum);
+
   const curation = useAppSelector(
     (state: RootState) => state.detailCuration.data
   );
-  // console.log(post);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // const post = parseInt(postId as string);
-    dispatch(getCurationByIdThunk(3));
+    const id = Number(ssrPostId);
+    dispatch(getCurationByIdThunk(id));
   }, []);
 
   useEffect(() => {
@@ -54,18 +53,6 @@ const DetailFeedContents = ({ req }: any) => {
       <DivisionLine />
     </>
   );
-};
-
-//@ts-ignore
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const { req } = context;
-    return {
-      props: { req },
-    };
-  } catch (error) {
-    console.error(error);
-  }
 };
 
 export default DetailFeedContents;

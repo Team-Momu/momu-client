@@ -23,7 +23,7 @@ const DetailFeed = ({ id }: any) => {
         <DetailFeedHeader />
       </HeaderContainer>
       <DetailFeedContentsContainer>
-        <DetailFeedContents postId={post} />
+        <DetailFeedContents ssrPostId={id} />
       </DetailFeedContentsContainer>
       <ContentContainer>
         <CommentList postId={postId} />
