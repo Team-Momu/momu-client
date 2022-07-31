@@ -265,14 +265,18 @@ const NextButton = styled.button<{ active?: boolean }>`
   background: ${({ active }) => (active ? '#F57A08' : '#BFBFBF')};
 `;
 
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   (store) =>
-//     async ({ req, res }) => {
-//       const { payload } = await store.dispatch(userInfo());
-//
-//       const { data } = payload;
-//       return { props: { data } };
-//     }
-// );
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req, res }) => {
+      const { payload } = await store.dispatch(userInfo());
+      const cookie = req ? req.headers.cookie : '';
+
+      console.log('cookie🔥', cookie);
+      console.log('payload🔥', payload);
+      const { data } = payload;
+
+      return { props: { data } };
+    }
+);
 
 export default Home;
