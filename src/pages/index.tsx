@@ -107,8 +107,9 @@ export const getServerSideProps = wrapper.getServerSideProps(
       if (cookie && req) {
         axios.defaults.headers.common['Cookie'] = cookie;
       }
+      const data = payload;
 
-      return { props: {} };
+      return { props: { data } };
     }
 );
 
