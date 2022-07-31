@@ -30,13 +30,14 @@ const Home: NextPage = ({ data }) => {
   // 서버사이드 유저 인증 과정
   useEffect(() => {
     // 닉네임은 설정했고 mbti 안하면
-    if (data.nickname && data.mbti !== '') {
-      router.push('/feed');
-    }
-    // 닉네임, mbti 모두 설정했으면
-    if (data.nickname && data.mbti === '') {
-      router.push('/profile/1');
-    }
+    // if (data.nickname && data.mbti !== '') {
+    //   router.push('/feed');
+    // }
+    // // 닉네임, mbti 모두 설정했으면
+    // if (data.nickname && data.mbti === '') {
+    //   router.push('/profile/1');
+    // }
+    console.log(data);
   }, [data]);
 
   const onChangeInput = useCallback(
