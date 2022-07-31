@@ -33,7 +33,9 @@ const Home: NextPage = ({ data }) => {
     // if (data.nickname && data.mbti === '') {
     //   router.push('/profile/1');
     // }
-    console.log(data);
+    if (data.nickname) {
+      router.push('/profile/1');
+    }
   }, [data]);
 
   const onChangeInput = useCallback(
