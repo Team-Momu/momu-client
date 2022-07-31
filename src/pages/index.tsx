@@ -23,6 +23,8 @@ const Home: NextPage = ({ data }) => {
 
   // SSR 방식
   useEffect(() => {
+    console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥', data);
+
     if (data.nickname === null) {
       router.push('/profile');
     }
