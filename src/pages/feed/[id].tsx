@@ -8,9 +8,9 @@ import { GetServerSideProps } from 'next';
 
 const DetailFeed = ({ id }: any) => {
   const router = useRouter();
-
+  console.log('➡️', id);
   const postId = Number(id);
-
+  console.log('➡️123', id);
   const writeComment = useCallback(() => {
     router.push(`/comment/${postId}`);
   }, []);
