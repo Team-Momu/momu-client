@@ -19,9 +19,9 @@ export const userInfo = createAsyncThunk(
     try {
       // const access_token = localStorage.getItem('access_token');
       // axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-      axios.defaults.headers.common[
-        'Authorization'
-      ] = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU5MzE5NDA4LCJpYXQiOjE2NTkyMzMwMDgsImp0aSI6ImM0YmVkMjBjNTg3OTRhZDg5NTZiMWYyYzljZDdiODQxIiwidXNlcl9pZCI6N30.2bqARWZttgVG-PLMAe8Q5aHDU13og2FCaBpfeLcBBIs`;
+      // axios.defaults.headers.common[
+      //   'Authorization'
+      // ] = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjU5MzE5NDA4LCJpYXQiOjE2NTkyMzMwMDgsImp0aSI6ImM0YmVkMjBjNTg3OTRhZDg5NTZiMWYyYzljZDdiODQxIiwidXNlcl9pZCI6N30.2bqARWZttgVG-PLMAe8Q5aHDU13og2FCaBpfeLcBBIs`;
       const response = await axios.get(`/user/profile/`);
       return response.data;
     } catch (error) {
