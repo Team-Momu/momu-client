@@ -45,20 +45,28 @@ const initialState: ICurationPostLists = {
 // ]
 
 // createAsyncThunk(typePrefix: string, payloadCreator: AsyncThunkPayloadCreator, options?: AsyncThunkOptions): AsyncThunk
+
+interface SystemError {
+  message: string;
+}
+
 export const getCurationPostListsThunk = createAsyncThunk(
   'curation/getCurationPostLists',
-  async () => {
-    const response = await axios.get('/feed/');
-    return response.data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.get('/feed/');
+      return response.data;
+    } catch (error) {
+      const e = error as SystemError;
+      return rejectWithValue({ message: e.message });
+    }
   }
 );
 
 export const getMoreCurationPostListsThunk = createAsyncThunk(
   'curation/getMoreCurationPostLists',
-  async () => {
-    const response = await axios.get(
-      `/feed/?cursor=cj0xJnA9MjAyMi0wNy0xMSsxMiUzQTQ0JTNBNDEuOTAzNjU2JTJCMDAlM0EwMA%3D%3D`
-    );
+  async (cursor: string) => {
+    const response = await axios.get(`/feed/?cursor=${cursor}`);
     return response.data;
   }
 );
@@ -67,7 +75,11 @@ export const getMoreCurationPostListsThunk = createAsyncThunk(
 export const curationPostSlice = createSlice({
   name: 'curation',
   initialState,
-  reducers: {},
+  reducers: {
+    setCursor: (state, action) => {
+      state.cursor = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCurationPostListsThunk.pending, (state) => {
@@ -88,7 +100,6 @@ export const curationPostSlice = createSlice({
       .addCase(getFilteredCurationThunk.fulfilled, (state, action) => {
         state.message = action.payload.message;
         state.data = action.payload.data;
-        state.status = action.payload.pending;
         state.status = 'success';
       })
       .addCase(getMoreCurationPostListsThunk.fulfilled, (state, action) => {

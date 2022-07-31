@@ -28,29 +28,26 @@ const Feed: NextPage = () => {
   //   }
   // }, [me]);
 
-  const onScroll = useCallback(
-    (e: any) => {
-      const a = e.target.scrollTop;
-      const b = e.target.scrollHeight - e.target.clientHeight;
-      const percent = Math.round((a / b) * 100);
-
-      if (percent >= 90) {
-        setHasNext(true);
-        setPercent(percent);
-      } else {
-        setHasNext(false);
-      }
-    },
-    [percent, hasNext]
-  );
+  const onScroll = (e: any) => {
+    const a = e.target.scrollTop;
+    const b = e.target.scrollHeight - e.target.clientHeight;
+    const percent = Math.round((a / b) * 100);
+    console.log('🔥🔥🔥🔥', percent);
+    if (percent >= 90) {
+      setHasNext(true);
+      setPercent(percent);
+    } else {
+      setHasNext(false);
+    }
+  };
 
   return (
-    <Wrapper>
+    <Wrapper onScroll={() => alert('hi')}>
       <MainFeed />
       <SliderContainer className="sticky top-0">
         <FeedHeader />
       </SliderContainer>
-      <FeedContainer onScroll={onScroll}>
+      <FeedContainer>
         <FeedList hasNext={hasNext} percent={percent} />
       </FeedContainer>
       <NavContainer className="fixed">
