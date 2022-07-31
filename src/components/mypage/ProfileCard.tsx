@@ -12,6 +12,7 @@ const ProfileCard = () => {
 
   useEffect(() => {
     dispatch(userInfo());
+    console.log(user.id);
   }, []);
 
   return (
@@ -29,7 +30,7 @@ const ProfileCard = () => {
         </ImgContainer>
         <UserInfo>
           <UserName>{user?.nickname}</UserName>
-          <UserMbti>{user?.mbti}</UserMbti>
+          <UserMbti>{user?.mbti.mbti}</UserMbti>
         </UserInfo>
         <BottomInfo>
           <UserLevel>
