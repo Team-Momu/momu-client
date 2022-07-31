@@ -16,18 +16,22 @@ const Home: NextPage = ({ data }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
+  // useEffect(() => {
+  //   dispatch(userInfo());
+  // });
+
   // SSR 방식
-  useEffect(() => {
-    if (data.nickname === null) {
-      router.push('/profile');
-    }
-    if (data.nickname && data.mbti === null) {
-      router.push('/profile/1');
-    }
-    if (data.nickname && data.mbti) {
-      router.push('/feed');
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data.nickname === null) {
+  //     router.push('/profile');
+  //   }
+  //   if (data.nickname && data.mbti === null) {
+  //     router.push('/profile/1');
+  //   }
+  //   if (data.nickname && data.mbti) {
+  //     router.push('/feed');
+  //   }
+  // }, [data]);
 
   return (
     <>
@@ -95,15 +99,15 @@ const KakaoText = styled.div`
 `;
 
 // 유저 정보를 서버사이드에서 받아옴
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req, res }) => {
-      const { payload } = await store.dispatch(userInfo());
-
-      const { data } = payload;
-
-      return { props: { data } };
-    }
-);
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) =>
+//     async ({ req, res }) => {
+//       const { payload } = await store.dispatch(userInfo());
+//
+//       const { data } = payload;
+//
+//       return { props: { data } };
+//     }
+// );
 
 export default Home;
