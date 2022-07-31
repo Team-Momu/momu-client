@@ -20,9 +20,7 @@ const Home: NextPage = ({ data }) => {
   const dispatch = useAppDispatch();
   const [nickname, setNickname] = useState('');
   const [active, setActive] = useState(false);
-
   const status = useSelector((state: RootState) => state.profileSet.status);
-
   const { imagePath, createObjectURL, handleImagePath } = useImage();
 
   useEffect(() => {

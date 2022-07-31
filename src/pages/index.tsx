@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import { userInfo } from '@slices/user/userThunk';
 import { useEffect } from 'react';
 import Spinner from '@common/Spinner';
+import axios from 'axios';
 
 // @ts-ignore
 const Home: NextPage = ({ data }) => {
@@ -94,20 +95,21 @@ const KakaoText = styled.div`
   font-size: 20px;
   line-height: 24px;
   /* identical to box height */
-
   color: #000000;
 `;
 
 // 유저 정보를 서버사이드에서 받아옴
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   (store) =>
-//     async ({ req, res }) => {
-//       const { payload } = await store.dispatch(userInfo());
-//
-//       const { data } = payload;
-//
-//       return { props: { data } };
-//     }
-// );
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req, res }) => {
+      const { payload } = await store.dispatch(userInfo());
+      const cookie = req ? req.headers.cookie : '';
+
+      console.log(cookie);
+      const { data } = payload;
+
+      return { props: { data } };
+    }
+);
 
 export default Home;
