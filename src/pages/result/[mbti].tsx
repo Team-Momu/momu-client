@@ -44,12 +44,12 @@ const Mbti = ({ data, cookie }: any) => {
 
   const mbti = data?.mbti;
 
-  useEffect(() => {
-    if (data) {
-      setMbtiState(data?.mbti.mbti);
-      setType(data?.mbti.type);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     setMbtiState(data?.mbti.mbti);
+  //     setType(data?.mbti.type);
+  //   }
+  // }, [data]);
 
   function openModal() {
     setIsOpen(true);
@@ -67,9 +67,9 @@ const Mbti = ({ data, cookie }: any) => {
       <Illustration />
       <CommentText>당신의 먹비티아이 유형은</CommentText>
       <CommentText second>
-        {mbtiState}({type})<span style={{ color: '#191919' }}> 입니다.</span>
+        {/*{mbtiState}({type})<span style={{ color: '#191919' }}> 입니다.</span>*/}
       </CommentText>
-      <Description>{mbti?.description}</Description>
+      {/*<Description>{mbti?.description}</Description>*/}
       <WhatIsMbti onClick={openModal}>먹비티아이란?</WhatIsMbti>
       <MomuStartButton onClick={pushToFeed}>모무 시작하기</MomuStartButton>
       <Modal
