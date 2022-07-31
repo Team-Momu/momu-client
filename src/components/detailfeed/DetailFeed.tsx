@@ -6,17 +6,15 @@ import GetCurationCard from 'components/feed/GetCurationCard';
 import styled from 'styled-components';
 import { DivisionLine } from 'styles/commentstyle/CommentStyle';
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 
 interface Props {
-  postId: string | string[] | undefined;
+  params: string | undefined;
 }
 
-const DetailFeedContents: FC<Props> = ({ postId }) => {
+const DetailFeedContents = ({ req }: any) => {
   const router = useRouter();
-  const post = router.query.id;
-
-  console.log(post);
-
+  console.log(req);
   // console.log(postNum);
   const curation = useAppSelector(
     (state: RootState) => state.detailCuration.data
@@ -24,11 +22,11 @@ const DetailFeedContents: FC<Props> = ({ postId }) => {
   // console.log(post);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    // const post = parseInt(postId as string);
-    const postNum = parseInt(post as string);
-    dispatch(getCurationByIdThunk(postNum));
-  }, []);
+  // useEffect(() => {
+  //   // const post = parseInt(postId as string);
+  //
+  //   // dispatch(getCurationByIdThunk(postNum));
+  // }, []);
 
   useEffect(() => {
     console.log('curation', curation);
@@ -57,6 +55,18 @@ const DetailFeedContents: FC<Props> = ({ postId }) => {
       <DivisionLine />
     </>
   );
+};
+
+//@ts-ignore
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    const { req } = context;
+    return {
+      props: { req },
+    };
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export default DetailFeedContents;
