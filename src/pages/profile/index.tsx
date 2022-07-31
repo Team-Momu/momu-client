@@ -267,7 +267,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
       const { data } = payload;
 
-      return { props: { data } };
+      return { props: { data, cookie } };
     }
 );
 
