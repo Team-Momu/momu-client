@@ -23,9 +23,10 @@ const Home: NextPage = ({ data, cookie }) => {
 
   // SSR 방식
   useEffect(() => {
-    if (data.message === 'Request failed with status code 401') {
-      data = null;
-    }
+    // if (data.message === 'Request failed with status code 401') {
+    //   data = null;
+    //   return;
+    // }
     if (data.nickname === null) {
       router.push('/profile');
     }
