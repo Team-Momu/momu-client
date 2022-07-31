@@ -23,10 +23,6 @@ const Home: NextPage = ({ data }) => {
   const status = useSelector((state: RootState) => state.profileSet.status);
   const { imagePath, createObjectURL, handleImagePath } = useImage();
 
-  useEffect(() => {
-    dispatch(userInfo());
-  }, []);
-
   // 서버사이드 유저 인증 과정
   useEffect(() => {
     // 닉네임은 설정했고 mbti 안하면
