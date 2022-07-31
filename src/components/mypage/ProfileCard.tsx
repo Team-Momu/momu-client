@@ -12,7 +12,6 @@ const ProfileCard = () => {
 
   useEffect(() => {
     dispatch(userInfo());
-    console.log(user.id);
   }, []);
 
   return (
