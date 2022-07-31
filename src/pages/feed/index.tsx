@@ -17,9 +17,6 @@ const Feed: NextPage = () => {
   const me = useSelector((state: RootState) => state.user.me);
   const [hasNext, setHasNext] = useState(false);
   const [percent, setPercent] = useState(0);
-  useEffect(() => {
-    dispatch(userInfo());
-  }, []);
 
   // useEffect(() => {
   //   if (!me) {

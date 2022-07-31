@@ -31,9 +31,6 @@ const FeedList = ({ hasNext, percent }: Props) => {
   // 인증 정보 확인
   const dispatch = useAppDispatch();
   const me = useSelector((state: RootState) => state.user.me);
-  useEffect(() => {
-    dispatch(userInfo());
-  }, []);
 
   // 처음에 게시물 한번 가져옴
   useEffect(() => {
@@ -67,6 +64,10 @@ const FeedList = ({ hasNext, percent }: Props) => {
     setPrevious(previous);
     moreChecker(next);
   }, [curationInfo]);
+
+  useEffect(() => {
+    console.log('🔥', curations);
+  }, [curations]);
 
   return (
     <Wrapper>
