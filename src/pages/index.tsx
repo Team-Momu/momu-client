@@ -45,38 +45,34 @@ const Home: NextPage = ({ data, cookie }) => {
 
   return (
     <>
-      {data ? (
-        <Spinner />
-      ) : (
-        <div
-          style={{
-            textAlign: 'center',
-            border: '1px dotted blackCurationPostLists',
-            marginTop: '100px',
-          }}
+      <div
+        style={{
+          textAlign: 'center',
+          border: '1px dotted blackCurationPostLists',
+          marginTop: '100px',
+        }}
+      >
+        <h1>❌모무데브 개발 중❌</h1>
+        <button
+          onClick={() => router.push('/profile/1')}
+          style={{ marginBottom: '20px' }}
         >
-          <h1>❌모무데브 개발 중❌</h1>
-          <button
-            onClick={() => router.push('/profile/1')}
-            style={{ marginBottom: '20px' }}
-          >
-            누르면 먹비티아이로 넘어가는 버튼
-          </button>
-          <button onClick={() => router.push('/feed')}>
-            누르면 피드로 넘어가는 버튼
-          </button>
-          <div>dd</div>
-          <KakaoButton
-            onClick={() =>
-              router.push(
-                `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`
-              )
-            }
-          >
-            <KakaoText>카카오 로그인</KakaoText>
-          </KakaoButton>
-        </div>
-      )}
+          누르면 먹비티아이로 넘어가는 버튼
+        </button>
+        <button onClick={() => router.push('/feed')}>
+          누르면 피드로 넘어가는 버튼
+        </button>
+        <div>dd</div>
+        <KakaoButton
+          onClick={() =>
+            router.push(
+              `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`
+            )
+          }
+        >
+          <KakaoText>카카오 로그인</KakaoText>
+        </KakaoButton>
+      </div>
     </>
   );
 };
