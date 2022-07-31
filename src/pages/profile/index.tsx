@@ -259,12 +259,11 @@ const NextButton = styled.button<{ active?: boolean }>`
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, res }) => {
-      const { payload } = await store.dispatch(userInfo());
       const cookie = req ? req.headers.cookie : '';
       if (cookie && req) {
         axios.defaults.headers.common['Cookie'] = cookie;
       }
-
+      const { payload } = await store.dispatch(userInfo());
       const { data } = payload;
 
       return { props: { data, cookie } };
