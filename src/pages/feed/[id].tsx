@@ -23,7 +23,9 @@ const DetailFeed = ({ id }: any) => {
       <DetailFeedContentsContainer>
         <DetailFeedContents postId={postId} />
       </DetailFeedContentsContainer>
-      <ContentContainer>{/*<CommentList postId={postId} />*/}</ContentContainer>
+      <ContentContainer>
+        <CommentList postId={postId} />
+      </ContentContainer>
       <ButtonContainer className="fixed">
         <AddCurationButton onClick={writeComment}>
           큐레이션 하기
