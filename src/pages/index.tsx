@@ -13,7 +13,7 @@ import Spinner from '@common/Spinner';
 import axios from 'axios';
 
 // @ts-ignore
-const Home: NextPage = ({ data }) => {
+const Home: NextPage = ({ data, cookie }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -23,8 +23,6 @@ const Home: NextPage = ({ data }) => {
 
   // SSR 방식
   useEffect(() => {
-    console.log('🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥', data);
-
     if (data.nickname === null) {
       router.push('/profile');
     }
@@ -35,6 +33,11 @@ const Home: NextPage = ({ data }) => {
       router.push('/feed');
     }
   }, [data]);
+
+  useEffect(() => {
+    console.log('data🔥🔥', data);
+    console.log('cookie🔥🔥', cookie);
+  }, [data, cookie]);
 
   return (
     <>
@@ -104,14 +107,13 @@ const KakaoText = styled.div`
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req }) => {
-      const { payload } = await store.dispatch(userInfo());
       const cookie = req ? req.headers.cookie : '';
       if (cookie && req) {
         axios.defaults.headers.common['Cookie'] = cookie;
       }
+      const { payload } = await store.dispatch(userInfo());
       const data = payload;
-
-      return { props: { data } };
+      return { props: { data, cookie } };
     }
 );
 
