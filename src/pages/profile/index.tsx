@@ -1,6 +1,10 @@
 import type { NextPage } from 'next';
 import { useSelector } from 'react-redux';
-import wrapper, { RootState, useAppDispatch } from 'store/store';
+import wrapper, {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from 'store/store';
 import styled from 'styled-components';
 import { CSSProperties, useCallback, useEffect, useState } from 'react';
 import defaultProfile from '@public/img/defaultProfile.png';
@@ -26,16 +30,21 @@ const Home: NextPage = ({ data }) => {
   const { imagePath, createObjectURL, handleImagePath } = useImage();
 
   // 서버사이드 유저 인증 과정
+  // useEffect(() => {
+  //   // 닉네임은 설정했고 mbti 안하면
+  //   if (data.nickname && data.mbti !== '') {
+  //     router.push('/feed');
+  //   }
+  //   // 닉네임, mbti 모두 설정했으면
+  //   if (data.nickname && data.mbti === '') {
+  //     router.push('/profile/1');
+  //   }
+  // }, [data]);
+
+  const me = useAppSelector((state: RootState) => state.user.me);
   useEffect(() => {
-    // 닉네임은 설정했고 mbti 안하면
-    if (data.nickname && data.mbti !== '') {
-      router.push('/feed');
-    }
-    // 닉네임, mbti 모두 설정했으면
-    if (data.nickname && data.mbti === '') {
-      router.push('/profile/1');
-    }
-  }, [data]);
+    dispatch(userInfo());
+  }, []);
 
   const onChangeInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -263,14 +272,14 @@ const NextButton = styled.button<{ active?: boolean }>`
   background: ${({ active }) => (active ? '#F57A08' : '#BFBFBF')};
 `;
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req, res }) => {
-      const { payload } = await store.dispatch(userInfo());
-
-      const { data } = payload;
-      return { props: { data } };
-    }
-);
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) =>
+//     async ({ req, res }) => {
+//       const { payload } = await store.dispatch(userInfo());
+//
+//       const { data } = payload;
+//       return { props: { data } };
+//     }
+// );
 
 export default Home;

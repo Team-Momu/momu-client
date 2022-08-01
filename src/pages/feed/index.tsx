@@ -47,7 +47,7 @@ const Feed: NextPage = () => {
       <SliderContainer className="sticky top-0">
         <FeedHeader />
       </SliderContainer>
-      <FeedContainer onScroll={() => alert('hi')}>
+      <FeedContainer onScroll={onScroll}>
         <FeedList hasNext={hasNext} percent={percent} />
       </FeedContainer>
       <NavContainer className="fixed">
