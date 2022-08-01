@@ -18,6 +18,10 @@ const Feed: NextPage = () => {
   const [hasNext, setHasNext] = useState(false);
   const [percent, setPercent] = useState(0);
 
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
+
   // useEffect(() => {
   //   if (!me) {
   //     alert('로그인이 필요합니다.');

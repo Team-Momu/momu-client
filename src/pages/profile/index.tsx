@@ -19,7 +19,7 @@ import useImage from '../../utils/hooks/useImage';
 import Spinner from '@common/Spinner';
 
 // @ts-ignore
-const Home: NextPage = ({ data }) => {
+const Home: NextPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [nickname, setNickname] = useState('');
@@ -27,6 +27,11 @@ const Home: NextPage = ({ data }) => {
   const status = useSelector((state: RootState) => state.profileSet.status);
   const { imagePath, createObjectURL, handleImagePath } = useImage();
   const message = useAppSelector((state: RootState) => state.profileSet.result);
+
+  const me = useAppSelector((state: RootState) => state.user.me);
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
 
   useEffect(() => {
     console.log('🔥message🔥', message);
@@ -36,19 +41,19 @@ const Home: NextPage = ({ data }) => {
   }, [message]);
 
   // 서버사이드 유저 인증 과정
-  useEffect(() => {
-    // 닉네임은 설정했고 mbti 안하면
-    // if (data?.data?.nickname && data?.data?.mbti !== '') {
-    //   router.push('/feed');
-    // }
-    // // 닉네임, mbti 모두 설정했으면
-    // if (data?.data?.nickname && data?.data?.mbti === '') {
-    //   router.push('/profile/1');
-    // }
-    // if (data?.data?.nickname) {
-    //   router.push('/profile/1');
-    // }
-  }, []);
+  // useEffect(() => {
+  // 닉네임은 설정했고 mbti 안하면
+  // if (data?.data?.nickname && data?.data?.mbti !== '') {
+  //   router.push('/feed');
+  // }
+  // // 닉네임, mbti 모두 설정했으면
+  // if (data?.data?.nickname && data?.data?.mbti === '') {
+  //   router.push('/profile/1');
+  // }
+  // if (data?.data?.nickname) {
+  //   router.push('/profile/1');
+  // }
+  // }, []);
 
   const onChangeInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -270,18 +275,18 @@ const NextButton = styled.button<{ active?: boolean }>`
   background: ${({ active }) => (active ? '#F57A08' : '#BFBFBF')};
 `;
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req, res }) => {
-      const cookie = req ? req.headers.cookie : '';
-      if (cookie && req) {
-        axios.defaults.headers.common['Cookie'] = cookie;
-      }
-      const { payload } = await store.dispatch(userInfo());
-      const { data } = payload;
-
-      return { props: { data, cookie } };
-    }
-);
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) =>
+//     async ({ req, res }) => {
+//       const cookie = req ? req.headers.cookie : '';
+//       if (cookie && req) {
+//         axios.defaults.headers.common['Cookie'] = cookie;
+//       }
+//       const { payload } = await store.dispatch(userInfo());
+//       const { data } = payload;
+//
+//       return { props: { data, cookie } };
+//     }
+// );
 
 export default Home;
