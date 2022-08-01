@@ -70,6 +70,6 @@ const NavContainer = styled.div`
   width: 343px;
   &.fixed {
     position: fixed;
-    top: 740px;
+    top: 695px;
   }
 `;
