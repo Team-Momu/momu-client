@@ -39,12 +39,13 @@ const FeedList = ({ hasNext, percent }: Props) => {
 
   // hasNext === true
 
-  // useEffect(() => {
-  //   // 더 가져오는 thunk 실행
-  //   if (hasNext && !end) {
-  //     dispatch(getMoreCurationPostListsThunk());
-  //   }
-  // }, [hasNext, percent, end]);
+  useEffect(() => {
+    // 더 가져오는 thunk 실행
+    if (hasNext && !end) {
+      console.log('실행');
+      dispatch(getMoreCurationPostListsThunk(cursor));
+    }
+  }, [hasNext, percent, end]);
 
   const moreChecker = (next: string) => {
     if (next === null) {
@@ -64,6 +65,11 @@ const FeedList = ({ hasNext, percent }: Props) => {
     setPrevious(previous);
     moreChecker(next);
   }, [curationInfo]);
+
+  useEffect(() => {
+    console.log('curationInfo🔥', curationInfo);
+    console.log('cursor🔥', cursor);
+  }, [curationInfo, next, cursor]);
 
   return (
     <Wrapper>
