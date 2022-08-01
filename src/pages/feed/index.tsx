@@ -39,12 +39,12 @@ const Feed: NextPage = () => {
   };
 
   return (
-    <Wrapper onScroll={() => alert('hi')}>
+    <Wrapper>
       <MainFeed />
       <SliderContainer className="sticky top-0">
         <FeedHeader />
       </SliderContainer>
-      <FeedContainer>
+      <FeedContainer onScroll={() => alert('hi')}>
         <FeedList hasNext={hasNext} percent={percent} />
       </FeedContainer>
       <NavContainer className="fixed">
@@ -60,6 +60,8 @@ const Wrapper = styled.div``;
 const FeedContainer = styled.div`
   background: #ffffff;
   margin-bottom: 85px;
+  height: 812px;
+  overflow: auto;
 `;
 
 const SliderContainer = styled.div`

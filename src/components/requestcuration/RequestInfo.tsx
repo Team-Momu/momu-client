@@ -83,10 +83,10 @@ const RequestInfo = () => {
 
   const onClickSubmit = (e: React.SyntheticEvent) => {
     if (data.location === '') {
-      return alert('장소를 선택해 주세요!1');
+      return alert('장소를 선택해 주세요!');
     }
     if (data.location === '신촌,홍대 부근 동네를 선택해주세요!') {
-      return alert('장소를 선택해 주세요!2');
+      return alert('장소를 선택해 주세요!');
     }
 
     dispatch(addCurationData(data));
