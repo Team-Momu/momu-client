@@ -174,15 +174,14 @@ const AddComment = () => {
           onRequestClose={closeModal}
           style={{
             overlay: {
-              background: 'none',
+              background: '#727272',
             },
             content: {
               position: 'absolute',
-              width: '343px',
-              height: '743px',
-              top: '-35px',
-
-              margin: 'auto',
+              width: '335px',
+              height: '723px',
+              top: '16px',
+              margin: '0 auto 0 auto',
             },
           }}
         >
