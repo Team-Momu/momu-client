@@ -4,7 +4,11 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import Modal from 'react-modal';
 import { useSelector } from 'react-redux';
-import wrapper, { RootState, useAppDispatch } from '../../store/store';
+import wrapper, {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from '../../store/store';
 import { userInfo } from '@slices/user/userThunk';
 import close from '@public/img/closeModal.png';
 import Korea from '@public/img/mbti/korea1.png';
@@ -32,9 +36,14 @@ import {
 } from '@mbti/mbtiStyle';
 import axios from 'axios';
 
-const Mbti = ({ data, cookie }: any) => {
+const Mbti = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+
+  const data = useAppSelector((state: RootState) => state.user.me);
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
 
   const [second, setSecond] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -319,17 +328,17 @@ const MomuStartButton = styled.button`
   line-height: 20px;
 `;
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req }) => {
-      const cookie = req ? req.headers.cookie : '';
-      if (cookie && req) {
-        axios.defaults.headers.common['Cookie'] = cookie;
-      }
-      const { payload } = await store.dispatch(userInfo());
-      const data = payload;
-      return { props: { data, cookie } };
-    }
-);
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) =>
+//     async ({ req }) => {
+//       const cookie = req ? req.headers.cookie : '';
+//       if (cookie && req) {
+//         axios.defaults.headers.common['Cookie'] = cookie;
+//       }
+//       const { payload } = await store.dispatch(userInfo());
+//       const data = payload;
+//       return { props: { data, cookie } };
+//     }
+// );
 
 export default Mbti;
