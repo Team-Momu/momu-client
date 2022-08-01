@@ -18,22 +18,27 @@ const Home: NextPage = ({ data, cookie }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  // SSR 방식
+  const me = useAppSelector((state: RootState) => state.user.me);
   useEffect(() => {
-    // if (data.message === 'Request failed with status code 401') {
-    //   data = null;
-    //   return;
-    // }
-    if (data.nickname === null) {
-      router.push('/profile');
-    }
-    if (data.nickname && data.mbti === null) {
-      router.push('/profile/1');
-    }
-    if (data.nickname && data.mbti) {
-      router.push('/feed');
-    }
-  }, [data]);
+    dispatch(userInfo());
+  }, []);
+
+  // SSR 방식
+  // useEffect(() => {
+  //   // if (data.message === 'Request failed with status code 401') {
+  //   //   data = null;
+  //   //   return;
+  //   // }
+  //   if (data.nickname === null) {
+  //     router.push('/profile');
+  //   }
+  //   if (data.nickname && data.mbti === null) {
+  //     router.push('/profile/1');
+  //   }
+  //   if (data.nickname && data.mbti) {
+  //     router.push('/feed');
+  //   }
+  // }, [data]);
 
   useEffect(() => {
     console.log('data🔥🔥', data);
@@ -101,17 +106,17 @@ const KakaoText = styled.div`
 `;
 
 // 유저 정보를 서버사이드에서 받아옴
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req }) => {
-      const cookie = req ? req.headers.cookie : '';
-      if (cookie && req) {
-        axios.defaults.headers.common['Cookie'] = cookie;
-      }
-      const { payload } = await store.dispatch(userInfo());
-      const data = payload;
-      return { props: { data, cookie } };
-    }
-);
+// export const getServerSideProps = wrapper.getServerSideProps(
+//   (store) =>
+//     async ({ req }) => {
+//       const cookie = req ? req.headers.cookie : '';
+//       if (cookie && req) {
+//         axios.defaults.headers.common['Cookie'] = cookie;
+//       }
+//       const { payload } = await store.dispatch(userInfo());
+//       const data = payload;
+//       return { props: { data, cookie } };
+//     }
+// );
 
 export default Home;
