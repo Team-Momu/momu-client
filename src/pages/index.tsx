@@ -10,9 +10,13 @@ import styled from 'styled-components';
 import { userInfo } from '@slices/user/userThunk';
 import { useEffect } from 'react';
 import Spinner from '@common/Spinner';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 // @ts-ignore
+
 const Home: NextPage = () => {
+
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -32,14 +36,23 @@ const Home: NextPage = () => {
   const me = useAppSelector((state: RootState) => state.user.me);
 
   useEffect(() => {
+
     dispatch(userInfo());
   }, []);
 
+
+  useEffect(() => {
+    console.log('data🔥🔥', data);
+    console.log('cookie🔥🔥', cookie);
+  }, [data, cookie]);
+
   return (
     <>
+
       {/*{data ? (*/}
       {/*  <Spinner />*/}
       {/*) : (*/}
+
       <div
         style={{
           textAlign: 'center',
@@ -96,11 +109,11 @@ const KakaoText = styled.div`
   font-size: 20px;
   line-height: 24px;
   /* identical to box height */
-
   color: #000000;
 `;
 
 // 유저 정보를 서버사이드에서 받아옴
+
 // export const getServerSideProps = wrapper.getServerSideProps(
 //   (store) =>
 //     async ({ req, res }) => {
@@ -111,5 +124,6 @@ const KakaoText = styled.div`
 //       return { props: { data } };
 //     }
 // );
+
 
 export default Home;

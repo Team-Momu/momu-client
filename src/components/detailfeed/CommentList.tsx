@@ -25,10 +25,14 @@ const CommentList: FC<Props> = ({ postId }) => {
   }, [commentLists.length]);
   const commentCount = commentLists.length;
 
+  useEffect(() => {
+    console.log('commentLsits', commentLists);
+  }, [commentLists]);
+
   return (
     <Wrapper>
       <CommentCountHeader commentCount={commentCount} />
-      {commentLists.map((comment) => {
+      {commentLists?.map((comment) => {
         return (
           <>
             <CommentCard

@@ -4,11 +4,12 @@ import { useCallback, useEffect } from 'react';
 import DetailFeedContents from 'components/detailfeed/DetailFeed';
 import DetailFeedHeader from 'components/detailfeed/DetailFeedHeader';
 import CommentList from 'components/detailfeed/CommentList';
+import { GetServerSideProps } from 'next';
 
-const DetailFeed = () => {
+const DetailFeed = ({ id }: any) => {
   const router = useRouter();
-  const post = router.query.id;
-  const postId = parseInt(post as string);
+
+  const postId = Number(id);
 
   const writeComment = useCallback(() => {
     router.push(`/comment/${postId}`);
@@ -20,7 +21,7 @@ const DetailFeed = () => {
         <DetailFeedHeader />
       </HeaderContainer>
       <DetailFeedContentsContainer>
-        <DetailFeedContents postId={post} />
+        <DetailFeedContents postId={postId} />
       </DetailFeedContentsContainer>
       <ContentContainer>
         <CommentList postId={postId} />
@@ -33,6 +34,19 @@ const DetailFeed = () => {
     </Wrapper>
   );
 };
+
+//@ts-ignore
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  try {
+    const id = context?.params?.id;
+    return {
+      props: { id },
+    };
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export default DetailFeed;
 
 const Wrapper = styled.div`
