@@ -18,8 +18,8 @@ const AppLayout: FC<Props> = ({ children }) => {
 };
 
 const Wrapper = styled.div`
-  width: 414px;
-  height: 767px;
+  width: 375px;
+  height: 750px;
   position: relative;
   margin: auto;
   background: #ffffff;
@@ -28,7 +28,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   position: relative;
   padding: 0 16px;
-  height: 767px;
+  height: 750px;
   margin: auto;
   overflow: auto;
 `;
