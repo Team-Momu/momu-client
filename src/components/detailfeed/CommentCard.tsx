@@ -50,7 +50,7 @@ const CommentCard: FC<Props> = ({
 }) => {
   const [selectedState, setSelectedState] = useState(selectedFlag);
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state: RootState) => state.user.me.data.id);
+  const user = useAppSelector((state: RootState) => state.user.me.data?.id);
   const test = useAppSelector((state: RootState) => state.user);
   console.log('test🥶', test);
 
