@@ -4,7 +4,10 @@ import { useCallback, useEffect, useState } from 'react';
 // import Modal from 'react-modal';
 import Modal from '@common/Modal';
 import styled from 'styled-components';
-import { getPlaceDatasThunk } from '@slices/comment/getPlaceSlice';
+import {
+  getPlaceDatasThunk,
+  getPlaceSlice,
+} from '@slices/comment/getPlaceSlice';
 import PlaceLists from './PlaceLists';
 import useCheckLength from 'utils/hooks/useCheckLength';
 import {
@@ -96,12 +99,9 @@ const AddComment = () => {
     [whereToGo]
   );
 
-  function closeModal() {
-    setIsOpen(false);
-    setText('');
-  }
   useEffect(() => {
     if (where !== '') {
+      dispatch(getPlaceSlice.actions.setKeyword(where));
       dispatch(getPlaceDatasThunk(where));
     }
   }, [where]);
@@ -190,27 +190,6 @@ const AddComment = () => {
           />
         </Modal>
       )}
-      {/*<div style={{ position: 'relative' }}>*/}
-      {/*  <Modal*/}
-      {/*    isOpen={modalIsOpen}*/}
-      {/*    onRequestClose={closeModal}*/}
-      {/*    style={{*/}
-      {/*      overlay: {*/}
-      {/*        background: 'none',*/}
-      {/*      },*/}
-      {/*      content: {*/}
-      {/*        position: 'absolute',*/}
-      {/*        width: '343px',*/}
-      {/*        height: '743px',*/}
-      {/*        top: '-35px',*/}
-      {/*        margin: 'auto',*/}
-      {/*        border: '1px solid red',*/}
-      {/*      },*/}
-      {/*    }}*/}
-      {/*  >*/}
-      {/*    */}
-      {/*  </Modal>*/}
-      {/*</div>*/}
     </Wrapper>
   );
 };

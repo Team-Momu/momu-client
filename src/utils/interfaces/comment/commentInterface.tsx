@@ -28,6 +28,9 @@ interface IGetPlaceData {
   data: IPlaceData[];
   page: number;
   total: number;
+  previous: string | null | number;
+  next: string | null | number;
+  keyword: string | null;
 }
 
 interface ICommentPost {

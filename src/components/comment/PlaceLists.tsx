@@ -1,7 +1,14 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { IPlaceData } from 'utils/interfaces/comment/commentInterface';
 import EachPlace from './EachPlace';
+import useScroll from '../../utils/hooks/useScroll';
+import { RootState, useAppDispatch, useAppSelector } from '../../store/store';
+import {
+  getMorePlaceDatasThunk,
+  getPlaceDatasThunk,
+} from '@slices/comment/getPlaceSlice';
+import Spinner from '@common/Spinner';
 
 interface Props {
   text: string;
@@ -9,6 +16,30 @@ interface Props {
   closeModal: () => void;
 }
 const PlaceLists: FC<Props> = ({ text, placeDatas, closeModal }) => {
+  const dispatch = useAppDispatch();
+  const previous = useAppSelector(
+    (state: RootState) => state.comments.previous
+  );
+  const next = useAppSelector((state: RootState) => state.comments.next);
+  const keyword = useAppSelector((state: RootState) => state.comments.keyword);
+  const pending = useAppSelector((state: RootState) => state.comments.pending);
+  const status = useAppSelector((state: RootState) => state.comments.status);
+  const { hasNext, percent, onScroll } = useScroll();
+
+  useEffect(() => {
+    if (hasNext && next) {
+      // 요청을 보내면 됨
+      // console.log('실행');
+      dispatch(getMorePlaceDatasThunk({ keyword, page: next }));
+    }
+  }, [hasNext, percent]);
+
+  // useEffect(() => {
+  //   console.log('next🔥', next);
+  //   console.log('keyword🔥', keyword);
+  //   console.log('placeDatas🔥', placeDatas);
+  // }, [next, keyword, placeDatas]);
+
   return (
     <Wrapper>
       <>
@@ -16,7 +47,7 @@ const PlaceLists: FC<Props> = ({ text, placeDatas, closeModal }) => {
         <PlaceHolder>에 대한 검색 결과를 알려드릴게요</PlaceHolder>
         <UnderLine></UnderLine>
       </>
-      <ResultArea onScroll={() => alert('hi')}>
+      <ResultArea onScroll={onScroll}>
         {placeDatas?.map((placeData) => {
           return (
             <>
@@ -30,12 +61,23 @@ const PlaceLists: FC<Props> = ({ text, placeDatas, closeModal }) => {
             </>
           );
         })}
+        {pending && (
+          <>
+            <SpinnerContainer>
+              <Spinner />
+            </SpinnerContainer>
+          </>
+        )}
       </ResultArea>
     </Wrapper>
   );
 };
 
 export default PlaceLists;
+
+const SpinnerContainer = styled.div`
+  height: 70px;
+`;
 
 const Wrapper = styled.div`
   padding: 0;
