@@ -34,7 +34,7 @@ const Feed: NextPage = () => {
     const b = e.target.scrollHeight - e.target.clientHeight;
     const percent = Math.round((a / b) * 100);
     console.log('🔥🔥🔥🔥', percent);
-    if (percent >= 90) {
+    if (percent === 100) {
       setHasNext(true);
       setPercent(percent);
     } else {
@@ -48,7 +48,7 @@ const Feed: NextPage = () => {
       <SliderContainer className="sticky top-0">
         <FeedHeader />
       </SliderContainer>
-      <FeedContainer onScroll={() => alert('hi')}>
+      <FeedContainer onScroll={onScroll}>
         <FeedList hasNext={hasNext} percent={percent} />
       </FeedContainer>
       <NavContainer className="fixed">
