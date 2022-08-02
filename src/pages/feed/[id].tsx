@@ -5,12 +5,22 @@ import DetailFeedContents from 'components/detailfeed/DetailFeed';
 import DetailFeedHeader from 'components/detailfeed/DetailFeedHeader';
 import CommentList from 'components/detailfeed/CommentList';
 import { GetServerSideProps } from 'next';
+import { RootState, useAppDispatch, useAppSelector } from 'store/store';
+import { getCurationByIdThunk } from '@slices/curation/detailCurationPostSlice';
 
 const DetailFeed = ({ id }: any) => {
   const router = useRouter();
 
   const postId = Number(id);
 
+  const curationSelectedFlag = useAppSelector(
+    (state: RootState) => state.detailCuration.data.selected_flag
+  );
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCurationByIdThunk(postId));
+  }, [curationSelectedFlag]);
   const writeComment = useCallback(() => {
     router.push(`/comment/${postId}`);
   }, []);
@@ -24,7 +34,10 @@ const DetailFeed = ({ id }: any) => {
         <DetailFeedContents postId={postId} />
       </DetailFeedContentsContainer>
       <ContentContainer>
-        <CommentList postId={postId} />
+        <CommentList
+          curationSelectedFlag={curationSelectedFlag}
+          postId={postId}
+        />
       </ContentContainer>
       <ButtonContainer className="fixed">
         <AddCurationButton onClick={writeComment}>

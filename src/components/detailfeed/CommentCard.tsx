@@ -13,8 +13,10 @@ import selectedButton from '@public/img/select/SelectedButton.svg';
 import unselectedButton from '@public/img/select/unSelectedButton.svg';
 import otherUserSelectedButton from '@public/img/select/OtherUserSelectedButton.svg';
 import line from '@public/img/Line.png';
+import { getCurationByIdThunk } from '@slices/curation/detailCurationPostSlice';
 
 interface Props {
+  curationSelectedFlag: boolean;
   userId: number;
   commentId: number;
   postId: number;
@@ -44,12 +46,28 @@ const CommentCard: FC<Props> = ({
   placeAddress,
   placeCategory,
   createAt,
+  curationSelectedFlag,
 }) => {
   const [selectedState, setSelectedState] = useState(selectedFlag);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state: RootState) => state.user.me.data.id);
   const test = useAppSelector((state: RootState) => state.user);
   console.log('test🥶', test);
+
+  //   const CurationSelectedFlag = useAppSelector(
+  //     (state: RootState) => state.detailCuration.data.selected_flag
+  //   );
+
+  //   useEffect(() => {
+  //     dispatch(getCurationByIdThunk(postId));
+  //   }, [CurationSelectedFlag]);
+
+  //   useEffect(() => {
+  //     setSelectedState(selectedFlag), [selectedFlag];
+  //   });
+
+  console.log('🍎', curationSelectedFlag, selectedState, selectedFlag);
+
   function ButtonChoice() {
     if (selectedState === true && user === userId) {
       return <Image src={selectedButton} />;

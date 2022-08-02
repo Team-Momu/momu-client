@@ -8,10 +8,11 @@ import CommentCard from './CommentCard';
 import CommentCountHeader from './CommentCountHeader';
 
 interface Props {
+  curationSelectedFlag: boolean;
   postId: number;
 }
 
-const CommentList: FC<Props> = ({ postId }) => {
+const CommentList: FC<Props> = ({ postId, curationSelectedFlag }) => {
   const commentLists = useAppSelector(
     (state: RootState) => state.postComments.data.results
   );
@@ -36,6 +37,7 @@ const CommentList: FC<Props> = ({ postId }) => {
         return (
           <>
             <CommentCard
+              curationSelectedFlag={curationSelectedFlag}
               key={comment.id + `${new Date()}`}
               userId={comment.post_user}
               postId={postId}
