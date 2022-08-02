@@ -43,6 +43,7 @@ const Mbti = () => {
   const dispatch = useAppDispatch();
 
   const data = useAppSelector((state: RootState) => state.user.me);
+  // @ts-ignore
   const modalState = useAppSelector(
     (state: RootState) => state.modal.searchModal
   );
