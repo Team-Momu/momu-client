@@ -57,7 +57,11 @@ const CommentCard: FC<Props> = ({
       return <Image src={unselectedButton} />;
     }
     if (selectedState === true && user !== userId) {
-      return <Image src={otherUserSelectedButton} />;
+      return (
+        <OtherUserSelcted>
+          <Image src={otherUserSelectedButton} />
+        </OtherUserSelcted>
+      );
     } else if (selectedState === false && user !== userId) {
       return <></>;
     }
@@ -272,4 +276,8 @@ const PlaceAddress = styled.div`
 const SelectedButton = styled.button`
   width: 36px;
   height: 36px;
+`;
+
+const OtherUserSelcted = styled.div`
+  margin-top: 3px;
 `;
