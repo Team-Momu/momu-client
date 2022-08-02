@@ -5,8 +5,8 @@ import ProfileHeader from 'components/mypage/ProfileHeader';
 import styled from 'styled-components';
 const mypage = () => {
   return (
-    <div>
-      <HeaderContainer className="sticky top-0">
+    <Wrapper>
+      <HeaderContainer className="fixed top-0">
         <ProfileHeader />
       </HeaderContainer>
       <ProfileCard />
@@ -16,7 +16,7 @@ const mypage = () => {
       <NavContainer className="fixed">
         <NavBar />
       </NavContainer>
-    </div>
+    </Wrapper>
   );
 };
 
