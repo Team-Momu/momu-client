@@ -19,6 +19,7 @@ import commentPostReducer from '@slices/comment/commentPostSlice';
 import selectReducer from '@slices/select/selectSlice';
 import mypageReducer from '@slices/mypage/mypageSlice';
 import addCommentReducer from '@slices/comment/addCommentSlice';
+import modalReducer from '@slices/Modal/modalSlice';
 
 const preloadedState = {};
 
@@ -37,6 +38,7 @@ export const store = configureStore({
     select: selectReducer,
     profileSet: profileSetReducer,
     mypage: mypageReducer,
+    modal: modalReducer,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',

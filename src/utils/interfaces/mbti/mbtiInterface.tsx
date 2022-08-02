@@ -18,6 +18,7 @@ export interface IResult {
 }
 
 export interface IState {
+  mbtiModal: boolean;
   status: string;
   error: any;
   accessToken: string | null;

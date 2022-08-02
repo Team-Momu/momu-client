@@ -25,9 +25,9 @@ const DetailFeedContents = ({ postId }: Props) => {
     dispatch(getCurationByIdThunk(postId));
   }, []);
 
-  useEffect(() => {
-    console.log('curation', curation);
-  }, [curation]);
+  // useEffect(() => {
+  //   console.log('curation', curation);
+  // }, [curation]);
 
   return (
     <>

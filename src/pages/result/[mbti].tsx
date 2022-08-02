@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
-import Modal from 'react-modal';
-import { useSelector } from 'react-redux';
+// import Modal from 'react-modal';
+import Modal from '@common/Modal';
+
 import wrapper, {
   RootState,
   useAppDispatch,
@@ -34,20 +35,21 @@ import {
   RightInnerUpBox,
   TitleText,
 } from '@mbti/mbtiStyle';
-import axios from 'axios';
+
+import { modalSlice } from '@slices/Modal/modalSlice';
 
 const Mbti = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
   const data = useAppSelector((state: RootState) => state.user.me);
+  const modalState = useAppSelector(
+    (state: RootState) => state.modal.searchModal
+  );
   useEffect(() => {
     dispatch(userInfo());
   }, []);
 
-  const [second, setSecond] = useState(true);
-  const [showModal, setShowModal] = useState(false);
-  const [modalIsOpen, setIsOpen] = useState(false);
   const [mbtiState, setMbtiState] = useState<string | undefined>('');
   const [type, setType] = useState<string | undefined>('');
 
@@ -60,16 +62,13 @@ const Mbti = () => {
     }
   }, [data]);
 
-  function openModal() {
-    setIsOpen(true);
-  }
-  function closeModal() {
-    setIsOpen(false);
-  }
-
   const pushToFeed = useCallback(() => {
     router.push('/feed');
   }, []);
+
+  const toggleSearchModal = () => {
+    dispatch(modalSlice.actions.searchModalToggle());
+  };
 
   return (
     <>
@@ -79,79 +78,68 @@ const Mbti = () => {
         {mbtiState}({type})<span style={{ color: '#191919' }}> 입니다.</span>
       </CommentText>
       <Description>{mbti?.description}</Description>
-      <WhatIsMbti onClick={openModal}>먹비티아이란?</WhatIsMbti>
+      <WhatIsMbti onClick={toggleSearchModal}>먹비티아이란?</WhatIsMbti>
       <MomuStartButton onClick={pushToFeed}>모무 시작하기</MomuStartButton>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={{
-          overlay: {
-            background: '#727272',
-          },
-          content: {
-            position: 'absolute',
-            width: '335px',
-            height: '723px',
-            top: '16px',
-            margin: '0 auto 0 auto',
-          },
-        }}
-      >
-        <Wrapper>
-          <Header>
-            <ButtonContainer>
-              <CloseStyle>
-                <CloseButtonStyle onClick={closeModal}>
-                  <Image src={close} />
-                </CloseButtonStyle>
-              </CloseStyle>
-            </ButtonContainer>
-            <HeaderText1>먹BTI는</HeaderText1>
-            <HeaderText2>
-              MBTI와 유사한 모무만의 맛집 취향 유형입니다.
-            </HeaderText2>
-            <HeaderBottomLine />
-          </Header>
-          <Article>
-            {kindOfMbti.map((c) => {
-              return (
-                <>
-                  <Container>
-                    <TitleText>{c.title}</TitleText>
-                    <ContentText>{c.content}</ContentText>
-                    <Box>
-                      <LeftBox>
-                        <LeftInnerBox>
-                          <LeftInnerUpBox>
-                            <ColorText>{c.typeLeft[0]}</ColorText>
-                            <NoneColorText>{c.typeLeft.slice(1)}</NoneColorText>
-                          </LeftInnerUpBox>
-                          <LeftInnerDownBox>
-                            {c.typeLeftDescription}
-                          </LeftInnerDownBox>
-                        </LeftInnerBox>
-                      </LeftBox>
-                      <RightBox>
-                        <RightInnerBox>
-                          <RightInnerUpBox>
-                            <ColorText>{c.typeRight[0]}</ColorText>
-                            <NoneColorText>
-                              {c.typeRight.slice(1)}
-                            </NoneColorText>
-                          </RightInnerUpBox>
-                          <RightInnerDownBox>
-                            {c.typeRightDescription}
-                          </RightInnerDownBox>
-                        </RightInnerBox>
-                      </RightBox>
-                    </Box>
-                  </Container>
-                </>
-              );
-            })}
-          </Article>
-        </Wrapper>
-      </Modal>
+      {modalState && (
+        <Modal>
+          <Wrapper>
+            <Header>
+              <ButtonContainer>
+                <CloseStyle>
+                  <CloseButtonStyle onClick={toggleSearchModal}>
+                    <Image src={close} />
+                  </CloseButtonStyle>
+                </CloseStyle>
+              </ButtonContainer>
+              <HeaderText1>먹BTI는</HeaderText1>
+              <HeaderText2>
+                MBTI와 유사한 모무만의 맛집 취향 유형입니다.
+              </HeaderText2>
+              <HeaderBottomLine />
+            </Header>
+            <Article>
+              {kindOfMbti.map((c) => {
+                return (
+                  <>
+                    <Container>
+                      <TitleText>{c.title}</TitleText>
+                      <ContentText>{c.content}</ContentText>
+                      <Box>
+                        <LeftBox>
+                          <LeftInnerBox>
+                            <LeftInnerUpBox>
+                              <ColorText>{c.typeLeft[0]}</ColorText>
+                              <NoneColorText>
+                                {c.typeLeft.slice(1)}
+                              </NoneColorText>
+                            </LeftInnerUpBox>
+                            <LeftInnerDownBox>
+                              {c.typeLeftDescription}
+                            </LeftInnerDownBox>
+                          </LeftInnerBox>
+                        </LeftBox>
+                        <RightBox>
+                          <RightInnerBox>
+                            <RightInnerUpBox>
+                              <ColorText>{c.typeRight[0]}</ColorText>
+                              <NoneColorText>
+                                {c.typeRight.slice(1)}
+                              </NoneColorText>
+                            </RightInnerUpBox>
+                            <RightInnerDownBox>
+                              {c.typeRightDescription}
+                            </RightInnerDownBox>
+                          </RightInnerBox>
+                        </RightBox>
+                      </Box>
+                    </Container>
+                  </>
+                );
+              })}
+            </Article>
+          </Wrapper>
+        </Modal>
+      )}
     </>
   );
 };

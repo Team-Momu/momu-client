@@ -19,6 +19,7 @@ const initialState: ICurationPostLists = {
   status: '',
   error: null,
   cursor: null,
+  pending: false,
 };
 
 // [
@@ -92,6 +93,7 @@ export const curationPostSlice = createSlice({
       })
       .addCase(getMoreCurationPostListsThunk.pending, (state) => {
         state.status = 'pending';
+        state.pending = true;
       })
       .addCase(getCurationPostListsThunk.fulfilled, (state, action) => {
         state.message = action.payload.message;
@@ -111,6 +113,7 @@ export const curationPostSlice = createSlice({
           action.payload.data.results
         );
         state.status = 'success';
+        state.pending = false;
       })
       .addCase(getCurationPostListsThunk.rejected, (state, action) => {
         state.status = 'rejected';

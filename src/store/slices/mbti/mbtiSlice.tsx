@@ -7,6 +7,7 @@ import { AppDispatch, RootState } from 'store/store';
 import { addMbti } from './mbtiThunk';
 
 export const initialState: IState = {
+  mbtiModal: false,
   status: '',
   error: null,
   accessToken: null,
@@ -80,6 +81,9 @@ export const mbtiSlice = createSlice({
   name: 'mbti',
   initialState,
   reducers: {
+    toggleMbtiModal: (state) => {
+      state.mbtiModal = !state.mbtiModal;
+    },
     resetAllActiveInStage1: (state, action) => {
       state.stage1.korea = false;
       state.stage1.china = false;
