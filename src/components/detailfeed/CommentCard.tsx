@@ -147,7 +147,7 @@ export default CommentCard;
 
 const Wrapper = styled.div``;
 const PlaceImgContainer = styled.div`
-  padding-top: 23px;
+  margin-top: 23px;
 `;
 const BottomContainer = styled.div``;
 
