@@ -47,11 +47,19 @@ const Feed: NextPage = () => {
 
 export default Feed;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: 100vh;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
+`;
 const FeedContainer = styled.div`
   background: #ffffff;
   margin-bottom: 85px;
-  height: 812px;
+  height: 100vh;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
   overflow: auto;
 `;
 
@@ -63,6 +71,6 @@ const NavContainer = styled.div`
   width: 343px;
   &.fixed {
     position: fixed;
-    top: 678px;
+    bottom: 0px;
   }
 `;

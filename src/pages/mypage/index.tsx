@@ -22,6 +22,13 @@ const mypage = () => {
 
 export default mypage;
 
+const Wrapper = styled.div`
+  height: 100vh;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
+`;
+
 const HeaderContainer = styled.div`
   background: #ffffff;
   z-index: 1;
@@ -31,7 +38,7 @@ const NavContainer = styled.div`
   width: 343px;
   &.fixed {
     position: fixed;
-    top: 678px;
+    bottom: 0px;
   }
 `;
 const ContentContainer = styled.div`

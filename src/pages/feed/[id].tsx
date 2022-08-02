@@ -50,7 +50,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default DetailFeed;
 
 const Wrapper = styled.div`
-  height: 815px;
+  height: 100vh;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -67,7 +70,7 @@ const ButtonContainer = styled.div`
   width: 343px;
   &.fixed {
     position: fixed;
-    top: 748px;
+    bottom: 0px;
   }
 `;
 

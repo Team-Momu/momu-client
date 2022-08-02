@@ -19,7 +19,11 @@ const AppLayout: FC<Props> = ({ children }) => {
 
 const Wrapper = styled.div`
   width: 375px;
-  height: 750px;
+  height: 100vh;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
+
   position: relative;
   margin: auto;
   background: #ffffff;
@@ -28,7 +32,11 @@ const Wrapper = styled.div`
 const Container = styled.div`
   position: relative;
   padding: 0 16px;
-  height: 750px;
+  height: 100vh;
+  @supports (-webkit-touch-callout: none) {
+    height: -webkit-fill-available;
+  }
+
   margin: auto;
   overflow: auto;
 `;
