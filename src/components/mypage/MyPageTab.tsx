@@ -39,8 +39,8 @@ const MyPageTab = () => {
         </TabList>
       ),
       tabCont: (
-        <CardContainer>
-          <ScrappedCard />
+        <CardContainer onScroll={onScroll}>
+          <ScrappedCard hasNext={hasNext} />
         </CardContainer>
       ),
     },
@@ -72,7 +72,7 @@ const TabListContainer = styled.div`
 
 const CardContainer = styled.div`
   margin-left: 2px;
-  border: 1px solid red;
+  border: 1px solid #ffffff;
   overflow: scroll;
   height: 100vh;
 `;

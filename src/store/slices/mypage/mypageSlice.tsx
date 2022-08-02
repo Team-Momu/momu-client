@@ -72,6 +72,9 @@ export const mypageSlice = createSlice({
       .addCase(getMoreCurationWrittenByUserThunk.pending, (state, action) => {
         state.pending = true;
       })
+      .addCase(getMoreCurationScrappedByUserThunk.pending, (state, action) => {
+        state.pending = true;
+      })
       .addCase(getCurationWrittenByUserThunk.fulfilled, (state, action) => {
         state.pending = false;
         state.message = action.payload.message;
@@ -82,6 +85,7 @@ export const mypageSlice = createSlice({
         state.pending = false;
         state.message = action.payload.message;
         state.data = action.payload.data;
+        state.scrapNext = action.payload.data.post.next;
       })
       .addCase(getMoreCurationWrittenByUserThunk.fulfilled, (state, action) => {
         state.pending = false;
@@ -91,6 +95,17 @@ export const mypageSlice = createSlice({
           action.payload.data.post.results
         );
       })
+      .addCase(
+        getMoreCurationScrappedByUserThunk.fulfilled,
+        (state, action) => {
+          state.pending = false;
+          state.data.profile = action.payload.data.profile;
+          state.scrapNext = action.payload.data.post.next;
+          state.data.post.results = state.data.post.results.concat(
+            action.payload.data.post.results
+          );
+        }
+      )
       .addCase(getCurationWrittenByUserThunk.rejected, (state, action) => {
         state.pending = false;
         console.log(action.error);
@@ -100,6 +115,9 @@ export const mypageSlice = createSlice({
         console.log(action.error);
       })
       .addCase(getMoreCurationWrittenByUserThunk.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(getMoreCurationScrappedByUserThunk.rejected, (state, action) => {
         state.error = action.payload;
       });
   },

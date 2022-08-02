@@ -8,7 +8,7 @@ const useScroll = () => {
     const a = e.target.scrollTop;
     const b = e.target.scrollHeight - e.target.clientHeight;
     const percent = Math.round((a / b) * 100);
-    console.log('🔥🔥🔥🔥', percent);
+    // console.log('🔥🔥🔥🔥', percent);
     if (percent === 100) {
       setHasNext(true);
       setPercent(percent);

@@ -23,15 +23,15 @@ const WrittenByUser = ({ hasNext }: IScrollVariable) => {
 
   useEffect(() => {
     if (hasNext && userNext) {
-      console.log('실행');
+      // console.log('실행');
       const cursor = userNext.split('=')[1];
       dispatch(getMoreCurationWrittenByUserThunk(cursor));
     }
   }, [hasNext, userNext]);
 
-  useEffect(() => {
-    console.log('userNext', userNext);
-  }, [userNext]);
+  // useEffect(() => {
+  //   console.log('userNext', userNext);
+  // }, [userNext]);
 
   return (
     <Wrapper>
