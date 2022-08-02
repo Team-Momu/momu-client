@@ -48,6 +48,7 @@ interface IDetailCurationPost {
 }
 
 interface ICurationPostLists {
+  pending: boolean;
   message: string;
   data: {
     next: string;

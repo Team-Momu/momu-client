@@ -9,14 +9,14 @@ import { UIEventHandler, useCallback, useEffect, useState } from 'react';
 import { userInfo } from '@slices/user/userThunk';
 import { useRouter } from 'next/router';
 import NavBar from '@common/NavBar';
+import useScroll from '../../utils/hooks/useScroll';
 
 const Feed: NextPage = () => {
   // 유저 정보 불러오기
   const dispatch = useAppDispatch();
   const router = useRouter();
   const me = useSelector((state: RootState) => state.user.me);
-  const [hasNext, setHasNext] = useState(false);
-  const [percent, setPercent] = useState(0);
+  const { hasNext, percent, onScroll } = useScroll();
 
   useEffect(() => {
     dispatch(userInfo());
@@ -28,19 +28,6 @@ const Feed: NextPage = () => {
   //     router.push('/');
   //   }
   // }, [me]);
-
-  const onScroll = (e: any) => {
-    const a = e.target.scrollTop;
-    const b = e.target.scrollHeight - e.target.clientHeight;
-    const percent = Math.round((a / b) * 100);
-    console.log('🔥🔥🔥🔥', percent);
-    if (percent === 100) {
-      setHasNext(true);
-      setPercent(percent);
-    } else {
-      setHasNext(false);
-    }
-  };
 
   return (
     <Wrapper>

@@ -23,6 +23,7 @@ const FeedList = ({ hasNext, percent }: Props) => {
   const curationInfo = useAppSelector(
     (state: RootState) => state.curation.data
   );
+  const pending = useAppSelector((state: RootState) => state.curation.pending);
   const [end, setEnd] = useState(false);
   const [next, setNext] = useState('');
   const [previous, setPrevious] = useState('');
@@ -66,10 +67,10 @@ const FeedList = ({ hasNext, percent }: Props) => {
     moreChecker(next);
   }, [curationInfo]);
 
-  useEffect(() => {
-    console.log('curationInfo🔥', curationInfo);
-    console.log('cursor🔥', cursor);
-  }, [curationInfo, next, cursor]);
+  // useEffect(() => {
+  //   console.log('curationInfo🔥', curationInfo);
+  //   console.log('cursor🔥', cursor);
+  // }, [curationInfo, next, cursor]);
 
   return (
     <Wrapper>
@@ -95,6 +96,13 @@ const FeedList = ({ hasNext, percent }: Props) => {
           </>
         );
       })}
+      {pending && (
+        <>
+          <SpinnerContainer>
+            <Spinner />
+          </SpinnerContainer>
+        </>
+      )}
     </Wrapper>
   );
 };
@@ -105,6 +113,9 @@ const Wrapper = styled.div`
   padding: 0;
   margin: 0;
   overflow: scroll;
+`;
+const SpinnerContainer = styled.div`
+  height: 70px;
 `;
 
 const GotoDetailButton = styled.button``;
