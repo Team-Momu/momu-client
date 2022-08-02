@@ -105,6 +105,8 @@ export const curationPostSlice = createSlice({
         state.status = 'success';
       })
       .addCase(getMoreCurationPostListsThunk.fulfilled, (state, action) => {
+        state.data.next = action.payload.data.next;
+        state.data.previous = action.payload.data.previous;
         state.data.results = state.data.results.concat(
           action.payload.data.results
         );
