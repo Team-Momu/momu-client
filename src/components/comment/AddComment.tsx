@@ -52,12 +52,16 @@ const AddComment = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [whereToGo, setWhereToGo] = useState('');
   const [where, setWhere] = useState('');
-  const { imagePath, createObjectURL, handleImagePath } = useImage();
+  const {
+    imagePath,
+    createObjectURL,
+    handleImagePath,
+    setImagePath,
+    setCreateObjectURL,
+  } = useImage();
 
   const post = router.query.id;
   const postId = parseInt(post as string);
-
-  console.log(imagePath);
 
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
   const onSubmit = async (e: React.SyntheticEvent) => {
@@ -113,8 +117,16 @@ const AddComment = () => {
     setText('');
   };
 
-  const showReset = () => {
+  const showInputReset = () => {
     if (text) {
+      return <Image src={ResetInputButton} width={24} height={24} />;
+    } else {
+      return <></>;
+    }
+  };
+
+  const showImgReset = () => {
+    if (imagePath) {
       return <Image src={ResetInputButton} width={24} height={24} />;
     } else {
       return <></>;
@@ -124,6 +136,11 @@ const AddComment = () => {
   const ResetInput = useCallback(() => {
     setText('');
     dispatch(resetPlaceData({ nullText }));
+  }, []);
+
+  const ResetImg = useCallback(() => {
+    setImagePath('');
+    setCreateObjectURL(null);
   }, []);
 
   return (
@@ -149,7 +166,7 @@ const AddComment = () => {
             value={text}
           ></PlaceInput>
         </form>
-        <ResetButton onClick={ResetInput}>{showReset()}</ResetButton>
+        <ResetButton onClick={ResetInput}>{showInputReset()}</ResetButton>
       </SearchPlace>
       <InnerContainer>
         <GuideText>사진 (선택)</GuideText>
@@ -179,6 +196,7 @@ const AddComment = () => {
               </ImageUploadArea>
             </label>
           </form>
+          <ImgResetButton onClick={ResetImg}>{showImgReset()}</ImgResetButton>
         </ImageWrapper>
       </InnerContainer>
       <InnerContainer>
@@ -273,6 +291,15 @@ const PlaceInput = styled.input`
   //  border: none;
   //  //border: 1px solid red;
   //}
+`;
+
+const ImgResetButton = styled.button`
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 335px;
+  top: 262px;
+  z-index: 2;
 `;
 const ResetButton = styled.button`
   position: absolute;

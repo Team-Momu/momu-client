@@ -20,7 +20,7 @@ const DetailFeed = ({ id }: any) => {
 
   useEffect(() => {
     dispatch(getCurationByIdThunk(postId));
-  }, [curationSelectedFlag]);
+  }, []);
   const writeComment = useCallback(() => {
     router.push(`/comment/${postId}`);
   }, []);

@@ -19,7 +19,13 @@ const useImage = () => {
     }
   };
 
-  return { imagePath, createObjectURL, handleImagePath };
+  return {
+    imagePath,
+    createObjectURL,
+    handleImagePath,
+    setImagePath,
+    setCreateObjectURL,
+  };
 };
 
 export default useImage;
