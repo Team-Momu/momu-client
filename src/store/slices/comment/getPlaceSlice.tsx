@@ -15,6 +15,8 @@ const initialState: IGetPlaceData = {
 export const getPlaceDatasThunk = createAsyncThunk(
   'comments/getPlaceDatas',
   async (keyword: string, thunkAPI) => {
+    const access_token = localStorage.getItem('access_token');
+    axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
     const response = await axios.get(`/feed/search/?keyword=${keyword}`);
     return response.data;
   }

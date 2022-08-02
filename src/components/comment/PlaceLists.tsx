@@ -16,19 +16,21 @@ const PlaceLists: FC<Props> = ({ text, placeDatas, closeModal }) => {
         <PlaceHolder>에 대한 검색 결과를 알려드릴게요</PlaceHolder>
         <UnderLine></UnderLine>
       </>
-      {placeDatas?.map((placeData) => {
-        return (
-          <>
-            <EachPlace
-              closeModal={closeModal}
-              key={placeData.id + `${new Date()}`}
-              placeData={placeData}
-              address={placeData.road_address_name}
-              name={placeData.place_name}
-            />
-          </>
-        );
-      })}
+      <ResultArea onScroll={() => alert('hi')}>
+        {placeDatas?.map((placeData) => {
+          return (
+            <>
+              <EachPlace
+                closeModal={closeModal}
+                key={placeData.id + `${new Date()}`}
+                placeData={placeData}
+                address={placeData.road_address_name}
+                name={placeData.place_name}
+              />
+            </>
+          );
+        })}
+      </ResultArea>
     </Wrapper>
   );
 };
@@ -42,6 +44,12 @@ const Wrapper = styled.div`
 
 const UnderLine = styled.div`
   border-top: 1px solid #000000;
+`;
+
+const ResultArea = styled.div`
+  overflow: scroll;
+  height: 475px;
+  border: 1px solid blue;
 `;
 
 const SearchedWord = styled.div`

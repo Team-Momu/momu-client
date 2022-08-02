@@ -1,7 +1,8 @@
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
+import Modal from '@common/Modal';
 import styled from 'styled-components';
 import { getPlaceDatasThunk } from '@slices/comment/getPlaceSlice';
 import PlaceLists from './PlaceLists';
@@ -19,6 +20,7 @@ import useImage from '../../utils/hooks/useImage';
 import Image from 'next/image';
 import { resetPlaceData } from '@slices/comment/PlaceChoiceSlice';
 import { addCommentThunk } from '@slices/comment/addCommentSlice';
+import { modalSlice } from '@slices/Modal/modalSlice';
 
 const AddComment = () => {
   const { description, handleInputLength } = useCheckLength();
@@ -31,6 +33,9 @@ const AddComment = () => {
   );
   const place_id = useAppSelector(
     (state: RootState) => state.placechoice.place.id
+  );
+  const searchModalState = useAppSelector(
+    (state: RootState) => state.modal.searchModal
   );
 
   const [text, setText] = useState('');
@@ -77,12 +82,16 @@ const AddComment = () => {
     setWhereToGo(value);
   };
 
+  const toggleSearchModal = () => {
+    dispatch(modalSlice.actions.searchModalToggle());
+  };
+
   const onSubmitPlace = useCallback(
     (e: React.SyntheticEvent) => {
       e.preventDefault();
       setWhereToGo('');
       setWhere(whereToGo);
-      setIsOpen(true);
+      dispatch(modalSlice.actions.searchModalToggle());
     },
     [whereToGo]
   );
@@ -167,37 +176,41 @@ const AddComment = () => {
           value={description}
         ></CommentTextInput>
       </InnerContainer>
-
-      <div style={{ position: 'relative' }}>
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          style={{
-            overlay: {
-              background: 'none',
-            },
-            content: {
-              position: 'absolute',
-              width: '343px',
-              height: '743px',
-              top: '-35px',
-
-              margin: 'auto',
-            },
-          }}
-        >
-          <button onClick={closeModal}>
+      {searchModalState && (
+        <Modal>
+          <button onClick={toggleSearchModal}>
             <ButtonContainer>
               <img src={'/img/modal/closeButton.svg'} />
             </ButtonContainer>
           </button>
           <PlaceLists
             text={text}
-            closeModal={closeModal}
+            closeModal={toggleSearchModal}
             placeDatas={placeDatas}
           />
         </Modal>
-      </div>
+      )}
+      {/*<div style={{ position: 'relative' }}>*/}
+      {/*  <Modal*/}
+      {/*    isOpen={modalIsOpen}*/}
+      {/*    onRequestClose={closeModal}*/}
+      {/*    style={{*/}
+      {/*      overlay: {*/}
+      {/*        background: 'none',*/}
+      {/*      },*/}
+      {/*      content: {*/}
+      {/*        position: 'absolute',*/}
+      {/*        width: '343px',*/}
+      {/*        height: '743px',*/}
+      {/*        top: '-35px',*/}
+      {/*        margin: 'auto',*/}
+      {/*        border: '1px solid red',*/}
+      {/*      },*/}
+      {/*    }}*/}
+      {/*  >*/}
+      {/*    */}
+      {/*  </Modal>*/}
+      {/*</div>*/}
     </Wrapper>
   );
 };
@@ -258,6 +271,12 @@ const PlaceInput = styled.input`
 
     color: #767676;
   }
+
+  //&:focus {
+  //  outline: none;
+  //  border: none;
+  //  //border: 1px solid red;
+  //}
 `;
 
 const SearchPlace = styled.div`
