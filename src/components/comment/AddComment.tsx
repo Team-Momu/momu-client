@@ -180,7 +180,6 @@ const AddComment = () => {
       {searchModalState && (
         <Modal>
           <button onClick={toggleSearchModal}>
-
             <ButtonContainer>
               <img src={'/img/modal/closeButton.svg'} />
             </ButtonContainer>

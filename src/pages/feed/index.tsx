@@ -54,6 +54,7 @@ const Wrapper = styled.div`
   }
 `;
 const FeedContainer = styled.div`
+  margin-left: 2px;
   background: #ffffff;
   margin-bottom: 85px;
   height: 100vh;

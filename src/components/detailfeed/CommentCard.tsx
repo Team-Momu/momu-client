@@ -57,7 +57,11 @@ const CommentCard: FC<Props> = ({
       return <Image src={unselectedButton} />;
     }
     if (selectedState === true && user !== userId) {
-      return <Image src={otherUserSelectedButton} />;
+      return (
+        <OtherUserSelcted>
+          <Image src={otherUserSelectedButton} />
+        </OtherUserSelcted>
+      );
     } else if (selectedState === false && user !== userId) {
       return <></>;
     }
@@ -143,7 +147,7 @@ export default CommentCard;
 
 const Wrapper = styled.div``;
 const PlaceImgContainer = styled.div`
-  padding-top: 23px;
+  margin-top: 23px;
 `;
 const BottomContainer = styled.div``;
 
@@ -234,8 +238,7 @@ const CategoryName = styled.div`
   font-weight: 500;
   font-size: 12px;
   color: #878787;
-
-  width: 33px;
+  padding: 0 6px;
   height: 20px;
   background: #ededed;
 `;
@@ -272,4 +275,8 @@ const PlaceAddress = styled.div`
 const SelectedButton = styled.button`
   width: 36px;
   height: 36px;
+`;
+
+const OtherUserSelcted = styled.div`
+  margin-top: 3px;
 `;

@@ -21,9 +21,9 @@ const MyPageTab = () => {
         </TabList>
       ),
       tabCont: (
-        <div>
+        <CardContainer>
           <WrittenByUser />
-        </div>
+        </CardContainer>
       ),
     },
     {
@@ -36,9 +36,9 @@ const MyPageTab = () => {
         </TabList>
       ),
       tabCont: (
-        <div>
+        <CardContainer>
           <ScrappedCard />
-        </div>
+        </CardContainer>
       ),
     },
   ];
@@ -65,6 +65,10 @@ const TabListContainer = styled.div`
 
   width: calc(100% + 16px * 2);
   margin: 0 16px 0 -16px;
+`;
+
+const CardContainer = styled.div`
+  margin-left: 2px;
 `;
 const TabList = styled.li`
   font-family: 'Pretendard';
