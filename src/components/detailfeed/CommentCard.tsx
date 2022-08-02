@@ -238,8 +238,7 @@ const CategoryName = styled.div`
   font-weight: 500;
   font-size: 12px;
   color: #878787;
-
-  width: 33px;
+  padding: 0 6px;
   height: 20px;
   background: #ededed;
 `;
