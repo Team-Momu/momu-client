@@ -107,10 +107,6 @@ const GetCurationCard: FC<Props> = ({
     router.push(`/feed/${post}`);
   }, []);
 
-  useEffect(() => {
-    console.log(profileImg);
-  }, [profileImg]);
-
   return (
     <CurationContainer>
       <InfoContainer>
