@@ -24,6 +24,7 @@ import Image from 'next/image';
 import { resetPlaceData } from '@slices/comment/PlaceChoiceSlice';
 import { addCommentThunk } from '@slices/comment/addCommentSlice';
 import { modalSlice } from '@slices/Modal/modalSlice';
+import ResetInputButton from '@public/img/search/ResetInput.png';
 
 const AddComment = () => {
   const { description, handleInputLength } = useCheckLength();
@@ -112,6 +113,19 @@ const AddComment = () => {
     setText('');
   };
 
+  const showReset = () => {
+    if (text) {
+      return <Image src={ResetInputButton} width={24} height={24} />;
+    } else {
+      return <></>;
+    }
+  };
+
+  const ResetInput = useCallback(() => {
+    setText('');
+    dispatch(resetPlaceData({ nullText }));
+  }, []);
+
   return (
     <Wrapper>
       <>
@@ -135,6 +149,7 @@ const AddComment = () => {
             value={text}
           ></PlaceInput>
         </form>
+        <ResetButton onClick={ResetInput}>{showReset()}</ResetButton>
       </SearchPlace>
       <InnerContainer>
         <GuideText>사진 (선택)</GuideText>
@@ -226,6 +241,7 @@ const ImageUploadArea = styled.div`
 `;
 
 const PlaceInput = styled.input`
+  padding-right: 40px;
   padding-left: 45px;
   font-family: 'Pretendard';
   font-style: normal;
@@ -258,7 +274,13 @@ const PlaceInput = styled.input`
   //  //border: 1px solid red;
   //}
 `;
-
+const ResetButton = styled.button`
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 325px;
+  top: 153px;
+`;
 const SearchPlace = styled.div`
   padding-top: 36px;
 `;
