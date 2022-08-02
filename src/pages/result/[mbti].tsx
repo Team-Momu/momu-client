@@ -258,18 +258,18 @@ const CommentText = styled.span<{ second?: boolean }>`
   width: 325px;
   height: 72px;
   left: 25px;
-  
-  top: ${({ second }) => (second ? '340px;' : '300px;')}
+
+  top: ${({ second }) => (second ? '340px;' : '300px;')};
 
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 22.5px;
   line-height: 36px;
-  text-align : center;
+  text-align: center;
   /* or 150% */
 
-  color:${({ second }) => (second ? '#F57906' : '#191919')} ;
+  color: ${({ second }) => (second ? '#F57906' : '#191919')};
 `;
 
 const WhatIsMbti = styled.div`
