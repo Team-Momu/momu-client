@@ -1,3 +1,4 @@
+import React from 'react';
 import { FC, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -51,22 +52,38 @@ const CommentCard: FC<Props> = ({
   const [selectedState, setSelectedState] = useState(selectedFlag);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state: RootState) => state.user.me.data?.id);
-  const test = useAppSelector((state: RootState) => state.user);
-  console.log('test🥶', test);
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
 
-  //   const CurationSelectedFlag = useAppSelector(
-  //     (state: RootState) => state.detailCuration.data.selected_flag
-  //   );
+  const selectedMessage = useAppSelector(
+    (state: RootState) => state.select.message
+  );
+  const CCurationSelectedFlag = useAppSelector(
+    (state: RootState) => state.detailCuration.data.selected_flag
+  );
 
-  //   useEffect(() => {
-  //     dispatch(getCurationByIdThunk(postId));
-  //   }, [CurationSelectedFlag]);
+  const curationCard = useAppSelector(
+    (state: RootState) => state.detailCuration.data
+  );
 
-  //   useEffect(() => {
-  //     setSelectedState(selectedFlag), [selectedFlag];
-  //   });
+  useEffect(() => {
+    console.log(curationCard);
+  }, [CCurationSelectedFlag]);
 
-  console.log('🍎', curationSelectedFlag, selectedState, selectedFlag);
+  useEffect(() => {
+    dispatch(getCurationByIdThunk(postId));
+  }, [CCurationSelectedFlag]);
+
+  console.log(
+    '🍎',
+    curationSelectedFlag,
+    selectedState,
+    selectedFlag,
+    CCurationSelectedFlag
+  );
+
+  console.log(selectedMessage);
 
   function ButtonChoice() {
     if (selectedState === true && user === userId) {
@@ -86,15 +103,25 @@ const CommentCard: FC<Props> = ({
   }
 
   const onClick = useCallback(() => {
+    if (
+      curationSelectedFlag === true &&
+      selectedState === false &&
+      user === userId
+    ) {
+      alert('이미 채택이 완료된 큐레이션입니다!');
+    } else {
+      if (selectedState === false && user === userId) setSelectedState(true);
+      if (selectedState === false && user === userId)
+        dispatch(postSelectedStateThunk({ postId, commentId }));
+    }
+
     if (selectedState === true && user === userId) {
       setSelectedState(false);
-    } else if (selectedState === false && user === userId)
-      setSelectedState(true);
+    }
     if (selectedState === true && user === userId) {
       dispatch(deleteSelectedStateThunk({ postId, commentId }));
-    } else if (selectedState === false && user === userId)
-      dispatch(postSelectedStateThunk({ postId, commentId }));
-  }, [selectedState]);
+    }
+  }, [selectedState, curationSelectedFlag]);
 
   return (
     <>
@@ -298,3 +325,6 @@ const SelectedButton = styled.button`
 const OtherUserSelcted = styled.div`
   margin-top: 3px;
 `;
+function componentDidMount() {
+  throw new Error('Function not implemented.');
+}
