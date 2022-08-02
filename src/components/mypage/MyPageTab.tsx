@@ -2,9 +2,12 @@ import { useState } from 'react';
 import ScrappedCard from './ScrappedCard';
 import WrittenByUser from './WrittenByUser';
 import styled from 'styled-components';
+import useScroll from '../../utils/hooks/useScroll';
 
 const MyPageTab = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const { hasNext, percent, onScroll } = useScroll();
 
   const tabClickHandler = (index: number) => {
     setActiveIndex(index);
@@ -21,8 +24,8 @@ const MyPageTab = () => {
         </TabList>
       ),
       tabCont: (
-        <CardContainer>
-          <WrittenByUser />
+        <CardContainer onScroll={onScroll}>
+          <WrittenByUser hasNext={hasNext} />
         </CardContainer>
       ),
     },
@@ -69,6 +72,9 @@ const TabListContainer = styled.div`
 
 const CardContainer = styled.div`
   margin-left: 2px;
+  border: 1px solid red;
+  overflow: scroll;
+  height: 100vh;
 `;
 const TabList = styled.li`
   font-family: 'Pretendard';

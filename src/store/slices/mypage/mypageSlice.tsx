@@ -20,6 +20,9 @@ const initialState: IProfileContent = {
       results: [],
     },
   },
+  userNext: null,
+  scrapNext: null,
+  error: null,
 };
 
 export const getCurationWrittenByUserThunk = createAsyncThunk(
@@ -30,10 +33,26 @@ export const getCurationWrittenByUserThunk = createAsyncThunk(
   }
 );
 
+export const getMoreCurationWrittenByUserThunk = createAsyncThunk(
+  'mypage/getMoreCurationWrittenByUser',
+  async (cursor: string, thunkAPI) => {
+    const response = await axios.get(`/user/profile/post/?cursor=${cursor}`);
+    return response.data;
+  }
+);
+
 export const getCurationScrappedByUserThunk = createAsyncThunk(
   'mypage/getCurationScrappedByUser',
   async (thunkAPI) => {
     const response = await axios.get('/user/profile/scrap/');
+    return response.data;
+  }
+);
+
+export const getMoreCurationScrappedByUserThunk = createAsyncThunk(
+  'mypage/getMoreCurationScrappedByUser',
+  async (cursor: string, thunkAPI) => {
+    const response = await axios.get(`/user/profile/scrap/?cursor=${cursor}`);
     return response.data;
   }
 );
@@ -50,15 +69,27 @@ export const mypageSlice = createSlice({
       .addCase(getCurationScrappedByUserThunk.pending, (state) => {
         state.pending = true;
       })
+      .addCase(getMoreCurationWrittenByUserThunk.pending, (state, action) => {
+        state.pending = true;
+      })
       .addCase(getCurationWrittenByUserThunk.fulfilled, (state, action) => {
         state.pending = false;
         state.message = action.payload.message;
         state.data = action.payload.data;
+        state.userNext = action.payload.data.post.next;
       })
       .addCase(getCurationScrappedByUserThunk.fulfilled, (state, action) => {
         state.pending = false;
         state.message = action.payload.message;
         state.data = action.payload.data;
+      })
+      .addCase(getMoreCurationWrittenByUserThunk.fulfilled, (state, action) => {
+        state.pending = false;
+        state.data.profile = action.payload.data.profile;
+        state.userNext = action.payload.data.post.next;
+        state.data.post.results = state.data.post.results.concat(
+          action.payload.data.post.results
+        );
       })
       .addCase(getCurationWrittenByUserThunk.rejected, (state, action) => {
         state.pending = false;
@@ -67,6 +98,9 @@ export const mypageSlice = createSlice({
       .addCase(getCurationScrappedByUserThunk.rejected, (state, action) => {
         state.pending = false;
         console.log(action.error);
+      })
+      .addCase(getMoreCurationWrittenByUserThunk.rejected, (state, action) => {
+        state.error = action.payload;
       });
   },
 });
