@@ -51,13 +51,7 @@ const Home: NextPage = ({ data, cookie }) => {
       <ServiceDescription>
         신촌 지역 기반 맛집 큐레이션 서비스 모무
       </ServiceDescription>
-      {/* 카카오 버튼 위치도 맞춘거라 그냥 나중에 하단 div만 삭제하면 됨. */}
-      <div>
-        <button onClick={() => router.push('/profile/1')}>
-          --먹비티아이로--/
-        </button>
-        <button onClick={() => router.push('/feed')}>--피드로--</button>
-      </div>
+
       <KakaoButton
         onClick={() =>
           router.push(
