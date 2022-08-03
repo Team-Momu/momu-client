@@ -2,8 +2,15 @@ import NavBar from '@common/NavBar';
 import MyPageTab from 'components/mypage/MyPageTab';
 import ProfileCard from 'components/mypage/ProfileCard';
 import ProfileHeader from 'components/mypage/ProfileHeader';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-const mypage = () => {
+import { RootState, useAppDispatch, useAppSelector } from '../../store/store';
+import { mypageSlice } from '@slices/mypage/mypageSlice';
+const Mypage = () => {
+  const dispatch = useAppDispatch();
+
+  const data = useAppSelector((state: RootState) => state.user.me);
+
   return (
     <Wrapper>
       <HeaderContainer className="fixed top-0">
@@ -20,7 +27,7 @@ const mypage = () => {
   );
 };
 
-export default mypage;
+export default Mypage;
 
 const Wrapper = styled.div`
   height: 100vh;

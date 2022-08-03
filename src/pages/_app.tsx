@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import GlobalStyle from 'styles/GlobalStyles';
 
 import AppLayout from '@common/AppLayOut';
-import wrapper from 'store/store';
+import wrapper, { RootState, useAppSelector } from 'store/store';
 import { AppProps } from 'next/app';
 import 'styles/globals.css';
 import 'styles/FilterStyle.css';

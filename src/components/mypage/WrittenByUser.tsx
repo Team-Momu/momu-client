@@ -1,17 +1,37 @@
-import { getCurationWrittenByUserThunk } from '@slices/mypage/mypageSlice';
+import {
+  getCurationWrittenByUserThunk,
+  getMoreCurationWrittenByUserThunk,
+} from '@slices/mypage/mypageSlice';
 import { useEffect } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import GetCurationCard from 'components/feed/GetCurationCard';
 import styled from 'styled-components';
 
-const WrittenByUser = () => {
+interface IScrollVariable {
+  hasNext: boolean;
+}
+
+const WrittenByUser = ({ hasNext }: IScrollVariable) => {
   const writtenCurations = useAppSelector(
     (state: RootState) => state.mypage.data.post.results
   );
+  const userNext = useAppSelector((state: RootState) => state.mypage.userNext);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getCurationWrittenByUserThunk());
   }, []);
+
+  useEffect(() => {
+    if (hasNext && userNext) {
+      // console.log('실행');
+      const cursor = userNext.split('=')[1];
+      dispatch(getMoreCurationWrittenByUserThunk(cursor));
+    }
+  }, [hasNext, userNext]);
+
+  // useEffect(() => {
+  //   console.log('userNext', userNext);
+  // }, [userNext]);
 
   return (
     <Wrapper>
