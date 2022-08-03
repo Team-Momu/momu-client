@@ -27,6 +27,14 @@ const Home: NextPage = ({ data }) => {
   }, []);
 
   useEffect(() => {
+    console.log('data', data);
+  }, []);
+
+  useEffect(() => {
+    console.log('me', me);
+  }, [me]);
+
+  useEffect(() => {
     if (me?.data?.id && me?.data?.nickname === null) {
       router.push('/profile');
     }
