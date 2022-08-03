@@ -149,19 +149,20 @@ const CommentCard: FC<Props> = ({
               <PlaceAddress>{placeAddress}</PlaceAddress>
             </PlaceContainer>
             <ButtonContainer>
-              <SelectedButton onClick={onClick}>
-                {/*{ButtonChoice()}*/}
-                {curationSelectedFlag
-                  ? result && (
+              {curationSelectedFlag
+                ? result && (
+                    <SelectedButton onClick={onClick}>
                       <OtherUserSelcted>
                         <Image src={otherUserSelectedButton} />
                       </OtherUserSelcted>
-                    )
-                  : user == questionUserId &&
-                    questionUserId != userId && (
+                    </SelectedButton>
+                  )
+                : user == questionUserId &&
+                  questionUserId != userId && (
+                    <SelectedButton onClick={onClick}>
                       <Image src={unselectedButton} />
-                    )}
-              </SelectedButton>
+                    </SelectedButton>
+                  )}
             </ButtonContainer>
           </PlaceInfoBox>
         </BottomContainer>
