@@ -56,7 +56,7 @@ const Wrapper = styled.div`
 const FeedContainer = styled.div`
   margin-left: 2px;
   background: #ffffff;
-  margin-bottom: 85px;
+  padding-bottom: 75px;
   height: 100vh;
   @supports (-webkit-touch-callout: none) {
     height: -webkit-fill-available;

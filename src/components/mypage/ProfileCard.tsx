@@ -110,7 +110,7 @@ const UserSelected = styled.div`
   border-bottom: 1px solid #191919;
   border-right: 1px solid #191919;
   height: 50px;
-  width: 171px;
+  width: 170px;
   display: flex;
   justify-content: space-between;
   padding: 14px 16px;
