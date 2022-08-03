@@ -31,8 +31,8 @@ const initialState: IDetailCurationPost = {
 export const getCurationByIdThunk = createAsyncThunk(
   'detailCuration/getCurationById',
   async (post: number, thunkAPI) => {
-    const access_token = localStorage.getItem('access_token');
-    axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+    // const access_token = localStorage.getItem('access_token');
+    // axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
     const response = await axios.get(`/feed/${post}/`);
     return response.data;
   }

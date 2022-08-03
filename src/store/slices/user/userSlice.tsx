@@ -31,8 +31,8 @@ const userSlice = createSlice({
     builder.addCase(kakao.fulfilled, (state, { payload }) => {
       state.status = 'success';
       state.auth = payload;
-      const { access_token, refresh_token } = payload;
-      localStorage.setItem('access_token', access_token);
+      // const { access_token } = payload;
+      // localStorage.setItem('access_token', access_token);
     });
     builder.addCase(kakao.rejected, (state, action) => {
       state.status = 'failed';
