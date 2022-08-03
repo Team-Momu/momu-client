@@ -301,14 +301,18 @@ const PlaceInfoBox = styled.div`
   margin-bottom: 23px;
 `;
 
-const PlaceContainer = styled.div``;
-
+const PlaceContainer = styled.div`
+  height: 66px;
+  width: 265px;
+  overflow: hidden;
+  text-overflow: clip;
+`;
 const CategoryContainer = styled.div`
   display: flex;
   width: 265px;
+
   height: 40px;
   overflow: hidden;
-  text-overflow: ellipsis;
 `;
 
 const CategoryName = styled.div`
