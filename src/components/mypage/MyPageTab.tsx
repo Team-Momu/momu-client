@@ -71,7 +71,8 @@ const TabListContainer = styled.div`
 `;
 
 const CardContainer = styled.div`
-  margin-left: 2px;
+  padding-bottom: 70px;
+  margin-left: 1px;
   border: 1px solid #ffffff;
   overflow: scroll;
   height: 100vh;
