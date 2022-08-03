@@ -59,8 +59,8 @@ const Mbti = () => {
 
   useEffect(() => {
     if (data) {
-      setMbtiState(data?.data?.mbti.mbti);
-      setType(data?.data?.mbti.type);
+      setMbtiState(data?.data?.mbti?.mbti);
+      setType(data?.data?.mbti?.type);
     }
   }, [data]);
 
