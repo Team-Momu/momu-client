@@ -122,13 +122,17 @@ const Home: NextPage = ({ data }: any) => {
   };
 
   const ssrRendering = () => {
-    if (data.nickname && data.mbti) {
+    if (!data.id) {
+      alert('로그인이 필요합니다.');
+      router.push('/');
+    }
+    if (data.id && data.nickname && data.mbti) {
       return <Spinner />;
     }
-    if (data.nickname && data.mbti === null) {
+    if (data.id && data.nickname && data.mbti === null) {
       return <Spinner />;
     }
-    if (!data.nickname) {
+    if (data.id && !data.nickname) {
       return (
         <>
           <SetProfileText>프로필 설정</SetProfileText>

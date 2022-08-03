@@ -12,61 +12,69 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import kakaoLogo from '@public/img/landing/kakaoLogo.png';
 import axios from 'axios';
+import Spinner from '@common/Spinner';
+import camera from '@public/img/camera.png';
+import defaultProfile from '@public/img/defaultProfile.png';
 
 // @ts-ignore
-const Home: NextPage = ({ data, cookie }) => {
+const Home: NextPage = ({ data }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  // const me = useAppSelector((state: RootState) => state.user.me);
-  // useEffect(() => {
-  //   dispatch(userInfo());
-  // }, []);
-
-  // SSR 방식
-  // useEffect(() => {
-  //   // if (data.message === 'Request failed with status code 401') {
-  //   //   data = null;
-  //   //   return;
-  //   // }
-  //   if (data.nickname === null) {
-  //     router.push('/profile');
-  //   }
-  //   if (data.nickname && data.mbti === null) {
-  //     router.push('/profile/1');
-  //   }
-  //   if (data.nickname && data.mbti) {
-  //     router.push('/feed');
-  //   }
-  // }, [data]);
+  const me = useAppSelector((state: RootState) => state.user.me);
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
 
   useEffect(() => {
-    console.log('data🔥🔥', data);
-    console.log('cookie🔥🔥', cookie);
-  }, [data, cookie]);
+    if (me?.data?.id && me?.data?.nickname === null) {
+      router.push('/profile');
+    }
+    if (me?.data?.id && me?.data?.nickname && me?.data?.mbti === null) {
+      router.push('/profile/1');
+    }
+    if (me?.data?.id && me?.data?.nickname && me?.data?.mbti) {
+      router.push('/feed');
+    }
+  }, [me]);
 
-  return (
-    <Wrapper>
-      <Text>뭐 먹을지 고민될 땐</Text>
-      <Logo></Logo>
-      <ServiceDescription>
-        신촌 지역 기반 맛집 큐레이션 서비스 모무
-      </ServiceDescription>
+  const ssrRendering = () => {
+    if (data.id && data.nickname === null) {
+      return <Spinner />;
+    }
+    if (data.id && data.nickname && data.mbti === null) {
+      return <Spinner />;
+    }
+    if (data.id && data.nickname && data.mbti) {
+      return <Spinner />;
+    }
+    if (!data.id) {
+      return (
+        <Wrapper>
+          <Text>뭐 먹을지 고민될 땐</Text>
+          <Logo></Logo>
+          <ServiceDescription>
+            신촌 지역 기반 맛집 큐레이션 서비스 모무
+          </ServiceDescription>
 
-      <KakaoButton
-        onClick={() =>
-          router.push(
-            `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`
-          )
-        }
-      >
-        <LogoContainer>
-          <Image src={kakaoLogo} width={28} height={28} />
-        </LogoContainer>
-        <KakaoText>카카오 로그인</KakaoText>
-      </KakaoButton>
-    </Wrapper>
-  );
+          <KakaoButton
+            onClick={() =>
+              router.push(
+                `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`
+              )
+            }
+          >
+            <LogoContainer>
+              <Image src={kakaoLogo} width={28} height={28} />
+            </LogoContainer>
+            <KakaoText>카카오 로그인</KakaoText>
+          </KakaoButton>
+        </Wrapper>
+      );
+    }
+  };
+
+  return <>{ssrRendering()}</>;
 };
 
 const Wrapper = styled.div`
