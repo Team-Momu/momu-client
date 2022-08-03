@@ -4,8 +4,14 @@ import ProfileCard from 'components/mypage/ProfileCard';
 import ProfileHeader from 'components/mypage/ProfileHeader';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { RootState, useAppDispatch, useAppSelector } from '../../store/store';
+import wrapper, {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from '../../store/store';
 import { mypageSlice } from '@slices/mypage/mypageSlice';
+import axios from 'axios';
+import { userInfo } from '@slices/user/userThunk';
 const Mypage = () => {
   const dispatch = useAppDispatch();
 
@@ -26,6 +32,19 @@ const Mypage = () => {
     </Wrapper>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req }) => {
+      const cookie = req ? req.headers.cookie : '';
+      if (cookie && req) {
+        axios.defaults.headers.common['Cookie'] = cookie;
+      }
+      const { payload } = await store.dispatch(userInfo());
+      const data = payload;
+      return { props: { data, cookie } };
+    }
+);
 
 export default Mypage;
 
