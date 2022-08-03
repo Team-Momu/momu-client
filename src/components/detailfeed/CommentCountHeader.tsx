@@ -1,16 +1,17 @@
 import { FC } from 'react';
 import styled from 'styled-components';
+import { RootState, useAppSelector } from '../../store/store';
 
-interface Props {
-  commentCount: number;
-}
-const CommentCountHeader: FC<Props> = ({ commentCount }) => {
+const CommentCountHeader = () => {
+  const comment_count = useAppSelector(
+    (state: RootState) => state.detailCuration.data.comment_count
+  );
   return (
     <Wrapper>
       <TextContainer>
         <Text>
           ALL
-          <CommentCount>({commentCount}) </CommentCount>
+          <CommentCount>({comment_count}) </CommentCount>
         </Text>
       </TextContainer>
     </Wrapper>

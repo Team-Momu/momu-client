@@ -24,6 +24,16 @@ const FeedList = ({ hasNext, percent }: Props) => {
     (state: RootState) => state.curation.data
   );
   const pending = useAppSelector((state: RootState) => state.curation.pending);
+  const addCurationPending = useAppSelector(
+    (state: RootState) => state.addCuration.addCurationPending
+  );
+  const addCurationSuccess = useAppSelector(
+    (state: RootState) => state.addCuration.addCurationSuccess
+  );
+  const addCurationFail = useAppSelector(
+    (state: RootState) => state.addCuration.addCurationFail
+  );
+
   const [end, setEnd] = useState(false);
   const [next, setNext] = useState('');
   const [previous, setPrevious] = useState('');
@@ -35,8 +45,10 @@ const FeedList = ({ hasNext, percent }: Props) => {
 
   // 처음에 게시물 한번 가져옴
   useEffect(() => {
-    dispatch(getCurationPostListsThunk());
-  }, []);
+    if (addCurationSuccess || !addCurationPending) {
+      dispatch(getCurationPostListsThunk());
+    }
+  }, [addCurationPending, addCurationSuccess]);
 
   // hasNext === true
 

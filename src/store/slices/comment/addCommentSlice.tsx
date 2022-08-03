@@ -3,6 +3,9 @@ import { IAddCommentProps } from 'utils/interfaces/comment/commentInterface';
 import axios from 'axios';
 
 const initialState: any = {
+  addCommentPending: false,
+  addCommentSuccess: false,
+  addCommentFail: false,
   pending: false,
   message: '',
   data: {
@@ -35,15 +38,21 @@ export const addCommentSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(addCommentThunk.pending, (state) => {
-        state.pending = true;
+        state.addCommentPending = true;
+        state.addCommentSuccess = false;
+        state.addCommentFail = false;
       })
       .addCase(addCommentThunk.fulfilled, (state, action) => {
         state.data = action.payload.data;
-        state.pending = false;
         state.message = action.payload.message;
+        state.addCommentPending = false;
+        state.addCommentSuccess = true;
+        state.addCommentFail = false;
       })
       .addCase(addCommentThunk.rejected, (state, action) => {
-        state.pending = false;
+        state.addCommentPending = false;
+        state.addCommentSuccess = false;
+        state.addCommentFail = true;
         console.log(action.error);
       });
   },

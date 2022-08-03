@@ -5,6 +5,9 @@ import { kakao } from '@slices/user/userThunk';
 import axios from 'axios';
 
 const initialState = {
+  addCurationPending: false,
+  addCurationSuccess: false,
+  addCurationFail: false,
   status: '',
   data: {
     location: '',
@@ -192,13 +195,19 @@ export const addCurationSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(addCurationData.pending, (state) => {
-      state.status = 'loading';
+      state.addCurationPending = true;
+      state.addCurationSuccess = false;
+      state.addCurationFail = false;
     });
     builder.addCase(addCurationData.fulfilled, (state) => {
-      state.status = 'success';
+      state.addCurationPending = false;
+      state.addCurationSuccess = true;
+      state.addCurationFail = false;
     });
     builder.addCase(addCurationData.rejected, (state, action) => {
-      state.status = 'failed';
+      state.addCurationPending = false;
+      state.addCurationSuccess = false;
+      state.addCurationFail = true;
     });
   },
 });
