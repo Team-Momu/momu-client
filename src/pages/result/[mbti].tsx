@@ -36,6 +36,7 @@ import {
   TitleText,
 } from '@mbti/mbtiStyle';
 
+import ResultLogo from '@public/img/mbti/ResultLogo.png';
 import { modalSlice } from '@slices/Modal/modalSlice';
 
 const Mbti = () => {
@@ -73,7 +74,9 @@ const Mbti = () => {
 
   return (
     <>
-      <Illustration />
+      <ImageContainer>
+        <Image src={ResultLogo} width={160} height={38} />
+      </ImageContainer>
       <CommentText>당신의 먹비티아이 유형은</CommentText>
       <CommentText second>
         {mbtiState}({type})<span style={{ color: '#191919' }}> 입니다.</span>
@@ -220,37 +223,10 @@ const Description = styled.div`
   color: #191919;
 `;
 
-const Navbar = styled.div`
+const ImageContainer = styled.div`
+  margin-top: 212px;
   position: absolute;
-  width: 88px;
-  height: 24px;
-  left: 144px;
-  top: 16px;
-
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-  /* identical to box height */
-
-  color: #191919;
-`;
-const NavbarUnderLine = styled.div`
-  position: absolute;
-  width: 375px;
-  height: 0px;
-  left: 0px;
-  top: 56px;
-  border-bottom: 1px solid #000000;
-`;
-const Illustration = styled.div`
-  position: absolute;
-  width: 160px;
-  height: 160px;
-  left: 107px;
-  top: 100px;
-  background: #d9d9d9;
+  left: 28.53%;
 `;
 
 const CommentText = styled.span<{ second?: boolean }>`
@@ -258,18 +234,18 @@ const CommentText = styled.span<{ second?: boolean }>`
   width: 325px;
   height: 72px;
   left: 25px;
-  
-  top: ${({ second }) => (second ? '340px;' : '300px;')}
+
+  top: ${({ second }) => (second ? '340px;' : '300px;')};
 
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 22.5px;
   line-height: 36px;
-  text-align : center;
+  text-align: center;
   /* or 150% */
 
-  color:${({ second }) => (second ? '#F57906' : '#191919')} ;
+  color: ${({ second }) => (second ? '#F57906' : '#191919')};
 `;
 
 const WhatIsMbti = styled.div`

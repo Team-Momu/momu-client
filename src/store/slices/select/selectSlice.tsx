@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { ISelectedInfo, ISelectState } from 'utils/select/selectinterface';
+import {
+  ISelectedInfo,
+  ISelectState,
+} from 'utils/interfaces/select/selectinterface';
 
 const initialState: ISelectState = {
   message: '',

@@ -23,12 +23,8 @@ const CommentList: FC<Props> = ({ postId, curationSelectedFlag }) => {
 
   useEffect(() => {
     dispatch(getCommentPostListsThunk({ hasNext, postId }));
-  }, [commentLists.length]);
+  }, []);
   const commentCount = commentLists.length;
-
-  useEffect(() => {
-    console.log('commentLsits', commentLists);
-  }, [commentLists]);
 
   return (
     <Wrapper>

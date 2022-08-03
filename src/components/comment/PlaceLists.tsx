@@ -91,7 +91,6 @@ const UnderLine = styled.div`
 const ResultArea = styled.div`
   overflow: scroll;
   height: 475px;
-  border: 1px solid blue;
 `;
 
 const SearchedWord = styled.div`
