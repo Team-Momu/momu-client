@@ -66,7 +66,7 @@ const FeedContainer = styled.div`
 
 const SliderContainer = styled.div`
   background: #ffffff;
-  z-index: 1;
+  z-index: 2;
 `;
 const NavContainer = styled.div`
   width: 343px;

@@ -20,6 +20,7 @@ import {
   getCurationByIdThunk,
 } from '@slices/curation/detailCurationPostSlice';
 import { useSelector } from 'react-redux';
+import cardProfileMask from '@public/img/mask/cardProfileMask.svg';
 
 interface Props {
   curationSelectedFlag: boolean;
@@ -164,6 +165,9 @@ const CommentCard: FC<Props> = ({
                     objectFit="cover"
                   />
                 )}
+                <Mask>
+                  <Image src={cardProfileMask} width={28} height={28} />
+                </Mask>
               </ProfileImgContainer>
               <UserNickName>{writerName}</UserNickName>
               <LineImg>
@@ -220,9 +224,19 @@ const UserContainer = styled.div`
   display: flex;
 `;
 const UserInfo = styled.div`
+  position: relative;
   margin: 12px 0;
   display: flex;
   justify-content: space-between;
+`;
+
+const Mask = styled.div`
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 28px;
+  height: 28px;
+  z-index: 1;
 `;
 const ProfileImgContainer = styled.div`
   width: 28px;

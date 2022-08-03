@@ -171,6 +171,7 @@ const GotoDetailButton = styled.button`
 `;
 
 const CurationContainer = styled.div`
+  position: relative;
   width: 339px;
   height: 193px;
   border: 1px solid #191919;
@@ -246,7 +247,7 @@ const Mask = styled.div`
   position: absolute;
 
   left: 16px;
-  top: 149px;
+  top: 151px;
   width: 28px;
   height: 28px;
   z-index: 1;
