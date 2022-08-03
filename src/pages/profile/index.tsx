@@ -48,10 +48,10 @@ const Home: NextPage = ({ data }: any) => {
   }, [message]);
 
   useEffect(() => {
-    if (me?.nickname && me?.mbti === null) {
+    if (me?.data?.nickname && me?.data?.mbti === null) {
       router.push('/profile/1');
     }
-    if (me?.nickname && me?.mbti) {
+    if (me?.data?.nickname && me?.data?.mbti) {
       router.push('/feed');
     }
   }, [me]);
