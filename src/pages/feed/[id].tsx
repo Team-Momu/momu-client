@@ -101,6 +101,7 @@ const DetailFeedContentsContainer = styled.div`
 `;
 
 const ButtonContainer = styled.div`
+  z-index: 2;
   width: 343px;
   &.fixed {
     position: fixed;
