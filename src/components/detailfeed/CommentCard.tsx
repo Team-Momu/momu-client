@@ -341,7 +341,7 @@ const PlaceName = styled.div`
   overflow: hidden;
   /* identical to box height */
   color: #191919;
-	
+`;
 
 const PlaceAddress = styled.div`
   margin-bottom: 12px;
