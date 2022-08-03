@@ -324,7 +324,7 @@ const ButtonContainer = styled.div`
   padding: 14px 0 0 19px;
 `;
 
-const PlaceName = styled.div`
+const PlaceName = styled.span`
   margin-top: 12px;
   padding-left: 3px;
   padding-bottom: 4px;
@@ -333,7 +333,7 @@ const PlaceName = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  max-width: 220px;
+  max-inline-size: 220px;
   overflow: hidden;
   text-overflow: ellipsis;
   /* identical to box height */
