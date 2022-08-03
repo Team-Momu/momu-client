@@ -58,6 +58,7 @@ const CommentCard: FC<Props> = ({
 }) => {
   const [selectedState, setSelectedState] = useState(selectedFlag);
   const [result, setResult] = useState<null | boolean>(null);
+  const [final, setFinal] = useState<null | boolean>(null);
   const dispatch = useAppDispatch();
   // useEffect(() => {
   //   dispatch(userInfo());
@@ -70,6 +71,14 @@ const CommentCard: FC<Props> = ({
   const questionUserId = useAppSelector(
     (state: RootState) => state.detailCuration.data.user.id
   );
+  const postError = useAppSelector(
+    (state: RootState) => state.select.postError
+  );
+  const deleteError = useAppSelector(
+    (state: RootState) => state.select.deleteError
+  );
+
+  // const testFlag = useAppSelector((state:RootState)=>state.)
 
   const onClick = () => {
     if (!curationSelectedFlag) {
@@ -90,11 +99,33 @@ const CommentCard: FC<Props> = ({
     }
   };
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   if (commentId === selectedCommentId) {
+  //     setResult(true);
+  //   }
+  // }, [selectedCommentId]);
+
+  function TestFunction() {
     if (commentId === selectedCommentId) {
-      setResult(true);
+      return (
+        <SelectedButton onClick={onClick}>
+          <OtherUserSelcted>
+            <Image src={otherUserSelectedButton} />
+          </OtherUserSelcted>
+        </SelectedButton>
+      );
     }
-  }, [selectedCommentId]);
+    if (selectedFlag) {
+      // 새로고침하면 얘로 시작
+      return (
+        <SelectedButton onClick={onClick}>
+          <OtherUserSelcted>
+            <Image src={otherUserSelectedButton} />
+          </OtherUserSelcted>
+        </SelectedButton>
+      );
+    }
+  }
 
   return (
     <>
@@ -150,13 +181,7 @@ const CommentCard: FC<Props> = ({
             </PlaceContainer>
             <ButtonContainer>
               {curationSelectedFlag
-                ? result && (
-                    <SelectedButton onClick={onClick}>
-                      <OtherUserSelcted>
-                        <Image src={otherUserSelectedButton} />
-                      </OtherUserSelcted>
-                    </SelectedButton>
-                  )
+                ? TestFunction()
                 : user == questionUserId &&
                   questionUserId != userId && (
                     <SelectedButton onClick={onClick}>
@@ -171,6 +196,14 @@ const CommentCard: FC<Props> = ({
     </>
   );
 };
+
+// selectedFlag && (
+//   <SelectedButton onClick={onClick}>
+//     <OtherUserSelcted>
+//       <Image src={otherUserSelectedButton} />
+//     </OtherUserSelcted>
+//   </SelectedButton>
+// )
 
 export default CommentCard;
 

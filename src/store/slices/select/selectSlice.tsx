@@ -11,6 +11,8 @@ const initialState: ISelectState = {
   curationDone: false,
   isSelected: false,
   selectedCommentId: null,
+  postError: null,
+  deleteError: null,
 };
 
 export const postSelectedStateThunk = createAsyncThunk(
@@ -62,12 +64,12 @@ export const selectSlice = createSlice({
         state.curationDone = false;
       })
       .addCase(postSelectedStateThunk.rejected, (state, action) => {
-        state.message = action.payload;
         state.pending = false;
+        state.postError = action.payload;
         console.error(action.error);
       })
       .addCase(deleteSelectedStateThunk.rejected, (state, action) => {
-        state.message = action.payload;
+        state.deleteError = action.payload;
         state.pending = false;
         console.error(action.error);
       });
