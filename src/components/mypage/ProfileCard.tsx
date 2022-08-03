@@ -4,6 +4,7 @@ import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import styled from 'styled-components';
 import Image from 'next/image';
 import defaultImage from '@public/img/defaultProfile.png';
+import mypageMask from '@public/img/mask/mypageMask.svg';
 
 const ProfileCard = () => {
   const dispatch = useAppDispatch();
