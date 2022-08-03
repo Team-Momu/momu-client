@@ -10,7 +10,7 @@ import { FC } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import defaultImage from '@public/img/defaultProfile.png';
-import scrapped from '@public/img/scrap/Scrapped.png';
+import scrapped from '@public/img/scrap/Scrapped.svg';
 import scrap from '@public/img/scrap/Scrap.svg';
 import line from '@public/img/Line.png';
 
