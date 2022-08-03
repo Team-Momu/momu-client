@@ -81,6 +81,9 @@ const CommentCard: FC<Props> = ({
   // const testFlag = useAppSelector((state:RootState)=>state.)
 
   const onClick = () => {
+    if (user != questionUserId) {
+      return alert('큐레이션 작성자만 가능합니다.');
+    }
     if (!curationSelectedFlag) {
       const ask = confirm('이 게시물을 채택하시겠습니까?');
       if (ask) {
