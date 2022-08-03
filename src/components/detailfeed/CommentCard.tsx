@@ -305,6 +305,8 @@ const PlaceContainer = styled.div``;
 
 const CategoryContainer = styled.div`
   display: flex;
+  width: 325px;
+  overflow: hidden;
 `;
 
 const CategoryName = styled.div`
