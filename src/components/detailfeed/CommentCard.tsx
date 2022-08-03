@@ -307,7 +307,7 @@ const CategoryContainer = styled.div`
   display: flex;
   width: 265px;
   height: 40px;
-  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const CategoryName = styled.div`
