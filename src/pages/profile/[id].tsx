@@ -28,6 +28,14 @@ const Profile = ({ data }: any) => {
   }, []);
 
   useEffect(() => {
+    console.log('data', data);
+  }, []);
+
+  useEffect(() => {
+    console.log('me', me);
+  }, [me]);
+
+  useEffect(() => {
     if (me?.data?.nickname && me?.data?.mbti === null) {
       router.push('/profile/1');
     }
