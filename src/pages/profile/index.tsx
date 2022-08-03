@@ -34,7 +34,6 @@ const Home: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log('🔥message🔥', message);
     if (message === '프로필 설정 성공') {
       router.push('/profile/1');
     }
@@ -275,18 +274,19 @@ const NextButton = styled.button<{ active?: boolean }>`
   background: ${({ active }) => (active ? '#F57A08' : '#BFBFBF')};
 `;
 
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   (store) =>
-//     async ({ req, res }) => {
-//       const cookie = req ? req.headers.cookie : '';
-//       if (cookie && req) {
-//         axios.defaults.headers.common['Cookie'] = cookie;
-//       }
-//       const { payload } = await store.dispatch(userInfo());
-//       const { data } = payload;
-//
-//       return { props: { data, cookie } };
-//     }
-// );
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req, res }) => {
+      const cookie = req ? req.headers.cookie : '';
+      axios.defaults.headers.common['Cookie'] = '';
+      if (cookie && req) {
+        axios.defaults.headers.common['Cookie'] = cookie;
+      }
+      const { payload } = await store.dispatch(userInfo());
+      const { data } = payload;
+
+      return { props: { data, cookie } };
+    }
+);
 
 export default Home;

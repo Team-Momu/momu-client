@@ -38,19 +38,20 @@ import {
 
 import ResultLogo from '@public/img/mbti/ResultLogo.png';
 import { modalSlice } from '@slices/Modal/modalSlice';
+import axios from 'axios';
 
-const Mbti = () => {
+const Mbti = ({ data }: any) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const data = useAppSelector((state: RootState) => state.user.me);
+  // const data = useAppSelector((state: RootState) => state.user.me);
   // @ts-ignore
   const modalState = useAppSelector(
     (state: RootState) => state.modal.searchModal
   );
-  useEffect(() => {
-    dispatch(userInfo());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(userInfo());
+  // }, []);
 
   const [mbtiState, setMbtiState] = useState<string | undefined>('');
   const [type, setType] = useState<string | undefined>('');
@@ -293,17 +294,18 @@ const MomuStartButton = styled.button`
   line-height: 20px;
 `;
 
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   (store) =>
-//     async ({ req }) => {
-//       const cookie = req ? req.headers.cookie : '';
-//       if (cookie && req) {
-//         axios.defaults.headers.common['Cookie'] = cookie;
-//       }
-//       const { payload } = await store.dispatch(userInfo());
-//       const data = payload;
-//       return { props: { data, cookie } };
-//     }
-// );
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req }) => {
+      const cookie = req ? req.headers.cookie : '';
+      axios.defaults.headers.common['Cookie'] = '';
+      if (cookie && req) {
+        axios.defaults.headers.common['Cookie'] = cookie;
+      }
+      const { payload } = await store.dispatch(userInfo());
+      const data = payload;
+      return { props: { data, cookie } };
+    }
+);
 
 export default Mbti;
