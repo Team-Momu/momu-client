@@ -55,8 +55,8 @@ export const getCurationPostListsThunk = createAsyncThunk(
   'curation/getCurationPostLists',
   async (_, { rejectWithValue }) => {
     try {
-      const access_token = localStorage.getItem('access_token');
-      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+      // const access_token = localStorage.getItem('access_token');
+      // axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
       const response = await axios.get('/feed/');
       return response.data;
     } catch (error) {
