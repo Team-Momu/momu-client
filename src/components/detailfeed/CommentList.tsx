@@ -93,6 +93,8 @@ const SpinnerContainer = styled.div`
 const Wrapper = styled.div`
   padding: 0;
   margin: 0;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
   height: 100vh;
 `;
