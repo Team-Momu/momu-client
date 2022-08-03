@@ -4,6 +4,8 @@ interface ISelectedInfo {
 }
 
 interface ISelectState {
+  postError: any;
+  deleteError: any;
   message: string | unknown;
   pending: boolean;
   curationDone: boolean | null;

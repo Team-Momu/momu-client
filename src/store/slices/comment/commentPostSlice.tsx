@@ -62,7 +62,6 @@ export const commentPostSlice = createSlice({
         state.data.results = state.data.results.concat(
           action.payload.data.results
         );
-        state.pending = action.payload.pending;
         state.pending = false;
       });
   },
