@@ -32,13 +32,24 @@ const CommentList: FC<Props> = ({ postId, curationSelectedFlag, sameUser }) => {
   const pending = useAppSelector(
     (state: RootState) => state.postComments.pending
   );
+  const addCommentPending = useAppSelector(
+    (state: RootState) => state.addcomment.addCommentPending
+  );
+  const addCommentSuccess = useAppSelector(
+    (state: RootState) => state.addcomment.addCommentSuccess
+  );
+  const addCommentFail = useAppSelector(
+    (state: RootState) => state.addcomment.addCommentFail
+  );
   const dispatch = useAppDispatch();
 
   const { hasNext, percent, onScroll } = useScroll();
 
   useEffect(() => {
-    dispatch(getCommentPostListsThunk(postId));
-  }, []);
+    if (!addCommentPending || addCommentSuccess) {
+      dispatch(getCommentPostListsThunk(postId));
+    }
+  }, [addCommentPending, addCommentSuccess]);
 
   useEffect(() => {
     if (hasNext && next) {
@@ -49,7 +60,7 @@ const CommentList: FC<Props> = ({ postId, curationSelectedFlag, sameUser }) => {
 
   return (
     <Wrapper onScroll={onScroll}>
-      <CommentCountHeader commentCount={comment_count} />
+      <CommentCountHeader />
       {commentLists?.map((comment) => {
         return (
           <>

@@ -55,7 +55,7 @@ const Wrapper = styled.div`
 const ProfileImg = styled.div`
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+  border-radius: 40px;
   overflow: hidden;
 `;
 

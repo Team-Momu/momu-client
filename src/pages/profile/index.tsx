@@ -19,7 +19,7 @@ import useImage from '../../utils/hooks/useImage';
 import Spinner from '@common/Spinner';
 
 // @ts-ignore
-const Home: NextPage = () => {
+const Home: NextPage = ({ data }: any) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [nickname, setNickname] = useState('');
@@ -28,13 +28,16 @@ const Home: NextPage = () => {
   const { imagePath, createObjectURL, handleImagePath } = useImage();
   const message = useAppSelector((state: RootState) => state.profileSet.result);
 
-  const me = useAppSelector((state: RootState) => state.user.me);
+  // const me = useAppSelector((state: RootState) => state.user.me);
+  // useEffect(() => {
+  //   dispatch(userInfo());
+  // }, []);
+
   useEffect(() => {
-    dispatch(userInfo());
+    console.log('data', data);
   }, []);
 
   useEffect(() => {
-    console.log('🔥message🔥', message);
     if (message === '프로필 설정 성공') {
       router.push('/profile/1');
     }
@@ -279,6 +282,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, res }) => {
       const cookie = req ? req.headers.cookie : '';
+      axios.defaults.headers.common['Cookie'] = '';
       if (cookie && req) {
         axios.defaults.headers.common['Cookie'] = cookie;
       }

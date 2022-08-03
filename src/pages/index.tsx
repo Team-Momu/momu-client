@@ -11,16 +11,17 @@ import { userInfo } from '@slices/user/userThunk';
 import { useEffect } from 'react';
 import Image from 'next/image';
 import kakaoLogo from '@public/img/landing/kakaoLogo.png';
+import axios from 'axios';
 
 // @ts-ignore
 const Home: NextPage = ({ data, cookie }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const me = useAppSelector((state: RootState) => state.user.me);
-  useEffect(() => {
-    dispatch(userInfo());
-  }, []);
+  // const me = useAppSelector((state: RootState) => state.user.me);
+  // useEffect(() => {
+  //   dispatch(userInfo());
+  // }, []);
 
   // SSR 방식
   // useEffect(() => {
@@ -51,13 +52,7 @@ const Home: NextPage = ({ data, cookie }) => {
       <ServiceDescription>
         신촌 지역 기반 맛집 큐레이션 서비스 모무
       </ServiceDescription>
-      {/* 카카오 버튼 위치도 맞춘거라 그냥 나중에 하단 div만 삭제하면 됨. */}
-      <div>
-        <button onClick={() => router.push('/profile/1')}>
-          --먹비티아이로--/
-        </button>
-        <button onClick={() => router.push('/feed')}>--피드로--</button>
-      </div>
+
       <KakaoButton
         onClick={() =>
           router.push(
@@ -148,17 +143,17 @@ const KakaoText = styled.div`
 `;
 
 // 유저 정보를 서버사이드에서 받아옴
-// export const getServerSideProps = wrapper.getServerSideProps(
-//   (store) =>
-//     async ({ req }) => {
-//       const cookie = req ? req.headers.cookie : '';
-//       if (cookie && req) {
-//         axios.defaults.headers.common['Cookie'] = cookie;
-//       }
-//       const { payload } = await store.dispatch(userInfo());
-//       const data = payload;
-//       return { props: { data, cookie } };
-//     }
-// );
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req }) => {
+      const cookie = req ? req.headers.cookie : '';
+      if (cookie && req) {
+        axios.defaults.headers.common['Cookie'] = cookie;
+      }
+      const { payload } = await store.dispatch(userInfo());
+      const data = payload;
+      return { props: { data, cookie } };
+    }
+);
 
 export default Home;

@@ -10,7 +10,7 @@ import { FC } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import defaultImage from '@public/img/defaultProfile.png';
-import scrapped from '@public/img/scrap/Scrapped.png';
+import scrapped from '@public/img/scrap/Scrapped.svg';
 import scrap from '@public/img/scrap/Scrap.svg';
 import line from '@public/img/Line.png';
 
@@ -241,7 +241,7 @@ const BottomContainer = styled.div`
 const ProfileImg = styled.div`
   width: 28px;
   height: 28px;
-  border-radius: 50%;
+  border-radius: 14px;
   overflow: hidden;
   margin-top: 11px;
 `;
