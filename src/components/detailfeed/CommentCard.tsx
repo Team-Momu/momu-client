@@ -52,9 +52,6 @@ const CommentCard: FC<Props> = ({
   const [selectedState, setSelectedState] = useState(selectedFlag);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state: RootState) => state.user.me.data?.id);
-  useEffect(() => {
-    dispatch(userInfo());
-  }, []);
 
   const selectedMessage = useAppSelector(
     (state: RootState) => state.select.message
@@ -67,23 +64,23 @@ const CommentCard: FC<Props> = ({
     (state: RootState) => state.detailCuration.data
   );
 
-  useEffect(() => {
-    console.log(curationCard);
-  }, [CCurationSelectedFlag]);
+  // useEffect(() => {
+  //   console.log(curationCard);
+  // }, [CCurationSelectedFlag]);
 
-  useEffect(() => {
-    dispatch(getCurationByIdThunk(postId));
-  }, [CCurationSelectedFlag]);
+  // useEffect(() => {
+  //   dispatch(getCurationByIdThunk(postId));
+  // }, [CCurationSelectedFlag]);
 
-  console.log(
-    '🍎',
-    curationSelectedFlag,
-    selectedState,
-    selectedFlag,
-    CCurationSelectedFlag
-  );
+  // console.log(
+  //   '🍎',
+  //   curationSelectedFlag,
+  //   selectedState,
+  //   selectedFlag,
+  //   CCurationSelectedFlag
+  // );
 
-  console.log(selectedMessage);
+  // console.log(selectedMessage);
 
   function ButtonChoice() {
     if (selectedState === true && user === userId) {

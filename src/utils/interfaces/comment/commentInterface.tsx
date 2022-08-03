@@ -77,7 +77,7 @@ interface ICommentPostLists {
 }
 
 interface ICommentThunkProps {
-  hasNext: string;
+  cursor: string;
   postId: number;
 }
 

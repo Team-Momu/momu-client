@@ -1,4 +1,7 @@
-import { getCommentPostListsThunk } from '@slices/comment/commentPostSlice';
+import {
+  getCommentPostListsThunk,
+  getMoreCommentPostListsThunk,
+} from '@slices/comment/commentPostSlice';
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
@@ -6,6 +9,8 @@ import styled from 'styled-components';
 import { DivisionLine } from 'styles/commentstyle/CommentStyle';
 import CommentCard from './CommentCard';
 import CommentCountHeader from './CommentCountHeader';
+import useScroll from '../../utils/hooks/useScroll';
+import Spinner from '@common/Spinner';
 
 interface Props {
   curationSelectedFlag: boolean;
@@ -16,19 +21,34 @@ const CommentList: FC<Props> = ({ postId, curationSelectedFlag }) => {
   const commentLists = useAppSelector(
     (state: RootState) => state.postComments.data.results
   );
-  const hasNext = useAppSelector(
+  const next = useAppSelector(
     (state: RootState) => state.postComments.data.next
+  );
+  const comment_count = useAppSelector(
+    (state: RootState) => state.detailCuration.data.comment_count
+  );
+  const pending = useAppSelector(
+    (state: RootState) => state.postComments.pending
   );
   const dispatch = useAppDispatch();
 
+  const { hasNext, percent, onScroll } = useScroll();
+
   useEffect(() => {
-    dispatch(getCommentPostListsThunk({ hasNext, postId }));
+    dispatch(getCommentPostListsThunk(postId));
   }, []);
-  const commentCount = commentLists.length;
+
+  useEffect(() => {
+    if (hasNext && next) {
+      const cursor = next.split('=')[1];
+
+      dispatch(getMoreCommentPostListsThunk({ postId, cursor }));
+    }
+  }, [hasNext, next]);
 
   return (
-    <Wrapper>
-      <CommentCountHeader commentCount={commentCount} />
+    <Wrapper onScroll={onScroll}>
+      <CommentCountHeader commentCount={comment_count} />
       {commentLists?.map((comment) => {
         return (
           <>
@@ -52,13 +72,25 @@ const CommentList: FC<Props> = ({ postId, curationSelectedFlag }) => {
           </>
         );
       })}
+      {pending && (
+        <>
+          <SpinnerContainer>
+            <Spinner />
+          </SpinnerContainer>
+        </>
+      )}
     </Wrapper>
   );
 };
 
 export default CommentList;
+const SpinnerContainer = styled.div`
+  height: 70px;
+`;
 
 const Wrapper = styled.div`
   padding: 0;
   margin: 0;
+  overflow: scroll;
+  height: 100vh;
 `;
