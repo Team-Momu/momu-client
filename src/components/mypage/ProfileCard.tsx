@@ -27,6 +27,9 @@ const ProfileCard = () => {
               objectFit="cover"
             />
           </ProfileImg>
+          <Mask>
+            <Image src={mypageMask} width={80} height={80} />
+          </Mask>
         </ImgContainer>
         <UserInfo>
           <UserName>{user?.nickname}</UserName>
@@ -61,8 +64,18 @@ const ProfileImg = styled.div`
 `;
 
 const ImgContainer = styled.div`
+  position: relative;
   margin-left: 8px;
   margin-bottom: 16px;
+`;
+
+const Mask = styled.div`
+  z-index: 1;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  left: 0px;
+  top: 0px;
 `;
 
 const UserInfo = styled.div`
