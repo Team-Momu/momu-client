@@ -48,6 +48,15 @@ const Home: NextPage = ({ data }) => {
     if (data.id && data.nickname && data.mbti) {
       return <Spinner />;
     }
+    if (data.nickname === null) {
+      return <Spinner />;
+    }
+    if (data.nickname && data.mbti === null) {
+      return <Spinner />;
+    }
+    if (data.nickname && data.mbti) {
+      return <Spinner />;
+    }
     if (!data.id) {
       return (
         <Wrapper>
