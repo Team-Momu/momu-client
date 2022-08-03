@@ -241,7 +241,7 @@ const BottomContainer = styled.div`
 const ProfileImg = styled.div`
   width: 28px;
   height: 28px;
-  border-radius: 50%;
+  border-radius: 14px;
   overflow: hidden;
   margin-top: 11px;
 `;
