@@ -302,7 +302,9 @@ const PlaceInfoBox = styled.div`
 `;
 
 const PlaceContainer = styled.div``;
-const CategoryContainer = styled.div``;
+const CategoryContainer = styled.div`
+  display: flex;
+`;
 
 const CategoryName = styled.div`
   margin-top: 14px;
@@ -333,16 +335,14 @@ const PlaceName = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  max-width: 220px;
+  max-width: 215px;
   white-space: nowrap;
-
   text-overflow: ellipsis;
   overflow: hidden;
-
   /* identical to box height */
-
   color: #191919;
-`;
+	
+
 const PlaceAddress = styled.div`
   margin-bottom: 12px;
   padding-left: 3px;
