@@ -8,13 +8,15 @@ const CommentCountHeader: FC<Props> = ({ commentCount }) => {
   return (
     <Wrapper>
       <TextContainer>
-        ALL
-        <CommentCount>({commentCount}) </CommentCount>
+        <Text>
+          ALL
+          <CommentCount>({commentCount}) </CommentCount>
+        </Text>
       </TextContainer>
-      <Line />
     </Wrapper>
   );
 };
+
 export default CommentCountHeader;
 
 const Wrapper = styled.div`
@@ -31,16 +33,16 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
+const Text = styled.div`
+  padding-bottom: 5px;
+  display: flex;
+  border-bottom: 4px solid #191919;
+  height: 40px;
+`;
 const TextContainer = styled.div`
   display: flex;
-  width: 79px;
-  height: 36px;
 `;
 
-const Line = styled.div`
-  border-bottom: 4px solid #191919;
-  width: 75px;
-`;
 const CommentCount = styled.div`
   padding-left: 5px;
   font-weight: 600;
