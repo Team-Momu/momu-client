@@ -8,6 +8,9 @@ import {
 const initialState: ISelectState = {
   message: '',
   pending: false,
+  curationDone: false,
+  isSelected: false,
+  selectedCommentId: null,
 };
 
 export const postSelectedStateThunk = createAsyncThunk(
@@ -33,7 +36,11 @@ export const deleteSelectedStateThunk = createAsyncThunk(
 export const selectSlice = createSlice({
   name: 'select',
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedCommentId: (state, action) => {
+      state.selectedCommentId = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(postSelectedStateThunk.pending, (state) => {
@@ -45,10 +52,14 @@ export const selectSlice = createSlice({
       .addCase(postSelectedStateThunk.fulfilled, (state, action) => {
         state.message = action.payload;
         state.pending = false;
+        state.isSelected = true;
+        state.curationDone = true;
       })
       .addCase(deleteSelectedStateThunk.fulfilled, (state, action) => {
         state.message = action.payload;
         state.pending = false;
+        state.isSelected = false;
+        state.curationDone = false;
       })
       .addCase(postSelectedStateThunk.rejected, (state, action) => {
         state.message = action.payload;

@@ -7,6 +7,7 @@ import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import {
   postSelectedStateThunk,
   deleteSelectedStateThunk,
+  selectSlice,
 } from '@slices/select/selectSlice';
 import { userInfo } from '@slices/user/userThunk';
 import defaultImage from '@public/img/defaultProfile.png';
@@ -14,7 +15,11 @@ import selectedButton from '@public/img/select/SelectedButton.svg';
 import unselectedButton from '@public/img/select/unSelectedButton.svg';
 import otherUserSelectedButton from '@public/img/select/OtherUserSelectedButton.svg';
 import line from '@public/img/Line.png';
-import { getCurationByIdThunk } from '@slices/curation/detailCurationPostSlice';
+import {
+  detailCurationPostSlice,
+  getCurationByIdThunk,
+} from '@slices/curation/detailCurationPostSlice';
+import { useSelector } from 'react-redux';
 
 interface Props {
   curationSelectedFlag: boolean;
@@ -31,6 +36,7 @@ interface Props {
   placeAddress: string;
   placeCategory: string;
   createAt: string;
+  sameUser: boolean | null;
 }
 
 const CommentCard: FC<Props> = ({
@@ -48,80 +54,47 @@ const CommentCard: FC<Props> = ({
   placeCategory,
   createAt,
   curationSelectedFlag,
+  sameUser,
 }) => {
   const [selectedState, setSelectedState] = useState(selectedFlag);
+  const [result, setResult] = useState<null | boolean>(null);
   const dispatch = useAppDispatch();
+  // useEffect(() => {
+  //   dispatch(userInfo());
+  // }, []);
   const user = useAppSelector((state: RootState) => state.user.me.data?.id);
-  useEffect(() => {
-    dispatch(userInfo());
-  }, []);
-
-  const selectedMessage = useAppSelector(
-    (state: RootState) => state.select.message
+  const selectedCommentId = useSelector(
+    (state: RootState) => state.select.selectedCommentId
   );
-  const CCurationSelectedFlag = useAppSelector(
-    (state: RootState) => state.detailCuration.data.selected_flag
+  // 질문 글을 쓴 유저 아이디
+  const questionUserId = useAppSelector(
+    (state: RootState) => state.detailCuration.data.user.id
   );
 
-  const curationCard = useAppSelector(
-    (state: RootState) => state.detailCuration.data
-  );
-
-  useEffect(() => {
-    console.log(curationCard);
-  }, [CCurationSelectedFlag]);
-
-  useEffect(() => {
-    dispatch(getCurationByIdThunk(postId));
-  }, [CCurationSelectedFlag]);
-
-  console.log(
-    '🍎',
-    curationSelectedFlag,
-    selectedState,
-    selectedFlag,
-    CCurationSelectedFlag
-  );
-
-  console.log(selectedMessage);
-
-  function ButtonChoice() {
-    if (selectedState === true && user === userId) {
-      return <Image src={selectedButton} />;
-    } else if (selectedState === false && user === userId) {
-      return <Image src={unselectedButton} />;
-    }
-    if (selectedState === true && user !== userId) {
-      return (
-        <OtherUserSelcted>
-          <Image src={otherUserSelectedButton} />
-        </OtherUserSelcted>
-      );
-    } else if (selectedState === false && user !== userId) {
-      return <></>;
-    }
-  }
-
-  const onClick = useCallback(() => {
-    if (
-      curationSelectedFlag === true &&
-      selectedState === false &&
-      user === userId
-    ) {
-      alert('이미 채택이 완료된 큐레이션입니다!');
-    } else {
-      if (selectedState === false && user === userId) setSelectedState(true);
-      if (selectedState === false && user === userId)
+  const onClick = () => {
+    if (!curationSelectedFlag) {
+      const ask = confirm('이 게시물을 채택하시겠습니까?');
+      if (ask) {
+        setSelectedState(true);
+        dispatch(selectSlice.actions.setSelectedCommentId(commentId));
+        dispatch(detailCurationPostSlice.actions.setCurationDone(true));
         dispatch(postSelectedStateThunk({ postId, commentId }));
+      }
+    } else {
+      const ask = confirm('채택을 취소하시겠습니까?');
+      if (ask) {
+        setSelectedState(false);
+        dispatch(detailCurationPostSlice.actions.setCurationDone(false));
+        dispatch(deleteSelectedStateThunk({ postId, commentId }));
+      }
     }
+  };
 
-    if (selectedState === true && user === userId) {
-      setSelectedState(false);
+  useEffect(() => {
+    if (commentId === selectedCommentId) {
+      setResult(true);
     }
-    if (selectedState === true && user === userId) {
-      dispatch(deleteSelectedStateThunk({ postId, commentId }));
-    }
-  }, [selectedState, curationSelectedFlag]);
+  }, [selectedCommentId]);
 
   return (
     <>
@@ -177,7 +150,17 @@ const CommentCard: FC<Props> = ({
             </PlaceContainer>
             <ButtonContainer>
               <SelectedButton onClick={onClick}>
-                {ButtonChoice()}
+                {/*{ButtonChoice()}*/}
+                {curationSelectedFlag
+                  ? result && (
+                      <OtherUserSelcted>
+                        <Image src={otherUserSelectedButton} />
+                      </OtherUserSelcted>
+                    )
+                  : user == questionUserId &&
+                    questionUserId != userId && (
+                      <Image src={unselectedButton} />
+                    )}
               </SelectedButton>
             </ButtonContainer>
           </PlaceInfoBox>

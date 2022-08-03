@@ -14,24 +14,24 @@ const initialState: ICommentPostLists = {
 
 export const getCommentPostListsThunk = createAsyncThunk(
   'postComments/getCurationPostLists',
-  async (CommentThunkProps: ICommentThunkProps, thunkAPI) => {
-    if (CommentThunkProps.hasNext) {
-      const response = await axios.get(
-        `/feed/${CommentThunkProps.postId}/comment/?cursor=${CommentThunkProps.hasNext}`
-      );
-      if (!response) {
-        console.log('error');
-      }
-      return response.data;
-    } else if (!CommentThunkProps.hasNext) {
-      const response = await axios.get(
-        `/feed/${CommentThunkProps.postId}/comment/`
-      );
-      if (!response) {
-        console.log('error');
-      }
-      return response.data;
+  async (postId: number, thunkAPI) => {
+    const response = await axios.get(`/feed/${postId}/comment/`);
+    if (!response) {
+      console.log('error');
     }
+    return response.data;
+  }
+);
+export const getMoreCommentPostListsThunk = createAsyncThunk(
+  'postComments/getMoreCurationPostLists',
+  async ({ postId, cursor }: ICommentThunkProps, thunkAPI) => {
+    const response = await axios.get(
+      `/feed/${postId}/comment/?cursor=${cursor}`
+    );
+    if (!response) {
+      console.log('error');
+    }
+    return response.data;
   }
 );
 
@@ -47,12 +47,23 @@ export const commentPostSlice = createSlice({
       .addCase(getCommentPostListsThunk.fulfilled, (state, action) => {
         state.message = action.payload.message;
         state.data = action.payload.data;
-        state.pending = action.payload.pending;
         state.pending = false;
       })
       .addCase(getCommentPostListsThunk.rejected, (state, action) => {
         state.pending = false;
         console.error(action.error);
+      })
+      .addCase(getMoreCommentPostListsThunk.pending, (state, action) => {
+        state.pending = true;
+      })
+      .addCase(getMoreCommentPostListsThunk.fulfilled, (state, action) => {
+        state.message = action.payload.message;
+        state.data.next = action.payload.data.next;
+        state.data.results = state.data.results.concat(
+          action.payload.data.results
+        );
+        state.pending = action.payload.pending;
+        state.pending = false;
       });
   },
 });
