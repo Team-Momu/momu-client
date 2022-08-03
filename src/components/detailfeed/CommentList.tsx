@@ -46,7 +46,7 @@ const CommentList: FC<Props> = ({ postId, curationSelectedFlag, sameUser }) => {
   const { hasNext, percent, onScroll } = useScroll();
 
   useEffect(() => {
-    if (!addCommentPending && addCommentSuccess) {
+    if (!addCommentPending || addCommentSuccess) {
       dispatch(getCommentPostListsThunk(postId));
     }
   }, [addCommentPending, addCommentSuccess]);
