@@ -39,27 +39,6 @@ const Home: NextPage = ({ data }) => {
   }, [me]);
 
   const ssrRendering = () => {
-    if (data.id && data.nickname === null) {
-      return <Spinner />;
-    }
-    if (data.id && data.nickname && data.mbti === null) {
-      return <Spinner />;
-    }
-    if (data.id && data.nickname && data.mbti) {
-      return <Spinner />;
-    }
-    if (data.nickname || data.mbti) {
-      return <Spinner />;
-    }
-    if (!data.nickname) {
-      return <Spinner />;
-    }
-    if (data.nickname && !data.mbti) {
-      return <Spinner />;
-    }
-    if (data.nickname && data.mbti) {
-      return <Spinner />;
-    }
     if (!data.id) {
       return (
         <Wrapper>
@@ -83,6 +62,8 @@ const Home: NextPage = ({ data }) => {
           </KakaoButton>
         </Wrapper>
       );
+    } else {
+      return <Spinner />;
     }
   };
 
