@@ -19,7 +19,7 @@ import useImage from '../../utils/hooks/useImage';
 import Spinner from '@common/Spinner';
 
 // @ts-ignore
-const Home: NextPage = () => {
+const Home: NextPage = ({ data }: any) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [nickname, setNickname] = useState('');
@@ -28,9 +28,13 @@ const Home: NextPage = () => {
   const { imagePath, createObjectURL, handleImagePath } = useImage();
   const message = useAppSelector((state: RootState) => state.profileSet.result);
 
-  const me = useAppSelector((state: RootState) => state.user.me);
+  // const me = useAppSelector((state: RootState) => state.user.me);
+  // useEffect(() => {
+  //   dispatch(userInfo());
+  // }, []);
+
   useEffect(() => {
-    dispatch(userInfo());
+    console.log('data', data);
   }, []);
 
   useEffect(() => {
