@@ -1,26 +1,46 @@
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DetailFeedContents from 'components/detailfeed/DetailFeed';
 import DetailFeedHeader from 'components/detailfeed/DetailFeedHeader';
 import CommentList from 'components/detailfeed/CommentList';
 import { GetServerSideProps } from 'next';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import { getCurationByIdThunk } from '@slices/curation/detailCurationPostSlice';
+import { userInfo } from '@slices/user/userThunk';
 
 const DetailFeed = ({ id }: any) => {
   const router = useRouter();
-
+  const dispatch = useAppDispatch();
   const postId = Number(id);
+
+  const [sameUser, setSameUser] = useState<boolean | null>(null);
 
   const curationSelectedFlag = useAppSelector(
     (state: RootState) => state.detailCuration.data.selected_flag
   );
-  const dispatch = useAppDispatch();
+  // 로그인한 유저 아이디
+  const logInUserId = useAppSelector(
+    (state: RootState) => state.user.me.data?.id
+  );
+  // 질문 글을 쓴 유저 아이디
+  const userId = useAppSelector(
+    (state: RootState) => state.detailCuration.data.user.id
+  );
+
+  // useEffect(() => {
+  //   const result = logInUserId == userId;
+  //   setSameUser(result);
+  //   // console.log('🔥same🔥', sameUser);
+  // }, [logInUserId, userId, sameUser]);
 
   useEffect(() => {
-    dispatch(getCurationByIdThunk(postId));
+    dispatch(userInfo());
   }, []);
+
+  // useEffect(() => {
+  //   dispatch(getCurationByIdThunk(postId));
+  // }, []);
   const writeComment = useCallback(() => {
     router.push(`/comment/${postId}`);
   }, []);
@@ -37,6 +57,7 @@ const DetailFeed = ({ id }: any) => {
         <CommentList
           curationSelectedFlag={curationSelectedFlag}
           postId={postId}
+          sameUser={sameUser}
         />
       </ContentContainer>
       <ButtonContainer className="fixed">

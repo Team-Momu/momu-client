@@ -41,7 +41,11 @@ export const getCurationByIdThunk = createAsyncThunk(
 export const detailCurationPostSlice = createSlice({
   name: 'detailCuration',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurationDone: (state, action) => {
+      state.data.selected_flag = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCurationByIdThunk.pending, (state) => {
