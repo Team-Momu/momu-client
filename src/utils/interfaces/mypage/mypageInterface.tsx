@@ -22,6 +22,9 @@ interface ICurationInfo {
 }
 
 interface IProfileContent {
+  error: any;
+  userNext: any;
+  scrapNext: any;
   pending: boolean;
   message: string;
   data: {
