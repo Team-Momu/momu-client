@@ -305,8 +305,8 @@ const PlaceContainer = styled.div``;
 
 const CategoryContainer = styled.div`
   display: flex;
-  width: 325px;
-  height: 24px;
+  width: 265px;
+  height: 40px;
   overflow: hidden;
 `;
 
