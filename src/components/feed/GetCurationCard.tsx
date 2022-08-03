@@ -13,6 +13,7 @@ import defaultImage from '@public/img/defaultProfile.png';
 import scrapped from '@public/img/scrap/Scrapped.svg';
 import scrap from '@public/img/scrap/Scrap.svg';
 import line from '@public/img/Line.png';
+import cardProfileMask from '@public/img/mask/cardProfileMask.svg';
 
 interface Props {
   area: string;
@@ -142,6 +143,9 @@ const GetCurationCard: FC<Props> = ({
               height={28}
               objectFit="cover"
             />
+            <Mask>
+              <Image src={cardProfileMask} width={28} height={28} />
+            </Mask>
           </ProfileImg>
           <USerId>{usernickname}</USerId>
           <LineImg>
@@ -236,6 +240,16 @@ const BottomContainer = styled.div`
 
   display: flex;
   justify-content: space-between;
+`;
+
+const Mask = styled.div`
+  position: absolute;
+
+  left: 16px;
+  top: 149px;
+  width: 28px;
+  height: 28px;
+  z-index: 1;
 `;
 
 const ProfileImg = styled.div`
