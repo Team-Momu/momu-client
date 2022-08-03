@@ -1,17 +1,22 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { RootState, useAppSelector } from '../../store/store';
 
 const CommentCountHeader = () => {
-  const comment_count = useAppSelector(
-    (state: RootState) => state.detailCuration.data.comment_count
+  const comments = useAppSelector(
+    (state: RootState) => state.detailCuration.data.comments
   );
+
+  // useEffect(() => {
+  //   console.log('commentCount', comments.length);
+  // }, [comments]);
+
   return (
     <Wrapper>
       <TextContainer>
         <Text>
           ALL
-          <CommentCount>({comment_count}) </CommentCount>
+          <CommentCount>({comments.length}) </CommentCount>
         </Text>
       </TextContainer>
     </Wrapper>
