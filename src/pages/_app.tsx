@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import GlobalStyle from 'styles/GlobalStyles';
 
 import AppLayout from '@common/AppLayOut';
-import wrapper, { RootState, useAppSelector } from 'store/store';
+import wrapper, { RootState } from 'store/store';
 import { AppProps } from 'next/app';
 import 'styles/globals.css';
 import 'styles/FilterStyle.css';
@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta
           property="og:description"
-          content="이제 찾지말고 받으세요! Eat with MOMU"
+          content="이제 찾지말고 받으세요! MOMU"
           key="description"
         />
       </Head>
