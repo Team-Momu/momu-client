@@ -4,7 +4,7 @@ import WrittenByUser from './WrittenByUser';
 import styled from 'styled-components';
 import useScroll from '../../utils/hooks/useScroll';
 
-const MyPageTab = () => {
+const MyPageTab = ({ me }: any) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const { hasNext, percent, onScroll } = useScroll();
@@ -25,7 +25,7 @@ const MyPageTab = () => {
       ),
       tabCont: (
         <CardContainer onScroll={onScroll}>
-          <WrittenByUser hasNext={hasNext} />
+          <WrittenByUser me={me} hasNext={hasNext} />
         </CardContainer>
       ),
     },
@@ -40,7 +40,7 @@ const MyPageTab = () => {
       ),
       tabCont: (
         <CardContainer onScroll={onScroll}>
-          <ScrappedCard hasNext={hasNext} />
+          <ScrappedCard me={me} hasNext={hasNext} />
         </CardContainer>
       ),
     },
