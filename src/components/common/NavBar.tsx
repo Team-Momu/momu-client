@@ -54,7 +54,7 @@ const NavBar = () => {
     if (!me?.data?.id) {
       return setOpen(true);
     }
-    router.push('/mypage');
+    router.push('/mypage').then(() => window.scrollTo(0, 0));
   }, [me]);
 
   const handleClose = () => {
