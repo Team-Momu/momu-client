@@ -25,7 +25,7 @@ const Mypage = ({ data }: any) => {
     dispatch(userInfo());
   }, []);
 
-  const scrollRef = useRef<HTMLElement>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (scrollRef && scrollRef.current) {
       scrollRef.current.scrollTo(0, 0);
@@ -65,7 +65,7 @@ const Mypage = ({ data }: any) => {
       return <Spinner />;
     } else {
       return (
-        <Wrapper>
+        <Wrapper ref={scrollRef}>
           <HeaderContainer className="fixed top-0">
             <ProfileHeader />
           </HeaderContainer>
