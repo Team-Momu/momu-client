@@ -5,7 +5,11 @@ import DetailFeedContents from 'components/detailfeed/DetailFeed';
 import DetailFeedHeader from 'components/detailfeed/DetailFeedHeader';
 import CommentList from 'components/detailfeed/CommentList';
 import { GetServerSideProps } from 'next';
-import { RootState, useAppDispatch, useAppSelector } from 'store/store';
+import wrapper, {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from 'store/store';
 import { getCurationByIdThunk } from '@slices/curation/detailCurationPostSlice';
 import { userInfo } from '@slices/user/userThunk';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -20,6 +24,7 @@ import Slide from '@mui/material/Slide';
 import Image from 'next/image';
 import Logo from '@public/img/logoGroup.svg';
 import { ContentTextStyle } from '../test';
+import axios from 'axios';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -30,7 +35,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const DetailFeed = ({ id }: any) => {
+const DetailFeed = ({ id, data }: any) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const postId = Number(id);
@@ -63,10 +68,10 @@ const DetailFeed = ({ id }: any) => {
   }, []);
 
   useEffect(() => {
-    if (!me?.id) {
+    if (data.message === 'Request failed with status code 401') {
       setOpen(true);
     }
-  }, [me]);
+  }, []);
 
   const writeComment = useCallback(() => {
     router.push(`/comment/${postId}`);
@@ -85,7 +90,7 @@ const DetailFeed = ({ id }: any) => {
           <DetailFeedHeader />
         </HeaderContainer>
         <DetailFeedContentsContainer>
-          <DetailFeedContents me={me} postId={postId} />
+          <DetailFeedContents me={me} data={data} postId={postId} />
         </DetailFeedContentsContainer>
         <ContentContainer>
           <CommentList
@@ -150,16 +155,31 @@ const DetailFeed = ({ id }: any) => {
 };
 
 //@ts-ignore
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const id = context?.params?.id;
-    return {
-      props: { id },
-    };
-  } catch (error) {
-    console.error(error);
-  }
-};
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   try {
+//     const id = context?.params?.id;
+//     return {
+//       props: { id },
+//     };
+//   } catch (error) {
+//     console.error(error);
+//   }
+// };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req, params }) => {
+      const id = params?.id;
+      const cookie = req ? req.headers.cookie : '';
+      axios.defaults.headers.common['Cookie'] = '';
+      if (cookie && req) {
+        axios.defaults.headers.common['Cookie'] = cookie;
+      }
+      const { payload } = await store.dispatch(userInfo());
+      const data = payload;
+      return { props: { data, id } };
+    }
+);
 
 export default DetailFeed;
 

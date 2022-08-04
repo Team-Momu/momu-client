@@ -11,9 +11,10 @@ import { GetServerSideProps } from 'next';
 interface Props {
   postId: number;
   me: any;
+  data: any;
 }
 
-const DetailFeedContents = ({ postId, me }: Props) => {
+const DetailFeedContents = ({ postId, me, data }: Props) => {
   const router = useRouter();
 
   const curation = useAppSelector(
@@ -49,6 +50,7 @@ const DetailFeedContents = ({ postId, me }: Props) => {
           user={curation.user.id}
           post={curation.id}
           me={me}
+          data={data}
         />
       </CardWrapper>
       <DivisionLine />
