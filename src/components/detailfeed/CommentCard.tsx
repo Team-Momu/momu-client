@@ -103,12 +103,21 @@ const CommentCard: FC<Props> = ({
         dispatch(postSelectedStateThunk({ postId, commentId }));
       }
     } else {
-      const ask = confirm('채택을 취소하시겠습니까?');
-      if (ask) {
-        setSelectedState(false);
-        dispatch(detailCurationPostSlice.actions.setCurationDone(false));
-        dispatch(deleteSelectedStateThunk({ postId, commentId }));
-      }
+      toast('채택이 완료된 큐레이션입니다.', {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // const ask = confirm('채택을 취소하시겠습니까?');
+      // if (ask) {
+      //   setSelectedState(false);
+      //   dispatch(detailCurationPostSlice.actions.setCurationDone(false));
+      //   dispatch(deleteSelectedStateThunk({ postId, commentId }));
+      // }
     }
   };
 
