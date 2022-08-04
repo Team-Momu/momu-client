@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import { RootState, useAppDispatch, useAppSelector } from 'store/store';
+import wrapper, {
+  RootState,
+  useAppDispatch,
+  useAppSelector,
+} from 'store/store';
 import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
 import {
@@ -14,6 +18,17 @@ import scrapped from '@public/img/scrap/Scrapped.svg';
 import scrap from '@public/img/scrap/Scrap.svg';
 import line from '@public/img/Line.png';
 import cardProfileMask from '@public/img/mask/cardProfileMask.svg';
+import axios from 'axios';
+import { userInfo } from '@slices/user/userThunk';
+import DialogTitle from '@mui/material/DialogTitle';
+import Korea from '@public/img/mbti/korea1.png';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import { TransitionProps } from '@mui/material/transitions';
+import Slide from '@mui/material/Slide';
 
 interface Props {
   area: string;
@@ -29,7 +44,17 @@ interface Props {
   scrapFlag: boolean;
   user: any;
   post: number;
+  data?: any;
 }
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const GetCurationCard: FC<Props> = ({
   area,
@@ -45,17 +70,17 @@ const GetCurationCard: FC<Props> = ({
   scrapFlag,
   user,
   post,
+  data,
 }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const curation = useAppSelector(
     (state: RootState) => state.detailCuration.data
   );
-
   const isScrapped = useAppSelector((state: RootState) => state.scrap);
   const [drink, setDrink] = useState('');
   const [countPerson, setCountPerson] = useState('');
-
+  const [open, setOpen] = useState(false);
   const [scrapState, setScrapState] = useState<boolean>();
 
   useEffect(() => {
@@ -105,60 +130,90 @@ const GetCurationCard: FC<Props> = ({
   }, [scrapState]);
 
   const moveToDetail = useCallback(() => {
+    if (!data.id) {
+      setOpen(true);
+    }
     router.push(`/feed/${post}`);
   }, []);
 
-  return (
-    <CurationContainer>
-      <InfoContainer>
-        <UpperContainer>
-          <GotoDetailButton onClick={moveToDetail}>
-            <FirstLineInfo>
-              <InfoText>#{area}</InfoText>
-              <InfoText>#{drink}</InfoText>
-            </FirstLineInfo>
-            <SecondLineInfo>
-              <InfoText>#{when}</InfoText>
-              <InfoText>#{countPerson}</InfoText>
-            </SecondLineInfo>
-          </GotoDetailButton>
-          <ScrapButton onClick={onClick}>
-            {scrapState ? <Image src={scrapped} /> : <Image src={scrap} />}
-          </ScrapButton>
-        </UpperContainer>
-        {additionalText === '' ? (
-          <NullTextContainer></NullTextContainer>
-        ) : (
-          <AdditionalText>{additionalText}</AdditionalText>
-        )}
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-        <Line />
-      </InfoContainer>
-      <BottomContainer>
-        <BottomInfo>
-          <ProfileImg>
-            <Image
-              src={profileImg || defaultImage}
-              width={28}
-              height={28}
-              objectFit="cover"
-            />
-            <Mask>
-              <Image src={cardProfileMask} width={28} height={28} />
-            </Mask>
-          </ProfileImg>
-          <USerId>{usernickname}</USerId>
-          <LineImg>
-            <Image src={line} height={'15'} />
-          </LineImg>
-          <Mukbti>{mukbti}</Mukbti>
-        </BottomInfo>
-        <BottomInfo>
-          <CardInfo>{createAt}</CardInfo>
-          <CardInfo>큐레이션 {commentNum}</CardInfo>
-        </BottomInfo>
-      </BottomContainer>
-    </CurationContainer>
+  return (
+    <>
+      <CurationContainer>
+        <InfoContainer>
+          <UpperContainer>
+            <GotoDetailButton onClick={moveToDetail}>
+              <FirstLineInfo>
+                <InfoText>#{area}</InfoText>
+                <InfoText>#{drink}</InfoText>
+              </FirstLineInfo>
+              <SecondLineInfo>
+                <InfoText>#{when}</InfoText>
+                <InfoText>#{countPerson}</InfoText>
+              </SecondLineInfo>
+            </GotoDetailButton>
+            <ScrapButton onClick={onClick}>
+              {scrapState ? <Image src={scrapped} /> : <Image src={scrap} />}
+            </ScrapButton>
+          </UpperContainer>
+          {additionalText === '' ? (
+            <NullTextContainer></NullTextContainer>
+          ) : (
+            <AdditionalText>{additionalText}</AdditionalText>
+          )}
+
+          <Line />
+        </InfoContainer>
+        <BottomContainer>
+          <BottomInfo>
+            <ProfileImg>
+              <Image
+                src={profileImg || defaultImage}
+                width={28}
+                height={28}
+                objectFit="cover"
+              />
+              <Mask>
+                <Image src={cardProfileMask} width={28} height={28} />
+              </Mask>
+            </ProfileImg>
+            <USerId>{usernickname}</USerId>
+            <LineImg>
+              <Image src={line} height={'15'} />
+            </LineImg>
+            <Mukbti>{mukbti}</Mukbti>
+          </BottomInfo>
+          <BottomInfo>
+            <CardInfo>{createAt}</CardInfo>
+            <CardInfo>큐레이션 {commentNum}</CardInfo>
+          </BottomInfo>
+        </BottomContainer>
+      </CurationContainer>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+        style={{ width: '370px', margin: 'auto' }}
+      >
+        <DialogTitle style={{ textAlign: 'center' }}>
+          <Image src={Korea} width={28} height={28} />
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            카카오 아이디로 간편 로그인하고 게시글을 확인해보세요!
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button onClick={handleClose}>확인</Button>
+          <Button onClick={handleClose}>로그인</Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 
