@@ -25,6 +25,7 @@ import Image from 'next/image';
 import Logo from '@public/img/logoGroup.svg';
 import { ContentTextStyle } from '../test';
 import axios from 'axios';
+import { useRefScrollTo } from 'utils/hooks/useRefScrollTo';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -83,9 +84,11 @@ const DetailFeed = ({ id, data }: any) => {
     router.push('/feed');
   };
 
+  const refToTop = useRefScrollTo();
+
   return (
     <>
-      <Wrapper className="relative">
+      <Wrapper ref={refToTop} className="relative">
         <HeaderContainer className="sticky top-0">
           <DetailFeedHeader />
         </HeaderContainer>

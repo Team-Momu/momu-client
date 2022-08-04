@@ -6,6 +6,7 @@ export const HeaderContainer = styled.div`
   width: 373px;
   height: 68px;
   line-height: 68px;
+  background: #ffffff;
 
   display: flex;
   align-items: center;
