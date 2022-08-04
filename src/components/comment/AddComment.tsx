@@ -216,6 +216,7 @@ const AddComment = () => {
           }}
           placeholder="자세하게 적어줄 수록 채택확률이 높아요!&#13;(최대 38자)"
           value={description}
+          maxLength={35}
         ></CommentTextInput>
       </InnerContainer>
 
