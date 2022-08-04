@@ -16,15 +16,17 @@ const Feed: NextPage = ({ data }: any) => {
   // 유저 정보 불러오기
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const me = useSelector((state: RootState) => state.user.me);
   const { hasNext, percent, onScroll } = useScroll();
+  const me = useSelector((state: RootState) => state.user.me);
 
   useEffect(() => {
     dispatch(userInfo());
   }, []);
 
   useEffect(() => {
-    console.log('me in feed', me);
+    if (me.data?.id && (!me.data?.mbti || !me.data?.nickname)) {
+      router.push('/profile');
+    }
   }, [me]);
 
   return (
@@ -42,6 +44,20 @@ const Feed: NextPage = ({ data }: any) => {
     </Wrapper>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req }) => {
+      const cookie = req ? req.headers.cookie : '';
+      axios.defaults.headers.common['Cookie'] = '';
+      if (cookie && req) {
+        axios.defaults.headers.common['Cookie'] = cookie;
+      }
+      const { payload } = await store.dispatch(userInfo());
+      const data = payload;
+      return { props: { data, cookie } };
+    }
+);
 
 export default Feed;
 
