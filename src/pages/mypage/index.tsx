@@ -16,6 +16,7 @@ import Spinner from '@common/Spinner';
 import { router } from 'next/client';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { useRefScrollTo } from 'utils/hooks/useRefScrollTo';
 const Mypage = ({ data }: any) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -25,12 +26,7 @@ const Mypage = ({ data }: any) => {
     dispatch(userInfo());
   }, []);
 
-  const scrollRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    if (scrollRef && scrollRef.current) {
-      scrollRef.current.scrollTo(0, 0);
-    }
-  }, []);
+  const refToTop = useRefScrollTo();
 
   useEffect(() => {
     if (data.message === 'Request failed with status code 401') {
@@ -65,7 +61,7 @@ const Mypage = ({ data }: any) => {
       return <Spinner />;
     } else {
       return (
-        <Wrapper ref={scrollRef}>
+        <Wrapper ref={refToTop}>
           <HeaderContainer className="fixed top-0">
             <ProfileHeader />
           </HeaderContainer>
