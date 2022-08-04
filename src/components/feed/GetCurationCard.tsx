@@ -73,6 +73,7 @@ const GetCurationCard: FC<Props> = ({
   user,
   post,
   me,
+  data,
 }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -128,7 +129,10 @@ const GetCurationCard: FC<Props> = ({
   }, [personnel]);
 
   const onClick = useCallback(() => {
-    if (!me?.data?.id) {
+    if (
+      !me?.data?.id &&
+      data.message === 'Request failed with status code 401'
+    ) {
       return setOpen(true);
     }
     scrapState ? setScrapState(false) : setScrapState(true);
@@ -138,7 +142,10 @@ const GetCurationCard: FC<Props> = ({
   }, [scrapState]);
 
   const moveToDetail = useCallback(() => {
-    if (!me?.data?.id) {
+    if (
+      !me?.data?.id &&
+      data.message === 'Request failed with status code 401'
+    ) {
       return setOpen(true);
     }
     router.push(`/feed/${post}`);
