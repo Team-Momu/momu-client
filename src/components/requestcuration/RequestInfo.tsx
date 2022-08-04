@@ -261,12 +261,21 @@ const RequestInfo = () => {
           <QuestionText>
             추가 요청사항을 알려주세요! <Optional>(선택)</Optional>
           </QuestionText>
-          <AdditionalInput
-            onChange={onChangeDescription}
-            type="text"
-            placeholder="(25자 이내) 싫어하는 음식, 상황 등을 말씀해주세요!"
-            value={description}
-          />
+          {description.length > 25 ? (
+            <AdditionalInput
+              onChange={onChangeDescription}
+              type="text"
+              value={description}
+              readOnly
+            />
+          ) : (
+            <AdditionalInput
+              onChange={onChangeDescription}
+              type="text"
+              placeholder="(25자 이내) 싫어하는 음식, 상황 등을 말씀해주세요!"
+              value={description}
+            />
+          )}
         </AdditionalRequest>
       </Wrapper>
     </>
