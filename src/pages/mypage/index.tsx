@@ -2,7 +2,7 @@ import NavBar from '@common/NavBar';
 import MyPageTab from 'components/mypage/MyPageTab';
 import ProfileCard from 'components/mypage/ProfileCard';
 import ProfileHeader from 'components/mypage/ProfileHeader';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import wrapper, {
   RootState,
@@ -24,11 +24,13 @@ const Mypage = ({ data }: any) => {
   useEffect(() => {
     dispatch(userInfo());
   }, []);
-  // useEffect(() => {
-  //   if (me.data?.id && (!me.data?.mbti || !me.data?.nickname)) {
-  //     router.push('/profile');
-  //   }
-  // }, [me]);
+
+  const scrollRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (scrollRef && scrollRef.current) {
+      scrollRef.current.scrollTo(0, 0);
+    }
+  }, []);
 
   useEffect(() => {
     if (data.message === 'Request failed with status code 401') {
