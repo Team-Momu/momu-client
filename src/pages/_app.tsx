@@ -27,7 +27,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           }
           key="url"
         />
-        <meta property="og:title" content="제목 정해주세요" key="title" />
+        <meta
+          property="og:title"
+          content="맞춤형 맛집 큐레이션 서비스 | 모무"
+          key="title"
+        />
         <meta property="og:type" content="website" key="type" />
         <meta
           property="og:image"
@@ -36,8 +40,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta
           property="og:description"
-          content="맞춤형 맛집 큐레이션 서비스 | 모무"
-          key="이제 찾지말고 받으세요! Eat with MOMU"
+          content="이제 찾지말고 받으세요! Eat with MOMU"
+          key="description"
         />
       </Head>
       <Script
