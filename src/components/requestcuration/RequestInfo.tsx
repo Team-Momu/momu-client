@@ -266,6 +266,7 @@ const RequestInfo = () => {
             type="text"
             placeholder="(25자 이내) 싫어하는 음식, 상황 등을 말씀해주세요!"
             value={description}
+            maxLength={25}
           />
         </AdditionalRequest>
       </Wrapper>
