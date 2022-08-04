@@ -49,7 +49,7 @@ const Home: NextPage = ({ data }: any) => {
   }, [message]);
 
   useEffect(() => {
-    if (me?.data?.nickname && me?.data?.mbti === null) {
+    if (me?.data?.nickname && !me?.data?.mbti) {
       router.push('/profile/1');
     }
     if (me?.data?.nickname && me?.data?.mbti) {
@@ -130,11 +130,11 @@ const Home: NextPage = ({ data }: any) => {
     zIndex: '1',
   };
 
-  const ssrRendering = () => {
-    if (!data.id) {
+  useEffect(() => {
+    if (data.message === 'Request failed with status code 401') {
       toast('로그인이 필요합니다.', {
         position: 'top-center',
-        autoClose: 2500,
+        autoClose: 1500,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -143,10 +143,16 @@ const Home: NextPage = ({ data }: any) => {
       });
       router.push('/');
     }
+  }, []);
+
+  const ssrRendering = () => {
+    if (data.message === 'Request failed with status code 401') {
+      return <Spinner />;
+    }
     if (data.id && data.nickname && data.mbti) {
       return <Spinner />;
     }
-    if (data.id && data.nickname && data.mbti === null) {
+    if (data.id && data.nickname && !data.mbti) {
       return <Spinner />;
     }
     if (data.id && !data.nickname) {
