@@ -15,6 +15,7 @@ import axios from 'axios';
 import Spinner from '@common/Spinner';
 import camera from '@public/img/camera.png';
 import defaultProfile from '@public/img/defaultProfile.png';
+import { toast } from 'react-toastify';
 
 // @ts-ignore
 const Home: NextPage = ({ data }) => {
@@ -36,12 +37,39 @@ const Home: NextPage = ({ data }) => {
 
   useEffect(() => {
     if (me?.data?.id && me?.data?.nickname === null) {
+      toast('로그인되어 설정 페이지로 이동합니다.', {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       router.push('/profile');
     }
     if (me?.data?.id && me?.data?.nickname && me?.data?.mbti === null) {
+      toast('로그인되어 설정 페이지로 이동합니다.', {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       router.push('/profile/1');
     }
     if (me?.data?.id && me?.data?.nickname && me?.data?.mbti) {
+      toast('로그인되어 피드로 이동합니다.', {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       router.push('/feed');
     }
   }, [me]);
