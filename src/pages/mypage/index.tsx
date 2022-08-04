@@ -24,6 +24,11 @@ const Mypage = ({ data }: any) => {
   useEffect(() => {
     dispatch(userInfo());
   }, []);
+  useEffect(() => {
+    if (me.data?.id && (!me.data?.mbti || !me.data?.nickname)) {
+      router.push('/profile');
+    }
+  }, [me]);
 
   useEffect(() => {
     if (data.message === 'Request failed with status code 401') {
