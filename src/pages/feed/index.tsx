@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import NavBar from '@common/NavBar';
 import useScroll from '../../utils/hooks/useScroll';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Feed: NextPage = ({ data }: any) => {
   // 유저 정보 불러오기
@@ -25,6 +26,15 @@ const Feed: NextPage = ({ data }: any) => {
 
   useEffect(() => {
     if (me.data?.id && (!me.data?.mbti || !me.data?.nickname)) {
+      toast('설정이 필요합니다.', {
+        position: 'top-center',
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       router.push('/profile');
     }
   }, [me]);

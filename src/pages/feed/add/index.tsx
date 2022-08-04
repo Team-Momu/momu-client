@@ -26,6 +26,15 @@ const AddCuration = ({ data }: any) => {
   }, []);
   useEffect(() => {
     if (me.data?.id && (!me.data?.mbti || !me.data?.nickname)) {
+      toast('설정이 필요합니다.', {
+        position: 'top-center',
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       router.push('/profile');
     }
   }, [me]);
@@ -42,17 +51,6 @@ const AddCuration = ({ data }: any) => {
         progress: undefined,
       });
       router.push('/');
-    } else if (data.data.id && (!data.data.mbti || !data.data.nickname)) {
-      toast('설정이 필요합니다.', {
-        position: 'top-center',
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      router.push('/profile');
     }
   }, []);
 
