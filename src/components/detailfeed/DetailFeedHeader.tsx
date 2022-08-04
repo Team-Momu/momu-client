@@ -12,6 +12,7 @@ import {
   HeaderTextContainer,
   Line,
 } from 'styles/headerstyle/HeaderCommonStyle';
+import { toast } from 'react-toastify';
 
 const DetailFeedHeader = () => {
   const [url, setUrl] = useState('');
@@ -26,7 +27,15 @@ const DetailFeedHeader = () => {
   }, []);
 
   const shareUrl = useCallback(() => {
-    alert('url이 복사되었습니다! ');
+    toast('URL이 복사되었습니다.', {
+      position: 'top-center',
+      autoClose: 2500,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }, []);
   return (
     <>
