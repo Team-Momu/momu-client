@@ -20,7 +20,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <link rel="shortcut icon" href="/images/favicon.ico" />
-        <meta property="og:url" content="https://momueat.com/" key="url" />
+        <meta
+          property="og:url"
+          content={
+            'https://momueat.com/' || 'https://momueat.com' || 'momueat.com'
+          }
+          key="url"
+        />
         <meta property="og:title" content="타이틀" key="title" />
         <meta property="og:type" content="website" key="type" />
         <meta property="og:image" content="/" key="image" />
