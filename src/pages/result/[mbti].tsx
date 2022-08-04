@@ -89,10 +89,24 @@ const Mbti = ({ data }: any) => {
       });
       router.push('/');
     }
+    if (data.data.id && (!data.data.mbti || !data.data.nickname)) {
+      toast('로그인이 필요합니다.', {
+        position: 'top-center',
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      router.push('/');
+    }
   }, []);
 
   const ssrRender = () => {
     if (data.message === 'Request failed with status code 401') {
+      return <Spinner />;
+    } else if (data.data.id && (!data.data.mbti || !data.data.nickname)) {
       return <Spinner />;
     } else {
       return (
