@@ -212,11 +212,11 @@ const AddComment = () => {
         <GuideText>큐레이션 작성</GuideText>
         <CommentTextInput
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            handleInputLength(e, 35);
+            handleInputLength(e, 38);
           }}
           placeholder="자세하게 적어줄 수록 채택확률이 높아요!&#13;(최대 38자)"
           value={description}
-          maxLength={35}
+          maxLength={38}
         ></CommentTextInput>
       </InnerContainer>
 
