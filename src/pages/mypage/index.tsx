@@ -12,25 +12,55 @@ import wrapper, {
 import { mypageSlice } from '@slices/mypage/mypageSlice';
 import axios from 'axios';
 import { userInfo } from '@slices/user/userThunk';
-const Mypage = () => {
+import Spinner from '@common/Spinner';
+import { router } from 'next/client';
+import { toast } from 'react-toastify';
+const Mypage = ({ data }: any) => {
   const dispatch = useAppDispatch();
 
-  const data = useAppSelector((state: RootState) => state.user.me);
+  const me = useAppSelector((state: RootState) => state.user.me);
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
 
-  return (
-    <Wrapper>
-      <HeaderContainer className="fixed top-0">
-        <ProfileHeader />
-      </HeaderContainer>
-      <ProfileCard />
-      <ContentContainer>
-        <MyPageTab />
-      </ContentContainer>
-      <NavContainer className="fixed">
-        <NavBar />
-      </NavContainer>
-    </Wrapper>
-  );
+  useEffect(() => {
+    if (data.message === 'Request failed with status code 401' || !me?.id) {
+      router.push('/').then((r) =>
+        toast('로그인이 필요합니다.', {
+          position: 'top-center',
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      );
+    }
+  }, [me]);
+
+  const ssrRender = () => {
+    if (data.message === 'Request failed with status code 401' || !me?.id) {
+      return <Spinner />;
+    } else {
+      return (
+        <Wrapper>
+          <HeaderContainer className="fixed top-0">
+            <ProfileHeader />
+          </HeaderContainer>
+          <ProfileCard />
+          <ContentContainer>
+            <MyPageTab />
+          </ContentContainer>
+          <NavContainer className="fixed">
+            <NavBar />
+          </NavContainer>
+        </Wrapper>
+      );
+    }
+  };
+
+  return <>{ssrRender()}</>;
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(
@@ -42,7 +72,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       }
       const { payload } = await store.dispatch(userInfo());
       const data = payload;
-      return { props: { data, cookie } };
+      return { props: { data } };
     }
 );
 

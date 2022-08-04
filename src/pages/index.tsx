@@ -75,7 +75,7 @@ const Home: NextPage = ({ data }) => {
   }, [me]);
 
   const ssrRendering = () => {
-    if (!data?.data?.id) {
+    if (!data?.data?.id || data?.message) {
       return (
         <Wrapper>
           <Text>뭐 먹을지 고민될 땐</Text>
