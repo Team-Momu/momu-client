@@ -26,7 +26,7 @@ const Mypage = ({ data }: any) => {
   }, []);
 
   useEffect(() => {
-    if (data.message === 'Request failed with status code 401' || !me?.id) {
+    if (data.message === 'Request failed with status code 401') {
       toast('로그인이 필요합니다.', {
         position: 'top-center',
         autoClose: 1500,
@@ -38,10 +38,10 @@ const Mypage = ({ data }: any) => {
       });
       router.push('/');
     }
-  }, [me]);
+  }, []);
 
   const ssrRender = () => {
-    if (data.message === 'Request failed with status code 401' || !me?.id) {
+    if (data.message === 'Request failed with status code 401') {
       return <Spinner />;
     } else {
       return (
