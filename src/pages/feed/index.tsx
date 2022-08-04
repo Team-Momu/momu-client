@@ -24,10 +24,6 @@ const Feed: NextPage = ({ data }: any) => {
   }, []);
 
   useEffect(() => {
-    console.log('data', data);
-  }, []);
-
-  useEffect(() => {
     console.log('me', me);
   }, [me]);
 
@@ -38,7 +34,7 @@ const Feed: NextPage = ({ data }: any) => {
         <FeedHeader />
       </SliderContainer>
       <FeedContainer onScroll={onScroll}>
-        <FeedList hasNext={hasNext} percent={percent} data={data} />
+        <FeedList hasNext={hasNext} percent={percent} me={me} />
       </FeedContainer>
       <NavContainer className="fixed">
         <NavBar />
@@ -46,19 +42,6 @@ const Feed: NextPage = ({ data }: any) => {
     </Wrapper>
   );
 };
-
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req }) => {
-      const cookie = req ? req.headers.cookie : '';
-      if (cookie && req) {
-        axios.defaults.headers.common['Cookie'] = cookie;
-      }
-      const { payload } = await store.dispatch(userInfo());
-      const data = payload;
-      return { props: { data } };
-    }
-);
 
 export default Feed;
 

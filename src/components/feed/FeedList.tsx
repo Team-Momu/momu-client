@@ -14,10 +14,10 @@ import Spinner from '@common/Spinner';
 interface Props {
   hasNext: Boolean;
   percent: number;
-  data?: any;
+  me?: any;
 }
 
-const FeedList = ({ hasNext, percent, data }: Props) => {
+const FeedList = ({ hasNext, percent, me }: Props) => {
   const curations = useAppSelector(
     (state: RootState) => state.curation.data.results
   );
@@ -40,9 +40,7 @@ const FeedList = ({ hasNext, percent, data }: Props) => {
   const [previous, setPrevious] = useState('');
   const [cursor, setCursor] = useState('');
 
-  // 인증 정보 확인
   const dispatch = useAppDispatch();
-  const me = useSelector((state: RootState) => state.user.me);
 
   // 처음에 게시물 한번 가져옴
   useEffect(() => {
@@ -51,12 +49,10 @@ const FeedList = ({ hasNext, percent, data }: Props) => {
     }
   }, [addCurationPending, addCurationSuccess]);
 
-  // hasNext === true
-
   useEffect(() => {
     // 더 가져오는 thunk 실행
     if (hasNext && !end) {
-      console.log('실행');
+      // console.log('실행');
       dispatch(getMoreCurationPostListsThunk(cursor));
     }
   }, [hasNext, percent, end]);
@@ -105,7 +101,7 @@ const FeedList = ({ hasNext, percent, data }: Props) => {
               scrapFlag={curation.scrap_flag}
               user={curation.user.id}
               post={curation.id}
-              data={data}
+              me={me}
             />
           </>
         );

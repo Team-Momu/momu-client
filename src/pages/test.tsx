@@ -10,7 +10,9 @@ import * as React from 'react';
 import { TransitionProps } from '@mui/material/transitions';
 import Slide from '@mui/material/Slide';
 import Korea from '@public/img/mbti/korea1.png';
+import Logo from '@public/img/logoGroup.svg';
 import Image from 'next/image';
+import styled from 'styled-components';
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -41,24 +43,61 @@ const Test = () => {
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
-        style={{ width: '370px', margin: 'auto' }}
       >
         <DialogTitle style={{ textAlign: 'center' }}>
-          <Image src={Korea} width={28} height={28} />
+          <Image src={Logo} />
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            카카오 아이디로 간편 로그인하고 게시글을 확인해보세요!
-          </DialogContentText>
+          <ContentTextStyle first>
+            앗! 아직 로그인하지 않으셨나요?
+          </ContentTextStyle>
+          <ContentTextStyle>
+            카카오 로그인 후 모무 큐레이션을 즐겨보세요!
+          </ContentTextStyle>
         </DialogContent>
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button style={{ border: '1px solid red' }} onClick={handleClose}>
-            확인
+          <Button
+            style={{
+              background: '#5f5f5f',
+              width: '70px',
+              height: '36px',
+              color: '#ffffff',
+              borderRadius: '0px',
+            }}
+            onClick={handleClose}
+          >
+            취소
           </Button>
-          <Button onClick={handleClose}>로그인</Button>
+          <Button
+            style={{
+              background: '#f57906',
+              width: '168px',
+              height: '36px',
+              color: '#ffffff',
+              borderRadius: '0px',
+            }}
+            onClick={handleClose}
+          >
+            로그인
+          </Button>
         </DialogActions>
       </Dialog>
     </>
   );
 };
+
+export const ContentTextStyle = styled.div<{ first?: boolean }>`
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  /* or 12px */
+  margin-bottom: ${({ first }) => (first ? '5px' : 'none')};
+
+  text-align: center;
+
+  color: #191919;
+`;
+
 export default Test;

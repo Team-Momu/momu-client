@@ -29,6 +29,8 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import { TransitionProps } from '@mui/material/transitions';
 import Slide from '@mui/material/Slide';
+import Logo from '@public/img/logoGroup.svg';
+import { ContentTextStyle } from 'pages/test';
 
 interface Props {
   area: string;
@@ -44,7 +46,7 @@ interface Props {
   scrapFlag: boolean;
   user: any;
   post: number;
-  data?: any;
+  me?: any;
 }
 
 const Transition = React.forwardRef(function Transition(
@@ -70,7 +72,7 @@ const GetCurationCard: FC<Props> = ({
   scrapFlag,
   user,
   post,
-  data,
+  me,
 }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -102,7 +104,6 @@ const GetCurationCard: FC<Props> = ({
         setDrink('');
     }
   }, [isDrink]);
-
   useEffect(() => {
     switch (personnel) {
       case 1:
@@ -123,6 +124,9 @@ const GetCurationCard: FC<Props> = ({
   }, [personnel]);
 
   const onClick = useCallback(() => {
+    if (!me.id) {
+      return setOpen(true);
+    }
     scrapState ? setScrapState(false) : setScrapState(true);
     scrapState
       ? dispatch(deleteScrapStateThunk(post))
@@ -130,14 +134,17 @@ const GetCurationCard: FC<Props> = ({
   }, [scrapState]);
 
   const moveToDetail = useCallback(() => {
-    if (!data.id) {
-      setOpen(true);
+    if (!me.id) {
+      return setOpen(true);
     }
     router.push(`/feed/${post}`);
-  }, []);
+  }, [me]);
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const pushToLanding = () => {
+    router.push('/');
   };
 
   return (
@@ -198,19 +205,43 @@ const GetCurationCard: FC<Props> = ({
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
-        style={{ width: '370px', margin: 'auto' }}
       >
         <DialogTitle style={{ textAlign: 'center' }}>
-          <Image src={Korea} width={28} height={28} />
+          <Image src={Logo} />
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            카카오 아이디로 간편 로그인하고 게시글을 확인해보세요!
-          </DialogContentText>
+          <ContentTextStyle first>
+            앗! 아직 로그인하지 않으셨나요?
+          </ContentTextStyle>
+          <ContentTextStyle>
+            카카오 로그인 후 모무 큐레이션을 즐겨보세요!
+          </ContentTextStyle>
         </DialogContent>
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button onClick={handleClose}>확인</Button>
-          <Button onClick={handleClose}>로그인</Button>
+          <Button
+            style={{
+              background: '#5f5f5f',
+              width: '70px',
+              height: '36px',
+              color: '#ffffff',
+              borderRadius: '0px',
+            }}
+            onClick={handleClose}
+          >
+            취소
+          </Button>
+          <Button
+            style={{
+              background: '#f57906',
+              width: '168px',
+              height: '36px',
+              color: '#ffffff',
+              borderRadius: '0px',
+            }}
+            onClick={pushToLanding}
+          >
+            로그인
+          </Button>
         </DialogActions>
       </Dialog>
     </>
