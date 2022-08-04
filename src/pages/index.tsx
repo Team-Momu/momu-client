@@ -75,10 +75,7 @@ const Home: NextPage = ({ data }) => {
   }, [me]);
 
   const ssrRendering = () => {
-    if (
-      !data?.data?.id ||
-      data.message === 'Request failed with status code 401'
-    ) {
+    if (data.message === 'Request failed with status code 401') {
       return (
         <Wrapper>
           <Text>뭐 먹을지 고민될 땐</Text>
@@ -187,6 +184,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req }) => {
       const cookie = req ? req.headers.cookie : '';
+      axios.defaults.headers.common['Cookie'] = '';
       if (cookie && req) {
         axios.defaults.headers.common['Cookie'] = cookie;
       }
