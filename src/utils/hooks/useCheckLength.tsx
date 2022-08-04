@@ -14,7 +14,7 @@ const useCheckLength = () => {
     } = e;
 
     if (value.length > maxLength) {
-      toast('최대 ${maxLength}자까지 입력이 가능합니다.', {
+      toast(`최대 ${maxLength}자까지 입력이 가능합니다.`, {
         position: 'top-center',
         autoClose: 2500,
         hideProgressBar: true,

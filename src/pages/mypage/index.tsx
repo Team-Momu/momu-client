@@ -69,7 +69,7 @@ const Mypage = ({ data }: any) => {
           </HeaderContainer>
           <ProfileCard />
           <ContentContainer>
-            <MyPageTab />
+            <MyPageTab me={me} />
           </ContentContainer>
           <NavContainer className="fixed">
             <NavBar />

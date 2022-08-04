@@ -9,9 +9,10 @@ import GetCurationCard from 'components/feed/GetCurationCard';
 import styled from 'styled-components';
 interface IScrollVariable {
   hasNext: boolean;
+  me: any;
 }
 
-const ScrappedCard = ({ hasNext }: IScrollVariable) => {
+const ScrappedCard = ({ hasNext, me }: IScrollVariable) => {
   const scrappedCurations = useAppSelector(
     (state: RootState) => state.mypage.data.post.results
   );
@@ -51,6 +52,7 @@ const ScrappedCard = ({ hasNext }: IScrollVariable) => {
               scrapFlag={curation.scrap_flag}
               user={curation.user.id}
               post={curation.id}
+              me={me}
             />
           </>
         );

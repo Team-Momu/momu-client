@@ -9,9 +9,10 @@ import styled from 'styled-components';
 
 interface IScrollVariable {
   hasNext: boolean;
+  me: any;
 }
 
-const WrittenByUser = ({ hasNext }: IScrollVariable) => {
+const WrittenByUser = ({ hasNext, me }: IScrollVariable) => {
   const writtenCurations = useAppSelector(
     (state: RootState) => state.mypage.data.post.results
   );
@@ -53,6 +54,7 @@ const WrittenByUser = ({ hasNext }: IScrollVariable) => {
               scrapFlag={curation.scrap_flag}
               user={curation.user.id}
               post={curation.id}
+              me={me}
             />
           </>
         );
