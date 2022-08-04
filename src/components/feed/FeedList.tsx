@@ -15,9 +15,10 @@ interface Props {
   hasNext: Boolean;
   percent: number;
   me?: any;
+  data: any;
 }
 
-const FeedList = ({ hasNext, percent, me }: Props) => {
+const FeedList = ({ hasNext, percent, me, data }: Props) => {
   const curations = useAppSelector(
     (state: RootState) => state.curation.data.results
   );
@@ -102,6 +103,7 @@ const FeedList = ({ hasNext, percent, me }: Props) => {
               user={curation.user.id}
               post={curation.id}
               me={me}
+              data={data}
             />
           </>
         );
