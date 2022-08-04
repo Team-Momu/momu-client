@@ -6,7 +6,6 @@ import { DivisionLine } from 'styles/commentstyle/CommentStyle';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import {
   postSelectedStateThunk,
-  deleteSelectedStateThunk,
   selectSlice,
 } from '@slices/select/selectSlice';
 import { userInfo } from '@slices/user/userThunk';
