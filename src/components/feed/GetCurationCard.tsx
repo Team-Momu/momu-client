@@ -47,6 +47,7 @@ interface Props {
   user: any;
   post: number;
   me?: any;
+  data?: any;
 }
 
 const Transition = React.forwardRef(function Transition(
