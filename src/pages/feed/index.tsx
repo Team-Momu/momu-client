@@ -3,15 +3,16 @@ import styled from 'styled-components';
 import FeedList from 'components/feed/FeedList';
 import MainFeed from 'components/feed/MainFeed';
 import FeedHeader from 'components/feed/FeedHeader';
-import { RootState, useAppDispatch } from '../../store/store';
+import wrapper, { RootState, useAppDispatch } from '../../store/store';
 import { useSelector } from 'react-redux';
 import { UIEventHandler, useCallback, useEffect, useState } from 'react';
 import { userInfo } from '@slices/user/userThunk';
 import { useRouter } from 'next/router';
 import NavBar from '@common/NavBar';
 import useScroll from '../../utils/hooks/useScroll';
+import axios from 'axios';
 
-const Feed: NextPage = () => {
+const Feed: NextPage = ({ data }: any) => {
   // 유저 정보 불러오기
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -22,12 +23,13 @@ const Feed: NextPage = () => {
     dispatch(userInfo());
   }, []);
 
-  // useEffect(() => {
-  //   if (!me) {
-  //     alert('로그인이 필요합니다.');
-  //     router.push('/');
-  //   }
-  // }, [me]);
+  useEffect(() => {
+    console.log('data', data);
+  }, []);
+
+  useEffect(() => {
+    console.log('me', me);
+  }, [me]);
 
   return (
     <Wrapper>
@@ -36,7 +38,7 @@ const Feed: NextPage = () => {
         <FeedHeader />
       </SliderContainer>
       <FeedContainer onScroll={onScroll}>
-        <FeedList hasNext={hasNext} percent={percent} />
+        <FeedList hasNext={hasNext} percent={percent} data={data} />
       </FeedContainer>
       <NavContainer className="fixed">
         <NavBar />
@@ -44,6 +46,19 @@ const Feed: NextPage = () => {
     </Wrapper>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ req }) => {
+      const cookie = req ? req.headers.cookie : '';
+      if (cookie && req) {
+        axios.defaults.headers.common['Cookie'] = cookie;
+      }
+      const { payload } = await store.dispatch(userInfo());
+      const data = payload;
+      return { props: { data } };
+    }
+);
 
 export default Feed;
 

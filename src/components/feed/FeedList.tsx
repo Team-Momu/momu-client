@@ -14,9 +14,10 @@ import Spinner from '@common/Spinner';
 interface Props {
   hasNext: Boolean;
   percent: number;
+  data?: any;
 }
 
-const FeedList = ({ hasNext, percent }: Props) => {
+const FeedList = ({ hasNext, percent, data }: Props) => {
   const curations = useAppSelector(
     (state: RootState) => state.curation.data.results
   );
@@ -104,6 +105,7 @@ const FeedList = ({ hasNext, percent }: Props) => {
               scrapFlag={curation.scrap_flag}
               user={curation.user.id}
               post={curation.id}
+              data={data}
             />
           </>
         );
