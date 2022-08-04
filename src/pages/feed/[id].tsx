@@ -8,6 +8,27 @@ import { GetServerSideProps } from 'next';
 import { RootState, useAppDispatch, useAppSelector } from 'store/store';
 import { getCurationByIdThunk } from '@slices/curation/detailCurationPostSlice';
 import { userInfo } from '@slices/user/userThunk';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import * as React from 'react';
+import { TransitionProps } from '@mui/material/transitions';
+import Slide from '@mui/material/Slide';
+import Image from 'next/image';
+import Logo from '@public/img/logoGroup.svg';
+import { ContentTextStyle } from '../test';
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const DetailFeed = ({ id }: any) => {
   const router = useRouter();
@@ -15,7 +36,15 @@ const DetailFeed = ({ id }: any) => {
   const postId = Number(id);
 
   const [sameUser, setSameUser] = useState<boolean | null>(null);
+  const [open, setOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const curationSelectedFlag = useAppSelector(
     (state: RootState) => state.detailCuration.data.selected_flag
   );
@@ -29,44 +58,94 @@ const DetailFeed = ({ id }: any) => {
   );
   const me = useAppSelector((state: RootState) => state.user.me);
 
-  // useEffect(() => {
-  //   const result = logInUserId == userId;
-  //   setSameUser(result);
-  //   // console.log('🔥same🔥', sameUser);
-  // }, [logInUserId, userId, sameUser]);
-
   useEffect(() => {
     dispatch(userInfo());
   }, []);
 
-  // useEffect(() => {
-  //   dispatch(getCurationByIdThunk(postId));
-  // }, []);
+  useEffect(() => {
+    if (!me?.id) {
+      setOpen(true);
+    }
+  }, [me]);
+
   const writeComment = useCallback(() => {
     router.push(`/comment/${postId}`);
   }, []);
+  const pushToLanding = () => {
+    router.push('/');
+  };
+  const pushToFeed = () => {
+    router.push('/feed');
+  };
 
   return (
-    <Wrapper className="relative">
-      <HeaderContainer className="sticky top-0">
-        <DetailFeedHeader />
-      </HeaderContainer>
-      <DetailFeedContentsContainer>
-        <DetailFeedContents me={me} postId={postId} />
-      </DetailFeedContentsContainer>
-      <ContentContainer>
-        <CommentList
-          curationSelectedFlag={curationSelectedFlag}
-          postId={postId}
-          sameUser={sameUser}
-        />
-      </ContentContainer>
-      <ButtonContainer className="fixed">
-        <AddCurationButton onClick={writeComment}>
-          큐레이션 하기
-        </AddCurationButton>
-      </ButtonContainer>
-    </Wrapper>
+    <>
+      <Wrapper className="relative">
+        <HeaderContainer className="sticky top-0">
+          <DetailFeedHeader />
+        </HeaderContainer>
+        <DetailFeedContentsContainer>
+          <DetailFeedContents me={me} postId={postId} />
+        </DetailFeedContentsContainer>
+        <ContentContainer>
+          <CommentList
+            curationSelectedFlag={curationSelectedFlag}
+            postId={postId}
+            sameUser={sameUser}
+          />
+        </ContentContainer>
+        <ButtonContainer className="fixed">
+          <AddCurationButton onClick={writeComment}>
+            큐레이션 하기
+          </AddCurationButton>
+        </ButtonContainer>
+      </Wrapper>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle style={{ textAlign: 'center' }}>
+          <Image src={Logo} />
+        </DialogTitle>
+        <DialogContent>
+          <ContentTextStyle first>
+            앗! 아직 로그인하지 않으셨나요?
+          </ContentTextStyle>
+          <ContentTextStyle>
+            카카오 로그인 후 모무 큐레이션을 즐겨보세요!
+          </ContentTextStyle>
+        </DialogContent>
+        <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button
+            style={{
+              background: '#5f5f5f',
+              width: '70px',
+              height: '36px',
+              color: '#ffffff',
+              borderRadius: '0px',
+            }}
+            onClick={pushToFeed}
+          >
+            취소
+          </Button>
+          <Button
+            style={{
+              background: '#f57906',
+              width: '168px',
+              height: '36px',
+              color: '#ffffff',
+              borderRadius: '0px',
+            }}
+            onClick={pushToLanding}
+          >
+            로그인
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 
