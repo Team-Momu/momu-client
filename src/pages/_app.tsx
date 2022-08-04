@@ -10,6 +10,7 @@ import axios from 'axios';
 import Script from 'next/script';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Head from 'next/head';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 axios.defaults.withCredentials = true;
@@ -17,6 +18,9 @@ axios.defaults.withCredentials = true;
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
+      <Head>
+        <link rel="shortcut icon" href="/images/favicon.ico" />
+      </Head>
       <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
@@ -31,7 +35,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                     });
                 `}
       </Script>
-
       <AppLayout>
         <ToastContainer
           position="top-center"
@@ -44,6 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           draggable
           pauseOnHover
         />
+
         <GlobalStyle />
         <Component {...pageProps} />
       </AppLayout>
