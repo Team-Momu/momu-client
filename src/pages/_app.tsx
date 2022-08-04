@@ -11,7 +11,6 @@ import Script from 'next/script';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
-import Share from '@public/images/share.png';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 axios.defaults.withCredentials = true;
@@ -37,8 +36,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta
           property="og:description"
-          content="본문내용 정해주세요"
-          key="description"
+          content="맞춤형 맛집 큐레이션 서비스 | 모무"
+          key="이제 찾지말고 받으세요! Eat with MOMU"
         />
       </Head>
       <Script
