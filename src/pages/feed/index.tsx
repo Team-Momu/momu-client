@@ -26,16 +26,17 @@ const Feed: NextPage = ({ data }: any) => {
 
   useEffect(() => {
     if (me.data?.id && (!me.data?.mbti || !me.data?.nickname)) {
-      toast('설정이 필요합니다.', {
-        position: 'top-center',
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      router.push('/profile');
+      router.push('/profile').then((r) =>
+        toast('설정이 필요합니다.', {
+          position: 'top-center',
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      );
     }
   }, [me]);
 
