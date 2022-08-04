@@ -172,7 +172,7 @@ const Wrapper = styled.div`
 
 const HeaderContainer = styled.div`
   background: #ffffff;
-  z-index: 1;
+  z-index: 2;
 `;
 
 const DetailFeedContentsContainer = styled.div`
