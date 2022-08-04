@@ -26,13 +26,13 @@ const Home: NextPage = ({ data }) => {
     dispatch(userInfo());
   }, []);
 
-  useEffect(() => {
-    console.log('data', data);
-  }, []);
-
-  useEffect(() => {
-    console.log('me', me);
-  }, [me]);
+  // useEffect(() => {
+  //   console.log('data', data);
+  // }, []);
+  //
+  // useEffect(() => {
+  //   console.log('me', me);
+  // }, [me]);
 
   useEffect(() => {
     if (me?.data?.id && me?.data?.nickname === null) {
@@ -47,7 +47,7 @@ const Home: NextPage = ({ data }) => {
   }, [me]);
 
   const ssrRendering = () => {
-    if (!data.id) {
+    if (!data?.data?.id) {
       return (
         <Wrapper>
           <Text>뭐 먹을지 고민될 땐</Text>
