@@ -90,6 +90,10 @@ const GetCurationCard: FC<Props> = ({
   }, [scrapFlag]);
 
   useEffect(() => {
+    console.log('me in feed', me);
+  }, [me]);
+
+  useEffect(() => {
     switch (isDrink) {
       case 0:
         setDrink('안 마셔요');
@@ -124,7 +128,7 @@ const GetCurationCard: FC<Props> = ({
   }, [personnel]);
 
   const onClick = useCallback(() => {
-    if (!me.id) {
+    if (!me?.data?.id) {
       return setOpen(true);
     }
     scrapState ? setScrapState(false) : setScrapState(true);
@@ -134,7 +138,7 @@ const GetCurationCard: FC<Props> = ({
   }, [scrapState]);
 
   const moveToDetail = useCallback(() => {
-    if (!me.id) {
+    if (!me?.data?.id) {
       return setOpen(true);
     }
     router.push(`/feed/${post}`);
