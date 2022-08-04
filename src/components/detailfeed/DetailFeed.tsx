@@ -10,9 +10,10 @@ import { GetServerSideProps } from 'next';
 
 interface Props {
   postId: number;
+  me: any;
 }
 
-const DetailFeedContents = ({ postId }: Props) => {
+const DetailFeedContents = ({ postId, me }: Props) => {
   const router = useRouter();
 
   const curation = useAppSelector(
@@ -47,6 +48,7 @@ const DetailFeedContents = ({ postId }: Props) => {
           scrapFlag={curation.scrap_flag}
           user={curation.user.id}
           post={curation.id}
+          me={me}
         />
       </CardWrapper>
       <DivisionLine />
