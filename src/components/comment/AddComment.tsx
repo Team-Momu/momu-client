@@ -25,6 +25,7 @@ import { resetPlaceData } from '@slices/comment/PlaceChoiceSlice';
 import { addCommentThunk } from '@slices/comment/addCommentSlice';
 import { modalSlice } from '@slices/Modal/modalSlice';
 import ResetInputButton from '@public/img/search/ResetInput.png';
+import { toast } from 'react-toastify';
 
 const AddComment = () => {
   const { description, handleInputLength } = useCheckLength();
@@ -66,7 +67,15 @@ const AddComment = () => {
   //모든 데이터 입력 후에 완료 버튼 누르면 formData 전송.
   const onSubmit = async (e: React.SyntheticEvent) => {
     if (placeName === '') {
-      alert('식당을 선택해주세요!');
+      toast('식당을 선택해주세요!', {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else {
       router.push(`/feed/${postId}`);
       e.preventDefault();

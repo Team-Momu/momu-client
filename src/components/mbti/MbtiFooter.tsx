@@ -44,7 +44,15 @@ const MbtiFooter = () => {
           pushNextPageUtils();
           break;
         } else {
-          alert('값을 입력해주세요');
+          toast('값을 입력해주세요!', {
+            position: 'top-center',
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           break;
         }
       case 2:
@@ -53,7 +61,15 @@ const MbtiFooter = () => {
           pushNextPageUtils();
           break;
         } else {
-          alert('값을 입력해주세요');
+          toast('값을 입력해주세요', {
+            position: 'top-center',
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           break;
         }
       case 3:
@@ -62,7 +78,15 @@ const MbtiFooter = () => {
           pushNextPageUtils();
           break;
         } else {
-          alert('값을 입력해주세요');
+          toast('값을 입력해주세요', {
+            position: 'top-center',
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           break;
         }
       case 4:
@@ -71,7 +95,15 @@ const MbtiFooter = () => {
           pushNextPageUtils();
           break;
         } else {
-          alert('값을 입력해주세요');
+          toast('값을 입력해주세요', {
+            position: 'top-center',
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           break;
         }
       case 5:
@@ -80,7 +112,15 @@ const MbtiFooter = () => {
           pushNextPageUtils();
           break;
         } else {
-          alert('값을 입력해주세요');
+          toast('값을 입력해주세요', {
+            position: 'top-center',
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           break;
         }
       case 6:
@@ -89,7 +129,15 @@ const MbtiFooter = () => {
           pushNextPageUtils();
           break;
         } else {
-          alert('값을 입력해주세요');
+          toast('값을 입력해주세요', {
+            position: 'top-center',
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           break;
         }
       case 7:
@@ -98,7 +146,15 @@ const MbtiFooter = () => {
           pushNextPageUtils();
           break;
         } else {
-          alert('값을 입력해주세요');
+          toast('값을 입력해주세요', {
+            position: 'top-center',
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           break;
         }
       case 8:
@@ -107,7 +163,15 @@ const MbtiFooter = () => {
           pushNextPageUtils();
           break;
         } else {
-          alert('값을 입력해주세요');
+          toast('값을 입력해주세요', {
+            position: 'top-center',
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           break;
         }
       case 9:
@@ -122,7 +186,15 @@ const MbtiFooter = () => {
 
           break;
         } else {
-          alert('값을 입력해주세요');
+          toast('값을 입력해주세요', {
+            position: 'top-center',
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
           break;
         }
 

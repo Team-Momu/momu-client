@@ -4,7 +4,7 @@ import MbtiHeader from '@mbti/MbtiHeader';
 import { userInfo } from '@slices/user/userThunk';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import wrapper, {
   RootState,
   useAppDispatch,
@@ -46,7 +46,15 @@ const Profile = ({ data }: any) => {
 
   const ssrRendering = () => {
     if (!data.id) {
-      alert('로그인이 필요합니다.');
+      toast('로그인이 필요합니다.', {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       router.push('/');
     }
     if (data.id && !data.mbti) {

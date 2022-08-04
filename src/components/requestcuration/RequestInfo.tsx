@@ -19,6 +19,7 @@ import { onClickTime } from 'utils/common/onClickTime';
 import { onClickDrink } from 'utils/common/onClickDrink';
 import { onClickCount } from 'utils/common/onClickCount';
 import { onChangeLocation } from 'utils/common/onChangeLocation';
+import { toast } from 'react-toastify';
 
 const RequestInfo = () => {
   const dispatch = useAppDispatch();
@@ -83,10 +84,26 @@ const RequestInfo = () => {
 
   const onClickSubmit = (e: React.SyntheticEvent) => {
     if (data.location === '') {
-      return alert('장소를 선택해 주세요!');
+      return toast('장소를 선택해 주세요.', {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
     if (data.location === '신촌,홍대 부근 동네를 선택해주세요!') {
-      return alert('장소를 선택해 주세요!');
+      return toast('장소를 선택해 주세요.', {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
 
     dispatch(addCurationData(data));

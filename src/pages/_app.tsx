@@ -8,6 +8,8 @@ import 'styles/globals.css';
 import 'styles/FilterStyle.css';
 import axios from 'axios';
 import Script from 'next/script';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 axios.defaults.withCredentials = true;
@@ -29,7 +31,19 @@ function MyApp({ Component, pageProps }: AppProps) {
                     });
                 `}
       </Script>
+
       <AppLayout>
+        <ToastContainer
+          position="top-center"
+          autoClose={2500}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <GlobalStyle />
         <Component {...pageProps} />
       </AppLayout>

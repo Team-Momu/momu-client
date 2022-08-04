@@ -17,6 +17,7 @@ import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import useImage from '../../utils/hooks/useImage';
 import Spinner from '@common/Spinner';
+import { toast } from 'react-toastify';
 
 // @ts-ignore
 const Home: NextPage = ({ data }: any) => {
@@ -62,7 +63,15 @@ const Home: NextPage = ({ data }: any) => {
       const notEngExp = /[^A-Za-z]/g;
       const isNotEng = notEngExp.test(e.target.value);
       if (isNotEng) {
-        alert('영어를 입력해주세요!');
+        toast('영어를 입력해주세요.', {
+          position: 'top-center',
+          autoClose: 2500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         e.preventDefault();
         return;
       }
@@ -123,7 +132,15 @@ const Home: NextPage = ({ data }: any) => {
 
   const ssrRendering = () => {
     if (!data.id) {
-      alert('로그인이 필요합니다.');
+      toast('로그인이 필요합니다.', {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       router.push('/');
     }
     if (data.id && data.nickname && data.mbti) {

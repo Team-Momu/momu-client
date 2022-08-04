@@ -36,7 +36,7 @@
     "react-spring": "^9.4.5",
     "react-spring-bottom-sheet": "^3.4.1",
     "react-sticky": "^6.0.3",
-    "react-toastify": "^9.0.5",
+    "react-toastify": "^9.0.7",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "rsuite": "^5.16.0",

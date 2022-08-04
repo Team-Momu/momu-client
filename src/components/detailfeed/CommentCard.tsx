@@ -21,6 +21,7 @@ import {
 } from '@slices/curation/detailCurationPostSlice';
 import { useSelector } from 'react-redux';
 import cardProfileMask from '@public/img/mask/cardProfileMask.svg';
+import { toast } from 'react-toastify';
 
 interface Props {
   curationSelectedFlag: boolean;
@@ -83,7 +84,15 @@ const CommentCard: FC<Props> = ({
 
   const onClick = () => {
     if (user != questionUserId) {
-      return alert('큐레이션 작성자만 가능합니다.');
+      return toast('큐레이션 작성자만 가능합니다.', {
+        position: 'top-center',
+        autoClose: 2500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
     if (!curationSelectedFlag) {
       const ask = confirm('이 게시물을 채택하시겠습니까?');
