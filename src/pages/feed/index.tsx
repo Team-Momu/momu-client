@@ -24,7 +24,7 @@ const Feed: NextPage = ({ data }: any) => {
   }, []);
 
   useEffect(() => {
-    console.log('me', me);
+    console.log('me in feed', me);
   }, [me]);
 
   return (
