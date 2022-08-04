@@ -24,7 +24,7 @@ const useCheckLength = () => {
         progress: undefined,
       });
 
-      setAdditionalComment(value.substr(0, 35));
+      setAdditionalComment(value.substr(0, maxLength - 1));
     } else {
       setAdditionalComment(value);
     }
