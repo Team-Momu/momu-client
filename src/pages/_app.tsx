@@ -11,6 +11,7 @@ import Script from 'next/script';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
+import Share from '@public/images/share.png';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 axios.defaults.withCredentials = true;
@@ -27,10 +28,18 @@ function MyApp({ Component, pageProps }: AppProps) {
           }
           key="url"
         />
-        <meta property="og:title" content="타이틀" key="title" />
+        <meta property="og:title" content="제목 정해주세요" key="title" />
         <meta property="og:type" content="website" key="type" />
-        <meta property="og:image" content="/" key="image" />
-        <meta property="og:description" content="설명글" key="description" />
+        <meta
+          property="og:image"
+          content="https://momu-s3.s3.ap-northeast-2.amazonaws.com/etc/KakaoTalk_Photo_2022-08-04-22-15-47.png"
+          key="image"
+        />
+        <meta
+          property="og:description"
+          content="본문내용 정해주세요"
+          key="description"
+        />
       </Head>
       <Script
         strategy="lazyOnload"

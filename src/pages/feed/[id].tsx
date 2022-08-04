@@ -27,6 +27,7 @@ const DetailFeed = ({ id }: any) => {
   const userId = useAppSelector(
     (state: RootState) => state.detailCuration.data.user.id
   );
+  const me = useAppSelector((state: RootState) => state.user.me);
 
   // useEffect(() => {
   //   const result = logInUserId == userId;
@@ -51,7 +52,7 @@ const DetailFeed = ({ id }: any) => {
         <DetailFeedHeader />
       </HeaderContainer>
       <DetailFeedContentsContainer>
-        <DetailFeedContents postId={postId} />
+        <DetailFeedContents me={me} postId={postId} />
       </DetailFeedContentsContainer>
       <ContentContainer>
         <CommentList
