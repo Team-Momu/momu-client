@@ -38,7 +38,7 @@ const DetailFeedHeader = () => {
     });
   }, []);
   return (
-    <>
+    <Wrapper>
       <HeaderContainer>
         <HeaderLeftSide>
           <BackButton onClick={moveToFeed}>
@@ -53,12 +53,15 @@ const DetailFeedHeader = () => {
         </ShareButton>
       </HeaderContainer>
       <Line></Line>
-    </>
+    </Wrapper>
   );
 };
 
 export default DetailFeedHeader;
 
+const Wrapper = styled.div`
+  z-index: 2;
+`;
 const ShareButton = styled.button`
   margin-right: 21px;
 `;
