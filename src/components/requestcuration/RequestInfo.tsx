@@ -62,7 +62,7 @@ const RequestInfo = () => {
 
   useEffect(() => {
     if (
-      data.location !== '' &&
+      data.location !== '신촌,홍대 부근 동네를 선택해주세요!' &&
       data.time !== '' &&
       (data.drink !== null || data.drink !== '') &&
       data.member_count !== ''
