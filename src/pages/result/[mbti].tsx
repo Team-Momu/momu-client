@@ -61,7 +61,7 @@ const Mbti = ({ data }: any) => {
   const mbti = data?.data?.mbti;
 
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
     if (data) {
       setMbtiState(data?.data?.mbti?.mbti);
       setType(data?.data?.mbti?.type);
@@ -140,7 +140,7 @@ const Mbti = ({ data }: any) => {
                   <HeaderBottomLine />
                 </Header>
                 <Article>
-                  {kindOfMbti.map((c) => {
+                  {kindOfMbti.map((c, i) => {
                     return (
                       <>
                         <Container>
@@ -150,7 +150,11 @@ const Mbti = ({ data }: any) => {
                             <LeftBox>
                               <LeftInnerBox>
                                 <LeftInnerUpBox>
-                                  <ColorText>{c.typeLeft[0]}</ColorText>
+                                  {i === 3 ? (
+                                    <ColorText>{c.typeLeft[7]}</ColorText>
+                                  ) : (
+                                    <ColorText>{c.typeLeft[0]}</ColorText>
+                                  )}
                                   <NoneColorText>
                                     {c.typeLeft.slice(1)}
                                   </NoneColorText>
@@ -163,7 +167,11 @@ const Mbti = ({ data }: any) => {
                             <RightBox>
                               <RightInnerBox>
                                 <RightInnerUpBox>
-                                  <ColorText>{c.typeRight[0]}</ColorText>
+                                  {i === 3 ? (
+                                    <ColorText>{c.typeRight[4]}</ColorText>
+                                  ) : (
+                                    <ColorText>{c.typeRight[0]}</ColorText>
+                                  )}
                                   <NoneColorText>
                                     {c.typeRight.slice(1)}
                                   </NoneColorText>

@@ -105,10 +105,10 @@ export const mbtiCalculator = (result: IResult) => {
       mbti.fourth = 'R';
       break;
   }
-  console.log('firstCount', firstCount);
-  console.log('secondCount', secondCount);
-  console.log('thirdCount', thirdCount);
-  console.log('fourhCount', fourthCount);
+  // console.log('firstCount', firstCount);
+  // console.log('secondCount', secondCount);
+  // console.log('thirdCount', thirdCount);
+  // console.log('fourhCount', fourthCount);
 
   // console.log(mbti);
 

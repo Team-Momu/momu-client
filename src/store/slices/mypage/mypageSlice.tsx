@@ -108,11 +108,11 @@ export const mypageSlice = createSlice({
       )
       .addCase(getCurationWrittenByUserThunk.rejected, (state, action) => {
         state.pending = false;
-        console.log(action.error);
+        // console.log(action.error);
       })
       .addCase(getCurationScrappedByUserThunk.rejected, (state, action) => {
         state.pending = false;
-        console.log(action.error);
+        // console.log(action.error);
       })
       .addCase(getMoreCurationWrittenByUserThunk.rejected, (state, action) => {
         state.error = action.payload;

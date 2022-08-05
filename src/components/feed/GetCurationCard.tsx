@@ -91,9 +91,9 @@ const GetCurationCard: FC<Props> = ({
     setScrapState(scrapFlag);
   }, [scrapFlag]);
 
-  useEffect(() => {
-    console.log('me in feed', me);
-  }, [me]);
+  // useEffect(() => {
+  //   console.log('me in feed', me);
+  // }, [me]);
 
   useEffect(() => {
     switch (isDrink) {

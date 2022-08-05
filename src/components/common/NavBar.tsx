@@ -37,9 +37,9 @@ const NavBar = () => {
     dispatch(userInfo());
   }, []);
 
-  useEffect(() => {
-    console.log('me in navbar', me);
-  }, [me]);
+  // useEffect(() => {
+  //   console.log('me in navbar', me);
+  // }, [me]);
 
   const onClickRequset = useCallback(() => {
     if (!me?.data?.id) {

@@ -17,7 +17,7 @@ export const getCommentPostListsThunk = createAsyncThunk(
   async (postId: number, thunkAPI) => {
     const response = await axios.get(`/feed/${postId}/comment/`);
     if (!response) {
-      console.log('error');
+      // console.log('error');
     }
     return response.data;
   }
@@ -29,7 +29,7 @@ export const getMoreCommentPostListsThunk = createAsyncThunk(
       `/feed/${postId}/comment/?cursor=${cursor}`
     );
     if (!response) {
-      console.log('error');
+      // console.log('error');
     }
     return response.data;
   }
