@@ -31,6 +31,9 @@ const Home: NextPage = ({ data }: any) => {
   const setProfilePending = useAppSelector(
     (state: RootState) => state.profileSet.setProfilePending
   );
+  const setProfileSuccess = useAppSelector(
+    (state: RootState) => state.profileSet.setProfileSuccess
+  );
   const me = useAppSelector((state: RootState) => state.user.me);
   useEffect(() => {
     dispatch(userInfo());
@@ -49,7 +52,7 @@ const Home: NextPage = ({ data }: any) => {
   }, []);
 
   useEffect(() => {
-    if (message === '프로필 설정 성공') {
+    if (!setProfilePending && setProfileSuccess) {
       router.push('/profile/1');
     }
   }, [message]);
@@ -164,7 +167,7 @@ const Home: NextPage = ({ data }: any) => {
     if (data.id && !data.nickname) {
       return (
         <>
-          {setProfilePending ? (
+          {setProfilePending && !setProfileSuccess ? (
             <Spinner />
           ) : (
             <>
