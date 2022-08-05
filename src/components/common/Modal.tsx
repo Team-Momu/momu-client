@@ -45,6 +45,7 @@ const Container = styled.div`
   top: 16px;
   padding: 20px;
   border: 1px solid black;
+  overflow: scroll;
 `;
 
 export default Modal;
