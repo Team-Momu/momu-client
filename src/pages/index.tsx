@@ -27,6 +27,12 @@ const Home: NextPage = ({ data }) => {
     dispatch(userInfo());
   }, []);
 
+  useEffect(() => {
+    if (data.detail === '찾을 수 없습니다.') {
+      console.log(data);
+    }
+  }, []);
+
   // useEffect(() => {
   //   console.log('data in landing', data);
   // }, []);
@@ -72,7 +78,7 @@ const Home: NextPage = ({ data }) => {
       });
       router.push('/feed');
     }
-    if (me?.detail === '찾을 수 없습니다.') {
+    if (data?.detail === '찾을 수 없습니다.') {
       toast('브라우저를 완전히 종료 후 다시 시도해 주세요.', {
         position: 'top-center',
         autoClose: 3500,
