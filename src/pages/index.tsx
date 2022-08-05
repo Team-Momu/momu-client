@@ -72,6 +72,17 @@ const Home: NextPage = ({ data }) => {
       });
       router.push('/feed');
     }
+    if (me?.detail === '찾을 수 없습니다.') {
+      toast('브라우저를 완전히 종료 후 다시 시도해 주세요.', {
+        position: 'top-center',
+        autoClose: 3500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   }, [me]);
 
   const ssrRendering = () => {
