@@ -31,9 +31,9 @@ const Profile = ({ data }: any) => {
   //   console.log('data', data);
   // }, []);
 
-  // useEffect(() => {
-  //   console.log('me', me);
-  // }, [me]);
+  useEffect(() => {
+    console.log('me in profile/1', me);
+  }, [me]);
 
   useEffect(() => {
     if (!me?.data?.nickname) {
