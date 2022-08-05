@@ -52,10 +52,10 @@ const Home: NextPage = ({ data }: any) => {
   // }, []);
 
   useEffect(() => {
-    if (!setProfilePending) {
+    if (!setProfilePending && setProfileSuccess) {
       router.push('/profile/1');
     }
-  }, [setProfilePending]);
+  }, [setProfilePending, setProfileSuccess]);
 
   useEffect(() => {
     if (me?.data?.nickname && !me?.data?.mbti) {
