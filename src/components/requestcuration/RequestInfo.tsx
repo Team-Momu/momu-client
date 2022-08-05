@@ -61,9 +61,11 @@ const RequestInfo = () => {
   const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {
+    data.location = '신촌,홍대 부근 동네를 선택해주세요!';
+  }, []);
+  useEffect(() => {
     if (
-      (data.location !== '신촌,홍대 부근 동네를 선택해주세요!' ||
-        data.location !== null) &&
+      data.location !== '신촌,홍대 부근 동네를 선택해주세요!' &&
       data.time !== '' &&
       (data.drink !== null || data.drink !== '') &&
       data.member_count !== ''
