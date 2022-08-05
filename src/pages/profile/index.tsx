@@ -38,9 +38,9 @@ const Home: NextPage = ({ data }: any) => {
   //   console.log('data', data);
   // }, []);
 
-  // useEffect(() => {
-  //   console.log('me', me);
-  // }, [me]);
+  useEffect(() => {
+    console.log('me in profile', me);
+  }, [me]);
 
   useEffect(() => {
     if (message === '프로필 설정 성공') {
