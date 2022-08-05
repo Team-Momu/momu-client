@@ -28,9 +28,7 @@ const Home: NextPage = ({ data }) => {
   }, []);
 
   useEffect(() => {
-    if (data.detail === '찾을 수 없습니다.') {
-      console.log(data);
-    }
+    console.log(data);
   }, []);
 
   // useEffect(() => {
