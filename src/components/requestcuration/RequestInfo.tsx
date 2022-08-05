@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ButtonContainer, ChoiceButton } from 'styles/CommonStyle';
 import useCheckLength from 'utils/hooks/useCheckLength';
@@ -58,13 +58,27 @@ const RequestInfo = () => {
   );
   const data = useSelector((state: RootState) => state.addCuration.data);
   const status = useSelector((state: RootState) => state.addCuration.status);
+  const [isSelected, setIsSelected] = useState(false);
 
+  useEffect(() => {
+    if (
+      data.location !== '' &&
+      data.time !== '' &&
+      (data.drink !== null || data.drink !== '') &&
+      data.member_count !== ''
+    ) {
+      setIsSelected(true);
+    } else {
+      setIsSelected(false);
+    }
+  }, []);
   //backbutton 클릭하거나 완료 버튼 클릭시 state reset
   const resetState = () => {
     dispatch(addCurationSlice.actions.resetLocation());
     dispatch(addCurationSlice.actions.resetActiveInTime());
     dispatch(addCurationSlice.actions.resetActiveInDrink());
     dispatch(addCurationSlice.actions.resetActiveInCount());
+    dispatch(addCurationSlice.actions.resetData());
   };
 
   const onChangeDescription = useCallback(
@@ -127,7 +141,13 @@ const RequestInfo = () => {
           </BackButton>
           <HeaderTextContainer>Request</HeaderTextContainer>
         </HeaderLeftSide>
-        <SubmitButton onClick={onClickSubmit}>완료</SubmitButton>
+        {isSelected ? (
+          <SubmitButton isSelected onClick={onClickSubmit}>
+            완료
+          </SubmitButton>
+        ) : (
+          <SubmitButton onClick={onClickSubmit}>완료</SubmitButton>
+        )}
       </HeaderContainer>
       <Line></Line>
       <Wrapper>
@@ -374,7 +394,7 @@ const AdditionalInput = styled.input`
   }
 `;
 
-const SubmitButton = styled.button`
+const SubmitButton = styled.button<{ isSelected?: boolean }>`
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 600;
@@ -382,9 +402,6 @@ const SubmitButton = styled.button`
   line-height: 20px;
   /* identical to box height, or 100% */
 
-  color: #999999;
+  color: ${({ isSelected }) => (isSelected ? '#f57a08' : '#999999')};
   margin-right: 24px;
-  &:hover {
-    color: #f57a08;
-  }
 `;
