@@ -40,7 +40,7 @@ const Container = styled.div`
   position: relative;
   margin: auto;
   width: 343px;
-  height: 900px;
+  height: 700px;
   background: #ffffff;
   top: 16px;
   padding: 20px;

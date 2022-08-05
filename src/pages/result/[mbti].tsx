@@ -151,13 +151,20 @@ const Mbti = ({ data }: any) => {
                               <LeftInnerBox>
                                 <LeftInnerUpBox>
                                   {i === 3 ? (
-                                    <ColorText>{c.typeLeft[7]}</ColorText>
+                                    <>
+                                      <NoneColorText>
+                                        {c.typeLeft.slice(0, 7)}
+                                      </NoneColorText>
+                                      <ColorText>{c.typeLeft[7]}</ColorText>
+                                    </>
                                   ) : (
-                                    <ColorText>{c.typeLeft[0]}</ColorText>
+                                    <>
+                                      <ColorText>{c.typeLeft[0]}</ColorText>
+                                      <NoneColorText>
+                                        {c.typeLeft.slice(1)}
+                                      </NoneColorText>
+                                    </>
                                   )}
-                                  <NoneColorText>
-                                    {c.typeLeft.slice(1)}
-                                  </NoneColorText>
                                 </LeftInnerUpBox>
                                 <LeftInnerDownBox>
                                   {c.typeLeftDescription}
@@ -201,6 +208,7 @@ const Mbti = ({ data }: any) => {
 const Article = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 200px;
 `;
 
 const Header = styled.div`
