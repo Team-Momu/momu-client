@@ -47,7 +47,9 @@ const AddComment = () => {
   useEffect(() => {
     setText(placeName);
   }, [placeName]);
-
+  const isSelected = useAppSelector(
+    (state: RootState) => state.placechoice.isSelected
+  );
   const placeDatas = useAppSelector((state: RootState) => state.comments.data);
   const dispatch = useAppDispatch();
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -161,8 +163,10 @@ const AddComment = () => {
               <BackIcon src={'/img/header/backbutton.svg'} />
             </BackButton>
           </HeaderLeftSide>
-          {text ? (
-            <SubmitButton onClick={onSubmit}>완료</SubmitButton>
+          {isSelected ? (
+            <SubmitButton isSelected onClick={onSubmit}>
+              완료
+            </SubmitButton>
           ) : (
             <SubmitButton onClick={onSubmit}>완료</SubmitButton>
           )}
@@ -387,7 +391,7 @@ const CommentTextInput = styled.textarea`
   }
 `;
 
-const SubmitButton = styled.button<{ active?: boolean }>`
+const SubmitButton = styled.button<{ isSelected?: boolean }>`
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 600;
@@ -395,7 +399,7 @@ const SubmitButton = styled.button<{ active?: boolean }>`
   line-height: 20px;
   /* identical to box height, or 100% */
 
-  color: ${({ active }) => (active ? '#f57a08' : '#999999')};
+  color: ${({ isSelected }) => (isSelected ? '#f57a08' : '#999999')};
   //color: #999999;
   margin-right: 24px;
 
