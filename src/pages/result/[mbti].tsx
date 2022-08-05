@@ -175,13 +175,23 @@ const Mbti = ({ data }: any) => {
                               <RightInnerBox>
                                 <RightInnerUpBox>
                                   {i === 3 ? (
-                                    <ColorText>{c.typeRight[4]}</ColorText>
+                                    <>
+                                      <NoneColorText>
+                                        {c.typeRight.slice(0, 4)}
+                                      </NoneColorText>
+                                      <ColorText>{c.typeRight[4]}</ColorText>
+                                      <NoneColorText>
+                                        {c.typeRight.slice(5)}
+                                      </NoneColorText>
+                                    </>
                                   ) : (
-                                    <ColorText>{c.typeRight[0]}</ColorText>
+                                    <>
+                                      <ColorText>{c.typeRight[0]}</ColorText>
+                                      <NoneColorText>
+                                        {c.typeRight.slice(1)}
+                                      </NoneColorText>
+                                    </>
                                   )}
-                                  <NoneColorText>
-                                    {c.typeRight.slice(1)}
-                                  </NoneColorText>
                                 </RightInnerUpBox>
                                 <RightInnerDownBox>
                                   {c.typeRightDescription}
