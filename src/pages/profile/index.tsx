@@ -52,7 +52,7 @@ const Home: NextPage = ({ data }: any) => {
   }, []);
 
   useEffect(() => {
-    if (!setProfilePending && setProfileSuccess) {
+    if (setProfileSuccess) {
       router.push('/profile/1');
     }
   }, [message]);
@@ -167,7 +167,7 @@ const Home: NextPage = ({ data }: any) => {
     if (data.id && !data.nickname) {
       return (
         <>
-          {setProfilePending && !setProfileSuccess ? (
+          {setProfilePending ? (
             <Spinner />
           ) : (
             <>
