@@ -154,6 +154,7 @@ const NavBar = () => {
 export default NavBar;
 
 const Wrapper = styled.div`
+  z-index: 2;
   width: calc(100% + 16px * 2);
   margin: 0 -16px;
   height: 72px;
