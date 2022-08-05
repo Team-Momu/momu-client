@@ -51,14 +51,20 @@ const Mbti = ({ data }: any) => {
   const modalState = useAppSelector(
     (state: RootState) => state.modal.searchModal
   );
-  // useEffect(() => {
-  //   dispatch(userInfo());
-  // }, []);
+  const me = useAppSelector((state: RootState) => state.user.me);
+  useEffect(() => {
+    dispatch(userInfo());
+  }, []);
 
   const [mbtiState, setMbtiState] = useState<string | undefined>('');
   const [type, setType] = useState<string | undefined>('');
 
   const mbti = data?.data?.mbti;
+
+  useEffect(() => {
+    console.log('data in [mbti]', data);
+    console.log('me in [mbti]', me);
+  }, []);
 
   useEffect(() => {
     // console.log(data);
@@ -69,8 +75,10 @@ const Mbti = ({ data }: any) => {
   }, [data]);
 
   const pushToFeed = useCallback(() => {
-    router.push('/feed');
-  }, []);
+    if (me.data.mbti) {
+      router.push('/feed');
+    }
+  }, [me]);
 
   const toggleSearchModal = () => {
     dispatch(modalSlice.actions.searchModalToggle());
