@@ -28,7 +28,7 @@ const Home: NextPage = ({ data }) => {
   }, []);
 
   useEffect(() => {
-    console.log(data);
+    console.log('data in feed', data);
   }, []);
 
   // useEffect(() => {
@@ -76,7 +76,7 @@ const Home: NextPage = ({ data }) => {
       });
       router.push('/feed');
     }
-    if (data?.detail === '찾을 수 없습니다.') {
+    if (data?.message === 'Request failed with status code 404') {
       toast('브라우저를 완전히 종료 후 다시 시도해 주세요.', {
         position: 'top-center',
         autoClose: 3500,
@@ -86,6 +86,7 @@ const Home: NextPage = ({ data }) => {
         draggable: true,
         progress: undefined,
       });
+      router.push('/404');
     }
   }, [me]);
 

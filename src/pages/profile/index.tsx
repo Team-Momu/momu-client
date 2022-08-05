@@ -43,6 +43,10 @@ const Home: NextPage = ({ data }: any) => {
   }, [me]);
 
   useEffect(() => {
+    console.log('data in profile', data);
+  }, []);
+
+  useEffect(() => {
     if (message === '프로필 설정 성공') {
       router.push('/profile/1');
     }
