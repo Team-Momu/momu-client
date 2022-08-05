@@ -402,8 +402,4 @@ const SubmitButton = styled.button<{ isSelected?: boolean }>`
   color: ${({ isSelected }) => (isSelected ? '#f57a08' : '#999999')};
   //color: #999999;
   margin-right: 24px;
-
-  &:hover {
-    color: #f57a08;
-  }
 `;
