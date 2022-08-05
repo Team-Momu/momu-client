@@ -27,13 +27,13 @@ const Home: NextPage = ({ data }) => {
     dispatch(userInfo());
   }, []);
 
-  useEffect(() => {
-    console.log('data in landing', data);
-  }, []);
+  // useEffect(() => {
+  //   console.log('data in landing', data);
+  // }, []);
 
-  useEffect(() => {
-    console.log('me in landing', me);
-  }, [me]);
+  // useEffect(() => {
+  //   console.log('me in landing', me);
+  // }, [me]);
 
   useEffect(() => {
     if (me?.data?.id && me?.data?.nickname === null) {

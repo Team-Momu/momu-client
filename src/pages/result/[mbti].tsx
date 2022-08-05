@@ -61,7 +61,7 @@ const Mbti = ({ data }: any) => {
   const mbti = data?.data?.mbti;
 
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
     if (data) {
       setMbtiState(data?.data?.mbti?.mbti);
       setType(data?.data?.mbti?.type);

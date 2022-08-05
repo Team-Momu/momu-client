@@ -27,13 +27,13 @@ const Profile = ({ data }: any) => {
     dispatch(userInfo());
   }, []);
 
-  useEffect(() => {
-    console.log('data', data);
-  }, []);
+  // useEffect(() => {
+  //   console.log('data', data);
+  // }, []);
 
-  useEffect(() => {
-    console.log('me', me);
-  }, [me]);
+  // useEffect(() => {
+  //   console.log('me', me);
+  // }, [me]);
 
   useEffect(() => {
     if (!me?.data?.nickname) {

@@ -49,7 +49,7 @@ export const scrapSlice = createSlice({
         state.data.user = action.payload.data.user;
         state.data.post = action.payload.data.post;
         state.pending = false;
-        console.log(state.data);
+        // console.log(state.data);
       })
       .addCase(deleteScrapStateThunk.fulfilled, (state, action) => {
         state.pending = false;
