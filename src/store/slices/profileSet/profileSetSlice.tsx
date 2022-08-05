@@ -9,6 +9,9 @@ interface IInitialState {
   status: string;
   error: string | unknown;
   result: string;
+  setProfilePending: boolean;
+  setProfileSuccess: boolean;
+  setProfileFail: boolean;
 }
 
 const initialState: IInitialState = {
@@ -17,6 +20,9 @@ const initialState: IInitialState = {
   status: '',
   error: '',
   result: '',
+  setProfilePending: false,
+  setProfileSuccess: false,
+  setProfileFail: false,
 };
 
 const profileSetSlice = createSlice({
@@ -30,14 +36,23 @@ const profileSetSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(setProfile.pending, (state) => {
       state.status = 'loading';
+      state.setProfilePending = true;
+      state.setProfileSuccess = false;
+      state.setProfileFail = false;
     });
     builder.addCase(setProfile.fulfilled, (state, { payload }) => {
       state.status = 'success';
       state.result = payload.message;
+      state.setProfilePending = false;
+      state.setProfileSuccess = true;
+      state.setProfileFail = false;
     });
     builder.addCase(setProfile.rejected, (state, { payload }) => {
       state.status = 'failed';
       state.error = payload;
+      state.setProfilePending = false;
+      state.setProfileSuccess = false;
+      state.setProfileFail = true;
     });
   },
 });
