@@ -61,10 +61,10 @@ const Mbti = ({ data }: any) => {
 
   const mbti = data?.data?.mbti;
 
-  useEffect(() => {
-    console.log('data in [mbti]', data);
-    console.log('me in [mbti]', me);
-  }, []);
+  // useEffect(() => {
+  //   console.log('data in [mbti]', data);
+  //   console.log('me in [mbti]', me);
+  // }, []);
 
   useEffect(() => {
     // console.log(data);

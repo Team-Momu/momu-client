@@ -43,13 +43,13 @@ const Home: NextPage = ({ data }: any) => {
   //   console.log('data', data);
   // }, []);
 
-  useEffect(() => {
-    console.log('me in profile', me);
-  }, [me]);
+  // useEffect(() => {
+  //   console.log('me in profile', me);
+  // }, [me]);
 
-  useEffect(() => {
-    console.log('data in profile', data);
-  }, []);
+  // useEffect(() => {
+  //   console.log('data in profile', data);
+  // }, []);
 
   useEffect(() => {
     if (!setProfilePending) {
