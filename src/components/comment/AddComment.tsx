@@ -161,7 +161,11 @@ const AddComment = () => {
               <BackIcon src={'/img/header/backbutton.svg'} />
             </BackButton>
           </HeaderLeftSide>
-          <SubmitButton onClick={onSubmit}>완료</SubmitButton>
+          {text ? (
+            <SubmitButton onClick={onSubmit}>완료</SubmitButton>
+          ) : (
+            <SubmitButton onClick={onSubmit}>완료</SubmitButton>
+          )}
         </HeaderContainer>
         <Line></Line>
       </>
@@ -383,7 +387,7 @@ const CommentTextInput = styled.textarea`
   }
 `;
 
-const SubmitButton = styled.button`
+const SubmitButton = styled.button<{ active?: boolean }>`
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 600;
@@ -391,7 +395,8 @@ const SubmitButton = styled.button`
   line-height: 20px;
   /* identical to box height, or 100% */
 
-  color: #999999;
+  color: ${({ active }) => (active ? '#f57a08' : '#999999')};
+  //color: #999999;
   margin-right: 24px;
 
   &:hover {
