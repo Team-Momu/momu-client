@@ -36,6 +36,10 @@ const Profile = ({ data }: any) => {
   }, [me]);
 
   useEffect(() => {
+    console.log('data in profile/1', data);
+  }, []);
+
+  useEffect(() => {
     if (!me?.data?.nickname) {
       router.push('/profile');
     }
