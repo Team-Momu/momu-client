@@ -71,7 +71,8 @@ const RequestInfo = () => {
     } else {
       setIsSelected(false);
     }
-  }, []);
+  }, [data]);
+
   //backbutton 클릭하거나 완료 버튼 클릭시 state reset
   const resetState = () => {
     dispatch(addCurationSlice.actions.resetLocation());
@@ -84,8 +85,6 @@ const RequestInfo = () => {
   const onChangeDescription = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       handleInputLength(e, 25);
-
-      // setText(e.target.value);
     },
 
     [description]
