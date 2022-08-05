@@ -10,7 +10,7 @@ const initialState = {
   addCurationFail: false,
   status: '',
   data: {
-    location: '신촌,홍대 부근 동네를 선택해주세요!' || null,
+    location: '신촌,홍대 부근 동네를 선택해주세요!',
     time: '',
     drink: null || '',
     member_count: 0 || '',
