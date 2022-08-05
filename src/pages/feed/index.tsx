@@ -24,9 +24,9 @@ const Feed: NextPage = ({ data }: any) => {
     dispatch(userInfo());
   }, []);
 
-  useEffect(() => {
-    console.log('me in feed', me);
-  }, []);
+  // useEffect(() => {
+  //   console.log('me in feed', me);
+  // }, []);
 
   useEffect(() => {
     if (me.data?.id && (!me.data?.mbti || !me.data?.nickname)) {
