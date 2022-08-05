@@ -16,7 +16,9 @@ const MainFeed = () => {
       <Banner onClick={onClick}>
         <LogoContainer>MOMU</LogoContainer>
         <Date>2022.08.18~2022.08.30</Date>
+
         <BannerText first>모무 런칭기념</BannerText>
+        <br />
         <BannerText>채택 이벤트</BannerText>
 
         <Description>치킨은 모무가 쏠게! 큐레이션은 누가 할래?</Description>
@@ -55,9 +57,7 @@ const BannerText = styled.div<{ first?: boolean }>`
   width: 174px;
   height: 72px;
   left: 24px;
-  top: 352px;
-
-  margin-bottom: ${({ first }) => (first ? '0px' : '10px')};
+  top: ${({ first }) => (first ? '352px' : '395px')};
 
   font-family: 'Pretendard';
   font-style: normal;
@@ -109,7 +109,7 @@ const Banner = styled.div`
   background-size: 375px 507px;
   height: 507px;
   width: calc(100% + 16px * 2);
-  //margin: 0 16px 0 -16px;
+  margin: 0 16px 0 -16px;
   margin-bottom: 15px;
   &:hover {
     cursor: pointer;
