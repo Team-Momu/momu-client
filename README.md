@@ -2,8 +2,8 @@ CEOS 15th Team momu Client
 
 https://momu-client.vercel.app/
 
-# AppLayOut 구조
-
+### AppLayOut 구조
+al
 Wrapper > Container > children
 
 - Wrapper 는 375px, 812px 맞춰주고 가운데로 옮겨주는 역할
