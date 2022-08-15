@@ -2,7 +2,7 @@ CEOS 15th Team momu Client
 
 https://momu-client.vercel.app/
 
-## AppLayOut 구조
+# AppLayOut 구조
 
 Wrapper > Container > children
 
