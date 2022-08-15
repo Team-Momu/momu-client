@@ -43,6 +43,7 @@ export const ProgressBarUnit = styled.div`
 export const ProgressBar = styled.div<{ status?: string }>`
   display: grid;
   grid-template-columns: repeat(9, 1fr);
+
   background: var(--grey-color8);
   position: absolute;
   width: 343px;
