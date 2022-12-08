@@ -98,6 +98,7 @@ const SliderContainer = styled.div`
   z-index: 2;
 `;
 const NavContainer = styled.div`
+  z-index: 3;
   width: 343px;
   &.fixed {
     position: fixed;

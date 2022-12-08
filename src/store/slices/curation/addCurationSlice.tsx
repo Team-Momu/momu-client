@@ -57,9 +57,9 @@ export const addCurationSlice = createSlice({
   initialState,
   reducers: {
     resetData: (state) => {
-      state.data.description = '신촌,홍대 부근 동네를 선택해주세요!';
+      state.data.description = '';
       state.data.drink = '';
-      state.data.location = '';
+      state.data.location = '신촌,홍대 부근 동네를 선택해주세요!';
       state.data.member_count = '';
       state.data.time = '';
     },
