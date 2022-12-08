@@ -8,6 +8,9 @@ const useAuth = () => {
   const [refresh, setRefresh] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // 액세스 토큰 검증
+  // 액세스 토큰 만료되면 리프레스 토큰 검증 시작
+
   useEffect(() => {
     UserService.auth().then((response) => {
       const { message } = response;
@@ -29,6 +32,8 @@ const useAuth = () => {
     });
   }, []);
 
+  // 리프레시 토큰 검증
+
   useEffect(() => {
     if (refresh) {
       UserService.authRefresh()
@@ -39,6 +44,7 @@ const useAuth = () => {
     }
   }, [refresh]);
 
+  // 최종 리턴 값
   return { isLoggedIn };
 };
 
