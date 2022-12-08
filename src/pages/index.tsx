@@ -16,9 +16,14 @@ import Spinner from '@common/Spinner';
 import camera from '@public/img/camera.png';
 import defaultProfile from '@public/img/defaultProfile.png';
 import { toast } from 'react-toastify';
+import useAuth from 'hooks/useAuth';
 
 // @ts-ignore
 const Home: NextPage = ({ data }) => {
+
+  const {isLoggedIn} = useAuth()
+
+
   const router = useRouter();
   const dispatch = useAppDispatch();
 
